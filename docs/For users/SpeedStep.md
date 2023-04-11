@@ -10,19 +10,19 @@ You can download it from <http://www.superhai.com/darwin.html>
 
 After downloading VoodooPowerMini.kext, you can install it on your PureDarwin 9 system:
 
-<span style="font-size:small">sudo chown root:wheel 755 VoodooPowerMini.kext</span>
-<span style="font-size:small">sudo chmod -R 755 VoodooPowerMini.kext</span>
-<span style="font-size:small">mv VoodooPowerMini.kext /System/Library/Extensions/</span>
-<span style="font-size:small">kextload /System/Library/Extensions/VoodooPowerMini.kext</span>
-<span style="font-size:small"># Rebuild kext cache with kextload</span>
+sudo chown root:wheel 755 VoodooPowerMini.kext
+sudo chmod -R 755 VoodooPowerMini.kext
+mv VoodooPowerMini.kext /System/Library/Extensions/
+kextload /System/Library/Extensions/VoodooPowerMini.kext
+# Rebuild kext cache with kextload
 
 Now, you can verify that it is working:
 
 
-<span style="font-size:small">toor@PureDarwin:~% sysctl -a | grep cpufrequency</span>
-<span style="font-size:small">hw.cpufrequency = </span>**<span style="font-size:small">800015400</span>**
-<span style="font-size:small">hw.cpufrequency_max: </span>**<span style="font-size:small">1600030800</span>**
-<span style="font-size:small">hw.cpufrequency_min: 800015400</span>
+toor@PureDarwin:~% sysctl -a | grep cpufrequency
+hw.cpufrequency = **800015400**
+hw.cpufrequency_max: **1600030800**
+hw.cpufrequency_min: 800015400
 
 
 If hw.cpufrequency is lower than hw.cpufrequency_max in low-CPU usage situations, then SpeedStep is working correctly.

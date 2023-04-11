@@ -1,7 +1,7 @@
 XBS
 ===
 ### What is XBS?
-In case you come across the term "<span style="font-weight:bold">XBS</span>": Apparently, this is what Apple's <span style="font-weight:bold">Build and Integration team</span> uses to compile projects for Mac OS X. It is a proprietary build system and is not available outside Apple. 
+In case you come across the term "**XBS**": Apparently, this is what Apple's **Build and Integration team** uses to compile projects for Mac OS X. It is a proprietary build system and is not available outside Apple. 
 
 For the outside world, there is [[DarwinBuild]] instead. 
 It is not known how much the two build systems have in common.

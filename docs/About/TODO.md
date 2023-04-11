@@ -6,10 +6,10 @@ Would you like to help out with PureDarwin?
 Don't know where to start? 
 
 
-<div class="sites-embed-align-left-wrapping-off">
-<div class="sites-embed-border-off sites-embed" style="width:333px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
+
+
 Contents
 
 1.  [**1** Feedback](https://github.com/PureDarwin/PureDarwin/wiki/TODO#feedback)
@@ -40,7 +40,7 @@ Packages and binary roots
 -------------------------
 ### Test available packages
 The basic Darwin system as provided by Apple is made up of over 400 different packages. Many of these have been included in releases of PureDarwin ([Xmas](downloads/xmas.html) and [Nano](downloads/puredarwin-nano.html)). Many more are available from http://src.macosforge.org.
-<span style="font-weight:bold">And they all need testing.</span>
+**And they all need testing.**
 We know this method is empiric but we simply need to know what works, and (more importantly) what doesn't, so that we can focus our efforts there.
 
 A particular interest at the moment is per example the high level web application stack: Apache, MySQL, and PHP (or lighttpd, rrdtool and postgresql, etc..). That also could be the other scripting languages as Python, Perl, Ruby... or also some more low level behavior via the use of DTrace per example.
@@ -58,7 +58,7 @@ Like all operating systems, Darwin will live or die by its hardware support.
 There are a great many IOKit device drivers created by Apple and 3rd parties available.
 We first need to collect a list together, so that they can be tested and then bundled with future versions of PureDarwin. 
 
-<span style="text-decoration:underline">Notes:</span> See the [Network](https://github.com/PureDarwin/PureDarwin/wiki/Network) page, the [KEXTs](https://github.com/PureDarwin/PureDarwin/wiki/kexts) page, the [Graphics](https://github.com/PureDarwin/PureDarwin/wiki/Graphics) page, the [Binary drivers](https://github.com/PureDarwin/PureDarwin/wiki/BinaryDrivers) page, the [ZFS](https://github.com/PureDarwin/PureDarwin/wiki/ZFS) page, etc...
+__Notes:__ See the [Network](https://github.com/PureDarwin/PureDarwin/wiki/Network) page, the [KEXTs](https://github.com/PureDarwin/PureDarwin/wiki/kexts) page, the [Graphics](https://github.com/PureDarwin/PureDarwin/wiki/Graphics) page, the [Binary drivers](https://github.com/PureDarwin/PureDarwin/wiki/BinaryDrivers) page, the [ZFS](https://github.com/PureDarwin/PureDarwin/wiki/ZFS) page, etc...
 ### Write device drivers
 This is a crucial mission.
 In case the previous item wasn't enough for you! Even pulling together all of the 3rd party drivers available, there will still be plenty of unsupported hardware. And we also have the problem of device drivers which are available in OS X but which haven't been made available for free redistribution in any form by Apple (e.g., the e1000 support via *AppleIntel82454XEthernet* driver springs instantly to mind).

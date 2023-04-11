@@ -6,15 +6,15 @@ SmartCard Services
 [![](../_/rsrc/1258934378474/curious/smartcard/SCChip-1.png%3Fheight=200&width=181)](smartcard/SCChip-1.png%3Fattredirects=0)
 
 **draft.**
-**<span style="color:rgb(0,0,0);font-family:Lucida Grande,Verdana,Arial,Helvetica,sans-serif;font-weight:normal">The [SmartCard Services](http://smartcardservices.macosforge.org/) project. </span>**
+**The [SmartCard Services](http://smartcardservices.macosforge.org/) project. **
 Overview
 --------
-**<span style="color:rgb(0,0,0);font-family:Lucida Grande,Verdana,Arial,Helvetica,sans-serif;font-weight:normal">Sources from Apple are divided in two branches respectively corresponding to Darwin 9 and Darwin 10.</span>**
-**<span style="color:rgb(0,0,0);font-family:Lucida Grande,Verdana,Arial,Helvetica,sans-serif;font-weight:normal">Each branch contains these three nested subprojects:</span>**
+**Sources from Apple are divided in two branches respectively corresponding to Darwin 9 and Darwin 10.**
+**Each branch contains these three nested subprojects:**
 -   SmartcardCCID
 -   SmartCardServices
 -   Tokend
-<span style="font-family:Arial,Verdana,sans-serif"></span>
+
 ### Status
 #### Darwin10
 SmartCardServices build
@@ -31,11 +31,11 @@ libusb (statically linked insto Smart Card CCID)
 *Licensed under APSL v2*
 
 Contains:
-<span style="font-family:Lucida Grande,Verdana,Arial,Helvetica,sans-serif">reader drivers (.bundle) for readers not supported by USB CCID Class Driver</span>
-<span style="font-family:Lucida Grande,Verdana,Arial,Helvetica,sans-serif">reader drivers KErnel eXTension (PPC only?)</span>
+reader drivers (.bundle) for readers not supported by USB CCID Class Driver
+reader drivers KErnel eXTension (PPC only?)
 manual pages
 pcscd (PCSC daemon)
--   <span style="font-family:Lucida Grande,Verdana,Arial,Helvetica,sans-serif">responsible of reader drivers dynamic (de)allocation at run-time</span>
+-   responsible of reader drivers dynamic (de)allocation at run-time
 -   manage reader connections
 PKCS11 library (legacy SC abstraction layer)
 various scripts
@@ -62,38 +62,38 @@ Buildroot: Darwin9 (9J61)
 **Problem:** /Developer/usr/bin/xcodebuild fails with 11 - Resource deadlock avoided
 **Solution:** ...
 #### Tokend
-**Problem: <span style="font-weight:normal">/Developer/usr/bin/xcodebuild fails with 11 - Resource deadlock avoided</span>**
+**Problem: /Developer/usr/bin/xcodebuild fails with 11 - Resource deadlock avoided**
 
 #### SmartcardCCID
-<span style="font-size:small">cd 9J61</span>
-<span style="font-size:small">darwinbuild -init http://smartcardservices.macosforge.org/trac/export/71/trunk/SmartcardCCID/SmartcardCCID.plist -nfs</span>
+cd 9J61
+darwinbuild -init http://smartcardservices.macosforge.org/trac/export/71/trunk/SmartcardCCID/SmartcardCCID.plist -nfs
 
-<span style="font-size:small">darwinbuild SmartcardCCID</span>
+darwinbuild SmartcardCCID
 
 **Problem: <span style="font-weight:normal"><span style="font-size:small">(cd /SourceCache/SmartcardCCID/SmartcardCCID-1/ccid/ccid && ./MacOSX/configure --no-configure --disable-opensc )</span></span>**
-<span style="font-size:small">/bin/sh: line 0: cd: /SourceCache/SmartcardCCID/SmartcardCCID-1/ccid/ccid: No such file or directory</span>
-<span style="font-size:small">make: *** [install] Error 1</span>
-**Solution:** <span style="font-size:small">cd BuildRoot/SourceCache/SmartcardCCID/SmartcardCCID-1/ccid</span>
-<span style="font-size:small">tar xjvf ccid-1.3.8.tar.bz2</span>
-<span style="font-size:small">ln -s ccid-1.3.8 ccid</span>
+/bin/sh: line 0: cd: /SourceCache/SmartcardCCID/SmartcardCCID-1/ccid/ccid: No such file or directory
+make: *** [install] Error 1
+**Solution:** cd BuildRoot/SourceCache/SmartcardCCID/SmartcardCCID-1/ccid
+tar xjvf ccid-1.3.8.tar.bz2
+ln -s ccid-1.3.8 ccid
 
-**Problem:** <span style="font-size:small">/bin/sh: /SourceCache/SmartcardCCID/SmartcardCCID-1/libusb/libusb/configure: No such file or directory</span>
-<span style="font-size:small">make[1]: *** [/private/var/tmp/SmartcardCCID/SmartcardCCID-1.obj/libusb/configure-stamp] Error 127</span>
-<span style="font-size:small">make: *** [install] Error 1</span>
+**Problem:** /bin/sh: /SourceCache/SmartcardCCID/SmartcardCCID-1/libusb/libusb/configure: No such file or directory
+make[1]: *** [/private/var/tmp/SmartcardCCID/SmartcardCCID-1.obj/libusb/configure-stamp] Error 127
+make: *** [install] Error 1
 
-**Solution:** <span style="font-size:small">chroot BuildRoot</span>
-<span style="font-size:small">cd SourceCache/SmartcardCCID/SmartcardCCID-1/libusb</span>
-<span style="font-size:small">tar xzvf libusb-0.1.13b.tar.gz</span>
-<span style="font-size:small">ln -s libusb-0.1.13b libusb</span>
-<span style="font-size:small">cd libusb</span>
-<span style="font-size:small">./autogen.sh</span>
-<span style="font-size:small">make distclean</span>
+**Solution:** chroot BuildRoot
+cd SourceCache/SmartcardCCID/SmartcardCCID-1/libusb
+tar xzvf libusb-0.1.13b.tar.gz
+ln -s libusb-0.1.13b libusb
+cd libusb
+./autogen.sh
+make distclean
 
 
 Then the build succeeds:
-<span style="font-size:small">BUILD TIME: 0h 2m 8s</span>
-<span style="font-size:small">EXIT STATUS: 0</span>
-<span style="font-size:small">SmartcardCCID - 7 files registered.</span>
+BUILD TIME: 0h 2m 8s
+EXIT STATUS: 0
+SmartcardCCID - 7 files registered.
 
 Resources
 ---------

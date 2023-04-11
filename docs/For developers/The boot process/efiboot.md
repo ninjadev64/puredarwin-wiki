@@ -30,7 +30,7 @@ The above command implements an Xinfo cache for PowerPC processors which is not 
 For PureDarwin a simplified command can be used that will bless for only EFI based Macintosh computers:  
 `"$MOUNT/usr/sbin/bless" --folder "$MOUNT/System/Library/CoreServices" -bootefi --verbose`
 
-<span style="font-family:inherit">The volume should now be bootable.</span>
+The volume should now be bootable.
 
 #### Moving boot.efi to UEFI-specified location
 The firmware of Intel-based Macintosh computers implement sections 3.1 and 3.2 of the UEFI 2.0 specification.

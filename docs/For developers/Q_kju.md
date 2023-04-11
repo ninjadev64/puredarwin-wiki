@@ -3,10 +3,10 @@ Q - [kju:]
 Some QEMU attempts through [Q](http://www.kju-app.org/), A CPU emulator for Macintosh.
 
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:300px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Status](qemu-q.html#TOC-Status)
 2.  [**2** UI](qemu-q.html#TOC-UI)
@@ -39,8 +39,8 @@ Boot sequence
 
 [![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20dfe%20bootloader.png%3Fheight=268&width=420)](qemu-q/Q%20dfe%20bootloader.png%3Fattredirects=0)
 #### CPU:FSB multiplier detection fails
-<span style="color:rgb(255,0,0);font-weight:bold">Please, let us know if you have a solution.
-</span>
+**Please, let us know if you have a solution.
+**
 [![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20CPUFSB%20detection%20fails.png%3Fheight=269&width=420)](qemu-q/Q%20CPUFSB%20detection%20fails.png%3Fattredirects=0)
 ### Chameleon bootloader
 
@@ -57,13 +57,13 @@ Then, the real boot begins, but quickly ends with a problem related to APIC simi
 [![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20local%20APIC%20version%20not%20as%20expected.png%3Fheight=101&width=420)](qemu-q/Q%20local%20APIC%20version%20not%20as%20expected.png%3Fattredirects=0)
 
 
-Then, with <span style="font-family:courier new,monospace"><span style="font-size:small">&lt;string&gt;-f -v -x cpus=1 busratio=16 io=0x21&lt;/string&gt;</span></span> in <span style="font-style:italic">/Library/Preferences/SystemConfiguration/com.apple.Boot.plist</span>, things go far:
+Then, with `<string>-f -v -x cpus=1 busratio=16 io=0x21</string>` in */Library/Preferences/SystemConfiguration/com.apple.Boot.plist*, things go far:
 
 
 [![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20busration%20and%20io.png%3Fheight=311&width=420)](qemu-q/Q%20busration%20and%20io.png%3Fattredirects=0)
 
 
-<span style="font-size:22px;font-weight:bold">Ressources</span>
+**Ressources**
 
 <http://www.kju-app.org/> (Q)
 <http://bellard.org/qemu/> (QEMU)

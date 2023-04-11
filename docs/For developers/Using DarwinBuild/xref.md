@@ -3,10 +3,10 @@ xref
 The xref database by [DarwinBuild](../darwinbuild.html) is roughly the equivalent to a package manager database on other systems.
  This page is intended to describe what is in the xref database, and how to use it.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** xref.db file format](xref.html#TOC-xref.db-file-format)
 2.  [**2** darwinxref](xref.html#TOC-darwinxref)
@@ -22,7 +22,7 @@ Contents
 The file xref.db is located in the .build directory of your [DarwinBuild](../darwinbuild.html) working directory (the one that contains BuildRoot, among other things). It is a mysql3 database file, which makes it convenient to open end edit using mysql3 (which comes with Leopard):
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">sqlite3 .build/xref.db</span></span>
+`sqlite3 .build/xref.db`
 
 
 You can now use sqlite SQL commands. However, you should limit yourself to read operations.
@@ -31,43 +31,43 @@ darwinxref is the command line client for the xref database that comes with Darw
 
 For example, to get a list of all the files contained in your BuildRoot and which projects they belong to, do:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinxref exportFiles &gt; darwinxref.exportFiles.txt</span></span>
+`darwinxref exportFiles > darwinxref.exportFiles.txt`
 
 
 This is handy to keep around.
-<span style="font-weight:normal"> </span>
+ 
 #### darwinxref binary_sites {style="color:rgb(0,0,0);margin-top:10px;margin-right:10px;margin-bottom:10px;margin-left:0px"}
 This command shows the URL(s) from which binary roots are tried to be downloaded. For example:
 
-<span style="font-family:courier new;font-size:12px">darwinxref binary_sites</span>
-<span style="font-family:courier new;font-size:12px">http://src.macosforge.org/Roots/9A581/</span>
+darwinxref binary_sites
+http://src.macosforge.org/Roots/9A581/
 <span style="font-family:courier new;font-size:12px">
  </span>
-<span style="font-size:12px"><span style="font-family:inherit">Since each individual project can specify additional binary_sites, you can also pass the name of a certain project to it:</span></span>
+Since each individual project can specify additional binary_sites, you can also pass the name of a certain project to it:
 <span style="font-size:12px">
  </span>
-<span style="font-size:12px"><span style="font-size:13px"> </span></span>
-<span style="font-family:courier new;font-size:12px">darwinxref binary_sites xnu</span>
-<span style="font-family:courier new;font-size:12px">http://src.macosforge.org/Roots/9A581/</span>
-<span style="font-family:courier new;font-size:12px">http://some.more.specific.to.xnu</span>
+ 
+darwinxref binary_sites xnu
+http://src.macosforge.org/Roots/9A581/
+http://some.more.specific.to.xnu
 #### darwinxref source_sites
 This command shows the URL(s) from which source packages are tried to be downloaded. For example:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinxref source_sites</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">http://src.macosforge.org/Projects/</span></span>
+`darwinxref source_sites`
+`http://src.macosforge.org/Projects/`
 
 
-<span style="font-size:12px">Since each individual project can specify additional binary_sites, you can also pass the name of a certain project to it as in the binary_sites example.</span>
+Since each individual project can specify additional binary_sites, you can also pass the name of a certain project to it as in the binary_sites example.
 #### darwinxref patchfiles
 Shows [patchfiles](patchfiles.html) that will be applied to a project, if any. For Example:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">sh-3.2# darwinxref patchfiles xnu</span></span>
+`sh-3.2# darwinxref patchfiles xnu`
 
 (more text to be written)
 #### darwinxref dependencies
 Shows build-time or run-time dependencies of a given project, For example:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">sh-3.2# darwinxref dependencies -build boot</span></span>
+`sh-3.2# darwinxref dependencies -build boot`
 
 shows a (recursive) list of build-time dependencies of the boot project.
 

@@ -44,7 +44,7 @@ BEFORE your reboot, edit the 
 /Library/Preferences/SystemConfiguration/com.apple.Boot.plist,
 add ".voodoo" to "mach_kernel", so it becomes "mach_kernel.voodoo"
      * mach_kernel.voodoo is already shipped with puredarwin.Xmas
-<span style="white-space:pre"> </span> * but mach_kernel.voodoo uses its own System.kext
+  * but mach_kernel.voodoo uses its own System.kext
 
 Troubleshooting:
 Q: if your first reboot freeze at: "MAC Framework successfully initialized using ...."
@@ -55,14 +55,14 @@ A: you might need a patched version of AppleACPIPlatform.kext and AppleAPIC.kext
 
 You will need:
 -   The Chameleon boot loader, installed into /usr/standalone/i386/ 
--   <span style="font-family:courier new,monospace">fdisk</span> (a version comes with Chameleon, so use that one)
--   <span style="font-family:courier new,monospace">dd</span><span><span style="font-family:arial,sans-serif">, </span></span><span style="font-family:courier new,monospace">newfs_hfs</span> and <span style="font-family:courier new,monospace">mount</span>
+-   `fdisk` (a version comes with Chameleon, so use that one)
+-   `dd`, `newfs_hfs` and `mount`
 Then, assuming that you're working with the first disk (0):
-1.  Create a partition and install the primary bootloader: <span style="font-family:courier new,monospace">fdisk -i -a hfs /dev/rdisk0</span>
-2.  <span style="font-family:arial,sans-serif">Create an HFS+ file system on the disk: </span><span style="font-family:courier new,monospace">newfs_hfs -s -J -v /dev/rdisk0</span>
-3.  Install the secondary bootloader: <span style="font-family:courier new,monospace">dd if=/usr/standalone/i386/boot1h of=/dev/rdisk0s1</span>
-4.  Mount the partition: <span style="font-family:courier new,monospace">mount -t hfs /dev/rdisk0s1 /tmp</span>
-5.  Install the tertiary bootloader: <span style="font-family:courier new,monospace">cp /usr/standalone/i386/boot /tmp/</span>
+1.  Create a partition and install the primary bootloader: `fdisk -i -a hfs /dev/rdisk0`
+2.  Create an HFS+ file system on the disk: `newfs_hfs -s -J -v /dev/rdisk0`
+3.  Install the secondary bootloader: `dd if=/usr/standalone/i386/boot1h of=/dev/rdisk0s1`
+4.  Mount the partition: `mount -t hfs /dev/rdisk0s1 /tmp`
+5.  Install the tertiary bootloader: `cp /usr/standalone/i386/boot /tmp/`
 6.  Install the kernel and everything else onto the system
 Simples, eh? A version of the PureDarwin Nano CD image with these tools installed will be available soon.
 

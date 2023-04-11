@@ -7,10 +7,10 @@ Visualize dependencies in MacPorts
 
 This page describes a way to track dependencies and related satellite information (e.g: as variants or blockers) in MacPorts.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:360px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Overview of dependencies, variants and blockers](macports-dependencies-overview.html#TOC-Overview-of-dependencies-variants-and-blockers)
     1.  [**1.1** Installing Graphviz](macports-dependencies-overview.html#TOC-Installing-Graphviz)
@@ -21,19 +21,19 @@ Contents
     3.  [**1.3** Miscellaneous](macports-dependencies-overview.html#TOC-Miscellaneous)
 2.  [**2** Ressources](macports-dependencies-overview.html#TOC-Ressources)
 
-<span style="font-size:18px">O</span>verview of dependencies, variants and blockers
+Overview of dependencies, variants and blockers
 -----------------------------------------------------------------------------------
 [Graphviz](http://www.graphviz.org/) is an opensource graph visualization software from AT&T Laboratories and Bell Laboratories (Lucent Technologies).
 #### Installing Graphviz {style="background-color:transparent;color:rgb(0,0,0);font-family:Arial,Verdana,sans-serif;font-size:14px;margin-top:10px;margin-right:10px;margin-bottom:10px;margin-left:0px"}
-Not so common to beginning (instead of ending) with a "snake eating his tail", we will use <span style="font-style:italic">graphviz</span> from MacPorts to track dependencies and other information.
+Not so common to beginning (instead of ending) with a "snake eating his tail", we will use *graphviz* from MacPorts to track dependencies and other information.
  
-<span style="font-family:courier new,monospace"><span style="font-size:small">port install graphviz +the_variants_you_need</span></span>
+`port install graphviz +the_variants_you_need`
 
 or grab and compile the source from [graphviz.org](http://graphviz.org/).
 
-<span style="text-decoration:underline">Note:</span> On Mac OS X, [Pixelglow](http://www.pixelglow.com/graphviz/) is a nice a front-end, you can even see the graph being built in real-time.
+__Note:__ On Mac OS X, [Pixelglow](http://www.pixelglow.com/graphviz/) is a nice a front-end, you can even see the graph being built in real-time.
 ### Using pd_portviz to generate a graph
-The <span style="font-style:italic">[pd_portviz](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/pd_portviz)</span> tool is available in the [svn or hg trunk](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/) location.
+The *[pd_portviz](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/pd_portviz)* tool is available in the [svn or hg trunk](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/) location.
 #### Preliminary {style="background-color:transparent;color:rgb(0,0,0);font-family:Arial,Verdana,sans-serif;font-size:14px;margin-top:10px;margin-right:10px;margin-bottom:10px;margin-left:0px"}
 A rudimentary legend is generated in the DOT language:
 
@@ -47,158 +47,158 @@ Sometimes there isn't any dependency, or the port is not installed ("Not here" i
 When a port is already installed, the content is examined in order to find and count "[current blocker](../../blockers.html)".
 Also, notice any variant explicitly given will be detected (if available) and highlighted on any dependencies.
 #### An example across rrdtool dependencies
-An example of hierarchical overview of <span style="font-style:italic">rrdtool</span> dependencies, where <span style="font-style:italic">glib2</span> (18 problematic objects) is identified as "impure":
+An example of hierarchical overview of *rrdtool* dependencies, where *glib2* (18 problematic objects) is identified as "impure":
 
 Here the current script output:
 
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">./pd_portviz.sh rrdtool +puredarwin</span></span>
+`./pd_portviz.sh rrdtool +puredarwin`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">
-</span></span></span>
+`
+`
 
-<span style="color:rgb(68,68,68);font-family:courier new;font-size:12px"></span>
+
 Generate dependencies graphs of rrdtool +puredarwin
 
 
  Legend:
 
- 1<span style="white-space:pre"> </span> + foo (variant_x1, ..., variant_xn)
+ 1  + foo (variant_x1, ..., variant_xn)
 
- 2<span style="white-space:pre"> </span> |`. bar (variant_y1, ..., variant_yn)               No dependency found
+ 2  |`. bar (variant_y1, ..., variant_yn)               No dependency found
 
- 2<span style="white-space:pre"> </span> |`+ baz <span style="font-weight:bold">impure</span><span style="font-weight:bold">!</span> /Blocker_1 -&gt; file_involved_1       Impurity detected
+ 2  |`+ baz **impure****!** /Blocker_1 -&gt; file_involved_1       Impurity detected
 
- 2<span style="white-space:pre"> </span> |`+ baz <span style="font-weight:bold">impure</span><span style="font-weight:bold">!</span> /Blocker_. -&gt; file_involved_.       Impurity detected
+ 2  |`+ baz **impure****!** /Blocker_. -&gt; file_involved_.       Impurity detected
 
- 2<span style="white-space:pre"> </span> |`+ baz <span style="font-weight:bold">impure!</span> /Blocker_n -&gt; file_involved_n       Impurity detected
+ 2  |`+ baz **impure!** /Blocker_n -&gt; file_involved_n       Impurity detected
 
- 2<span style="white-space:pre"> </span> |`+ baz (variant_z1, ..., variant_zn)               Has Dependenc{y|ies}
+ 2  |`+ baz (variant_z1, ..., variant_zn)               Has Dependenc{y|ies}
 
- 3<span style="white-space:pre"> </span> | |`- dependency_bar ()                             Already processed
+ 3  | |`- dependency_bar ()                             Already processed
 
 
 Now generating dependencies tree and checking for ``purity'', please wait...
 
 
- 1<span style="white-space:pre"> </span> + rrdtool (universal python)
+ 1  + rrdtool (universal python)
 
- 2<span style="white-space:pre"> </span> |`. XFree86 (darwin puredarwin macosx)
+ 2  |`. XFree86 (darwin puredarwin macosx)
 
- 2<span style="white-space:pre"> </span> |`+ xrender (universal)
+ 2  |`+ xrender (universal)
 
- 3<span style="white-space:pre"> </span> | |`- XFree86 ()
+ 3  | |`- XFree86 ()
 
- 3<span style="white-space:pre"> </span> | |`+ render ()
+ 3  | |`+ render ()
 
- 4<span style="white-space:pre"> </span> | | |`. pkgconfig (universal darwin_6)
+ 4  | | |`. pkgconfig (universal darwin_6)
 
- 2<span style="white-space:pre"> </span> |`. expat (universal no_static examples)
+ 2  |`. expat (universal no_static examples)
 
- 2<span style="white-space:pre"> </span> |`+ fontconfig (universal doc vera macosx)
+ 2  |`+ fontconfig (universal doc vera macosx)
 
- 3<span style="white-space:pre"> </span> | |`+ libiconv (universal darwin_7 darwin_8 freebsd linux disable_utf8mac disable_extra_encodings enable_cp932fix)
+ 3  | |`+ libiconv (universal darwin_7 darwin_8 freebsd linux disable_utf8mac disable_extra_encodings enable_cp932fix)
 
- 4<span style="white-space:pre"> </span> | | |`. gperf (universal)
+ 4  | | |`. gperf (universal)
 
- 3<span style="white-space:pre"> </span> | |`- expat ()
+ 3  | |`- expat ()
 
- 3<span style="white-space:pre"> </span> | |`+ freetype (universal bytecode doc)
+ 3  | |`+ freetype (universal bytecode doc)
 
- 4<span style="white-space:pre"> </span> | | |`. zlib (universal examples)
+ 4  | | |`. zlib (universal examples)
 
- 2<span style="white-space:pre"> </span> |`- freetype ()
+ 2  |`- freetype ()
 
- 2<span style="white-space:pre"> </span> |`+ glib2 (universal puredarwin darwin powerpc darwin_6 darwin_9)
+ 2  |`+ glib2 (universal puredarwin darwin powerpc darwin_6 darwin_9)
 
- 3<span style="white-space:pre"> </span> | |`- pkgconfig ()
+ 3  | |`- pkgconfig ()
 
- 3<span style="white-space:pre"> </span> | |`+ gettext (universal darwin_6)
+ 3  | |`+ gettext (universal darwin_6)
 
- 4<span style="white-space:pre"> </span> | | |`- libiconv ()
+ 4  | | |`- libiconv ()
 
- 4<span style="white-space:pre"> </span> | | |`+ ncurses (universal freebsd)
+ 4  | | |`+ ncurses (universal freebsd)
 
- 5<span style="white-space:pre"> </span> | | | |`. ncursesw (universal)
+ 5  | | | |`. ncursesw (universal)
 
- 4<span style="white-space:pre"> </span> | | |`- expat ()
+ 4  | | |`- expat ()
 
- 3<span style="white-space:pre"> </span> | |`- libiconv ()
+ 3  | |`- libiconv ()
 
- 3<span style="white-space:pre"> </span> | |`. perl5.8 (darwin threads shared darwin_8 darwin_9)
+ 3  | |`. perl5.8 (darwin threads shared darwin_8 darwin_9)
 
- 2<span style="white-space:pre"> </span> |`- libiconv ()
+ 2  |`- libiconv ()
 
- 2<span style="white-space:pre"> </span> |`- gettext ()
+ 2  |`- gettext ()
 
- 2<span style="white-space:pre"> </span> |`+ pango (universal no_x11)
+ 2  |`+ pango (universal no_x11)
 
- 3<span style="white-space:pre"> </span> | |`- pkgconfig ()
+ 3  | |`- pkgconfig ()
 
- 3<span style="white-space:pre"> </span> | |`- glib2 ()
+ 3  | |`- glib2 ()
 
- 3<span style="white-space:pre"> </span> | |`- XFree86 ()
+ 3  | |`- XFree86 ()
 
- 3<span style="white-space:pre"> </span> | |`+ Xft2 (universal)
+ 3  | |`+ Xft2 (universal)
 
- 4<span style="white-space:pre"> </span> | | |`- pkgconfig ()
+ 4  | | |`- pkgconfig ()
 
- 4<span style="white-space:pre"> </span> | | |`+ xorg-xproto ()
+ 4  | | |`+ xorg-xproto ()
 
- 5<span style="white-space:pre"> </span> | | | |`+ xorg-util-macros ()
+ 5  | | | |`+ xorg-util-macros ()
 
- 6<span style="white-space:pre"> </span> | | | | |`- pkgconfig ()
+ 6  | | | | |`- pkgconfig ()
 
- 4<span style="white-space:pre"> </span> | | |`- zlib ()
+ 4  | | |`- zlib ()
 
- 4<span style="white-space:pre"> </span> | | |`- xrender ()
+ 4  | | |`- xrender ()
 
- 4<span style="white-space:pre"> </span> | | |`- freetype ()
+ 4  | | |`- freetype ()
 
- 4<span style="white-space:pre"> </span> | | |`- fontconfig ()
+ 4  | | |`- fontconfig ()
 
- 4<span style="white-space:pre"> </span> | | |`- expat ()
+ 4  | | |`- expat ()
 
- 3<span style="white-space:pre"> </span> | |`+ cairo (universal glitz no_x11 macosx)
+ 3  | |`+ cairo (universal glitz no_x11 macosx)
 
- 4<span style="white-space:pre"> </span> | | |`- pkgconfig ()
+ 4  | | |`- pkgconfig ()
 
- 4<span style="white-space:pre"> </span> | | |`. libpixman (universal)
+ 4  | | |`. libpixman (universal)
 
- 4<span style="white-space:pre"> </span> | | |`- xrender ()
+ 4  | | |`- xrender ()
 
- 4<span style="white-space:pre"> </span> | | |`- fontconfig ()
+ 4  | | |`- fontconfig ()
 
- 4<span style="white-space:pre"> </span> | | |`- freetype ()
+ 4  | | |`- freetype ()
 
- 4<span style="white-space:pre"> </span> | | |`+ libpng (universal)
+ 4  | | |`+ libpng (universal)
 
- 5<span style="white-space:pre"> </span> | | | |`- zlib ()
+ 5  | | | |`- zlib ()
 
- 4<span style="white-space:pre"> </span> | | |`- render ()
+ 4  | | |`- render ()
 
- 4<span style="white-space:pre"> </span> | | |`- zlib ()
+ 4  | | |`- zlib ()
 
- 4<span style="white-space:pre"> </span> | | |`- expat ()
+ 4  | | |`- expat ()
 
- 3<span style="white-space:pre"> </span> | |`- fontconfig ()
+ 3  | |`- fontconfig ()
 
- 2<span style="white-space:pre"> </span> |`- cairo ()
+ 2  |`- cairo ()
 
- 2<span style="white-space:pre"> </span> |`- perl5.8 ()
+ 2  |`- perl5.8 ()
 
- 2<span style="white-space:pre"> </span> |`. tcl (universal threads memdebug)
+ 2  |`. tcl (universal threads memdebug)
 
- 2<span style="white-space:pre"> </span> |`- zlib ()
+ 2  |`- zlib ()
 
- 2<span style="white-space:pre"> </span> |`- libpng ()
+ 2  |`- libpng ()
 
- 2<span style="white-space:pre"> </span> |`+ libxml2 (universal debug)
+ 2  |`+ libxml2 (universal debug)
 
- 3<span style="white-space:pre"> </span> | |`- libiconv ()
+ 3  | |`- libiconv ()
 
- 3<span style="white-space:pre"> </span> | |`- zlib ()
+ 3  | |`- zlib ()
 
 
 Generation of rrdtool.dot complete.
@@ -253,17 +253,17 @@ The second undirected view:
 Here an example of impurities detected in a port:
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">[...]</span></span>
+`[...]`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"> 1</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz <span style="font-weight:bold">impure!</span> /ApplicationServices.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/graphviz </span></span>
+` 1` <span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz **impure!** /ApplicationServices.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/graphviz </span></span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"> 1</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz <span style="font-weight:bold">impure!</span> /ApplicationServices.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/Versions/A/graphviz </span></span>
+` 1` <span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz **impure!** /ApplicationServices.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/Versions/A/graphviz </span></span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"> 1</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz <span style="font-weight:bold">impure!</span> /Cocoa.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/MacOS/Graphviz </span></span>
+` 1` <span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz **impure!** /Cocoa.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/MacOS/Graphviz </span></span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"> 1</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz (universal darwin_6 darwin_7 darwin_8 darwin_9 guile lua ocaml perl php python ruby tcl smyrna no_pangocairo no_x11 gui)</span></span>
+` 1` ` + graphviz (universal darwin_6 darwin_7 darwin_8 darwin_9 guile lua ocaml perl php python ruby tcl smyrna no_pangocairo no_x11 gui)`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">[...]</span></span>
+`[...]`
 
 
 And the corresponding result:
@@ -281,12 +281,12 @@ Illustration of irony?
 [![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/graphviz_undirectedBIS.png%3Fheight=304&width=420)](macports-dependencies-overview/graphviz_undirectedBIS.png%3Fattredirects=0)
 
 
-Why is it hard to compile a "pure" <span style="font-style:italic">kde3</span>?
+Why is it hard to compile a "pure" *kde3*?
 
 
 [![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/pd_portviz%20kde_directed.png%3Fheight=267&width=420)](macports-dependencies-overview/pd_portviz%20kde_directed.png%3Fattredirects=0)
 
-Why is it also hard to compile a "pure" <span style="font-style:italic">gnome?</span>
+Why is it also hard to compile a "pure" *gnome?*
 
 [![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/pd_portviz%20gnome_directed.png%3Fheight=119&width=420)](macports-dependencies-overview/pd_portviz%20gnome_directed.png%3Fattredirects=0)
 Ressources

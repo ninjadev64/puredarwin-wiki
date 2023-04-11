@@ -1,16 +1,16 @@
 QEMU
 ====
-This page is about running PureDarwin on the QEMU emulator and is <span style="font-style:italic">not </span>about running Mac OS X.
+This page is about running PureDarwin on the QEMU emulator and is *not *about running Mac OS X.
 
 [QEMU](http://en.wikipedia.org/wiki/QEMU) is a hardware emulator that can be used to run operating systems on virtualized hardware, not unlike VMware or Parallels. It is an open source project.
 The ability to run PureDarwin on emulated hardware can be very useful, especially for development, testing and debugging.
-**<span style="color:rgb(255,0,0)">If you get the "Error parsing plist file", then you need to increase the amount of virtual RAM. At least 330 MB seem to be required. If the kernel just crashes and the boot prompt appears again, press F8 and enter mach_kernel.voodoo &lt;enter&gt;.</span>**
+**If you get the "Error parsing plist file", then you need to increase the amount of virtual RAM. At least 330 MB seem to be required. If the kernel just crashes and the boot prompt appears again, press F8 and enter mach_kernel.voodoo <enter>.**
 
 <!--
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">-->
+
+-->
 Contents
 1.  [**1** Running PureDarwin Xmas on QEMU](qemu.html#TOC-Running-PureDarwin-Xmas-on-QEMU)
     1.  [**1.1** On Linux hosts](qemu.html#TOC-On-Linux-hosts)
@@ -39,34 +39,33 @@ Running PureDarwin Xmas on QEMU
 -------------------------------
 ### On Linux hosts
 ~~To get [PureDarwin Xmas](../downloads/xmas.html) to run in QEMU, fetch QEMU from svn, compile, run without kqemu (it might work on OSX-supported cpus). **Update:** if you can get a **0.10** binary of qemu for your platform (some are linked below), you don't necessarily need to compile from svn any more.~~ **Update 2:** As of Ubuntu 9.10, the QEMU that can be installed with sudo apt-get install qemu is sufficient, so you don't need to compile or download a special version of QEMU any more. Use the following configuration:
-<span style="border-collapse:separate;font-family:courier new;font-size:12px">
+
+
+
+or
+
+<span style="border-collapse:separate;font-family:Monaco;font-size:9px">`-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.vmdk `-boot d -m 512
 </span>
-<span style="border-collapse:separate;font-family:Monaco;font-size:9px"><span style="font-family:courier new,monospace"><span style="font-size:small">-hda someemptydiskimage (if you want some disk to work on) -hdb puredarwinxmas.vmdk -cdrom purdarwinxmas.vmdk </span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">-boot d -m 512
-</span></span></span></span>
+
 or
 
-<span style="border-collapse:separate;font-family:Monaco;font-size:9px"><span style="font-family:courier new,monospace"><span style="font-size:small">-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.vmdk </span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">-boot d -m 512
-</span></span></span></span>
-<span style="border-collapse:separate;font-family:courier new;font-size:12px"><span style="border-collapse:collapse;font-family:Arial;font-size:13px"></span></span>
-or
 
-<span style="border-collapse:separate;font-family:courier new;font-size:12px"><span style="border-collapse:collapse;font-family:Arial;font-size:13px"></span></span>
-<span style="border-collapse:separate;font-family:Monaco;font-size:9px"><span style="font-family:courier new,monospace"><span style="font-size:small">-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.iso </span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">-boot d -m 512
-</span></span></span></span>
+<span style="border-collapse:separate;font-family:Monaco;font-size:9px">`-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.iso `-boot d -m 512
+</span>
 
 
 QEMU can (at least on some platforms) emulate the Realtek RTL8139 network interface.
-An open source driver for this NIC is included with PureDarwinXmas. Enable the interface in QEMU with the <span><span style="font-family:courier new,monospace"><span style="font-size:small">-net nic,model=rtl8139 -no-kvm-irqchip -net user</span></span></span> option.
+An open source driver for this NIC is included with PureDarwinXmas. Enable the interface in QEMU with the -net nic,model=rtl8139 -no-kvm-irqchip -net user option.
 
-Run it using the instructions above (although <span style="font-family:courier new,monospace"><span style="font-size:small">-hda puredarwinxmas.vmdk -cdrom puredarwinxmas.vmdk -boot d -m 512</span></span><span style="font-size:small"> </span>seems the more reliable option).
-X will probably fail to start first time, but can then be kicked into life with <span style="font-family:courier new,monospace"><span style="font-size:small">startx</span></span> or <span style="font-family:courier new,monospace"><span style="font-size:small">pd_startx</span></span>.
+Run it using the instructions above (although `-hda puredarwinxmas.vmdk -cdrom puredarwinxmas.vmdk -boot d -m 512` seems the more reliable option).
+X will probably fail to start first time, but can then be kicked into life with `startx` or `pd_startx`.
 
 
 
 
 [![](http://img356.imageshack.us/img356/4199/puredarwinxmasinqemudh5.png)](http://img356.imageshack.us/img356/4199/puredarwinxmasinqemudh5.png)
 
-PureDarwin Xmas running on openSUSE. <span style="text-decoration:underline">Credits:</span> oxygene 
+PureDarwin Xmas running on openSUSE. __Credits:__ oxygene 
 
 
 
@@ -74,46 +73,45 @@ PureDarwin Xmas running on openSUSE. <span style="text-decoration:underline">Cr
 PureDarwin Xmas on Ubuntu 8.10 (using the binary linked below) and mach_kernel.voodoo. 
 
 Command used:
-<span style="font-family:courier new,monospace">qemu -hda 'puredarwinxmas.vmdk' -cdrom 'puredarwinxmas.vmdk' -boot d -m 512</span>
+`qemu -hda 'puredarwinxmas.vmdk' -cdrom 'puredarwinxmas.vmdk' -boot d -m 512`
 press F8 when asked
-<span style="font-family:courier new,monospace">mach_kernel.voodoo</span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">Then have to launch X11 manually:
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/X11/bin/startx</span></span></span></span>
+`mach_kernel.voodoo`
+
 
 ### On Windows hosts
 [![](http://img7.imageshack.us/img7/6195/qemupdwin32.jpg)](http://img7.imageshack.us/img7/6195/qemupdwin32.jpg)
 
 PureDarwin Xmas on MS Windows XP (using the binary linked above).
-<span style="text-decoration:underline">Credits:</span> oxygene
+__Credits:__ oxygene
 ### On Mac OS X hosts
 
 QEMU 0.10.1 from MacPorts can run PureDarwin Xmas with
 
-<span style="font-family:courier new;font-size:12px"></span>
+
 qemu -hda puredarwinxmas.vmdk -cdrom puredarwinxmas.vmdk -boot d -m 512
 
-<span style="font-family:Arial;font-size:13px"></span>
-<span style="text-decoration:underline">Note:</span> if you want to run qemu from a different location, use the -L option as:
 
-<span style="font-size:small">qemu -L ./pc-bios/ -hda puredarwinxmas.vmdk -cdrom puredarwinxmas.vmdk -boot d -m 512
-</span>
+__Note:__ if you want to run qemu from a different location, use the -L option as:
+
+qemu -L ./pc-bios/ -hda puredarwinxmas.vmdk -cdrom puredarwinxmas.vmdk -boot d -m 512
 
 
-<span style="font-family:Arial;font-size:13px"></span>
-<span style="border-collapse:separate;font-family:courier new;font-size:12px"><span style="border-collapse:collapse;font-family:Arial;font-size:13px"></span></span>
+
+
+
 [![](../_/rsrc/1237722501980/developers/qemu/Qemu%20first%20stage.png%3Fheight=263&width=420)](qemu/Qemu%20first%20stage.png%3Fattredirects=0)
 
 If you don't boot by default with the Voodoo kernel (xnu-dev), at boot press F8...
 [![](../_/rsrc/1237722807563/developers/qemu/Qemu%20bootloader%20stage.png%3Fheight=263&width=420)](qemu/Qemu%20bootloader%20stage.png%3Fattredirects=0)
 
 And enter
-<span style="font-family:courier new,monospace"><span style="font-size:small">mach_kernel.voodoo rd=disk1s3 -v</span></span>
+`mach_kernel.voodoo rd=disk1s3 -v`
 
 or, if you have the vmdk as -hda:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">mach_kernel.voodoo rd=disk0s3 -v</span></span>
+`mach_kernel.voodoo rd=disk0s3 -v`
 
-Wait for a bit on <span style="font-family:courier new,monospace"><span style="font-size:small">failed to open/create the journal</span></span>... if that happens.
+Wait for a bit on `failed to open/create the journal`... if that happens.
 
 [![](../_/rsrc/1237722991136/developers/qemu/Qemu%20PD%20booting.png%3Fheight=263&width=420)](qemu/Qemu%20PD%20booting.png%3Fattredirects=0)
 
@@ -125,7 +123,7 @@ After the KEXTs decompression phase, you should see the kernel booting (notice t
 [![](../_/rsrc/1237723486088/developers/qemu/Qemu%20PD%20booting3.png%3Fheight=331&width=420)](qemu/Qemu%20PD%20booting3.png%3Fattredirects=0)
 Then depending your settings, a login prompt or X should be waiting for you.
 
-It is necessary to launch X11 manually by issuing <span style="font-size:small">/usr/X11R6/bin/startx</span>.
+It is necessary to launch X11 manually by issuing /usr/X11R6/bin/startx.
 
 
 
@@ -154,15 +152,15 @@ This network stack supports ip, tcp, udp, dhcp, tftp, etc.. but ICMP.
 It also acts as a proxy between the qemu process and the target process, with tcp/udp data field decapsulation and forward.
 ### The user network stack
 
-<span style="text-decoration:underline">Credits:</span> Partial network support already existed, thanks to "hingwah" who helped and pointed its existence to us.
+__Credits:__ Partial network support already existed, thanks to "hingwah" who helped and pointed its existence to us.
 
 As said in [3.7.3 Using the user mode network stack](http://www.qemu.org/qemu-doc.html#SEC3) QEMU documentation ("*The DHCP server assign addresses to the hosts starting from 10.0.2.15.*"), the interface is well auto-assigned (notes: KernelEventMonitor (confid_plugins) has been added and seems to be responsible of the client DHCP capability) as the route to the virtual available gateway (a firewall / dhcp server).
 
 ### Requirements
 Append -net user if it is not already there to the qemu command line:
-<span style="font-size:small">[...] -net nic,model={i82551|i82557b|rtl8139} -no-kvm-irqchip -net user [...]</span>
+[...] -net nic,model={i82551|i82557b|rtl8139} -no-kvm-irqchip -net user [...]
 
-<span style="text-decoration:line-through">Be prepare to ping the gateway continuously, it's a workaround.</span>
+~~Be prepare to ping the gateway continuously, it's a workaround.~~
 As user inp reported on #puredarwin, adding '-no-kvm-irqchip' to the qemu call solves this issue with the rtl8139 driver.
 
 Of course, it's mandatory to have a Kernel EXTension matching its respective device.
@@ -186,10 +184,10 @@ An example of a "correct" configuration, where everything has been provided auto
 
 **What is well known:**
 
-<span style="text-decoration:line-through">It seems that network hangs easily if the gateway is not pinged when network operations are needed.</span> As user inp reported on #puredarwin, adding '-no-kvm-irqchip' to the qemu call solves this issue with the rtl8139 driver.
+~~It seems that network hangs easily if the gateway is not pinged when network operations are needed.~~ As user inp reported on #puredarwin, adding '-no-kvm-irqchip' to the qemu call solves this issue with the rtl8139 driver.
 ### Ping workaround
-<span style="text-decoration:line-through">ping the gateway (10.0.2.2) from the guest side (PureDarwin) seems necessary at this time.</span>
-<span style="text-decoration:line-through">If it is not the done, the connection simply hangs or fails to establish sometimes.</span>
+~~ping the gateway (10.0.2.2) from the guest side (PureDarwin) seems necessary at this time.~~
+~~If it is not the done, the connection simply hangs or fails to establish sometimes.~~
 As user inp reported on #puredarwin, adding '-no-kvm-irqchip' to the qemu call solves this issue with the rtl8139 driver.
 
 Depending the ping interval (-i) against the virtual gateway, the bandwith varies (a pseudo bandwith control state; qos?).
@@ -218,53 +216,53 @@ QEMU options
 
 This is another non exhaustive list of (reported to work) options available. Some part also needs investigations and feedback.
 ### Standard options
-<span style="font-family:courier new,monospace"><span style="font-size:small">-M machine      select emulated machine (-M ? for list) </span></span><span style="font-weight:bold"><span style="color:rgb(255,0,0)">Need investigations.</span></span> (could be interesting to see how it is close or not the reality when it is possible to compare the cases)
-<span style="font-family:courier new,monospace"><span style="font-size:small">-cpu cpu        select CPU (-cpu ? for list) </span></span><span style="color:rgb(255,0,0);font-weight:bold">Need investigations.</span>
+`-M machine      select emulated machine (-M ? for list) `**Need investigations.** (could be interesting to see how it is close or not the reality when it is possible to compare the cases)
+`-cpu cpu        select CPU (-cpu ? for list) `**Need investigations.**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-fda/-fdb file  use 'file' as floppy disk 0/1 image</span></span> <span style="font-weight:bold"><span style="color:rgb(61,133,198)">No thanks.</span></span>
+`-fda/-fdb file  use 'file' as floppy disk 0/1 image` **No thanks.**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-hda/-hdb file  use 'file' as IDE hard disk 0/1 image</span></span> <span style="font-weight:bold"><span style="color:rgb(56,118,29)">Reported to work with a iso, dmg, vmdk (convert or not).</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">-hdc/-hdd file  use 'file' as IDE hard disk 2/3 image</span></span> <span style="color:rgb(255,0,0);font-weight:bold">Need investigations.</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">-cdrom file     use 'file' as IDE cdrom image (cdrom is ide1 master)</span></span> <span style="color:rgb(56,118,29);font-weight:bold">Reported to work with a iso, dmg, vmdk (convert or not).</span>
+`-hda/-hdb file  use 'file' as IDE hard disk 0/1 image` **Reported to work with a iso, dmg, vmdk (convert or not).**
+`-hdc/-hdd file  use 'file' as IDE hard disk 2/3 image` **Need investigations.**
+`-cdrom file     use 'file' as IDE cdrom image (cdrom is ide1 master)` **Reported to work with a iso, dmg, vmdk (convert or not).**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-m megs         set virtual RAM size to megs MB [default=128]<span style="font-family:Arial;font-size:13px"><span style="font-weight:bold"><span style="color:rgb(56,118,29)">384 and 512 are ok.</span></span></span></span></span>
+``
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-smp n          set the number of CPUs to 'n' [default=1]</span></span> <span style="color:rgb(56,118,29);font-weight:bold">Work well with default value or 1.<span style="color:rgb(0,0,0);font-weight:normal"> <span style="color:rgb(255,0,0);font-weight:bold">Need investigations</span> ([Kernel panic with voodoo kernel](qemu/qemusmp2voodookernelpanic.png%3Fattredirects=0) even with reflecting modifications (<span style="font-family:courier new,monospace"><span style="font-size:small">cpus=2</span></span>) in /<span style="font-style:italic">Library/Preferences/SystemConfiguration/com.apple.Boot.plist</span>)</span></span>
+`-smp n          set the number of CPUs to 'n' [default=1]` ****
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-k language     use keyboard layout (for example "fr" for French)</span></span> <span style="color:rgb(255,0,0);font-weight:bold">Need investigations, not working.</span>
+`-k language     use keyboard layout (for example "fr" for French)` **Need investigations, not working.**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-vga [std|cirrus|vmware] </span></span><span style="color:rgb(56,118,29);font-weight:bold"><span style="color:rgb(255,0,0)">Need investigations. </span>Seems to works fine without -vga .... provided (default settings cyrus?). </span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">-usb            enable the USB driver (will be the default soon)</span></span> <span style="color:rgb(255,0,0);font-weight:bold">Need investigations.</span>
+`-vga [std|cirrus|vmware] `****
+`-usb            enable the USB driver (will be the default soon)` **Need investigations.**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-usbdevice name add the host or guest USB device 'name'</span></span> <span style="color:rgb(255,0,0);font-weight:bold">Need investigations.</span>
+`-usbdevice name add the host or guest USB device 'name'` **Need investigations.**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-name string    set the name of the guest </span></span><span style="color:rgb(56,118,29);font-weight:bold">PureDarwin.</span>
+`-name string    set the name of the guest `**PureDarwin.**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-uuid %08x-%04x-%04x-%04x-%012x specify machine</span></span> <span style="color:rgb(255,0,0);font-weight:bold">Need investigations, UUID C0FFEEC0-FFEE-C0FF-EEC0-FFEEC0FFEEC0 has no effect.</span>
+`-uuid %08x-%04x-%04x-%04x-%012x specify machine` **Need investigations, UUID C0FFEEC0-FFEE-C0FF-EEC0-FFEEC0FFEEC0 has no effect.**
 
 ### Network options
-According to the `man', "<span style="font-style:italic">The NIC is an ne2k_pci by default on the PC target</span>", but some other valid values are: 
-<span style="color:rgb(56,118,29)">i82551</span>, <span style="color:rgb(56,118,29)">i82557b</span>, i82559er, ne2k_pci, ne2k_isa, pcnet, rtl8139, e1000, smc91c111, lance and mcf_fec.
+According to the `man', "*The NIC is an ne2k_pci by default on the PC target*", but some other valid values are: 
+i82551, i82557b, i82559er, ne2k_pci, ne2k_isa, pcnet, rtl8139, e1000, smc91c111, lance and mcf_fec.
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-net nic[,vlan=n][,macaddr=addr][,model=type]</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                create a new Network Interface Card and connect it to VLAN 'n' <span style="font-family:Arial;font-size:13px"><span style="font-weight:bold"><span style="color:rgb(56,118,29)">-net nic,model=rtl8139 is enabled by PureFoundation. <span style="color:rgb(255,0,0)">Need investigations.</span></span></span></span></span></span>
+`-net nic[,vlan=n][,macaddr=addr][,model=type]`
+<span style="font-family:courier new,monospace"><span style="font-size:small">                create a new Network Interface Card and connect it to VLAN 'n' <span style="font-family:Arial;font-size:13px"><span style="font-weight:bold"><span style="color:rgb(56,118,29)">-net nic,model=rtl8139 is enabled by PureFoundation. Need investigations.</span></span></span></span></span>
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">-boot [a|c|d|n] boot on floppy (a), hard disk (c), CD-ROM (d), or network (n)</span></span><span style="font-weight:bold"><span style="color:rgb(56,118,29)"> "d" with the corresponding target is functional.</span></span>
-**<span style="color:rgb(0,0,0);font-weight:normal"></span>**
+`-boot [a|c|d|n] boot on floppy (a), hard disk (c), CD-ROM (d), or network (n)`** "d" with the corresponding target is functional.**
+****
 <div style="display:block">
--redir to test. <span style="font-family:Arial,monospace;font-size:13px;color:rgb(255,0,0);font-weight:bold">Need investigations</span>
-<span style="font-family:Arial,monospace;font-size:13px;color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-family:monospace,Verdana,Tahoma,Helvetica,Geneva,sans-serif;font-size:12px;font-weight:normal">-tftp prefix</span></span>
+-redir to test. **Need investigations**
+**-tftp prefix**
 -smb
 -macaddr addr
 -nics
 
-<span style="font-family:Arial,Verdana,Tahoma,Helvetica,Geneva,sans-serif"></span>
 
 
-<span style="color:rgb(56,118,29);font-weight:bold">
-</span>
+
+**
+**
 The option "-net nic,model={i82551|i82557b}" seems to match with [AppletIntel8255x](http://src.macosforge.org/Roots/9A581/AppleIntel8255x.root.tar.gz) from DarwinBuild:
 
 
@@ -288,7 +286,7 @@ Press ctrl+alt+4 to switch to parallel0 console:
 
 [![](../_/rsrc/1242470037379/developers/qemu/qemu%20ctrl%20alt%204.png%3Fheight=283&width=420)](qemu/qemu%20ctrl%20alt%204.png%3Fattredirects=0)
 
-<span style="font-size:18px;font-weight:bold">Patches to run stock XNU on QEMU</span>
+**Patches to run stock XNU on QEMU**
 
 Currently, it appears that one needs to used a patched version of the XNU kernel called mach_kernel.voodoo to run on QEMU. This is even true when running QEMU on an Intel Mac on Mac OS X (tested with a MacBook Pro).
 
@@ -387,7 +385,7 @@ Change:
 to
         val = 0x14 | ((APIC_LVT_NB - 1) << 16); /* version 0x14 */ 
 </pre>
-Thanks Rafael for sharing this information, which is not easy to find. <span style="border-collapse:collapse;color:rgb(34,34,34);font-family:arial,sans-serif">kvm is doing really great these days.</span>
+Thanks Rafael for sharing this information, which is not easy to find. kvm is doing really great these days.
 
 QSOC project on Darwin support in QEMU
 --------------------------------------
@@ -406,13 +404,13 @@ References
 hfsprogs
 ========
 debian and Ubuntu have a package called "hfsprogs", which can be used to create HFS+ disk images:
-<span style="font-family:courier new,monospace">apt-get install hfsprogs</span>
-<span style="font-family:courier new,monospace">mkfs.hfsplus disk.hfsplus </span>
-<span style="font-family:courier new,monospace">Initialized disk.hfsplus as a 100 MB HFS Plus volume</span>
-<span style="font-family:courier new,monospace">file disk.hfsplus </span>
-<span style="font-family:courier new,monospace">disk.hfsplus: Macintosh HFS Extended version 4 data last mounted by: '10.0', created: Mon Mar 23 18:32:16 2009, last modified: Mon Mar 23 18:32:16 2009, last checked: Mon Mar 23 18:32:16 2009, block size: 4096, number of blocks: 25600, free blocks: 25197</span>
-<span style="font-family:courier new,monospace">sudo mkdir /media/hfsplus</span>
-<span style="font-family:courier new,monospace">sudo mount disk.hfsplus /media/hfsplus/ -o loop</span>
+`apt-get install hfsprogs`
+`mkfs.hfsplus disk.hfsplus `
+`Initialized disk.hfsplus as a 100 MB HFS Plus volume`
+`file disk.hfsplus `
+`disk.hfsplus: Macintosh HFS Extended version 4 data last mounted by: '10.0', created: Mon Mar 23 18:32:16 2009, last modified: Mon Mar 23 18:32:16 2009, last checked: Mon Mar 23 18:32:16 2009, block size: 4096, number of blocks: 25600, free blocks: 25197`
+`sudo mkdir /media/hfsplus`
+`sudo mount disk.hfsplus /media/hfsplus/ -o loop`
 Now we can copy something there
 (How) can we use this disk image with qemu?
 If we want to make this bootable with a boot loader, we need to have a partition table inside the disk image!

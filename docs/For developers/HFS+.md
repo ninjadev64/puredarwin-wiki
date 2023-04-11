@@ -3,10 +3,10 @@ HFS+
 This page describes the HFS+ filesystem and how to interact with it.
 This is a work in progress; please contribute to this page.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** What is HFS+](hfsplus.html#TOC-What-is-HFS-)
 2.  [**2** How to interact with HFS+](hfsplus.html#TOC-How-to-interact-with-HFS-)

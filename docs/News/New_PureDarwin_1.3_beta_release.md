@@ -1,10 +1,10 @@
 New PureDarwin 1.3 beta release
 ===============================
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Download](newpuredarwin9l30betarelease.html#TOC-Download)
     1.  [**1.1** Running](newpuredarwin9l30betarelease.html#TOC-Running)
@@ -37,9 +37,9 @@ qemu-system-i386 -m 1024 -cpu core2duo -vga std -net user -net nic -hda puredar
 You'll arrive at an X11 display with a terminal window.  The user's password is 'darwin', which you'll need for enabling DHCP networking.
 
 sudo ipconfig set en1 BOOTP
-<span style="font-family:arial,helvetica,sans-serif">
-</span>
-<span style="font-family:arial,helvetica,sans-serif">See the default user's home directory for the source code patches.  Use 'port sync' instead of 'port selfupdate', because MacPorts has to be patched in order to function, but you can still install the latest packages anyway.  Some MacPorts packages (such as python27) require further patches, which are documented on trac.macports.org.</span>
+
+
+See the default user's home directory for the source code patches.  Use 'port sync' instead of 'port selfupdate', because MacPorts has to be patched in order to function, but you can still install the latest packages anyway.  Some MacPorts packages (such as python27) require further patches, which are documented on trac.macports.org.
 
 Please come to IRC (#puredarwin at irc.freenode.net, where I'm 'dtm') to discuss your findings and to give rafirafi your thanks!
 
@@ -47,13 +47,13 @@ Please come to IRC (#puredarwin at irc.freenode.net, where I'm 'dtm') to discuss
 Date : 25/09/2012
 Author : rafirafi
 
-<span style="white-space:pre"> </span>About this build :
+ About this build :
 
 platform : leopard 9L30
 only i386 architecture
 
-<span style="white-space:pre"> </span>How to use:
-<span style="white-space:pre"> </span>
+ How to use:
+ 
 There is an user created "puredarwin" with passworg "darwin", "root" have password "rootroot"
 Network is tested as working in virtualbox and linux with kvm modules patch available on puredarwin.org site, from here you can connect with ssh.
 
@@ -62,64 +62,64 @@ kvm -m 512 -cpu host,family=6,model=15 -device VGA,bus=pci.0,addr=0x02 -device r
 
 **Edit:** See below for running in VirtualBox.
 
-<span style="white-space:pre"> </span>What it is :
+ What it is :
 
 This is an attempt to have a puredarwin without binaries.
 
  made with the information publicly available about the puredarwin project with the maximum of features and developer tools I have been abble to include.
 What news / puredarwin Xmas :
-<span style="white-space:pre"> </span>- based on 10.5.8 source
-<span style="white-space:pre"> </span>- use the last opensource platform expert, only i386
+ - based on 10.5.8 source
+ - use the last opensource platform expert, only i386
 
 
-<span style="white-space:pre"> </span>Shipped but not built :
+ Shipped but not built :
 
 openjdk and antlr : here in case someone want to built openjdk
 
-<span style="white-space:pre"> </span>Packages not coming from 9L30 apple source with puredarwin patches:
+ Packages not coming from 9L30 apple source with puredarwin patches:
 
 From rafirafi :
-<span style="white-space:pre"> </span>ClockRTC.kext : Read the date from rtc and provide it to the platform expert
-<span style="white-space:pre"> </span>VMQemuVGA.kext : a framebuffer for the qemu default vga, should be compatible with any card supporting the VBE standard.
-<span style="white-space:pre"> </span>PCNet : an experimental driver for the pcnet32 network card, only version Am79C970A supported. 
+ ClockRTC.kext : Read the date from rtc and provide it to the platform expert
+ VMQemuVGA.kext : a framebuffer for the qemu default vga, should be compatible with any card supporting the VBE standard.
+ PCNet : an experimental driver for the pcnet32 network card, only version Am79C970A supported. 
 From darwin 8:
-<span style="white-space:pre"> </span>IOATABlockStorage.kext
-<span style="white-space:pre"> </span>IOSCSIArchitectureModelFamily.kext
-<span style="white-space:pre"> </span>AppleAPIC.kext with 8259 support : made standalone in Apple8259PIC.kext
-<span style="white-space:pre"> </span>AppleI386GenericPlatform.kext : hook to ClockRTC added. Add the kernel boot option "platform=PCx86" for compatibility or Apple ACPI platform will be loaded.
-<span style="white-space:pre"> </span>AppleI386PCI.kext
-<span style="white-space:pre"> </span>DarwinTools : provide sw_vers and SystemVersion.plist
-<span style="white-space:pre"> </span>CFNetwork : not so much tested
+ IOATABlockStorage.kext
+ IOSCSIArchitectureModelFamily.kext
+ AppleAPIC.kext with 8259 support : made standalone in Apple8259PIC.kext
+ AppleI386GenericPlatform.kext : hook to ClockRTC added. Add the kernel boot option "platform=PCx86" for compatibility or Apple ACPI platform will be loaded.
+ AppleI386PCI.kext
+ DarwinTools : provide sw_vers and SystemVersion.plist
+ CFNetwork : not so much tested
 From BSD:
-<span style="white-space:pre"> </span>logger
+ logger
 From Zenith432 / VMware:
-<span style="white-space:pre"> </span>VMMouse.kext
+ VMMouse.kext
 From Stuart Crook:
-<span style="white-space:pre"> </span>purefoundation
-<span style="white-space:pre"> </span>pam_sessioncreate.so : Cf http://marc.info/?l=launchd-dev&m=123732227520735
+ purefoundation
+ pam_sessioncreate.so : Cf http://marc.info/?l=launchd-dev&m=123732227520735
 From opencflite:
-<span style="white-space:pre"> </span>CF : missing function, essentially Stuart Crook code.
+ CF : missing function, essentially Stuart Crook code.
 From voodooprojects :
-<span style="white-space:pre"> </span>chameleon : last version building with darwin 9, svn version 2045, need 400M of memory min. to boot.
+ chameleon : last version building with darwin 9, svn version 2045, need 400M of memory min. to boot.
 From macports :
-<span style="white-space:pre"> </span>a macports fresh install of the last version is here (compiled zithout objc and foundation support)
-<span style="white-space:pre"> </span>a keep a Xorg installed for convenience, if you dont zant it erase /usr/X* directory and modify .profile file.
+ a macports fresh install of the last version is here (compiled zithout objc and foundation support)
+ a keep a Xorg installed for convenience, if you dont zant it erase /usr/X* directory and modify .profile file.
 From cauldrondevelopement:
-<span style="white-space:pre"> </span>osxbom : for now just lsbom, a reimplementation of the utility of the same name. Here for using with macport binary package.
+ osxbom : for now just lsbom, a reimplementation of the utility of the same name. Here for using with macport binary package.
 From hnak:
-<span style="white-space:pre"> </span>AppleIntelE1000.kext : driver for the e1000 netwok family cards (http://osx86drivers.sourceforge.net ), slightly corrected to work with puredarwin.
+ AppleIntelE1000.kext : driver for the e1000 netwok family cards (http://osx86drivers.sourceforge.net ), slightly corrected to work with puredarwin.
 
 Others:
-<span style="white-space:pre"> </span>subversion-1.3.2 is in /Users/puredarwin.
-<span style="white-space:pre"> </span>A part of jre from openjdk is here with antlr 2.7.3.
-<span style="white-space:pre"> </span>
+ subversion-1.3.2 is in /Users/puredarwin.
+ A part of jre from openjdk is here with antlr 2.7.3.
+ 
 
-<span style="white-space:pre"> </span>Components not working / lacking :
+ Components not working / lacking :
 
 PureFoundation : there are (...) features not implemented, tested. 
 
 Security framework : there is no free CSP, so a lot of features are not ok.
-<span style="white-space:pre"> </span>www.opensource.apple.com/source/Security/Security-55163.44/doc/AppleCSP.doc
+ www.opensource.apple.com/source/Security/Security-55163.44/doc/AppleCSP.doc
 
 CFNetwork : not really tested, perhaps it's ok.
 
@@ -130,7 +130,7 @@ ddistnoted: not here. you can get the binary from puredarwin site or ask the aut
 Kerberos : depends on plutil. A python module for plist exist so somebody can make a plutil substitute.
 
 
-<span style="white-space:pre"> </span>Features with less problems:
+ Features with less problems:
 
 Login throught pam:
 this is achieve by creating/recreating the pam_sessioncreate.so module foolowing the Stuart mail from:
@@ -141,7 +141,7 @@ Multi-users : you can use the script from puredarwin site
 DTrace:
 The dtrace patch interfers which dyld buily, so I patched ld64 but dtrace functionnalities were not tested after this patch.
 
-<span style="white-space:pre"> </span>Features with less problem:
+ Features with less problem:
 
 Network:
 You can see a message at boot:
@@ -153,12 +153,12 @@ Only a framebuffer for qemu/virtualbox is here, it's based on VBE features only 
 
 There is a driver made by zenith432 VMWare Svga II which should provide support for vmware.
 
-<span style="white-space:pre"> </span>What's been done :
+ What's been done :
 
 A lot of patches.
 But there is a lot of patch to build only i386.
 
-<span style="white-space:pre"> </span>What I think could be solve :
+ What I think could be solve :
 
 CF - purefoundation : 
 The patch available for CF pf6 is not ok, and some feature were backported from CF-550 or opencflite.
@@ -171,7 +171,7 @@ Python and Tcl needs additionnal patches to build completly in darwinbuild.
 X : re-enable XDarwin feature.
 
 
-<span style="white-space:pre"> </span>What will be very difficult to solve :
+ What will be very difficult to solve :
 
 Security :
 there is no opensource CSP, perhaps it's possible to use openssl...

@@ -12,7 +12,7 @@ An experimental binary root of CFLite also compiled through DarwinBuild (but inc
 
 The [PureFoundation](../purefoundation.html) project also provides patched binaries of CFLite. These combine patches necessary to fix some short-comings with CFLite with those needed by the cloned Foundation.framework, and as a result require the presence of that framework.
 
-<span style="text-decoration:underline">Notes:</span> Please, read [Apple CFLite](http://developer.apple.com/opensource/cflite.html) page for more information.
+__Notes:__ Please, read [Apple CFLite](http://developer.apple.com/opensource/cflite.html) page for more information.
 
 There is also [OpenCFLite](http://opencflite.svn.sourceforge.net/viewvc/opencflite/), a version of CFLite maintained by an couple of independent developers ([blog](http://lwat.blogspot.com/)) which aims to port it to Windows and Linux. As well as the platform-specific changes, this also includes a number of bug-fixes and feature enhancements. There is a good chance that in the near future the version of CFLite bundled for use with PureFoundation will be based on OpenCFLite rather than directly on Apple's CFLite.
 
@@ -45,23 +45,23 @@ It is probably fair to assume that the Darwin sources should either not make use
 #### Symbols
 
 In this example, _NSInvalidArgumentException should be exported by CF. (Please note: using the latest PureDarwin darwinbuild patch will automatically build a version of CFLite which now exports this and other NS-domain exceptions.)
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px">nm -an /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation | grep _NSInvalidArgumentException</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">0010111b <span style="font-weight:bold">S</span> $ld$hide$os10.4$_NSInvalidArgumentException</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">0013b444 <span style="font-weight:bold">S</span> _NSInvalidArgumentException</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">nm -an /System/Library/Frameworks/Foundation.framework/Foundation | grep _NSInvalidArgumentException </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">         </span></span><span style="font-weight:bold"><span style="font-family:courier new,monospace"><span style="font-size:small">U</span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"> _NSInvalidArgumentException</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">00272c70 S $ld$add$os10.4$_NSInvalidArgumentException</span></span>
--   <span style="font-weight:bold">U</span> means "it is somewhere else"
--   <span style="font-weight:bold">S</span> means "it exports it"
+
+
+nm -an /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation | grep _NSInvalidArgumentException
+``
+<span style="font-family:courier new,monospace"><span style="font-size:small">0013b444 **S** _NSInvalidArgumentException</span></span>
+`nm -an /System/Library/Frameworks/Foundation.framework/Foundation | grep _NSInvalidArgumentException `
+`         `**U**` _NSInvalidArgumentException`
+`00272c70 S $ld$add$os10.4$_NSInvalidArgumentException`
+-   **U** means "it is somewhere else"
+-   **S** means "it exports it"
 
 #### Missing exported symbols
 Here is a list of the 22% exported symbols that are missing from CF-Lite when compared to the full CF:
 
-<span style="font-family:courier new;font-size:12px">diff CF.symbols CF-Lite.symbols | grep "^&lt; " </span>
+diff CF.symbols CF-Lite.symbols | grep "^< " 
 
-<span style="font-weight:bold">Whenever you encounter a message that includes one of the follwing symbol names, then it might well be due to the difference between CF and CF-Lite.</span>
+**Whenever you encounter a message that includes one of the follwing symbol names, then it might well be due to the difference between CF and CF-Lite.**
 1.  $ld$hide$os10.4$.objc_class_name_NSArray
 2.  $ld$hide$os10.4$.objc_class_name_NSCalendar
 3.  $ld$hide$os10.4$.objc_class_name_NSData

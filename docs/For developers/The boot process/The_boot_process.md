@@ -1,11 +1,11 @@
 The boot process
 ================
 This page describes the boot process of a Darwin 9 system.
-<span style="color:rgb(255,0,0)">This is a first draft, please feel free to contribute.</span>
-<div class="sites-embed-align-left-wrapping-off">
+This is a first draft, please feel free to contribute.
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Single-user (-s/cmd-S)](booting.1.html#TOC-Single-user--s-cmd-S-)
 2.  [**2** Multi-user](booting.1.html#TOC-Multi-user)

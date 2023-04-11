@@ -63,7 +63,7 @@ Optionally,
 -   The MacPorts project
 -   Xcode (which is a requirement via transitivity)
 ### Quick steps
-After [cloning of the PureDarwin repository](http://code.google.com/p/puredarwin/source/checkout), the quickest way is to modify <span style="text-decoration:underline">nothing</span> and keep the default configuration ([pd_config](http://code.google.com/p/puredarwin/source/browse/setup/pd_config)).
+After [cloning of the PureDarwin repository](http://code.google.com/p/puredarwin/source/checkout), the quickest way is to modify __nothing__ and keep the default configuration ([pd_config](http://code.google.com/p/puredarwin/source/browse/setup/pd_config)).
 Simply fetch binaryroots, thin them and build/deploy PureDarwin to the requested target after selection the `setup' folder.
 1.  `./pd_fetch`
 2.  `./pd_thin`

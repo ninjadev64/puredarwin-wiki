@@ -7,5 +7,5 @@ as you might have experienced, the current published sources of some Darwin 9 pr
 
 It looks like patching the respective sources to remove the non-Darwin dependencies is the most pragmatic approach at this time. Hence, Aladin from the PureDarwin project has made available a series of patches.
 
-Read the full post on the <span style="font-weight:bold">darwin-dev</span> mailing list at
+Read the full post on the **darwin-dev** mailing list at
 <http://lists.apple.com/archives/darwin-dev//2008/Oct/msg00132.html> 

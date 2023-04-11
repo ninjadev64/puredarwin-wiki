@@ -14,7 +14,7 @@ Please obtain, read, and make sure you understand the [full text of the APSL](ht
  (b) You must duplicate (...) the **notice in Exhibit A** in each file of the Source Code of all Your Modifications, and cause the modified files to carry prominent **notices stating that You changed the files and the date of any change**; and
  (c) If You Externally Deploy Your Modifications, You must **make Source Code** (...) **available** (...) under the terms set forth in this License, including the license grants set forth in Section 3 below (...).
  2.3 Distribution of Executable Versions. 
-(...) must include a prominent notice, in the code itself as well as in related documentation, stating that Source Code of the Covered Code is available under the terms of this License with <span style="font-weight:bold">information on how and where to obtain</span> (...) **Source Code**.
+(...) must include a prominent notice, in the code itself as well as in related documentation, stating that Source Code of the Covered Code is available under the terms of this License with **information on how and where to obtain** (...) **Source Code**.
 
 3. Your Grants.
 (...) You hereby **grant** (...) a non-exclusive, royalty-free, perpetual, irrevocable **license**, (...) of the same scope and extent as Apple's licenses under Sections 2.1 and 2.2 above.

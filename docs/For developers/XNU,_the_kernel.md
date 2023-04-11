@@ -18,9 +18,9 @@ XNU acronym stands for "X is Not Unix" (although Mac OS X has been Unix certifie
 
 (please add some text)
 
--   <span style="font-style:italic">Not</span> a microkernel (although using parts of the Mach microkernel)
--   <span style="font-style:italic">Not</span> 64-bit (although able to run 64-bit binaries)
--   <span style="font-style:italic">Not</span> so hard to recompile
+-   *Not* a microkernel (although using parts of the Mach microkernel)
+-   *Not* 64-bit (although able to run 64-bit binaries)
+-   *Not* so hard to recompile
 See [here](http://developer.apple.com/documentation/Darwin/Conceptual/KernelProgramming/Architecture/chapter_3_section_3.html) why the term kernel is used somewhat differently than you might expect.
 
 ### Common parts of XNU

@@ -2,10 +2,10 @@ Visualize mach-o dependencies
 =============================
 In the spirit of [Vizualize dependencies in MacPorts](../macports/macports-dependencies-overview.html) and [Vizualize KEXTs dependencies](../kexts/kexts-dependencies-overview.html), this page describes a way to track mach-o file dependencies and related satellite information (e.g: blockers).
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:444px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Prerequisites](mach-o-dependencies-overview.html#TOC-Prerequisites)
 2.  [**2** Using pd_machviz to generate a graph](mach-o-dependencies-overview.html#TOC-Using-pd_machviz-to-generate-a-graph)
@@ -19,12 +19,12 @@ Contents
 [Graphviz](http://www.graphviz.org/) is an opensource graph visualization software from AT&T Laboratories and Bell Laboratories (Lucent Technologies).
 
 <div style="font-family:courier new,monospace">
-<span style="font-size:small">port install graphviz +the_variants_you_need</span>
+port install graphviz +the_variants_you_need
 
 or grab and compile the source from [graphviz.org](http://graphviz.org/).
-<span style="text-decoration:underline">Note:</span> On Mac OS X, [Pixelglow](http://www.pixelglow.com/graphviz/) is a nice a front-end, you can even see the graph being built in real-time.
+__Note:__ On Mac OS X, [Pixelglow](http://www.pixelglow.com/graphviz/) is a nice a front-end, you can even see the graph being built in real-time.
 ### Using pd_machviz to generate a graph
-The <span style="font-style:italic">[pd_machviz](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/pd_machviz)</span> tool is available in the [svn/hg trunk](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/).
+The *[pd_machviz](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/pd_machviz)* tool is available in the [svn/hg trunk](http://code.google.com/p/puredarwin/source/browse/trunk/scripts/).
 #### A simple example across otool dependencies
 A hierarchical view:
 
@@ -33,65 +33,65 @@ A hierarchical view:
 The corresponding script output:
 
 <div style="font-family:courier new,monospace">
-<span style="font-size:small">./pd_machviz /usr/bin/otool</span>
+./pd_machviz /usr/bin/otool
 <div style="font-family:courier new,monospace">
 
 <div style="font-family:courier new,monospace">
-<span style="font-size:small">Generate dependencies graphs of /usr/bin/otool</span>
+Generate dependencies graphs of /usr/bin/otool
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">
-</span></span>
+
+
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> Legend:</span></span>
+ Legend:
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 1</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> + foo</span></span>
+ 1  + foo
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`- bar                                             No more dependency</span></span>
+ 2  |`- bar                                             No more dependency
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`+ baz impure! /Blocker_1 -&gt; file_involved_1       Impurity detected</span></span>
+ 2  |`+ baz impure! /Blocker_1 -> file_involved_1       Impurity detected
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`+ baz impure! /Blocker_. -&gt; file_involved_.       Impurity detected</span></span>
+ 2  |`+ baz impure! /Blocker_. -> file_involved_.       Impurity detected
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`+ baz impure! /Blocker_n -&gt; file_involved_n       Impurity detected</span></span>
+ 2  |`+ baz impure! /Blocker_n -> file_involved_n       Impurity detected
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`+ baz                                             Dependency found</span></span>
+ 2  |`+ baz                                             Dependency found
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 3</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> | |`. qux                                           Cached file (Already processed)</span></span>
+ 3  | |`. qux                                           Cached file (Already processed)
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">
-</span></span>
+
+
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Now generating dependencies tree, please wait...</span></span>
+Now generating dependencies tree, please wait...
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">
-</span></span>
+
+
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 1</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> + /usr/bin/otool</span></span>
+ 1  + /usr/bin/otool
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`+ /usr/lib/libgcc_s.1.dylib</span></span>
+ 2  |`+ /usr/lib/libgcc_s.1.dylib
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 3</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> | |`+ /usr/lib/libSystem.B.dylib</span></span>
+ 3  | |`+ /usr/lib/libSystem.B.dylib
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 4</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> | | |`- /usr/lib/system/libmathCommon.A.dylib</span></span>
+ 4  | | |`- /usr/lib/system/libmathCommon.A.dylib
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)"> 2</span></span><span style="white-space:pre"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-size:small"><span style="color:rgb(68,68,68)"> |`. /usr/lib/libSystem.B.dylib</span></span>
+ 2  |`. /usr/lib/libSystem.B.dylib
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Generation of otool.dot complete.</span></span>
+Generation of otool.dot complete.
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">
-</span></span>
+
+
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Now drawing graphs from otool.dot, please wait...</span></span>
+Now drawing graphs from otool.dot, please wait...
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Generation of otool.dot_directed.png complete.</span></span>
+Generation of otool.dot_directed.png complete.
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Generation of otool.dot_circular.png complete.</span></span>
+Generation of otool.dot_circular.png complete.
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Generation of otool.dot_radial.png complete.</span></span>
+Generation of otool.dot_radial.png complete.
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Generation of otool.dot_undirected.png complete.</span></span>
+Generation of otool.dot_undirected.png complete.
 <div style="font-family:courier new,monospace">
-<span style="font-size:small"><span style="color:rgb(68,68,68)">Generation of otool.dot_undirectedBIS.png complete.</span></span>
+Generation of otool.dot_undirectedBIS.png complete.
 #### A circular view of xterm dependencies
 
 [![](../../_/rsrc/1224967011322/developers/otool/mach-o-dependencies-overview/xterm.dot_circular.png%3Fheight=346&width=420)](mach-o-dependencies-overview/xterm.dot_circular.png%3Fattredirects=0)

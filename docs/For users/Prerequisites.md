@@ -19,9 +19,9 @@ This list does not consider the PowerPC platform since no PowerPC hardware is av
 | <div                                 | <span                                |
 | style="display:block;text-align:left | style="border-collapse:collapse">    |
 | ">                                   | </span>                              |
-|                                      | <span style="font-weight:bold">For   |
+|                                      | **For   |
 | [![](../_/rsrc/1212143186078/users/p | PureDarwin Xmas: VMware Fusion 2     |
-| rerequisites/darwin9.gif)](prerequis | running on a Macintosh</span>        |
+| rerequisites/darwin9.gif)](prerequis | running on a Macintosh**        |
 | ites/darwin9.gif%3Fattredirects=0)   | A "family 6" Intel processor, which  |
 |                                      | includes (but is not limited to)    |
 | </div>                               | -   Core Solo and Core Duo ("Yonah") |

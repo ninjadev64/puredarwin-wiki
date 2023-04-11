@@ -133,7 +133,7 @@ http://src.macosforge.org/Roots/10A432/
 69. ICAClassicNotSeizeDriver.kext.tar.gz
 70. ICAFWKodakProDriver.kext.tar.gz
 71. IOBluetoothFamily.kext.tar.gz
-72. <span style="font-weight:bold">IOHDIXController.kext.tar.gz</span>
+72. **IOHDIXController.kext.tar.gz**
 73. IOSCSIParallelFamily.kext.tar.gz
 74. InternalModemSupport.kext.tar.gz
 75. InternalUSBModem.kext.tar.gz

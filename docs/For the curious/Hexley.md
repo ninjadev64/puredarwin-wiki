@@ -5,8 +5,8 @@ Hexley is not [Huxley](http://en.wikipedia.org/wiki/Thomas_Huxley) but the Darw
 
 [![](http://www.hexley.com/images/hexley_450_pngs/hexley_fork_450.png)](http://www.hexley.com/images/hexley_450_pngs/hexley_fork_450.png)
 
-<span style="font-style:italic">Hexley DarwinOS Mascot Copyright 2000 by Jon Hooper. </span>
-<span style="font-style:italic">All Rights Reserved.</span>
+*Hexley DarwinOS Mascot Copyright 2000 by Jon Hooper. *
+*All Rights Reserved.*
 
 
 Visit <http://www.hexley.com/> for the full story.
@@ -27,12 +27,12 @@ Random found on the web:
 
 
 
-<span style="font-size:10px">http://fsck3r.deviantart.com/art/Hexley-91095754</span>
-<span style="font-size:10px">http://promoq.com/index.php?cat=6</span>
+http://fsck3r.deviantart.com/art/Hexley-91095754
+http://promoq.com/index.php?cat=6
 
-<span style="font-size:10px">http://wotakuma.blog60.fc2.com/blog-entry-315.html</span>
+http://wotakuma.blog60.fc2.com/blog-entry-315.html
 
-<span style="font-size:x-small">http://LordZoltan.deviantart.com/art/Visitor-15K-s-gift-52907225</span>
+http://LordZoltan.deviantart.com/art/Visitor-15K-s-gift-52907225
 
 ------------------------------------------------------------------------
 Hexley has also appeared in [supertuxkart](http://supertuxkart.sourceforge.net/)..

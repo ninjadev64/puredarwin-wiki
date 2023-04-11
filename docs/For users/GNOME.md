@@ -5,10 +5,10 @@ GNOME
 GNOME is a graphical desktop environment and development platform. For more information, see <http://www.gnome.org/>.
 This page is about running GNOME components on a PureDarwin system.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** GNOME components running in PureDarwin 9](gnome.html#TOC-GNOME-components-running-in-PureDarwin-9)
     1.  [**1.1** metacity](gnome.html#TOC-metacity)
@@ -22,16 +22,16 @@ Metacity is the window manager most commonly used with GNOME. 
 Once you have installed it (e.g., from MacPorts) and try to launch it, you will get
 
 
-<span style="font-size:small">Window manager warning: Failed to contact configuration server; some possible causes are that you need to enable TCP/IP networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/ for information. (Details -  1: Failed to get connection to session: Not enough memory)</span>
-<span style="font-size:small">Dynamic session lookup supported but failed: launchd did not provide a socket path, verify that org.freedesktop.dbus-session.plist is loaded!</span>
-<span style="font-size:small">Window manager warning: Failed to contact configuration server; some possible causes are that you need to enable TCP/IP networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/ for information. (Details -  1: Failed to get connection to session: Not enough memory)</span>
+Window manager warning: Failed to contact configuration server; some possible causes are that you need to enable TCP/IP networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/ for information. (Details -  1: Failed to get connection to session: Not enough memory)
+Dynamic session lookup supported but failed: launchd did not provide a socket path, verify that org.freedesktop.dbus-session.plist is loaded!
+Window manager warning: Failed to contact configuration server; some possible causes are that you need to enable TCP/IP networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/ for information. (Details -  1: Failed to get connection to session: Not enough memory)
 
 
 Then simply 
 
 
-<span style="font-size:small">launchctl load -w /Library/LaunchAgents/org.freedesktop.dbus-session.plist </span>
-<span style="font-size:small">metacity</span>
+launchctl load -w /Library/LaunchAgents/org.freedesktop.dbus-session.plist 
+metacity
 
 
 and it will run.

@@ -4,20 +4,20 @@ Darwin 10
 10C540 status
 -------------
 No dependency problem and half of the projects can be build without any patches.
-Some projects in the list below also have been volontary <span style="text-decoration:underline">not</span> built but build, including: 
-<span style="font-family:monospace;font-size:11px"></span>
+Some projects in the list below also have been volontary __not__ built but build, including: 
+
   ----------------------------------------------------------------------------------------------------------------------------------------
-  <span style="font-family:monospace">BerkeleyDB
+  BerkeleyDB
   MySQL
-  </span><span style="font-family:monospace">bind9
+  bind9
   cups_libs
-  </span><span style="font-family:monospace">gcc_select
-  </span>libtelnet
+  gcc_select
+  libtelnet
   passwordserver_saslkerberos
   <span style="font-family:monospace">passwordserver_saslextra<span style="font-family:monospace"><span style="font-family:monospace">
   </span></span></span>
   ----------------------------------------------------------------------------------------------------------------------------------------
-<span style="font-family:monospace;font-size:11px"></span>
+
   -------------- -------------- -------------- -------------- --------------
   **PROJECT**    **BIN**        **SRC**        **PAK**        **PASSES**
   Apple16X50Seri                                           [1](javascript
@@ -1279,7 +1279,7 @@ Some projects in the list below also have been volontary <span style="text-decor
 -------------
 Without providing any fixes for the projects which do not build on the first pass, the second pass reveals no dependency issue.
 
-<span style="font-family:monospace;font-size:11px"></span>
+
   -------------- -------------- -------------- -------------- --------------
   **PROJECT**    **BIN**        **SRC**        **PAK**        **PASSES**
   Apple16X50Seri                                           [1](javascript

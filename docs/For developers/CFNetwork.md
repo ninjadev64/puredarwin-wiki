@@ -7,8 +7,8 @@ While it was available as part of Darwin 8 (OS X 10.4), with the release of Darw
 
 CFNetwork is part of the CoreServices umbrella framework. CoreServices itself is a basic stub, existing solely to link to the framework under it.
 
-Below as an attachement is a binary version of <span style="font-style:italic">CFNetwork.framework</span>, wrapped inside a <span style="font-style:italic">CoreServices.framework</span>.
-Also included is the <span style="font-style:italic">CarbonCore.framework</span>, which contains only header files.
+Below as an attachement is a binary version of *CFNetwork.framework*, wrapped inside a *CoreServices.framework*.
+Also included is the *CarbonCore.framework*, which contains only header files.
 
 ![](https://raw.github.com/wiki/PureDarwin/PureDarwin/images/CoreServicesPureFoundation.png)
 

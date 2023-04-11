@@ -3,10 +3,10 @@ The world of bootstrapping
 This page gives an overview over some basic concepts about booting operating systems.
 It is based on a conversation with dfe in #puredarwin.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Linux](bootstrapping.html#TOC-Linux)
 2.  [**2** Windows NTLDR](bootstrapping.html#TOC-Windows-NTLDR)

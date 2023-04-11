@@ -21,6 +21,6 @@ Links
 -   [WWDC09](http://developer.apple.com/wwdc/) (Apple Worldwide Developers Conference) - San Francisco, June 2009
 -   [HAR2009](http://har2009.org/) (Hacking At Random) - Netherlands?, August 2009
 Looking for sponsors for PureDarwin to attend these ;-)
-<span style="font-weight:bold"></span>
+****
 #### Miscellaneous
 -   [The homepage of "Hexley" the platypus](http://www.hexley.com/)

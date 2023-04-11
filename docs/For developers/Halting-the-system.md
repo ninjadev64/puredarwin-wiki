@@ -17,7 +17,7 @@ In case, \`halt' fails, this is what could happening:
 `couldn't lock for reboot`
 
 
-At this time, `shutdown -s now' is failing because of <span style="font-style:italic">sleep</span>:
+At this time, `shutdown -s now' is failing because of *sleep*:
 
 
 [![](../_/rsrc/1225466088081/developers/halt/shutdown%20failing.png)](halt/shutdown%20failing.png%3Fattredirects=0)

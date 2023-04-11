@@ -3,10 +3,10 @@ Upgrading a port
 ![](../../_/rsrc/1222694606788/developers/macports/macports-logo-top.png)[MacPorts](http://www.macports.org/), formerly known as DarwinPorts, is a variant of the BSD ports system for Darwin and Mac OS X.
 This page describes how to upgrade a port in MacPorts to a later version of the respective software.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Case example](upgrading-a-port.html#TOC-Case-example)
     1.  [**1.1** Downloading latest upstream source](upgrading-a-port.html#TOC-Downloading-latest-upstream-source)
@@ -23,38 +23,38 @@ In this example, we update the portfile for gnustep-base. This is just an exampl
 #### Downloading latest upstream source
 To find out the URL where the upstream source is located, do:
 
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">port cat gnustep-base </span></span>
+
+
+`port cat gnustep-base `
 
 Check whether a newer version is available at that download location and download it, in this case gnustep-base-1.16.3.tar.gz
 #### Calculating md5
 Calculate the md5 checksum of the upstream source with
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">md5 gnustep-base-1.16.3.tar.gz </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">MD5 (gnustep-base-1.16.3.tar.gz) = 32ae302922a0a6e14c7008a105014bba</span></span>
+`md5 gnustep-base-1.16.3.tar.gz `
+`MD5 (gnustep-base-1.16.3.tar.gz) = 32ae302922a0a6e14c7008a105014bba`
 #### Editing the portfile
 Copy the portfile first so that we can create a patch later:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp $(port file gnustep-base) $(port file gnustep-base).orig</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">port edit gnustep-base</span></span>
+`cp $(port file gnustep-base) $(port file gnustep-base).orig`
+`port edit gnustep-base`
 
 Change version to 1.16.3
 Change md5 to the value calculated before
 #### Creating the patch
-<span style="font-family:courier new,monospace"><span style="font-size:small">diff -u $(port file gnustep-base).orig $(port file gnustep-base) &gt; gnustep-base.patch</span></span>
+`diff -u $(port file gnustep-base).orig $(port file gnustep-base) > gnustep-base.patch`
 #### Testing the patched portfile
 Now build it with
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">port rpm gnustep-base</span></span>
+`port rpm gnustep-base`
 #### Activating the new version
 In order to activate the new version so that it is used when builting additional software, you need to do in addition:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">port archive gnustep-base</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">port upgrade -n gnustep-base</span></span>
+`port archive gnustep-base`
+`port upgrade -n gnustep-base`
 
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">Finally, check that your activated version is really the new one with</span></span>
+Finally, check that your activated version is really the new one with
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">port installed gnustep-base</span></span>
+`port installed gnustep-base`
 #### Submitting the patch to MacPorts
 Search whether a ticket already exists, if not submit a new one with the patch attached.

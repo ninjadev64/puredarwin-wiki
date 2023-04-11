@@ -155,7 +155,7 @@ For bootable CDs, see [here](https://github.com/PureDarwin/PureDarwin/wiki/Booti
 ### Mounting DMGs on PureDarwin
 It looks like compressed DMGs (UDIF) cannot readily be mounted on PureDarwin since Darwin lacks the neccessary frameworks (e.g., DiskImages.framework) and/or kernel extensions (e.g., IOHDIXController.kext and its plug-ins) that Mac OS X uses for this purpose.
 
-<span style="color:rgb(255,0,0)">IOHDIXController.kext used to be [distributed](https://github.com/PureDarwin/PureDarwin/wiki/BinaryDrivers) with Darwin under the Apple Binary License. Perhaps that's what we need to do for PureDarwin as well.</span>
+IOHDIXController.kext used to be [distributed](https://github.com/PureDarwin/PureDarwin/wiki/BinaryDrivers) with Darwin under the Apple Binary License. Perhaps that's what we need to do for PureDarwin as well.
 
 ### vndevice
 Using the raw BSD vndevice would mean that we cannot seemingly use compressed DMGs (UDIF).
@@ -186,30 +186,30 @@ Also have a look at this:
 
 **This log should be cleaned up, when I (Tyson) get around to it:**
 
->   (11:04:38 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> hi
+>   (11:04:38 AM) errordeveloper: hi
 
->   (11:05:56 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> I just had a bit of experience with getting a dmg image converted into a raw disk image with 1 partion
+>   (11:05:56 AM) errordeveloper: I just had a bit of experience with getting a dmg image converted into a raw disk image with 1 partion
 
->   (11:06:12 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> so poweriso and dmg2img didn't work for me
+>   (11:06:12 AM) errordeveloper: so poweriso and dmg2img didn't work for me
 
->   (11:06:30 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> both produced a wrong kind of image
+>   (11:06:30 AM) errordeveloper: both produced a wrong kind of image
 
->   (11:06:46 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> which I couldn't validate with fdisk/parted
+>   (11:06:46 AM) errordeveloper: which I couldn't validate with fdisk/parted
 
->   (11:06:59 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> then I found this:
+>   (11:06:59 AM) errordeveloper: then I found this:
 
->   (11:07:02 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> https://github.com/planetbeing/libdmg-hfsplus/>
+>   (11:07:02 AM) errordeveloper: https://github.com/planetbeing/libdmg-hfsplus/>
 
->   (11:07:13 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> commit d4a253cae40fb4b38377273eb1f89f21c4cb224a
+>   (11:07:13 AM) errordeveloper: commit d4a253cae40fb4b38377273eb1f89f21c4cb224a
 
->   (11:08:13 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> ^ current state of the master branch is a bit broken, but all I had to do was just to add one variable which was not defined for some reason
+>   (11:08:13 AM) errordeveloper: ^ current state of the master branch is a bit broken, but all I had to do was just to add one variable which was not defined for some reason
 
->   (11:08:53 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> after it compiled, I got the 'dmg' util to convert the image
+>   (11:08:53 AM) errordeveloper: after it compiled, I got the 'dmg' util to convert the image
 
->   (11:09:19 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> and the result turned out to be valid in parted
+>   (11:09:19 AM) errordeveloper: and the result turned out to be valid in parted
 
->   (11:09:29 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> now
+>   (11:09:29 AM) errordeveloper: now
 
->  (11:09:53 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> the problem is that [http://www.puredarwin.org/developers/diskimages](diskimages.html) is not a wiki page
+>  (11:09:53 AM) errordeveloper: the problem is that [http://www.puredarwin.org/developers/diskimages](diskimages.html) is not a wiki page
 
->   (11:10:10 AM) <span style="color:rgb(118,69,31)">errordeveloper:</span> and I cannot simpy add this info there, so other might find it usefull
+>   (11:10:10 AM) errordeveloper: and I cannot simpy add this info there, so other might find it usefull

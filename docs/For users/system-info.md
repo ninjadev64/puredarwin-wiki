@@ -2,10 +2,10 @@ system-info
 ===========
 `system-info' is a little OpenSource tool (GPL v3) which reports operating system information.
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** Status](system-info.html#TOC-Status)
     1.  [**1.1** system-info v1.1.3](system-info.html#TOC-system-info-v1.1.3)

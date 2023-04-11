@@ -57,26 +57,26 @@ DTrace may also be used as (or be a part of) 
 -   a Troubleshooting software bugs 
 -   a partial intrusion detection system 
 -   an educative software (in order to explore, and understand how this operating system works)
-<span style="text-decoration:underline">Notes:</span><span style="font-size:small"> Although PureDarwin is focused on i386, DTrace supports most of common architectures (</span><span style="font-family:courier new,monospace"><span style="font-size:small">-arch i386|x86_64|ppc|ppc64</span></span><span style="font-size:small">).</span>
+__Notes:__ Although PureDarwin is focused on i386, DTrace supports most of common architectures (`-arch i386|x86_64|ppc|ppc64`).
 In Mac OS X 10.5, Instruments.app found in developer tools is another front-end to the DTrace facility.
-<span style="text-decoration:underline"><span style="font-size:small">Warning:</span></span><span style="font-size:small"> If the operating system becomes too busy or if you attempt to trace too many events (ie: all function entry related to the kernel), DTrace can drop events and even abort tracing and execution. Consequently, security auditing with DTrace is impacted and more,<span style="font-family:Helvetica"> system() action is not synchronous (so unreliable for security purpose).</span></span>
+__Warning:__
 
 ### Pros
--   <span style="font-size:13px">Every process, or specific processes, can be traced "simultaneously".</span>
--   <span style="font-size:13px">Output is fully flexible.</span>
--   <span style="font-size:13px">Nanosecond timestamp for function execution measurements.</span>
--   <span style="font-size:13px">Minimum performance impact when used smartly.</span>
--   <span style="font-size:13px">No need to restart anything in order to trace.</span>
--   <span style="font-size:13px">Relatively safe.</span>
+-   Every process, or specific processes, can be traced "simultaneously".
+-   Output is fully flexible.
+-   Nanosecond timestamp for function execution measurements.
+-   Minimum performance impact when used smartly.
+-   No need to restart anything in order to trace.
+-   Relatively safe.
 
 ### Cons
 
--   Partially supported (around 20K probes available instead of 60K) on Darwin (<span style="font-size:12px;font-family:Helvetica"><span style="font-family:courier new,monospace">dtrace -l | wc -l</span><span style="font-size:13px;font-family:Arial"> returns </span><span style="font-family:courier new,monospace">22466</span>).</span>
--   <span style="font-family:Helvetica">DTrace cannot fetch low levels hardware data.</span>
--   <span style="font-family:Helvetica">Performance impact when probe count goes under 36,000 probes (every kernel function entry/return) and 100,000 probes function in user-land.
-    Consequently, not really suited for security auditing, because DTrace may drop events if the system is really busy or simply (but dramatically in this case) abort.</span>
--   <span style="font-family:Helvetica">Need to be run as root (not sure it should belong to "cons" part).</span>
-<span style="font-size:small"></span>
+-   Partially supported (around 20K probes available instead of 60K) on Darwin (
+-   DTrace cannot fetch low levels hardware data.
+-   Performance impact when probe count goes under 36,000 probes (every kernel function entry/return) and 100,000 probes function in user-land.
+    Consequently, not really suited for security auditing, because DTrace may drop events if the system is really busy or simply (but dramatically in this case) abort.
+-   Need to be run as root (not sure it should belong to "cons" part).
+
 
 Examples
 --------
@@ -86,67 +86,67 @@ Examples
 <span style="font-size:13px">On Linux systems, "strace -eopen -f ... 2&gt;&1 | grep ENOENT" can be used to see which files a process tries to open. Using dtrace, the equivalent is:</span>
 1.  Open two terminals
 2.  In the first terminal, run:
-    <span><span style="font-family:courier new,monospace"><span style="font-size:small">opensnoop -ex</span></span></span>
-3.  <span style="font-family:Helvetica">In the second terminal, run the command that you want to inspect</span>
-<span style="font-family:Helvetica">In the first terminal, you will see the files that are tried to be opened but fail to open (e.g., ENOENT).</span>
+    opensnoop -ex
+3.  In the second terminal, run the command that you want to inspect
+In the first terminal, you will see the files that are tried to be opened but fail to open (e.g., ENOENT).
 
 ### A _cliché_ example: "Hello world!"
-<span style="font-size:small"></span>
+
 
 #### Inline
-<span style="font-size:small"><span style="font-family:courier new,monospace">dtrace -n "BEGIN { trace("Hello World!"); exit(0);}"</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span><span style="color:rgb(68,68,68)">dtrace: description 'BEGIN ' matched 1 probe</span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span><span style="color:rgb(68,68,68)">CPU     ID                    FUNCTION:NAME</span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span><span style="color:rgb(68,68,68)">  0      1                           :BEGIN   Hello World!</span></span></span></span>
+dtrace -n "BEGIN { trace("Hello World!"); exit(0);}"
+dtrace: description 'BEGIN ' matched 1 probe
+CPU     ID                    FUNCTION:NAME
+  0      1                           :BEGIN   Hello World!
 #### In a file
-<span style="font-size:small">Edit and save Hello.d:</span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">BEGIN </span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">{ </span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">trace("Hello World!"); </span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">exit(0); </span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">}</span></span></span>
+Edit and save Hello.d:
+BEGIN 
+{ 
+ trace("Hello World!"); 
+ exit(0); 
+}
 Then run the script:
-<span style="font-family:courier new">dtrace -s Hello.d </span>
-<span style="font-size:12px"> </span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span><span style="color:rgb(68,68,68)">dtrace: script 'Hello.d' matched 1 probe</span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span><span style="color:rgb(68,68,68)">CPU     ID                    FUNCTION:NAME</span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span><span style="color:rgb(68,68,68)">  0      1                           :BEGIN   Hello World!</span></span></span></span>
+dtrace -s Hello.d 
+ 
+dtrace: script 'Hello.d' matched 1 probe
+CPU     ID                    FUNCTION:NAME
+  0      1                           :BEGIN   Hello World!
 ### Detect new process (successfully started)
-<span style="font-family:courier new,monospace"> proc:::exec-success</span>
-<span style="font-family:courier new,monospace"> {</span>
-<span style="font-family:courier new,monospace"> printf("%s(pid=%d) started by uid - %dn",execname, pid, uid);</span>
-<span style="font-family:courier new,monospace"> }</span>
-<span style="font-size:small"></span>
+` proc:::exec-success`
+` {`
+` printf("%s(pid=%d) started by uid - %dn",execname, pid, uid);`
+` }`
+
 ### Detect sigkill
-<span style="font-size:12px"></span>
-<span style="font-family:courier new">proc:::signal-send</span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>/args[2] == SIGKILL/</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>{</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>  printf("to %s",args[1]-&gt;pr_fname);</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>  printf(" at %d", timestamp);</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>  printf(" by (%d)", uid);</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>  printf(" from %sn", execname);</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span>}</span></span></span>
+
+proc:::signal-send
+/args[2] == SIGKILL/
+{
+  printf("to %s",args[1]->pr_fname);
+  printf(" at %d", timestamp);
+  printf(" by (%d)", uid);
+  printf(" from %sn", execname);
+}
 ### Detect promiscuous mode changes
-<span style="font-family:courier new">fbt:mach_kernel:ifnet_set_promiscuous:*</span>
-<span style="font-family:courier new,monospace"><span>{</span></span>
-<span style="font-family:courier new,monospace"><span>   printf("%s", execname);
-</span></span>
-<span style="font-family:courier new,monospace"><span>}</span></span>
+fbt:mach_kernel:ifnet_set_promiscuous:*
+`{`
+`   printf("%s", execname);
+`
+`}`
 ### Watch setuid/setgid calls
-<span style="font-family:courier new,monospace"><span style="font-size:small">/* '*' == {entry|return} */</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">fbt:mach_kernel:setuid:*</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">{</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">   printf("%s", execname);</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">}</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">fbt:mach_kernel:setgid:*</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">{</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">   printf("%s", execname);</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">}</span></span>
+`/* '*' == {entry|return} */`
+`
+`
+`fbt:mach_kernel:setuid:*`
+`{`
+`   printf("%s", execname);`
+`}`
+`
+`
+`fbt:mach_kernel:setgid:*`
+`{`
+`   printf("%s", execname);`
+`}`
 ### Classic examples
 DTrace [one-liners](http://www.solarisinternals.com/wiki/index.php/DTrace_Topics_One_Liners)
 The [DTraceToolkit](http://www.opensolaris.org/os/community/dtrace/dtracetoolkit) (~100 scripts)
@@ -154,52 +154,51 @@ D Programming language
 ----------------------
 It seems to have been based on C language for some parts.
 (please add text)
-1.  <span style="font-size:small">D programs are compiled in user-land</span>
-2.  <span style="font-size:small">And sent to the DTrace virtual machine in the kernel-land</span>
-3.  <span style="font-size:small">Then run inside the kernel's address space (not in the DTrace process, nor in the target process)</span>
-<span style="font-size:small">Most of the times, you will use <span style="font-family:courier new,monospace">copyin</span> or <span style="font-family:courier new,monospace">copyinstr</span> in order to copy data from user-land to kernel-land:
-</span>
-<span style="font-size:small">
-</span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">     copyin()      Copies len bytes of data from the user-space address uaddr</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">                   to the kernel-space address kaddr.</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">
-</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">     copyinstr()   Copies a NUL-terminated string, at most len bytes long,</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">                   from user-space address uaddr to kernel-space address</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">                   kaddr.  The number of bytes actually copied, including the</span></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace">                   terminating NUL, is returned in *done.</span></span>
+1.  D programs are compiled in user-land
+2.  And sent to the DTrace virtual machine in the kernel-land
+3.  Then run inside the kernel's address space (not in the DTrace process, nor in the target process)
+
+
+
+     copyin()      Copies len bytes of data from the user-space address uaddr
+                   to the kernel-space address kaddr.
+
+
+     copyinstr()   Copies a NUL-terminated string, at most len bytes long,
+                   from user-space address uaddr to kernel-space address
+                   kaddr.  The number of bytes actually copied, including the
+                   terminating NUL, is returned in *done.
 ### A generic D script example
 `probe description /predicate/ {    action }`{style="font-family:courier new,monospace"}
-<span style="font-size:12px"></span>
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span style="font-family:Arial;font-size:13px"></span></span></span>
+
+
 ### Probes and providers
-<span style="font-size:small"><span style="font-family:courier new,monospace"><span style="font-family:Arial;font-size:13px">A provider is a collection of probe.
-</span></span></span>
+A provider is a collection of probe.
+
 #### Probe syntax
 Four fields describe a probe:
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">provider:module:function:name</span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span>
+provider:module:function:name`
+`
 Examples:
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">fbt:mach_kernel:setuid:entry</span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">syscall::open*:entry</span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span>
+fbt:mach_kernel:setuid:entry`
+`syscall::open*:entry`
+`
 Notes: Some special characters *, ?, [, and ] are allowed.
 * is the well known wildcard extension. 
 ? character is for any single character in the name. 
 [ and ] characters are used to specify a set of specific characters in the name.
 #### Listing probes
-<span style="font-family:courier new"><span style="font-size:12px">dtrace -l</span></span> lists all available probes.
+dtrace -l lists all available probes.
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">   ID   PROVIDER            MODULE                          FUNCTION NAME</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">    1     dtrace                                                     BEGIN</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">    2     dtrace                                                     END</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">    3     dtrace                                                     ERROR</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">    4   lockstat       mach_kernel                      lck_mtx_lock adaptive-acquire</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">[...]</span></span>
+`   ID   PROVIDER            MODULE                          FUNCTION NAME`
+`    1     dtrace                                                     BEGIN`
+`    2     dtrace                                                     END`
+`    3     dtrace                                                     ERROR`
+`    4   lockstat       mach_kernel                      lck_mtx_lock adaptive-acquire`
+`[...]`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">22527 plockstat1 libSystem.B.dylib    pthread_rwlock_unlock$UNIX2003 rw-release</span></span>
+`22527 plockstat1 libSystem.B.dylib    pthread_rwlock_unlock$UNIX2003 rw-release`
 
 #### Available providers
 Some providers (non exhaustive list):
@@ -281,28 +280,28 @@ When the predicate evaluates to true, "action" is executed.
 ### Action (optional)
 C-style functions and semicolon (;) separation for the "body".
 Examples: printf(), ustack(), trace, ...
-### <span style="font-size:large">Kernel destructive actions</span>
-<span style="font-family:Arial;font-size:13px;font-weight:normal"><span style="font-size:small">Understand "destructive for the running OS".</span></span>
+### Kernel destructive actions
+Understand "destructive for the running OS".
 #### "-w" flag required for...
-<span style="white-space:pre"><span style="font-size:small"><span style="font-family:courier new,monospace"> </span></span></span><span style="font-size:small"><span style="font-family:courier new,monospace">-w  permit destructive actions
-</span></span>
-<span style="font-family:Helvetica;font-size:12px"></span>
--   <span style="font-size:13px">void stop()</span>
--   <span style="font-size:13px">voir raise()</span>
--   <span style="font-size:13px">void breakpoint(void)</span>
--   <span style="font-size:13px">void chill(int nanoseconds)</span>
--   <span style="font-size:13px">void panic(void)</span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(255,0,0)">panic: We are hanging here... </span></span></span></span>
-<span style="font-family:Arial;font-size:13px">It can force a kernel crash dump.
+ -w  permit destructive actions
+
+
+-   void stop()
+-   voir raise()
+-   void breakpoint(void)
+-   void chill(int nanoseconds)
+-   void panic(void)
+panic: We are hanging here... 
+It can force a kernel crash dump.
 FIXME
-</span>
+
 References
 ----------
-<span>[<span style="font-family:courier new,monospace"><span style="font-size:small">man dtrace</span></span>](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtrace.1.html)<span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span>[<span style="font-family:courier new,monospace"><span style="font-size:small">man dtruss</span></span>](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtruss.1m.html)<span style="font-family:courier new,monospace"><span style="font-size:small">
-</span></span></span>[<span><span style="font-family:courier new,monospace"><span style="font-size:small">man procsystime</span></span></span>](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/procsystime.1m.html)<span style="font-size:small">
-</span>
+<span>[`man dtrace`](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtrace.1.html)`
+`[`man dtruss`](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtruss.1m.html)`
+`</span>[man procsystime](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/procsystime.1m.html)
+
 <span style="font-size:small">Jon Haslam. <http://wikis.sun.com/display/DTrace/Security>, Sun Microsystems, 2008.</span>
-<span style="font-size:small">Glenn Brunette & Jon Haslam. <span style="font-style:italic">Enhancing Security Awareness with DTrace</span>, Sun Microsystems, 2006.</span>
-<span style="font-size:small"><span style="font-style:italic">How To Use DTrace.</span> <http://www.sun.com/software/solaris/howtoguides/dtracehowto.jsp>, Sun Microsystems, 2005.</span>
-<span style="font-size:small"><span style="font-style:italic">Solaris Dynamic Tracing Guide.</span> <http://docs.sun.com/app/docs/doc/817-6223>, Sun Microsystems, 2005.</span>
+<span style="font-size:small">Glenn Brunette & Jon Haslam. *Enhancing Security Awareness with DTrace*, Sun Microsystems, 2006.</span>
+<span style="font-size:small">*How To Use DTrace.* <http://www.sun.com/software/solaris/howtoguides/dtracehowto.jsp>, Sun Microsystems, 2005.</span>
+<span style="font-size:small">*Solaris Dynamic Tracing Guide.* <http://docs.sun.com/app/docs/doc/817-6223>, Sun Microsystems, 2005.</span>

@@ -5,9 +5,9 @@ PureDarwin Boot is a minimal Darwin distribution, based on Nano, with a few extr
 A binary root of PureDarwin Boot is available below.
 
 ### Creating a Bootable Image
-To create a bootable CD image of PureDarwin Boot you will need the archive below and a copy of the <span style="font-family:courier new,monospace">pd_makedmg</span> script from the svn/hg. Assuming you've unpacked the archive in your Downloads directory, and as root:
+To create a bootable CD image of PureDarwin Boot you will need the archive below and a copy of the `pd_makedmg` script from the svn/hg. Assuming you've unpacked the archive in your Downloads directory, and as root:
 
-<span>    <span style="font-family:courier new,monospace"># pd_makedmg ~/Downloads/PureDarwinBoot.root/ /tmp/pdboot.iso PureDarwinBoot</span></span>
+
 
 The image will have been created as /tmp/pdboot.iso.dmg, so rename it to pdboot.iso and burn it to a CD.
 
@@ -21,8 +21,8 @@ The installer offers you a choice of EFI (for Macs and VMWare Fusion) or Chamele
 A step-by-step guide to installing using it will be written soon. Maybe even by me.
 
 ### Know Issues
--   <span style="font-family:courier new">shutdown</span> does not work. This is because Apple's shutdown (which this is) attempts to communicate with the kextd before stopping the system. If it cannot contact the kextd (which it can't because Boot doesn't run the kextd) it will not allow shutdown.
--   <span style="font-family:courier new,monospace">bless</span> does not work, because it requires the ApplicationServices.framework, which isn't even in the full PureDarwin release. Still, VMWare at least still boots without having its disk blessed.
+-   shutdown does not work. This is because Apple's shutdown (which this is) attempts to communicate with the kextd before stopping the system. If it cannot contact the kextd (which it can't because Boot doesn't run the kextd) it will not allow shutdown.
+-   `bless` does not work, because it requires the ApplicationServices.framework, which isn't even in the full PureDarwin release. Still, VMWare at least still boots without having its disk blessed.
 There are also many more problems, I'm sure.
 
 Please leave comments below as you find them.

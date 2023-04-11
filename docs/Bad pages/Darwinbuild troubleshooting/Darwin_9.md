@@ -8,36 +8,36 @@ not tested.
 -----------
 ### Principle
 #### 1-pass
-After running the so-called brutus command `<span style="font-family:courier new,monospace"><span style="font-size:small">for X in $(darwinxref version '*' | cut -f 1 -d '-'); do darwinbuild $X; done</span></span>' the following projects have been successfully built, taking in account that some projects has been excluded as e.g., <span style="font-style:italic">xnu</span> (because it was already built and packaged as a test case at the beginning), but also <span style="font-style:italic">MySQL</span>, <span style="font-style:italic">gcc_42</span>, <span style="font-style:italic">gcc</span>, <span style="font-style:italic">BerkeleyDB</span>, <span style="font-style:italic">bind9</span> and <span style="font-style:italic">apache1</span> which can be built successfully at first or second pass depending the project but definitively takes too much time and space at compilation process (<span style="font-style:italic">gcc_42</span> could be soon needed too).
+After running the so-called brutus command ``for X in $(darwinxref version '*' | cut -f 1 -d '-'); do darwinbuild $X; done`' the following projects have been successfully built, taking in account that some projects has been excluded as e.g., *xnu* (because it was already built and packaged as a test case at the beginning), but also *MySQL*, *gcc_42*, *gcc*, *BerkeleyDB*, *bind9* and *apache1* which can be built successfully at first or second pass depending the project but definitively takes too much time and space at compilation process (*gcc_42* could be soon needed too).
 
 
 Let's load the projects freshly built with the following script, even if we don't need most of them.
 
-<span style="font-family:courier new">
-</span>
-<span style="font-family:courier new"><span style="font-family:Arial"></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">for Y in `ls Packages | awk -F "." '{print $1}'`; do</span></span>
-<span style="font-family:courier new;white-space:pre"> <span style="white-space:normal">darwinbuild -load $Y</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">done</span></span>
+
+
+
+`for Y in `ls Packages | awk -F "." '{print $1}'`; do`
+
+`done`
 
 
 #### 2-pass
 Then a second pass will be made, excluding the previous built and load projects, with:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">for X in $(darwinxref version '*' | cut -f 1 -d '-'); do</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>SAME="false"</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>for Y in `ls Packages | awk -F "."  '{print $1}'`; do</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>if [ "$Y" = "$X" ]; then</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>SAME="true"</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>break</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>fi</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>done</span></span>
-<span style="font-family:courier new">
-</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>if [ "$SAME" = "false" ]; then</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                darwinbuild  $X</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="white-space:pre">  </span>fi</span></span>
-<span style="font-family:courier new">done</span>
+`for X in $(darwinxref version '*' | cut -f 1 -d '-'); do`
+``
+<span style="font-family:courier new,monospace"><span style="font-size:small">  for Y in `ls Packages | awk -F "."  '{print $1}'`; do</span></span>
+<span style="font-family:courier new,monospace"><span style="font-size:small">  if [ "$Y" = "$X" ]; then</span></span>
+<span style="font-family:courier new,monospace"><span style="font-size:small">  SAME="true"</span></span>
+<span style="font-family:courier new,monospace"><span style="font-size:small">  break</span></span>
+<span style="font-family:courier new,monospace"><span style="font-size:small">  fi</span></span>
+<span style="font-family:courier new,monospace"><span style="font-size:small">  done</span></span>
+
+
+<span style="font-family:courier new,monospace"><span style="font-size:small">  if [ "$SAME" = "false" ]; then</span></span>
+`                darwinbuild  $X`
+<span style="font-family:courier new,monospace"><span style="font-size:small">  fi</span></span>
+done
 
 
 What does that mean if we found a "diff" between the two passes? What can we do?
@@ -45,9 +45,9 @@ What does that mean if we found a "diff" between the two passes? What can we do?
 2- We should run a 3rd-pass on the projects which still fail if between the previous passes, some noticable differences were found. And at the end, we should still obtain more binary roots and less compilation time.
 3- A quick electromagnetic solar tempest has just disappeard?
 
-<span style="text-decoration:underline">Notes:</span> from scratch, the "~&lt;build attempts&gt;" appended to the project and its version (found in "<span style="font-style:italic">Logs/&lt;project&gt;/&lt;project&gt;-&lt;version&gt;.log~&lt;build attempts&gt;</span>", but not only/necessarly here in fact) could be used in the "n-passes" process in order to know if and when the project has been successfully built previously or not. (TODO)
+__Notes:__ from scratch, the "~&lt;build attempts&gt;" appended to the project and its version (found in "*Logs/<project>/<project>-<version>.log~<build attempts>*", but not only/necessarly here in fact) could be used in the "n-passes" process in order to know if and when the project has been successfully built previously or not. (TODO)
 #### n-pass
-At a certain point, projects which cannot be built "by default" will be listed if between a <span style="font-style:italic">pass n </span>and a <span style="font-style:italic">pass n-1</span> no difference has been established. Moreover, knowing that a project failed to build at the first pass or fail to build near the other extremum will help in the fixing process.
+At a certain point, projects which cannot be built "by default" will be listed if between a *pass n *and a *pass n-1* no difference has been established. Moreover, knowing that a project failed to build at the first pass or fail to build near the other extremum will help in the fixing process.
 ### Results (excerpt)
 #### Current status
 The approximative current status (not including the chaos) looks like the following:
@@ -59,13 +59,13 @@ The bin column refers to the availability of an "official" binaryroot (e.g., fro
 The src column points to the availability of an "official" source.
 The logs column list (and locally points to the project logs) each build attempt (pass) and its state.
 
-> <span style="color:rgb(56,118,29)">green</span> for exit status 0 (build succeed)
-> <span style="color:rgb(191,144,0)">orange</span> for exit status 1 (fail)
-> <span style="color:rgb(255,0,0)">red</span> for exit status 2 (fail)
+> green for exit status 0 (build succeed)
+> orange for exit status 1 (fail)
+> red for exit status 2 (fail)
 > black when "it seems" that no src is available, so nothing can be built.
 > 
 
-<span style="font-size:11px"><span style="font-family:monospace"></span></span>
+
   ------------------ ------------------ ------------------ ------------------
   **PROJECT**        **BIN**            **SRC**            **LOGS**
   Apple16X50Serial                                       [1](javascript:voi
@@ -8308,28 +8308,28 @@ The logs column list (and locally points to the project logs) each build attempt
 ------------------------------------------------------------------------
 289 / 417 successfully built.
 121 / 417 failed to build.
-<span style="font-family:-webkit-monospace;font-size:11px"><span>
-</span></span>
+
+
 ------------------------------------------------------------------------
 #### 1..3-pass
-<span style="font-size:small">After the first pass and using `/opt/local/share/darwinbuild/packageRoots', many projects have been built and packaged successfully.</span>
-<span style="font-size:13px"><span style="font-size:12px"></span></span>
-<span style="font-size:small">On the other side, there is the list of packages which have not been built successfully for any reasons.</span>
-<span style="font-size:small"></span>
+After the first pass and using `/opt/local/share/darwinbuild/packageRoots', many projects have been built and packaged successfully.
+
+On the other side, there is the list of packages which have not been built successfully for any reasons.
+
 Just before running into the second pass, we will load all these freshly built projects. Then we will see if more projects are built after the second pass.
 
 These binary roots will be also loaded.
 Another step which could have been done at the beginning or each pass is to load headers (-headers):
 
-<span style="font-family:courier new,monospace">for Y in `ls Packages | awk -F "." '{print $1}'`; do</span>
-<span style="font-family:courier new,monospace">        darwinbuild -headers $Y</span>
-<span style="font-family:courier new,monospace">done</span>
+`for Y in `ls Packages | awk -F "." '{print $1}'`; do`
+`        darwinbuild -headers $Y`
+`done`
 
 
 Build succeeded:
 
-<span style="font-size:13px">
-</span>
+
+
 +--------------------+--------------------+--------------------+--------------------+
 | <span              |  **2-pass**       |  **3-pass**       |  **3-pass'        |
 | style="font-weight |                    |                    | (-headers)**       |
@@ -9949,241 +9949,241 @@ Build succeeded:
 |                    |                    |                    |                    |
 | </div>             |                    |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+
-<span style="font-size:13px"><span style="font-size:12px">
-</span></span>
-<span style="font-weight:bold">4-pass</span>
+
+
+**4-pass**
 
 Again, all the projects will be built (or not). As a result, nothing will be built successfully according to packageRoots:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/opt/local/share/darwinbuild/packageRoots           </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">Archive tool: tar (GNU tar) 1.15.1</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">*** Packaging Headers</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">*** Packaging Roots</span></span></span>
+`/opt/local/share/darwinbuild/packageRoots           `
+`Archive tool: tar (GNU tar) 1.15.1`
+`*** Packaging Headers`
+`*** Packaging Roots`
 
 Finally, we reach the point where no buildable (without alteration, patch, etc..) dependency is missing.
 
 
-Let's also now add [PureFoundation](../../../purefoundation.html) in <span style="font-style:italic">[...]/9J61/BuildRoot</span> folder with: <span style="font-family:courier new,monospace"><span style="font-size:small">tar xzf ../../../hg/Roots/pd/PureFoundation.root.tar.gz</span></span>.
+Let's also now add [PureFoundation](../../../purefoundation.html) in *[...]/9J61/BuildRoot* folder with: `tar xzf ../../../hg/Roots/pd/PureFoundation.root.tar.gz`.
 And go for a 5 round..
 #### 5-pass
 After trying again to build all projects, it appears that 6 additional projects have been successfully built:
 
-<span style="font-size:x-small">Libc_headers-498.1.7~5 Libc_man-498.1.7~5 cxxfilt-7~5 gdbforcw-5~5 <span style="font-size:12px">libstdcxx-16~5 project_makefiles-126~5 </span></span>
-<span style="font-size:x-small">
-</span>
+
+
+
 Let's load them, and be prepare for pass six.
 It is also plausible that many solutions and pseudo-solutions below will be needed for the next passes. Everything has been logged since the beginning, some useful `grep' sequences based on the available solutions against the log files could also be done in order to make them build.
 #### 6-pass
 Indeed, nothing more succeed at this stage.
 
-<span style="font-size:10px"></span>
-<span style="font-size:12px"></span>
 
-<span style="font-size:13px"></span>
+
+
+
 Enjoy the number of error to fix..
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">grep -i error Logs/*/*6 | wc -l</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  196493</span></span>
+`grep -i error Logs/*/*6 | wc -l`
+`  196493`
 
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">grep -i warning Logs/*/*6 | wc -l</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">   38007</span></span>
-<span style="font-family:courier new">
-</span>
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif">Errata:</span></span><span style="font-family:arial,sans-serif"> <span style="font-style:italic">headers</span> have been built but not loaded above..</span>
-<span style="font-family:arial,sans-serif">it should be loaded with -load -headers:</span>
-<span style="font-family:courier new"></span>
+`grep -i warning Logs/*/*6 | wc -l`
+`   38007`
+
+
+**Errata:**
+it should be loaded with -load -headers:
+
 for Y in `ls Packages/*hdrs*.tar.gz | awk -F "." '{print $1}' | sed 's/Packages///g'`; do
-<span>    </span>darwinbuild -load -headers $Y
+    darwinbuild -load -headers $Y
 done
 
 
-<span style="font-size:13px">Let's first look the projects which do not have any binaryroot and cannot be built.</span>
--   <span style="font-size:13px">In <span style="color:rgb(56,118,29)">green</span> are the projects which have enough solution(s) available in order to built successfully the project (on 9J61)</span>
--   <span style="font-size:13px">In <span style="color:rgb(255,153,0)">orange</span> I let you guess.</span>
--   <span style="font-size:13px">In <span style="color:rgb(255,0,0)">red</span> are the projects where source not available or impossible to build (e.g., CFNetwork on darwin 9).</span>
--   <span style="font-size:13px">In <span style="color:rgb(153,153,153)">gray</span> are not (yet) really important project (e.g., svk or SpamAssassin)</span>
-<span style="font-size:13px">
-</span>
-<span style="font-size:13px"></span>
-<span style="font-size:x-small">-AppleMacRISC4PE</span>
-<span style="font-size:x-small">-AppleOnboardAudio</span>
-<span style="font-size:x-small">-AppleUSBAudio</span>
-<span style="font-size:x-small">-AppleUSBCDCDriver</span>
-<span style="font-size:x-small">-AppleUSBIrDA</span>
-<span style="font-size:x-small">-BootCache</span>
-<span style="font-size:x-small">-BootX</span>
-<span style="font-size:x-small"><span style="color:rgb(255,0,0)">-CFNetwork</span></span>
-<span style="font-size:x-small">-CPAN</span>
-<span style="font-size:x-small">-CPANInternal</span>
-<span style="font-size:x-small">-ChatServer</span>
-<span style="font-size:x-small">-<span style="color:rgb(255,0,0)">Chess</span></span>
-<span style="font-size:x-small">-CyrusIMAP</span>
-<span style="font-size:x-small">-DSPasswordServerPlugin</span>
-<span style="font-size:x-small">-DynamicPowerStep</span>
-<span style="font-size:x-small">-FastCGI</span>
-<span style="font-size:x-small">-FirewallTool</span>
-<span style="font-size:x-small">-IOATABlockStorage</span>
-<span style="font-size:x-small">-IOATAPIProtocolTransport</span>
-<span style="font-size:x-small">-IOBDStorageFamily</span>
-<span style="font-size:x-small">-IOFWDVComponents</span>
-<span style="font-size:x-small">-IOFireWireIP</span>
-<span style="font-size:x-small">-IOFireWireSerialBusProtocolTransport</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">IOKitTools</span></span>
-<span style="font-size:x-small">-<span style="color:rgb(255,153,0)">IOKitUser</span></span>
-<span style="font-size:x-small">-IOSCSIArchitectureModelFamily</span>
-<span style="font-size:x-small">-JavaScriptCore</span>
-<span style="font-size:x-small">-JavaScriptGlue</span>
-<span style="font-size:x-small">-Libc_debug</span>
-<span style="font-size:x-small">-Libc_profile</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">NFS</span></span>
-<span style="font-size:x-small">-OpenAL</span>
-<span style="font-size:x-small">-OpenDirectory</span>
-<span style="font-size:x-small">-OpenLDAP</span>
-<span style="font-size:x-small">-OpenSSH</span>
-<span style="font-size:x-small">-PyRSS2Gen</span>
-<span style="font-size:x-small">-RubyOnRails</span>
-<span style="font-size:x-small">-SecurityTool</span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-SpamAssassin</span></span>
-<span style="font-size:x-small">-Twisted</span>
-<span style="font-size:x-small">-TwistedWords</span>
-<span style="font-size:x-small">-TwistedXish</span>
-<span style="font-size:x-small">-VirtualAudioDriver</span>
-<span style="font-size:x-small">-WebCore</span>
-<span style="font-size:x-small">-X11fonts</span>
-<span style="font-size:x-small">-X11libs</span>
-<span style="font-size:x-small">-X11proto</span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache</span></span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache_mod_bonjour</span></span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache_mod_fastcgi</span></span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache_mod_hfs_apple</span></span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache_mod_perl</span></span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache_mod_php</span></span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-apache_mod_php4</span></span>
-<span style="font-size:x-small">-autofs</span>
-<span style="font-size:x-small">-cddafs</span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-clamav</span></span>
-<span style="font-size:x-small">-configd_executables</span>
-<span style="font-size:x-small">-configd_plugins</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">cron</span></span>
-<span style="font-size:x-small">-cups</span>
-<span style="font-size:x-small">-disklabel</span>
-<span style="font-size:x-small">-efax</span>
-<span style="font-size:x-small">-efiboot</span>
-<span style="font-size:x-small">-gdb</span>
-<span style="font-size:x-small">-gnuserv</span>
-<span style="font-size:x-small">-gpt</span>
-<span style="font-size:x-small">-gssd</span>
-<span style="font-size:x-small">-gutenprint</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">headerdoc</span></span>
-<span style="font-size:x-small">-iodbc</span>
-<span style="font-size:x-small">-ipsec</span>
-<span style="font-size:x-small">-ipv6configuration</span>
-<span style="font-size:x-small"><span style="color:rgb(56,118,29)">-isoutil</span></span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">launchd_libs</span></span>
-<span style="font-size:x-small">-libsecurity_agent</span>
-<span style="font-size:x-small">-libsecurity_apple_csp</span>
-<span style="font-size:x-small">-libsecurity_apple_cspdl</span>
-<span style="font-size:x-small">-libsecurity_apple_file_dl</span>
-<span style="font-size:x-small">-libsecurity_apple_x509_cl</span>
-<span style="font-size:x-small">-libsecurity_apple_x509_tp</span>
-<span style="font-size:x-small">-libsecurity_asn1</span>
-<span style="font-size:x-small">-libsecurity_authorization</span>
-<span style="font-size:x-small">-libsecurity_cdsa_plugin</span>
-<span style="font-size:x-small">-libsecurity_cdsa_utils</span>
-<span style="font-size:x-small">-libsecurity_checkpw</span>
-<span style="font-size:x-small">-libsecurity_cms</span>
-<span style="font-size:x-small">-libsecurity_codesigning</span>
-<span style="font-size:x-small">-libsecurity_dotmacdl</span>
-<span style="font-size:x-small">-libsecurity_filedb</span>
-<span style="font-size:x-small">-libsecurity_filevault</span>
-<span style="font-size:x-small">-libsecurity_keychain</span>
-<span style="font-size:x-small">-libsecurity_ldap_dl</span>
-<span style="font-size:x-small">-libsecurity_manifest</span>
-<span style="font-size:x-small">-libsecurity_mds</span>
-<span style="font-size:x-small">-libsecurity_ocspd</span>
-<span style="font-size:x-small">-libsecurity_pkcs12</span>
-<span style="font-size:x-small">-libsecurity_sd_cspdl</span>
-<span style="font-size:x-small">-libsecurity_smime</span>
-<span style="font-size:x-small">-libsecurity_ssl</span>
-<span style="font-size:x-small">-libsecurityd</span>
-<span style="font-size:x-small">-libstdcxx_SUPanWheat</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">libxml2</span></span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">libxslt</span></span>
-<span style="font-size:x-small">-mDNSResponderSystemLibraries</span>
-<span style="font-size:x-small">-mailman</span>
-<span style="font-size:x-small"><span style="color:rgb(56,118,29)">-msdosfs</span></span>
-<span style="font-size:x-small">-net_snmp</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">netinfo</span></span>
-<span style="font-size:x-small">-notify</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">ntfs</span></span>
-<span style="font-size:x-small">-ntp</span>
-<span style="font-size:x-small">-pam_modules</span>
-<span style="font-size:x-small">-passwordserver_saslkerberos</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">pdisk</span></span>
-<span style="font-size:x-small">-portmap</span>
-<span style="font-size:x-small">-postfix</span>
-<span style="font-size:x-small">-pyOpenSSL</span>
-<span style="font-size:x-small">-pyobjc</span>
-<span style="font-size:x-small">-python</span>
-<span style="font-size:x-small">-python23</span>
-<span style="font-size:x-small">-python_dateutil</span>
-<span style="font-size:x-small">-python_modules</span>
-<span style="font-size:x-small">-ruby</span>
-<span style="font-size:x-small">-ruby_dnssd</span>
-<span style="font-size:x-small">-ruby_libxml</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">screen</span></span>
-<span style="font-size:x-small">-security_certtool</span>
-<span style="font-size:x-small">-security_crlrefresh</span>
-<span style="font-size:x-small">-security_dotmac_tp</span>
-<span style="font-size:x-small">-security_ocspd</span>
-<span style="font-size:x-small">-security_privportserver</span>
-<span style="font-size:x-small">-security_systemkeychain</span>
-<span style="font-size:x-small">-securityd</span>
-<span style="font-size:x-small">-smb</span>
-<span style="font-size:x-small">-subversion</span>
-<span style="font-size:x-small"><span style="color:rgb(153,153,153)">-svk</span></span>
-<span style="font-size:x-small">-syslog</span>
-<span style="font-size:x-small">-tcl</span>
-<span style="font-size:x-small">-tcl_ext</span>
-<span style="font-size:x-small">-tcl_tk</span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">usertemplate</span></span>
-<span style="font-size:x-small">-<span style="color:rgb(153,153,153)">webdavfs</span></span>
-<span style="font-size:x-small">-<span style="color:rgb(56,118,29)">xar</span></span>
+Let's first look the projects which do not have any binaryroot and cannot be built.
+-   <span style="font-size:13px">In green are the projects which have enough solution(s) available in order to built successfully the project (on 9J61)</span>
+-   
+-   <span style="font-size:13px">In red are the projects where source not available or impossible to build (e.g., CFNetwork on darwin 9).</span>
+-   
+
+
+
+-AppleMacRISC4PE
+-AppleOnboardAudio
+-AppleUSBAudio
+-AppleUSBCDCDriver
+-AppleUSBIrDA
+-BootCache
+-BootX
+-CFNetwork
+-CPAN
+-CPANInternal
+-ChatServer
+
+-CyrusIMAP
+-DSPasswordServerPlugin
+-DynamicPowerStep
+-FastCGI
+-FirewallTool
+-IOATABlockStorage
+-IOATAPIProtocolTransport
+-IOBDStorageFamily
+-IOFWDVComponents
+-IOFireWireIP
+-IOFireWireSerialBusProtocolTransport
+
+
+-IOSCSIArchitectureModelFamily
+-JavaScriptCore
+-JavaScriptGlue
+-Libc_debug
+-Libc_profile
+
+-OpenAL
+-OpenDirectory
+-OpenLDAP
+-OpenSSH
+-PyRSS2Gen
+-RubyOnRails
+-SecurityTool
+-SpamAssassin
+-Twisted
+-TwistedWords
+-TwistedXish
+-VirtualAudioDriver
+-WebCore
+-X11fonts
+-X11libs
+-X11proto
+-apache
+-apache_mod_bonjour
+-apache_mod_fastcgi
+-apache_mod_hfs_apple
+-apache_mod_perl
+-apache_mod_php
+-apache_mod_php4
+-autofs
+-cddafs
+-clamav
+-configd_executables
+-configd_plugins
+
+-cups
+-disklabel
+-efax
+-efiboot
+-gdb
+-gnuserv
+-gpt
+-gssd
+-gutenprint
+
+-iodbc
+-ipsec
+-ipv6configuration
+-isoutil
+
+-libsecurity_agent
+-libsecurity_apple_csp
+-libsecurity_apple_cspdl
+-libsecurity_apple_file_dl
+-libsecurity_apple_x509_cl
+-libsecurity_apple_x509_tp
+-libsecurity_asn1
+-libsecurity_authorization
+-libsecurity_cdsa_plugin
+-libsecurity_cdsa_utils
+-libsecurity_checkpw
+-libsecurity_cms
+-libsecurity_codesigning
+-libsecurity_dotmacdl
+-libsecurity_filedb
+-libsecurity_filevault
+-libsecurity_keychain
+-libsecurity_ldap_dl
+-libsecurity_manifest
+-libsecurity_mds
+-libsecurity_ocspd
+-libsecurity_pkcs12
+-libsecurity_sd_cspdl
+-libsecurity_smime
+-libsecurity_ssl
+-libsecurityd
+-libstdcxx_SUPanWheat
+
+
+-mDNSResponderSystemLibraries
+-mailman
+-msdosfs
+-net_snmp
+
+-notify
+
+-ntp
+-pam_modules
+-passwordserver_saslkerberos
+
+-portmap
+-postfix
+-pyOpenSSL
+-pyobjc
+-python
+-python23
+-python_dateutil
+-python_modules
+-ruby
+-ruby_dnssd
+-ruby_libxml
+
+-security_certtool
+-security_crlrefresh
+-security_dotmac_tp
+-security_ocspd
+-security_privportserver
+-security_systemkeychain
+-securityd
+-smb
+-subversion
+-svk
+-syslog
+-tcl
+-tcl_ext
+-tcl_tk
+
+
+
 
 Let's make another pass (7th) again after loading all these built projects.
 At this stage, the state of the buildroot is not "clean" anymore, some headers have been copied or linked manually from a location to another (and even from outside the buildroot sometimes), etc..
 #### 7 pass
 The results are really great, more and more projects are built again (see results of packageRoots):
 
-<span style="font-family:arial,sans-serif"><span style="font-size:x-small">AppleAPIC-13~7 AppleDisplays-1140.0.5~7 AppleFileSystemDriver-12~7 AppleHWSensor-190~7 AppleIntel8255x-19~7 AppleKeyLargo-172.3.1~7 AppleSMBIOS-38~7 AppleUSBAudio-264.2.10~7 BootCache-43.12~13 BootX-81~7 CF-476.18~7 DirectoryServiceMIG-514.25~7 IOATAFamily-201.0.1~7 IOAudioFamily-169.4.3~7 IOCDStorageFamily-39~7 IODVDStorageFamily-26~7 IOFireWireFamily-347.4.0~7 IOFireWireIP-177.4.0~7 IOFireWireSBP2-198.4.0~7 IOGraphics-305.14~7 IOI2CFamily-111.0.2~7 IOPCCardFamily-48~7 IOPCIFamily-110~7 IOStorageFamily-92.9~7 Libinfo-278.0.3~7 Libnotify-36~7 Libsyscall-1228.12.14~7 UserNotification-21~7 VirtualAudioDriver-258.3.1~7 diskdev_cmds-421.8~7 distcc-881~7 gpt-7~7 libresolv-25.0.2~7 libsecurity_checkpw-29159~7 portmap-26~7 shell_cmds-118~7 top-39~7</span></span>
+AppleAPIC-13~7 AppleDisplays-1140.0.5~7 AppleFileSystemDriver-12~7 AppleHWSensor-190~7 AppleIntel8255x-19~7 AppleKeyLargo-172.3.1~7 AppleSMBIOS-38~7 AppleUSBAudio-264.2.10~7 BootCache-43.12~13 BootX-81~7 CF-476.18~7 DirectoryServiceMIG-514.25~7 IOATAFamily-201.0.1~7 IOAudioFamily-169.4.3~7 IOCDStorageFamily-39~7 IODVDStorageFamily-26~7 IOFireWireFamily-347.4.0~7 IOFireWireIP-177.4.0~7 IOFireWireSBP2-198.4.0~7 IOGraphics-305.14~7 IOI2CFamily-111.0.2~7 IOPCCardFamily-48~7 IOPCIFamily-110~7 IOStorageFamily-92.9~7 Libinfo-278.0.3~7 Libnotify-36~7 Libsyscall-1228.12.14~7 UserNotification-21~7 VirtualAudioDriver-258.3.1~7 diskdev_cmds-421.8~7 distcc-881~7 gpt-7~7 libresolv-25.0.2~7 libsecurity_checkpw-29159~7 portmap-26~7 shell_cmds-118~7 top-39~7
 
-<span style="text-decoration:underline">
-</span>
-<span style="text-decoration:underline">Random notes:</span> In fact we have a workaround since 9F33pd1 which will soon be used as many projects are related to the following problem(s) [...].
-<span style="font-weight:bold">Problems: <span style="font-family:courier new;font-size:12px;font-weight:normal">/System/Library/Frameworks/Security.framework/Headers/SecBase.h:63: error: syntax error before 'SecKeychainAttrType'</span></span>
+__
+__
+__Random notes:__ In fact we have a workaround since 9F33pd1 which will soon be used as many projects are related to the following problem(s) [...].
+****
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecBase.h:74: error: syntax error before 'SecKeychainAttrType'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecBase.h:77: error: syntax error before '}' token</span></span>
+`/System/Library/Frameworks/Security.framework/Headers/SecBase.h:74: error: syntax error before 'SecKeychainAttrType'`
+`/System/Library/Frameworks/Security.framework/Headers/SecBase.h:77: error: syntax error before '}' token`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:78: error: syntax error before 'SecAuthenticationType'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:117: error: syntax error before 'SecProtocolType'</span></span>
-<span style="font-weight:bold">Projects impacted:</span>
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:78: error: syntax error before 'SecAuthenticationType'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:117: error: syntax error before 'SecProtocolType'`
+**Projects impacted:**
 
-<span style="font-size:x-small">DynamicPowerStep KerberosHelper OpenSSH SecurityTool apache_mod_bonjour bootp cddafs configd_executables ipsec ipv6configuration libsecurity_apple_x509_tp libsecurity_asn1 libsecurity_cdsa_utilities libsecurity_cdsa_utils libsecurity_cms libsecurity_dotmacdl libsecurity_filevault libsecurity_ldap_dl libsecurity_manifest libsecurity_pkcs12 libsecurity_smime libsecurity_ssl modemccl ppp samba security_certtool security_ocspd security_systemkeychain securityd</span>
-<span style="font-size:x-small">
-</span>
-So let's use the workaround which consists of simply adding<span style="font-family:Courier New;font-size:12px"><span style="font:normal normal normal 12px/normal Arial"> in <span style="font-style:italic">SecBase.h</span> </span>#include &lt;CarbonCore/MacTypes.h&gt;</span><span style="font-size:12px"><span style="font-family:arial,sans-serif">. This is a dirty workaround because nobody should alter any header files.</span></span>
-<span style="font-size:12px">Let's go for the 8th round, we're not tired at all.</span>
+DynamicPowerStep KerberosHelper OpenSSH SecurityTool apache_mod_bonjour bootp cddafs configd_executables ipsec ipv6configuration libsecurity_apple_x509_tp libsecurity_asn1 libsecurity_cdsa_utilities libsecurity_cdsa_utils libsecurity_cms libsecurity_dotmacdl libsecurity_filevault libsecurity_ldap_dl libsecurity_manifest libsecurity_pkcs12 libsecurity_smime libsecurity_ssl modemccl ppp samba security_certtool security_ocspd security_systemkeychain securityd
+
+
+So let's use the workaround which consists of simply adding. This is a dirty workaround because nobody should alter any header files.
+Let's go for the 8th round, we're not tired at all.
 #### 8 pass
-<span style="font-size:12px">build build!</span>
-<span style="font-size:12px">Results: <span style="font-family:arial,sans-serif;font-size:x-small">DynamicPowerStep-1.6.0~8 IOFireWireAVC-223.4.1~8 cddafs-230.0.5~8 ipsec-34.0.3~8 libsecurity_cdsa_utils-32586~8</span></span>
-<span style="font-size:12px"></span>
+build build!
+
+
 ### 9 pass
-<span style="font-size:12px"></span>
+
 o/
-<span style="font-size:x-small">OpenSSH-95.1.5~9 cctools-667.3~9 cctools_ofiles-667.3~9 gssd-23~9 libdyld-97.1~9 libsecurity_agent-32091.1~9 libsecurity_ocspd-29518~9 mDNSResponderSystemLibraries-176.3~9 network_cmds-307.1.1~9 notify-16~9 remote_cmds-13.0.2~9 security_certtool-31828~9</span>
+OpenSSH-95.1.5~9 cctools-667.3~9 cctools_ofiles-667.3~9 gssd-23~9 libdyld-97.1~9 libsecurity_agent-32091.1~9 libsecurity_ocspd-29518~9 mDNSResponderSystemLibraries-176.3~9 network_cmds-307.1.1~9 notify-16~9 remote_cmds-13.0.2~9 security_certtool-31828~9
 ..[...]
 
 #### 10 pass
@@ -10220,7 +10220,7 @@ Below are errors related to the project described just above.
 According to the map, we should probably begin to fix first :
 
 libsecurity_cdsa_utilities
-<span style="color:rgb(56,118,29)">libsecurityd<span style="color:rgb(0,0,0)"> and libsecurity_utilities  "unblocks" </span>libsecurity_asn1<span style="color:rgb(0,0,0)">, </span>libsecurity_cdsa_plugin</span> which unblocks <span style="color:rgb(56,118,29)">libsecurity_apple_x509_tp</span>, <span style="color:rgb(56,118,29)">libsecurity_apple_x509_cl</span>, <span style="color:rgb(56,118,29)">SecurityTool</span>, <span style="color:rgb(56,118,29)">libsecurity_cms</span>,  <span style="color:rgb(56,118,29)">libsecurity_ssl</span>, <span style="color:rgb(56,118,29)">libsecurity_smime</span>,<span style="font-family:Times;font-size:8px"><span style="font-size:12px;font-family:Arial"> <span style="color:rgb(56,118,29)">libsecurity_sd_cspdl</span>, libsecurity_manifest.</span></span>
+ which unblocks libsecurity_apple_x509_tp, libsecurity_apple_x509_cl, SecurityTool, libsecurity_cms,  libsecurity_ssl, libsecurity_smime,
 
 
 Problematic point is all the project linked (depending) on a non available project.
@@ -10228,147 +10228,147 @@ Problematic point is all the project linked (depending) on a non available proje
 
 After running another pass (11 iirc..), more projects are built:
 
-<span style="font-size:x-small">AppleRS232Serial-130.2.7~11</span>
+AppleRS232Serial-130.2.7~11
 
-<span style="font-size:x-small">AppleSCCSerial-132.4.2~11</span>
+AppleSCCSerial-132.4.2~11
 
-<span style="font-size:x-small">AppleUSBCDCDriver-3212.4.1~11</span>
+AppleUSBCDCDriver-3212.4.1~11
 
-<span style="font-size:x-small">AppleUSBIrDA-144.4.0~11</span>
+AppleUSBIrDA-144.4.0~11
 
-<span style="font-size:x-small">IOSerialFamily-32.2~11</span>
+IOSerialFamily-32.2~11
 
-<span style="font-size:x-small">SecurityTokend-32363~11</span>
+SecurityTokend-32363~11
 
-<span style="font-size:x-small">SmartCardServices-34733~11</span>
+SmartCardServices-34733~11
 
-<span style="font-size:x-small">disklabel-2~11</span>
+disklabel-2~11
 
-<span style="font-size:x-small">libsecurity_cdsa_client-32432~11</span>
+libsecurity_cdsa_client-32432~11
 
-<span style="font-size:x-small">libsecurity_cssm-32993~11</span>
+libsecurity_cssm-32993~11
 
-<span style="font-size:x-small">libsecurity_filedb-32868~11</span>
+libsecurity_filedb-32868~11
 
-<span style="font-size:x-small">libsecurity_utilities-36433~16</span>
+libsecurity_utilities-36433~16
 
 Which satisfy dependency for:
-<span style="font-size:x-small">libsecurity_mds</span>
-<span style="font-size:x-small">libsecurity_apple_file_dl</span>
+libsecurity_mds
+libsecurity_apple_file_dl
 ...
 let's fix more and more..
 
 After applying some patches and rebuild some dependents where their dependencies just have been patched, the picture looks like:
 <span style="font-size:x-small">[![](../../../_/rsrc/1245014664511/developers/darwinbuild/troubleshooting/9J61pd1-n.png%3Fheight=420&width=165)](9J61pd1-n.png%3Fattredirects=0)</span>
-<span style="font-size:x-small">
-</span>
-<span style="font-size:small">The state is beyond the 12th pass now..</span>
-<span style="font-size:small">
-</span>
+
+
+The state is beyond the 12th pass now..
 
 
 
 
-<span style="font-family:courier new"></span>
-<span style="font-family:Arial"></span>
+
+
+
+
 ------------------------------------------------------------------------
 
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">Problem:</span></span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)"> The Mac OS X platform is missing...</span></span></span>
+**Problem:** The Mac OS X platform is missing...
 
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">Solution: </span></span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">It is more than recommended to avoid using HFS+ as the filesystem of your BuildRoot volume with DarwinBuild (precisely Xcode in this case). An UFS disk image works, alternatively you can also </span></span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">fool</span></span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)"> Xcode using NFS as described </span></span></span>[<span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">there</span></span></span>](../../darwinbuild.html#TOC-Work-around-DarwinBuild-ticket-1)<span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">. Also note that on Mac OS X 10.5, there is a bug in `hdiutil' which prevents to create large UFS disk image (around 12g max). The trick is to use a Tiger machine to create a larger image.</span></span></span>
-<span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">Example with an UFS disk image:</span></span></span>
+**Solution: **It is more than recommended to avoid using HFS+ as the filesystem of your BuildRoot volume with DarwinBuild (precisely Xcode in this case). An UFS disk image works, alternatively you can also *fool* Xcode using NFS as described [there](../../darwinbuild.html#TOC-Work-around-DarwinBuild-ticket-1). Also note that on Mac OS X 10.5, there is a bug in `hdiutil' which prevents to create large UFS disk image (around 12g max). The trick is to use a Tiger machine to create a larger image.
+Example with an UFS disk image:
 
-<span><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)">hdiutil create -size 30g -type UDIF -fs UFS -volname Builds -attach Builds.dmg</span></span></span></span>
+hdiutil create -size 30g -type UDIF -fs UFS -volname Builds -attach Builds.dmg
 
-<span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)"><span style="font-weight:bold">Note</span></span><span style="color:rgb(153,153,153)"><span style="font-weight:bold">:</span></span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"><span style="color:rgb(153,153,153)"> The cause is Xcode 3.1 running in a chroot on not-UFS.</span></span></span>
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small">Fixed: </span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">This wor</span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">karound is </span></span><span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small">no longer needed</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> since on the </span></span>[<span style="font-family:arial,sans-serif"><span style="font-size:small">Darwinbuild website</span></span>](http://darwinbuild.macosforge.org/)<span style="font-family:arial,sans-serif"><span style="font-size:small">, we can read (news from 2009/04/17): "</span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">The latest revision of trunk has support for sparsebundles and NFS Loopback in order to avoid the problems with xcodebuild inside of chroots. If you do not change the way you use darwinbuild, you will start seeing the sparsebundle storage. Nothing else is needed and Xcode-based projects will build on whatever filesyste</span></span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">m you have.</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">"</span></span>
-<span style="font-size:13px">
-</span>
-<span style="font-size:13px"><span style="font-weight:bold">Problem: </span><span style="font-size:12px"><span style="font-family:courier new,monospace">Error: TargetConfig not defined</span></span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace">darwinbuild -load TargetConfig</span> (this will download a binary root)
-<span style="font-size:13px"></span>
+ The cause is Xcode 3.1 running in a chroot on not-UFS.
+**Fixed: **This workaround is **no longer needed** since on the [Darwinbuild website](http://darwinbuild.macosforge.org/), we can read (news from 2009/04/17): "*The latest revision of trunk has support for sparsebundles and NFS Loopback in order to avoid the problems with xcodebuild inside of chroots. If you do not change the way you use darwinbuild, you will start seeing the sparsebundle storage. Nothing else is needed and Xcode-based projects will build on whatever filesyste**m you have.*"
+
+
+
+**Solution:** `darwinbuild -load TargetConfig` (this will download a binary root)
+
 ------------------------------------------------------------------------
 ### AppleDisplay
-<span style="font-family:courier new">darwinbuild AppleDisplay</span>
+darwinbuild AppleDisplay
 #### 9J61 (ok)
-<span style="font-weight:bold">Problems: <span style="font-family:courier new;font-weight:normal">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:24:38: error: libkern/c++/OSContainers.h: No such file or directory</span></span>
-<span style="font-size:13px"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:25:26: error: IOKit/system.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:26:25: error: IOKit/IOLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:27:38: error: IOKit/graphics/IODisplay.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:28:39: error: IOKit/IODeviceTreeSupport.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:29:36: error: IOKit/IOPlatformExpert.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:30:49: error: IOKit/ndrvsupport/IONDRVFramebuffer.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:31:29: error: IOKit/IOMessage.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:32:38: error: IOKit/pwr_mgt/RootDomain.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:33:26: error: IOKit/assert.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:36:20: error: stddef.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:? </span>(resolved near pass 7)
+****
 
-<span style="font-weight:bold">Problem:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> /SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/IVAD.h:27:29: error: libkern/OSTypes.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> ? (resolved near pass 7)
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:25:26: error: IOKit/system.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:26:25: error: IOKit/IOLib.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:27:38: error: IOKit/graphics/IODisplay.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:28:39: error: IOKit/IODeviceTreeSupport.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:29:36: error: IOKit/IOPlatformExpert.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:30:49: error: IOKit/ndrvsupport/IONDRVFramebuffer.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:31:29: error: IOKit/IOMessage.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:32:38: error: IOKit/pwr_mgt/RootDomain.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:33:26: error: IOKit/assert.h: No such file or directory`
+`/SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/AppleOnboardDisplay.cpp:36:20: error: stddef.h: No such file or directory`
+**Solution:? **(resolved near pass 7)
+
+**Problem:**` /SourceCache/AppleDisplays/AppleDisplays-1140.0.5/AppleOnboardDisplay/IVAD.h:27:29: error: libkern/OSTypes.h: No such file or directory`
+**Solution:** ? (resolved near pass 7)
 ------------------------------------------------------------------------
 ### AppleMacRISC4PE
 #### 9J61
-<span style="font-weight:bold">Problem:</span>
+**Problem:**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">MacRISC4PE.cpp:183: error: 'kUniNRevision3_2_1' was not declared in this scope</span></span>
+`MacRISC4PE.cpp:183: error: 'kUniNRevision3_2_1' was not declared in this scope`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">MacRISC4CPU.cpp:488: error: 'kUniNNormal' was not declared in this scope</span></span>
+`MacRISC4CPU.cpp:488: error: 'kUniNNormal' was not declared in this scope`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">MacRISC4CPU.cpp:551: error: 'kUniNSave' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">MacRISC4CPU.cpp:557: error: 'kUniNSleep' was not declared in this scope</span></span>
+`MacRISC4CPU.cpp:551: error: 'kUniNSave' was not declared in this scope`
+`MacRISC4CPU.cpp:557: error: 'kUniNSleep' was not declared in this scope`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">U3.cpp:91: error: 'kUniNVersion' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">U3.cpp:93: error: 'kUniNVersion3' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">U3.cpp:136: error: 'kU3ToggleRegister' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">[...]</span></span>
+`U3.cpp:91: error: 'kUniNVersion' was not declared in this scope`
+`U3.cpp:93: error: 'kUniNVersion3' was not declared in this scope`
+`U3.cpp:136: error: 'kU3ToggleRegister' was not declared in this scope`
+`[...]`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">U3.cpp:1268: error: 'kU3API_DARTExcp' was not declared in this scope</span></span>
-<span style="font-weight:bold">Solution:</span> ?
+`U3.cpp:1268: error: 'kU3API_DARTExcp' was not declared in this scope`
+**Solution:** ?
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:356: error: 'kIOPPluginForceUpdateKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:357: error: 'kIOPPluginForceUpdateAllKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:358: error: 'kIOPPluginForceSensorCurValKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:359: error: 'kIOPPluginReleaseForcedSensorKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:360: error: 'kIOPPluginForceCtrlTargetValKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:361: error: 'kIOPPluginReleaseForcedControlKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:362: error: 'kIOPPluginForceCtrlLoopMetaStateKey' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOPlatformPlugins/IOPlatformPlugin.cpp:363: error: 'kIOPPluginReleaseForcedCtrlLoopKey' was not declared in this scope</span></span>
-<span style="font-weight:bold">Solution:</span> ?
+**Problem:** `IOPlatformPlugins/IOPlatformPlugin.cpp:356: error: 'kIOPPluginForceUpdateKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:357: error: 'kIOPPluginForceUpdateAllKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:358: error: 'kIOPPluginForceSensorCurValKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:359: error: 'kIOPPluginReleaseForcedSensorKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:360: error: 'kIOPPluginForceCtrlTargetValKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:361: error: 'kIOPPluginReleaseForcedControlKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:362: error: 'kIOPPluginForceCtrlLoopMetaStateKey' was not declared in this scope`
+`IOPlatformPlugins/IOPlatformPlugin.cpp:363: error: 'kIOPPluginReleaseForcedCtrlLoopKey' was not declared in this scope`
+**Solution:** ?
 ------------------------------------------------------------------------
 ### AppleOnboardAudio
 #### 9J61
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace;font-size:small">HALPlugin/AOAHALPlugin.h:44:41: error: CoreAudio/AudioDriverPlugIn.h: No such file or directory</span>
-<span style="font-weight:bold">Solution: </span> ?
+**Problem:** `HALPlugin/AOAHALPlugin.h:44:41: error: CoreAudio/AudioDriverPlugIn.h: No such file or directory`
+**Solution: ** ?
 See <http://darwinbuild.macosforge.org/trac/ticket/82>
 ------------------------------------------------------------------------
 ### AppleRAID
 #### 9J61
-<span style="font-weight:bold">Problem:</span> /SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:60:27: error: IOKit/IOTypes.h: No such file or directory/SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:61:29: error: IOKit/IOService.h: No such file or directory /SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:62:30: error: IOKit/IOWorkLoop.h: No such file or directory /SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:63:33: error: IOKit/IOEventSource.h: No such file or directory... etc
-<span style="font-weight:bold">Solution:</span> related to kernel headers and iokituser headers
+**Problem:** /SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:60:27: error: IOKit/IOTypes.h: No such file or directory/SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:61:29: error: IOKit/IOService.h: No such file or directory /SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:62:30: error: IOKit/IOWorkLoop.h: No such file or directory /SourceCache/AppleRAID/AppleRAID-3.0.19/AppleRAID.h:63:33: error: IOKit/IOEventSource.h: No such file or directory... etc
+**Solution:** related to kernel headers and iokituser headers
 
-<span style="font-weight:bold">Problem:</span> /SourceCache/AppleRAID/AppleRAID-3.0.19/artest.c:38:30: error: MediaKit/MKMedia.h: No such file or directory
+**Problem:** /SourceCache/AppleRAID/AppleRAID-3.0.19/artest.c:38:30: error: MediaKit/MKMedia.h: No such file or directory
 /SourceCache/AppleRAID/AppleRAID-3.0.19/artest.c:39:36: error: MediaKit/MKMediaAccess.h: No such file or directory
-<span style="font-weight:bold">Solution:</span> ???
+**Solution:** ???
 ------------------------------------------------------------------------
 ### AppleRS232Serial
 #### 9J61
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">AppleRS232Serial.cpp:31:39: error: IOKit/serial/IOSerialKeys.h: No such file or directory</span></span>
+**Problem:** `AppleRS232Serial.cpp:31:39: error: IOKit/serial/IOSerialKeys.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">AppleRS232Serial.h:86:45: error: IOKit/serial/IOSerialDriverSync.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">AppleRS232Serial.h:87:50: error: IOKit/serial/IORS232SerialStreamSync.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> Fixed at between pass 10 and pass 11 with Apple16X50Serial fix
+`AppleRS232Serial.h:86:45: error: IOKit/serial/IOSerialDriverSync.h: No such file or directory`
+`AppleRS232Serial.h:87:50: error: IOKit/serial/IORS232SerialStreamSync.h: No such file or directory`
+**Solution:** Fixed at between pass 10 and pass 11 with Apple16X50Serial fix
 
 ------------------------------------------------------------------------
 ### AppleUSBCDCDriver
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> /SourceCache/AppleUSBCDCDriver/AppleUSBCDCDriver-3212.4.1/AppleUSBCDC/Classes/AppleUSBCDC.cpp:47:39: error: IOKit/serial/IOSerialKeys.h: No such file or directory
+**Problem:** /SourceCache/AppleUSBCDCDriver/AppleUSBCDCDriver-3212.4.1/AppleUSBCDC/Classes/AppleUSBCDC.cpp:47:39: error: IOKit/serial/IOSerialKeys.h: No such file or directory
 /SourceCache/AppleUSBCDCDriver/AppleUSBCDCDriver-3212.4.1/AppleUSBCDC/Classes/AppleUSBCDC.cpp:48:45: error: IOKit/serial/IOSerialDriverSync.h: No such file or directory
 /SourceCache/AppleUSBCDCDriver/AppleUSBCDCDriver-3212.4.1/AppleUSBCDC/Classes/AppleUSBCDC.cpp:49:50: error: IOKit/serial/IOModemSerialStreamSync.h: No such file or directory
 /SourceCache/AppleUSBCDCDriver/AppleUSBCDCDriver-3212.4.1/AppleUSBCDC/Classes/AppleUSBCDC.cpp:50:50: error: IOKit/serial/IORS232SerialStreamSync.h: No such file or directory
 
-<span style="font-weight:bold">Solution:</span> Fixed at between pass 10 and pass 11 with Apple16X50Serial fix
+**Solution:** Fixed at between pass 10 and pass 11 with Apple16X50Serial fix
 ------------------------------------------------------------------------
 ### AppleUSBIrDA
 #### 9J61 (ok)
@@ -10378,134 +10378,119 @@ AppleUSBIrDA/AppleUSBIrDA.cpp:42:50: error: IOKit/serial/IORS232SerialStreamSync
 In file included from AppleUSBIrDA/AppleUSBIrDA.cpp:46:
 AppleUSBIrDA/AppleUSBIrDA.h:27:45: error: IOKit/serial/IOSerialDriverSync.h: No such file or directory
 
-<span style="font-weight:bold">Solution:</span> Fixed at between pass 10 and pass 11 with Apple16X50Serial fix
+**Solution:** Fixed at between pass 10 and pass 11 with Apple16X50Serial fix
 
 
 ------------------------------------------------------------------------
 ### Apple16X50Serial
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/Apple16X50Serial/Apple16X50Serial-19.3/Apple16X50UARTSync.h:31:64: error: IOKit/serial/IORS232SerialStreamSync.h: No such file or directory</span></span>
+**Problem:** `/SourceCache/Apple16X50Serial/Apple16X50Serial-19.3/Apple16X50UARTSync.h:31:64: error: IOKit/serial/IORS232SerialStreamSync.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/Apple16X50Serial/Apple16X50Serial-19.3/Apple16X50Queue.h:23:45: error: IOKit/serial/IOSerialStreamSync.h: No such file or directory</span></span>
+`/SourceCache/Apple16X50Serial/Apple16X50Serial-19.3/Apple16X50Queue.h:23:45: error: IOKit/serial/IOSerialStreamSync.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/Apple16X50Serial/Apple16X50Serial-19.3/Apple16X50PCCard.cpp:26:39: error: IOKit/serial/IOSerialKeys.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span>
+`/SourceCache/Apple16X50Serial/Apple16X50Serial-19.3/Apple16X50PCCard.cpp:26:39: error: IOKit/serial/IOSerialKeys.h: No such file or directory`
+**Solution:**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">chroot BuildRoot</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">mkdir /XCD/SY/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders/IOKit/serial</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp SourceCache/IOSerialFamily/IOSerialFamily-32.2/IOSerialFamily.kmodproj/*h /XCD/SY/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders/IOKit/serial </span></span>
+`chroot BuildRoot`
+`mkdir /XCD/SY/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders/IOKit/serial`
+`cp SourceCache/IOSerialFamily/IOSerialFamily-32.2/IOSerialFamily.kmodproj/*h /XCD/SY/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders/IOKit/serial `
 then 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">** BUILD SUCCEEDED **</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">[...]</span></span></span>
+`** BUILD SUCCEEDED **`
+`[...]`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">Apple16X50Serial - 6 files registered.</span></span></span>
+`Apple16X50Serial - 6 files registered.`
 
 
 ------------------------------------------------------------------------
 ### BootCache
 #### 9J61
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">This is related to the availability of ruby (copystrings is a ruby script)</span></span>.
-<span style="font-weight:bold">Solution: </span>to have ruby. <span style="font-weight:bold"><span style="color:rgb(255,0,0)">Please let us know if you have a solution.</span></span>
+**Problem:** `error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings: No such file or directory`
+`This is related to the availability of ruby (copystrings is a ruby script)`.
+**Solution: **to have ruby. **Please let us know if you have a solution.**
 ------------------------------------------------------------------------
 
 
 ### CF 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild CF</span></span>
+`darwinbuild CF`
 #### 9J61
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">CFMessagePort.c:38:28: error: bootstrap_priv.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="color:rgb(153,153,153)">darwinbuild launchd && darwinbuild -load launchd</span></span>
+**Problem:** `CFMessagePort.c:38:28: error: bootstrap_priv.h: No such file or directory`
+**Solution:** <span style="font-family:courier new"><span style="color:rgb(153,153,153)">darwinbuild launchd && darwinbuild -load launchd</span></span>
 #### 9G55
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small">Problem</span></span>:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/usr/include/sys/stat.h:75:26: In file included from CFBundle.c:40error: Availability.h: No such file or directory</span></span>
-<span style="font-family:courier new;font-size:12px"></span>
+**** `/usr/include/sys/stat.h:75:26: In file included from CFBundle.c:40error: Availability.h: No such file or directory`
+
 /usr/include/sys/stat.h:75:26: error: Availability.h: No such file or directory
 
-<span style="font-weight:bold"><span style="font-size:small">Solution</span>: <span style="font-family:arial;font-weight:normal">There is a new <span style="font-style:italic">CarbonHeaders-9G55</span> posted which adds the rest of the <span style="font-style:italic">Availability*.h</span> headers that were missing.</span></span>
+****
 #### 9F33 (ok)
-<span style="font-size:22px;font-weight:bold"><span><span style="font-family:Helvetica"><span style="font-size:small">Problem</span></span><span style="font-size:small">:</span></span><span style="font-weight:normal"><span style="font-size:small"> </span><span style="font-family:courier new,monospace"><span><span style="font-size:small">ForFoundationOnly.h:170:49: error: CoreFoundation/CFNotificationCenter.h: No such file or directory</span></span></span><span style="font-size:small">
-</span></span><span><span style="font-size:small">Solution: </span></span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span><span style="font-size:small">cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span></span></span></span></span>
+<span style="font-size:22px;font-weight:bold"><span>Problem:</span><span style="font-weight:normal"> `ForFoundationOnly.h:170:49: error: CoreFoundation/CFNotificationCenter.h: No such file or directory`
+</span>Solution: cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span>
 
 [![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/CF.png)](CF.png%3Fattredirects=0)
 
-<span style="font-family:Helvetica;font-weight:bold">Problem: </span>In fact, CF-lite appears to missing many functions. Although the CF-lite built just above is enough for [PureDarwin nano](../../../downloads/puredarwin-nano.html), it won't be sufficient in a full PureDarwin release since many vital daemons may use these missing functions. Some have been already patched or can be short-circuited with an empty body, but others clearly need some code inside their body.
+**Problem: **In fact, CF-lite appears to missing many functions. Although the CF-lite built just above is enough for [PureDarwin nano](../../../downloads/puredarwin-nano.html), it won't be sufficient in a full PureDarwin release since many vital daemons may use these missing functions. Some have been already patched or can be short-circuited with an empty body, but others clearly need some code inside their body.
 
 
 For more information about the differences between the CF from Mac OS X and the CF-lite from DarwinBuild (the one we use) which explain why some expected symbols are missing, please take a look at [CF-lite](../../cf-lite.html) page.
 
 This is a non exhaustive list of missing symbols found, from darwinbuild compilation or at runtime.
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">com.apple.configd[28]: 2008-10-30 23:17:34.674 configd[28:1503] CFLog: Error loading /System/Library/SystemConfiguration/PowerManagement.bundle/Contents/MacOS/PowerManagement: dlopen(/System/Library/SystemConfiguration/PowerManagement.bundle/Contents/MacOS/PowerManagement, 262): Symbol not found: <span style="color:rgb(255,0,0)">_CFNotificationCenterGetDistributedCenter</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(255,0,0)"><span style="color:rgb(0,0,0)">com.apple.configd[28]: Referenced from: /System/Library/SystemConfiguration/PowerManagement.bundle/Contents/MacOS/PowerManagement </span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">com.apple.configd[28]: Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
-</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">
-com.apple.DirectoryServices[32]: dyld: Symbol not found: <span style="color:rgb(255,0,0)">_NSInvalidArgumentException</span> 
-com.apple.DirectoryServices[32]: Referenced from: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation 
-com.apple.DirectoryServices[32]: Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
-com.apple.kextd[21]: dyld: Symbol not found: <span style="color:rgb(255,0,0)">_CFNotificationCenterGetLocalCenter</span> 
-com.apple.kextd[21]: Referenced from: /usr/libexec/kextd 
-com.apple.kextd[21]: Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
-com.apple.DirectoryServices[37]: dyld: <span style="color:rgb(255,0,0)"><span style="color:rgb(0,0,0)">Symbol not found:</span> _NSGenericException</span> 
-com.apple.DirectoryServices[37]: Referenced from: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation 
-com.apple.DirectoryServices[37]: Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
-Undefined symbols: 
-"<span style="color:rgb(255,0,0)">_CFPreferencesAppValueIsForced</span>", referenced from: 
-_processPreferences in SCNetworkConnectionPrivate.o 
-_SCUserPreferencesIsForced in SCNetworkConnectionPrivate.o 
-"<span style="color:rgb(255,0,0)">_CFStringTransform</span>", referenced from: 
-__SC_dos_copy_string in SCDPrivate.o</span></span>
+``
+`com.apple.configd[28]: Referenced from: /System/Library/SystemConfiguration/PowerManagement.bundle/Contents/MacOS/PowerManagement `
+`com.apple.configd[28]: Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+`
+``
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Symbol not found:<span style="color:rgb(255,0,0)"> __kCFBundleResourceSpecificationKey</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Referenced from: /System/Library/Frameworks/Security.framework/Versions/A/Security</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation</span></span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
+``
+`  Referenced from: /System/Library/Frameworks/Security.framework/Versions/A/Security`
+`  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation`
 
 
-<span style="font-weight:bold">
-</span>
-<span style="font-weight:bold">Solution: </span><span>Build using the PureDarwin .plist (see [Integrating patches and additional sources](../patchfiles.html) for instructions), which includes patches to resolve most of these problems.</span>
+
+**
+**
+**Solution: **Build using the PureDarwin .plist (see [Integrating patches and additional sources](../patchfiles.html) for instructions), which includes patches to resolve most of these problems.
 ------------------------------------------------------------------------
 ### CFNetwork
 #### 9J61
 CFNetwork is not opensource in darwin 9 but in darwin 8. See <http://darwinbuild.macosforge.org/trac/ticket/16>
 
-<span style="font-weight:bold">problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">*** Fetching Sources ...</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">Downloading http://src.macosforge.org/Projects//CFNetwork-219.tar.gz ...</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">Downloading http://src.macosforge.org/Patches//CFNetwork-219.tar.gz ...</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">*** Copying Sources ...</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">tar (child): /Users/aladin/PureDarwin/darwinbuild/9J61/Sources/CFNetwork-219.tar.gz: Cannot open: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">tar (child): Error is not recoverable: exiting now</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">tar: Child returned status 2</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">tar: Error exit delayed from previous errors</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">make: *** No rule to make target `install'.  Stop.</span></span>
-<span style="font-weight:bold">solution:</span> The version in the original <span style="font-style:italic">9J61.plist</span> seems to not match the available sources.
+**problem:** `*** Fetching Sources ...`
+`Downloading http://src.macosforge.org/Projects//CFNetwork-219.tar.gz ...`
+`Downloading http://src.macosforge.org/Patches//CFNetwork-219.tar.gz ...`
+`*** Copying Sources ...`
+`tar (child): /Users/aladin/PureDarwin/darwinbuild/9J61/Sources/CFNetwork-219.tar.gz: Cannot open: No such file or directory`
+`tar (child): Error is not recoverable: exiting now`
+`tar: Child returned status 2`
+`tar: Error exit delayed from previous errors`
+`make: *** No rule to make target `install'.  Stop.`
+**solution:** The version in the original *9J61.plist* seems to not match the available sources.
 CFNetwork-129.20 &lt;- is the latest available at this time, 9J61pd1 is not yet out, but the version could be downgraded in any plist which inherits from 9J61.
 
-<span style="font-weight:bold">Problem:</span> cc1: error: unrecognized command line option "-Wno-precomp"
-<span style="font-weight:bold">Solution:</span> Patch baby patch!
-<span style="color:rgb(255,0,0);font-weight:bold"></span>
+**Problem:** cc1: error: unrecognized command line option "-Wno-precomp"
+**Solution:** Patch baby patch!
+****
 ------------------------------------------------------------------------
 
 ### CFOpenDirectory
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild CFOpenDirectory</span></span>
+`darwinbuild CFOpenDirectory`
 
-<span style="text-decoration:underline">Notes:</span> CFOpenDirectory is needed by `passwd'
+__Notes:__ CFOpenDirectory is needed by `passwd'
 #### 9J61 ??
 #### 9G55
-<span style="font-weight:bold">Problem:<span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings: No such file or directory</span></span>
+<span style="font-weight:bold">Problem:<span style="font-family:courier new,monospace"> </span></span>`error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings: No such file or directory`
 
-<span style="font-weight:bold">Solution: </span>related implicitly (but mandatory) to ruby as explained later below.
+**Solution: **related implicitly (but mandatory) to ruby as explained later below.
 #### 9F33
-<span style="font-weight:bold">Problem:<span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation</span></span></span></span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">Referenced from: /System/Library/PrivateFrameworks/OpenDirectory.framework/Versions/A/OpenDirectory</span></span></span></span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">Reason: image not found</span></span></span></span>
-<span style="font-weight:bold">Solution: </span><span><span style="font-size:small">Patch OpenDirectory so that it doesn't need Foundation, which is not part of Darwin (<span style="font-weight:bold">TODO!?</span>)</span></span>
-<span style="font-size:small"></span>
+<span style="font-weight:bold">Problem:<span style="font-family:courier new,monospace"> </span>dyld: Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation</span>
+**Referenced from: /System/Library/PrivateFrameworks/OpenDirectory.framework/Versions/A/OpenDirectory**
+**Reason: image not found**
+**Solution: **
+
 ------------------------------------------------------------------------
-<span style="font-size:13px"></span>
+
 ### CPAN
 #### 9J61pd1
 /usr/bin/perl ../xsubpps/xsubpp-5.8.0 -noprototypes -typemap /System/Library/Perl/5.8.8/ExtUtils/typemap  AppleEvents.xs &gt; AppleEvents.xsc && mv AppleEvents.xsc AppleEvents.c
@@ -10538,7 +10523,7 @@ ERRORS/WARNINGS FOUND IN PREREQUISITES.  You may wish to install the versions
 ------------------------------------------------------------------------
 ### DSPasswordServerPlugin
 #### 9J61
-**Problem:** <span style="font-family:courier new,monospace">/SourceCache/DSPasswordServerPlugin/DSPasswordServerPlugin-208.5/CPSPlugIn.h:56:24: error: sasl/sasl.h: No such file or directory</span>
+**Problem:** `/SourceCache/DSPasswordServerPlugin/DSPasswordServerPlugin-208.5/CPSPlugIn.h:56:24: error: sasl/sasl.h: No such file or directory`
 
 /SourceCache/DSPasswordServerPlugin/DSPasswordServerPlugin-208.5/CPSPlugIn.h:57:28: error: sasl/saslutil.h: No such file or directory
 
@@ -10564,64 +10549,64 @@ ERRORS/WARNINGS FOUND IN PREREQUISITES.  You may wish to install the versions
 ------------------------------------------------------------------------
 ### CyrusIMAP
 #### 9J61pd1 (ok)
-<span style="font-size:small">**Problem: **<span style="font-size:12px">/bin/sh: sw_vers: command not found</span></span>
+
 **Solution: **echo '
 #!/bin/sh
-echo "ProductName:<span style="white-space:pre"> </span>PureDarwin"
-echo "ProductVersion:<span style="white-space:pre"> </span>10.5.7"
-echo "BuildVersion:<span style="white-space:pre"> </span>9J61"' &gt; BuildRoot/usr/bin/sw_vers
+echo "ProductName: PureDarwin"
+echo "ProductVersion: 10.5.7"
+echo "BuildVersion: 9J61"' &gt; BuildRoot/usr/bin/sw_vers
 **Problem: **missing *sasl.h
-**Solution:** <span style="font-size:small">mkdir -p BuildRoot/usr/include/sasl</span>
-<span style="font-size:small">cp BuildRoot/SourceCache/passwordserver_sasl/passwordserver_sasl-118.1/cyrus_sasl/include/*h BuildRoot/usr/include/sasl</span> 
-<span style="font-size:12px">
-</span>
+**Solution:** mkdir -p BuildRoot/usr/include/sasl
+cp BuildRoot/SourceCache/passwordserver_sasl/passwordserver_sasl-118.1/cyrus_sasl/include/*h BuildRoot/usr/include/sasl 
+
+
 ------------------------------------------------------------------------
 ### DirectoryService
-<span style="font-size:small"><span style="font-family:courier new,monospace">darwinbuild DirectoryService</span></span>
+darwinbuild DirectoryService
 #### 9J61 ??
 #### 9F33
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">error: couldn't exec /usr/sbin/dtrace: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then build dtrace first:
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace && darwinbuild -load dtrace && </span></span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild DirectoryService</span></span>
+**Problem:** `error: couldn't exec /usr/sbin/dtrace: No such file or directory`
+**Solution:** Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then build dtrace first:
+<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace && darwinbuild -load dtrace && </span></span>`darwinbuild DirectoryService`
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/usr/sbin/dtrace -h -s Threads/dslockstat.d -o "/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h"</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dtrace(13670) malloc: *** error for object 0x116310: Non-aligned pointer being freed (2)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">*** set a breakpoint in malloc_error_break to debug</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dtrace(13670) malloc: *** error for object 0x116310: Non-aligned pointer being freed (2)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">*** set a breakpoint in malloc_error_break to debug</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dtrace(13670) malloc: *** error for object 0x116310: Non-aligned pointer being freed (2)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">*** set a breakpoint in malloc_error_break to debug</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="color:rgb(255,0,0);font-weight:bold">Please, let us know if you have one.</span>
+**Problem:** `/usr/sbin/dtrace -h -s Threads/dslockstat.d -o "/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h"`
+`dtrace(13670) malloc: *** error for object 0x116310: Non-aligned pointer being freed (2)`
+`*** set a breakpoint in malloc_error_break to debug`
+`dtrace(13670) malloc: *** error for object 0x116310: Non-aligned pointer being freed (2)`
+`*** set a breakpoint in malloc_error_break to debug`
+`dtrace(13670) malloc: *** error for object 0x116310: Non-aligned pointer being freed (2)`
+`*** set a breakpoint in malloc_error_break to debug`
+**Solution:** **Please, let us know if you have one.**
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:36: error: expected unqualified-id before 'long'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:36: error: expected `)' before 'long'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:38: error: expected unqualified-id before 'long'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:38: error: expected `)' before 'long'</span></span>
-<span style="font-weight:bold">Solution:</span> ...
+**Problem:** `/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:36: error: expected unqualified-id before 'long'`
+`/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:36: error: expected `)' before 'long'`
+`/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:38: error: expected unqualified-id before 'long'`
+`/private/var/tmp/DirectoryService/DirectoryService-514.23.obj/DirectoryService.build/API Framework.build/DerivedSources/dslockstat.h:38: error: expected `)' before 'long'`
+**Solution:** ...
 
 
 
 ------------------------------------------------------------------------
 ### DirectoryServiceDaemon
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild </span></span><span style="font-family:courier new,monospace"><span style="font-size:small">DirectoryServiceDaemon</span></span>
+`darwinbuild ``DirectoryServiceDaemon`
 #### 9J61
 #### 9F33
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/PlugIns/Common/CDSAuthParams.h:28:37: error: PasswordServer/AuthFile.h: No such file or directory</span></span>
+**Problem:** `/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/PlugIns/Common/CDSAuthParams.h:28:37: error: PasswordServer/AuthFile.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/PlugIns/Common/CDSAuthParams.h:92: error: 'PWGlobalAccessFeatures' does not name a type</span></span>
+`/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/PlugIns/Common/CDSAuthParams.h:92: error: 'PWGlobalAccessFeatures' does not name a type`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/PlugIns/Common/CDSAuthParams.h:93: error: 'PWGlobalMoreAccessFeatures' does not name a type</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/System/Library/PrivateFrameworks/PasswordServer.framework BuildRoot/XCD/SY/Library/PrivateFrameworks</span></span>
+`/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/PlugIns/Common/CDSAuthParams.h:93: error: 'PWGlobalMoreAccessFeatures' does not name a type`
+**Solution:** `cp -R BuildRoot/System/Library/PrivateFrameworks/PasswordServer.framework BuildRoot/XCD/SY/Library/PrivateFrameworks`
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/Server/DirServiceMain.cpp:61:25: error: XSEventPort.h: No such file or directory</span></span>
+**Problem:** `/SourceCache/DirectoryServiceDaemon/DirectoryService-514.23/Server/DirServiceMain.cpp:61:25: error: XSEventPort.h: No such file or directory`
 
-<span style="font-weight:bold">Solution: <span style="color:rgb(255,0,0)">Please, let us know if you have one.</span></span>
+****
 
 
 ------------------------------------------------------------------------
 
 
-<span style="font-size:13px"></span>
+
 ### FastCGI
 #### 9J61
 (cd gems && /usr/bin/gem install --install-dir /private/var/tmp/FastCGI/FastCGI-4.root/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8 --local --include-dependencies --rdoc fcgi -- with-fcgi-dir=/private/var/tmp/FastCGI/FastCGI-4.root/usr)
@@ -10634,23 +10619,23 @@ make[1]: *** [install-ruby-binding] Error 126
 #### 9J61 (ok)
 see n-pass.
 #### 9F33pd1 (ok)
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then:
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1</span></span>
+darwinbuild -init 9F33pd1
 
 <span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">The plist file above contains a workaround that tend to avoid an error related to <http://darwinbuild.macosforge.org/trac/ticket/38> .</span></span>
-<span style="font-size:13px"></span>
+
 ------------------------------------------------------------------------
-<span style="font-size:13px"></span>
+
 ### IOATAPIProtocolTransport
 #### 9J61
-Problem: <span style="font-size:small">IOATAPIProtocolTransport.cpp:33:50: error: IOKit/scsi/SCSICommandOperationCodes.h: No such file or directory</span>
+Problem: IOATAPIProtocolTransport.cpp:33:50: error: IOKit/scsi/SCSICommandOperationCodes.h: No such file or directory
 
-<span style="font-size:small">IOATAPIProtocolTransport.cpp:34:33: error: IOKit/scsi/SCSITask.h: No such file or directory</span>
-<span style="font-size:small">IOATAPIProtocolTransport.cpp:35:107: error: IOKit/scsi/SCSITaskDefinition.h: No such file or directory</span>
+IOATAPIProtocolTransport.cpp:34:33: error: IOKit/scsi/SCSITask.h: No such file or directory
+IOATAPIProtocolTransport.cpp:35:107: error: IOKit/scsi/SCSITaskDefinition.h: No such file or directory
 
-<span style="font-size:small">IOATAPIProtocolTransport.h:50:51: error: IOKit/storage/ata/IOATAStorageDefines.h: No such file or directory</span>
-<span style="font-size:small">IOATAPIProtocolTransport.h:53:47: error: IOKit/scsi/IOSCSIProtocolServices.h: No such file or directory</span>
+IOATAPIProtocolTransport.h:50:51: error: IOKit/storage/ata/IOATAStorageDefines.h: No such file or directory
+IOATAPIProtocolTransport.h:53:47: error: IOKit/scsi/IOSCSIProtocolServices.h: No such file or directory
 
 ------------------------------------------------------------------------
 ### IOBDBlockStorageDevice
@@ -10672,56 +10657,56 @@ Where can we found it? except in the sdk.
 ?
 #### 9F33pd1
 
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-size:small"><span style="font-family:Arial">Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then:</span></span>
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1</span></span>
 
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">The plist file above contains some patches that tend to avoid most of the errors just below.</span></span>
+<span style="font-size:small"><span style="font-family:Arial">Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:</span></span>
+darwinbuild -init 9F33pd1
 
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px">darwinbuild IOHIDFamily</span>
-
-
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/IOKit.framework/PrivateHeaders/hid/IOHIDLibPrivate.h:30:42: error: IOKit/hid/IOHIDLibUserClient.h: No such file or directory</span></span>
-
-<span style="font-weight:bold">Pseudo-solution:</span> Headers from IOKitUser appear to be needed:
-
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp BuildRoot/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/hid/IOHIDLibUserClient.h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/hid/</span></span>
-
-
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOHIDFamily/IOHIDFamily-258.3/IOHIDLib/IOHIDDeviceClass.cpp:455: error: 'nil' was not declared in this scope</span></span>
-
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOHIDFamily/IOHIDFamily-258.3/IOHIDLib/IOHIDQueueClass.cpp:447: error: 'nil' was not declared in this scope</span></span>
-
-
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;objc/objc.h&gt;</span></span>
-
-
-<span style="font-weight:bold">Problem:<span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOHIDFamily/IOHIDFamily-258.3/hidd/hidd.c:28: error: 'IOHIDEventSystemRef' undeclared (first use in this function)</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-weight:bold">?</span>
+The plist file above contains some patches that tend to avoid most of the errors just below.
 
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold">Problem: </span>/SourceCache/IOHIDFamily/IOHIDFamily-258.3/IOHIDLib/IOHIDDeviceClass.cpp:366: error: 'kIOHIDLibUserClientConnectManager' was not declared in this scope</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-weight:bold">?</span>
+darwinbuild IOHIDFamily
+
+
+**Problem:** `/System/Library/Frameworks/IOKit.framework/PrivateHeaders/hid/IOHIDLibPrivate.h:30:42: error: IOKit/hid/IOHIDLibUserClient.h: No such file or directory`
+
+**Pseudo-solution:** Headers from IOKitUser appear to be needed:
+
+`cp BuildRoot/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/hid/IOHIDLibUserClient.h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/hid/`
+
+
+**Problem: **`/SourceCache/IOHIDFamily/IOHIDFamily-258.3/IOHIDLib/IOHIDDeviceClass.cpp:455: error: 'nil' was not declared in this scope`
+
+**Problem: **`/SourceCache/IOHIDFamily/IOHIDFamily-258.3/IOHIDLib/IOHIDQueueClass.cpp:447: error: 'nil' was not declared in this scope`
+
+
+**Solution:** `#include <objc/objc.h>`
+
+
+<span style="font-weight:bold">Problem:<span style="font-family:courier new,monospace"> </span></span>`/SourceCache/IOHIDFamily/IOHIDFamily-258.3/hidd/hidd.c:28: error: 'IOHIDEventSystemRef' undeclared (first use in this function)`
+**Solution:** **?**
+
+
+
+``
+**Solution:** **?**
 
 
 
 ------------------------------------------------------------------------
 
-<span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-weight:normal"></span></span>
+****
 ### IOKitUser
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild IOKitUser</span></span>
-<span style="font-size:small">
-</span>
-<span style="font-size:small"><span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span></span>
-<span style="font-weight:bold">Problem:</span> The framework is registered in /XCD/SY:
-<span style="font-family:courier new,monospace">40755 0 0 0 ./XCD/SY/Library/Frameworks/IOKit.framework</span>
-<span style="font-weight:bold">Pseudo-Solution: <span style="font-weight:normal">Edit <span style="font-size:12px">*Roots/IOKitUser/IOKitUser-388.2.1.root~28/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit* </span></span></span>
-<span style="font-size:12px">and replace XCD/SY in the binary with /System for all occurences.</span>
-<span style="font-size:12px">Then:</span>
-<span style="font-size:12px"><span style="font-size:13px"></span></span>
+`darwinbuild IOKitUser`
+
+
+
+**Problem:** The framework is registered in /XCD/SY:
+`40755 0 0 0 ./XCD/SY/Library/Frameworks/IOKit.framework`
+****
+and replace XCD/SY in the binary with /System for all occurences.
+Then:
+
 
 mv Roots/IOKitUser/IOKitUser-388.2.1.root~28/XCD/SY/Library/ 
 mkdir Roots/IOKitUser/IOKitUser-388.2.1.root~28/System 
@@ -10731,64 +10716,64 @@ rm -R Roots/IOKitUser/IOKitUser-388.2.1.root~28/XCD/
 After in the chrooted buildroot:
 file /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
 /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit: Mach-O universal binary with 4 architectures
-/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture i386):<span style="white-space:pre"> </span>Mach-O dynamically linked shared library i386
-/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture x86_64):<span style="white-space:pre"> </span>Mach-O 64-bit dynamically linked shared library x86_64
-/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture ppc7400):<span style="white-space:pre"> </span>Mach-O dynamically linked shared library ppc
-/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture ppc64):<span style="white-space:pre"> </span>Mach-O 64-bit dynamically linked shared library ppc64
+/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture i386): Mach-O dynamically linked shared library i386
+/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture x86_64): Mach-O 64-bit dynamically linked shared library x86_64
+/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture ppc7400): Mach-O dynamically linked shared library ppc
+/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (for architecture ppc64): Mach-O 64-bit dynamically linked shared library ppc64
 and 
 
 otool -L /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
 /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit:
-<span style="white-space:pre"> </span>/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)
-<span style="white-space:pre"> </span>/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
-<span style="white-space:pre"> </span>/usr/lib/libz.1.dylib (compatibility version 1.0.0, current version 1.2.3)
-<span style="white-space:pre"> </span>/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)
-<span style="white-space:pre"> </span>/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.4)
+ /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)
+ /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
+ /usr/lib/libz.1.dylib (compatibility version 1.0.0, current version 1.2.3)
+ /usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)
+ /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.4)
 Instead of 
 otool -L /XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit 
 /XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit:
-<span style="white-space:pre"> </span>/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)
-<span style="white-space:pre"> </span>/XCD/SY/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.18.0)
-<span style="white-space:pre"> </span>/XCD/lib/libz.1.dylib (compatibility version 1.0.0, current version 1.2.3)
-<span style="white-space:pre"> </span>/XCD/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)
-<span style="white-space:pre"> </span>/XCD/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.4)
+ /XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)
+ /XCD/SY/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.18.0)
+ /XCD/lib/libz.1.dylib (compatibility version 1.0.0, current version 1.2.3)
+ /XCD/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)
+ /XCD/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.4)
 
-<span style="font-weight:bold">Solution:<span style="color:rgb(255,0,0)"> Please, let us know if you have one.</span></span>
+****
 
 
 #### 9J61
-<span style="font-size:small">PureFoundation need to be added (for `arch' dep).</span>
-<span style="font-weight:bold"><span style="font-size:small">Problem:</span></span><span style="font-size:small"> </span><span style="font-family:courier new,monospace"><span style="font-size:small">pbxcp: IOAccelSurfaceControl.h: No such file or directory</span></span>
+PureFoundation need to be added (for `arch' dep).
+**Problem:** `pbxcp: IOAccelSurfaceControl.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">pbxcp: IOGraphicsLibPrivate.h: No such file or directory</span></span>
+`pbxcp: IOGraphicsLibPrivate.h: No such file or directory`
 
-<span style="font-weight:bold"><span style="font-size:small">Solution:</span></span><span style="font-size:small"> </span><span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/SourceCache/IOKitUser/IOKitUser-388.53.11/graphics.subproj/*h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/private/var/tmp/IOKitUser/IOKitUser-388.53.11.sym/BuiltProducts/include/IOKit/graphics/IO* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics</span></span>
-<span style="font-size:small">
-</span>
-<span style="font-weight:bold"><span style="font-size:small">Problem:</span></span><span style="font-size:small"> </span><span style="font-family:courier new"><span style="font-size:small"><span style="font-family:courier new,monospace">pbxcp: IODisplayProductIDs.h: No such file or directory</span></span><span style="font-family:Arial"><span style="font-size:small"> (this one seems to be part of AppleDisplay project)</span></span></span>
-<span style="font-weight:bold"><span style="font-size:small">Solution:</span></span><span style="font-size:small"> </span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild AppleDisplay</span></span><span style="font-size:small"> (it could fail to build, but anyway we need the header file)</span>
-<span style="font-size:small">then </span><span style="font-family:courier new,monospace"><span style="font-size:small">cp ./BuildRoot/private/var/tmp/AppleDisplays/AppleDisplays-1140.0.5.root/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/IODisplayProductIDs.h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics</span></span>
-<span style="font-family:courier new">
-</span>
-<span style="font-weight:bold"><span style="font-size:small">Problem:</span></span><span style="font-size:small"> <span style="font-family:courier new,monospace">/SourceCache/IOKitUser/IOKitUser-388.53.11/IOKitLib.c:351: error: 'kNilOptions' undeclared (first use in this function)</span></span>
+**Solution:** `cp -R BuildRoot/SourceCache/IOKitUser/IOKitUser-388.53.11/graphics.subproj/*h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics`
+`cp -R BuildRoot/private/var/tmp/IOKitUser/IOKitUser-388.53.11.sym/BuiltProducts/include/IOKit/graphics/IO* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics`
 
-<span style="font-family:Helvetica"><span style="font-weight:bold"><span style="font-size:small">Pseudo-Solution:</span></span><span style="font-size:small"> Patch </span><span style="font-style:italic"><span style="font-size:small">BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/IOKitLib.h</span></span><span style="font-size:small"> with</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">#ifndef kNilOptions 
-</span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">    </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">#define kNilOptions 0
-#endif</span></span>
-<span style="font-family:courier new">
-</span>
-<span style="font-family:courier new">... follow solutions and pseudo-solutions as below. </span>
+
+**Problem:** 
+**Solution:** `darwinbuild AppleDisplay` (it could fail to build, but anyway we need the header file)
+then `cp ./BuildRoot/private/var/tmp/AppleDisplays/AppleDisplays-1140.0.5.root/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/IODisplayProductIDs.h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics`
+
+
+**Problem:**
+
+
+`#ifndef kNilOptions 
+`    `#define kNilOptions 0
+#endif`
+
+
+... follow solutions and pseudo-solutions as below. 
 #### 9F33pd1 (+ppc +ppc64 +x86 +x86_64)
 
-<span style="font-family:courier new"></span>
-<span style="font-family:Arial">To build isoutil on 9J61, iokituser for i386+ppc in 9F33pd1 need to be build.. + some regular solutions available below needs to be applied..</span>
-<span style="font-family:Arial">Also i386 specific arch has been removed from 9F33pd1 of IOKitUser project.</span>
-<span style="font-family:Arial">
-</span>
-<span style="font-family:Arial"><span style="font-weight:bold">Problems:</span></span>
-<span style="font-family:Arial">cp -R BuildRoot/SourceCache/IOGraphics/IOGraphics-305.14/IOGraphicsFamily/IOKit/graphics/* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/</span>
+
+To build isoutil on 9J61, iokituser for i386+ppc in 9F33pd1 need to be build.. + some regular solutions available below needs to be applied..
+Also i386 specific arch has been removed from 9F33pd1 of IOKitUser project.
+
+
+Problems:
+cp -R BuildRoot/SourceCache/IOGraphics/IOGraphics-305.14/IOGraphicsFamily/IOKit/graphics/* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/
 
 
 cp BuildRoot/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/storage/RAID/AppleRAIDUserLib.h BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/storage/RAID
@@ -10800,8 +10785,8 @@ cp /Users/aladin/PureDarwin/darwinbuild/9J61/.build/buildroot.nfs/SourceCache/Ap
 cp -R /Users/aladin/PureDarwin/darwinbuild/9J61/.build/buildroot.nfs/SourceCache/IOGraphics/IOGraphics-305.14/IOGraphicsFamily/IOKit/i2c BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/ 
 
 
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif">Problem: </span></span>/SourceCache/IOKitUser/IOKitUser-388.2.1/pwr_mgt.subproj/IOPMEnergyPrefs.c:36:31: error: servers/bootstrap.h: No such file or directory
-<span style="font-family:arial,sans-serif">According to DTrace:</span>
+**Problem: **/SourceCache/IOKitUser/IOKitUser-388.2.1/pwr_mgt.subproj/IOPMEnergyPrefs.c:36:31: error: servers/bootstrap.h: No such file or directory
+According to DTrace:
   1  17720                       open:entry cc1 /private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/servers/bootstrap.h
   1  17720                       open:entry cc1 /private/var/tmp/IOKitUser/IOKitUser-388.2.1.obj/IOKitUser.build/DerivedSources/servers/bootstrap.h
   1  17720                       open:entry cc1 /System/Library/Frameworks/System.framework/PrivateHeaders/servers/bootstrap.h
@@ -10810,264 +10795,264 @@ cp -R /Users/aladin/PureDarwin/darwinbuild/9J61/.build/buildroot.nfs/SourceCache
   1  17720                       open:entry cc1 /usr/lib/gcc/powerpc-apple-darwin9/4.0.1/include/servers/bootstrap.h
   1  17720                       open:entry cc1 /usr/include/servers/bootstrap.h
 
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif">Solution:</span></span> cp -R /Developer/SDKs/MacOSX10.5.sdk/usr/include/servers/ BuildRoot/usr/include
+**Solution:** cp -R /Developer/SDKs/MacOSX10.5.sdk/usr/include/servers/ BuildRoot/usr/include
 
 cp /Developer/SDKs/MacOSX10.5.sdk/usr/include/servers/* BuildRoot/usr/include/servers/
-<span style="font-family:arial,sans-serif">
-</span>
 
-<span style="font-family:arial,sans-serif">At the end: </span><span style="font-family:courier new,monospace">** BUILD SUCCEEDED **</span>
+
+
+At the end: `** BUILD SUCCEEDED **`
 o// 
-<span style="font-family:arial,sans-serif">That helps to satisfy isoutil on 9J61 per example.</span>
-<span style="font-family:arial">`file':</span>
-<span style="font-family:arial"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture ppc7400):</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">Mach-O dynamically linked shared library ppc</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture ppc64):</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">Mach-O 64-bit dynamically linked shared library ppc64</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture i386):</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">Mach-O dynamically linked shared library i386</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture x86_64):</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">Mach-O 64-bit dynamically linked shared library x86_64</span></span>
+That helps to satisfy isoutil on 9J61 per example.
+`file':
+
+`XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture ppc7400):` `Mach-O dynamically linked shared library ppc`
+`XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture ppc64):` `Mach-O 64-bit dynamically linked shared library ppc64`
+`XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture i386):` `Mach-O dynamically linked shared library i386`
+`XCD/SY/Library/Frameworks/IOKit.framework/IOKit (for architecture x86_64):` `Mach-O 64-bit dynamically linked shared library x86_64`
 
 
 
 #### 9F33pd1 (ok)
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-size:small"><span style="font-family:Arial">Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then:</span></span>
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1</span></span>
 
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">The plist file above contains some patches that tend to avoid most of the errors just below.</span></span>
-In order to build IOKitUser, you also need to alter your <span style="font-style:italic">BuildRoot</span> directory, a minimalist script and some patches are available [here](http://code.google.com/p/puredarwin/source/browse/#svn/trunk/scripts).
+<span style="font-size:small"><span style="font-family:Arial">Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:</span></span>
+darwinbuild -init 9F33pd1
 
-<span style="font-family:courier new"><span style="font-size:12px">./pd_injectbuildroot /Volumes/Builds/9F33/BuildRoot/</span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">Not sure if it is needed or not:</span></span>
+The plist file above contains some patches that tend to avoid most of the errors just below.
+In order to build IOKitUser, you also need to alter your *BuildRoot* directory, a minimalist script and some patches are available [here](http://code.google.com/p/puredarwin/source/browse/#svn/trunk/scripts).
 
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild -headers IOKitUser</span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px">Now, prepare coffee.</span></span>
+./pd_injectbuildroot /Volumes/Builds/9F33/BuildRoot/
 
-<span style="font-family:courier new;font-size:12px">darwinbuild IOKitUser</span>
-<span style="font-family:courier new;font-size:12px">
-</span>
 
-<span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold"><span style="font-size:13px">Problem</span>:</span> <span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/bin/mig -DIOKIT...</span></span></span></span>
-<span style="font-family:Helvetica;font-size:12px"><span style="font-family:courier new"><span style="font-family:Arial;font-size:13px"><span style="font-family:courier new;font-size:12px">dyld: Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation</span></span></span></span>
-<span style="font-family:courier new"><span style="font-size:12px">  Referenced from: /usr/bin/arch</span></span>
-<span style="font-family:courier new"><span style="font-size:12px">  Reason: image not found</span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">gcc-4.0: Invalid arch name : -D__MACH30__</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">mig: fatal: "&lt;no name yet&gt;", line -1: no SubSystem declaration</span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:Arial;font-size:13px;font-weight:normal"><span style="font-weight:bold"><span style="font-family:Helvetica">Solution</span>: </span>We're creating a trivial hook where `arch' calls `uname -p' (Alternatively, we could patch the sources to use `uname -p').</span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:Arial;font-size:13px;font-weight:normal"><span style="font-family:courier new;font-size:12px">mv /usr/bin/arch /usr/bin/arch.origin</span></span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:Arial;font-size:13px;font-weight:normal"><span style="font-family:courier new;font-size:12px">echo 'uname -p' &gt; /usr/bin/arch</span></span></span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span><span style="font-family:courier new,monospace"><span style="font-size:small">chmod +x /usr/bin/arch</span></span></span></span></span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
-<span style="font-weight:bold">Alternative solution:</span> [PureFoundation](../../../purefoundation.html) can be added manually in the buildroot to satisfy dependency referenced to Foundation.framework.
-<span style="font-family:courier new,monospace"><span style="font-size:small">root@europa:/Volumes/Builds/</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">9G55/BuildRoot# mv PureFoundation/Foundation.</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">framework System/Library/Frameworks</span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">root@europa:/Volumes/Builds/</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">9G55/BuildRoot# chroot .
+Not sure if it is needed or not:
+
+darwinbuild -headers IOKitUser
+
+
+Now, prepare coffee.
+
+darwinbuild IOKitUser
+
+
+
+
+dyld: Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+  Referenced from: /usr/bin/arch
+  Reason: image not found
+gcc-4.0: Invalid arch name : -D__MACH30__
+`mig: fatal: "<no name yet>", line -1: no SubSystem declaration`
+****
+**mv /usr/bin/arch /usr/bin/arch.origin**
+**echo 'uname -p' > /usr/bin/arch**
+**chmod +x /usr/bin/arch**
+
+**Alternative solution:** [PureFoundation](../../../purefoundation.html) can be added manually in the buildroot to satisfy dependency referenced to Foundation.framework.
+`root@europa:/Volumes/Builds/``9G55/BuildRoot# mv PureFoundation/Foundation.``framework System/Library/Frameworks`
+<span>`root@europa:/Volumes/Builds/``9G55/BuildRoot# chroot .
 europa# arch
 NSObject +load
-i386</span></span></span>
-
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
-<span style="font-size:22px;font-weight:bold"><span><span style="font-family:Helvetica"><span style="font-size:small">Problem</span></span><span style="font-size:small">:</span></span><span style="font-weight:normal"><span style="font-size:small"> </span><span style="font-family:courier new,monospace"><span><span style="font-size:small">ForFoundationOnly.h:170:49: error: CoreFoundation/CFNotificationCenter.h: No such file or directory</span></span></span><span style="font-size:small">
-</span></span><span><span style="font-size:small">Solution: </span></span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span><span style="font-size:small">cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span></span></span></span></span>
-
-<span style="font-weight:bold">Also:</span> The latest builds of the patched CFLite which accompanies PureFoundation include an implementation of CFNotificationCenter.
+i386`</span>
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/XCD/loper/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks <span>/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/IOAccelSurfaceControl.h</span> /private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/IOKit/graphics</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span>pbxcp: IOAccelSurfaceControl.h: No such file or directory</span></span></span>
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/XCD/loper/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks <span>/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/IOGraphicsLibPrivate.h</span> /private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/IOKit/graphics</span></span>
-<span style="font-family:courier new;font-size:12px"><span>pbxcp: IOGraphicsLibPrivate.h: No such file or directory</span></span>
-<span style="font-family:Helvetica"><span style="font-weight:bold">Solution:</span> </span><span style="font-family:courier new,monospace"><span style="font-size:small">mkdir -p </span></span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics</span></span></span></span>
+
+
+<span style="font-size:22px;font-weight:bold"><span>Problem:</span><span style="font-weight:normal"> `ForFoundationOnly.h:170:49: error: CoreFoundation/CFNotificationCenter.h: No such file or directory`
+</span>Solution: cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span>
+
+**Also:** The latest builds of the patched CFLite which accompanies PureFoundation include an implementation of CFNotificationCenter.
+
+
+**Problem:** ``
+`pbxcp: IOAccelSurfaceControl.h: No such file or directory`
+**Problem:** ``
+pbxcp: IOGraphicsLibPrivate.h: No such file or directory
+<span style="font-family:Helvetica">**Solution:** </span>`mkdir -p `**BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics**
 Then copy to the directory created just above from:
--   <span style="font-family:courier new,monospace"><span style="font-size:small">BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/*.h</span></span>
--   <span style="font-family:courier new;font-size:12px">BuildRoot/private/var/tmp/IOKitUser/IOKitUser-388.2.1.root/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/*.h</span>
--   <span style="font-family:courier new,monospace"><span style="font-size:small">BuildRoot/private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/IOKit/graphics/*.h</span></span>
+-   `BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/*.h`
+-   BuildRoot/private/var/tmp/IOKitUser/IOKitUser-388.2.1.root/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/graphics/*.h
+-   `BuildRoot/private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/IOKit/graphics/*.h`
 
-<span style="font-weight:bold">TODO: </span>clean location please..
-
-
-<span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold"><span style="font-size:13px">Problem</span>:</span> </span><span style="font-family:courier new"><span style="font-size:12px">/XCD/loper/usr/bin/mig: line 147: : command not found</span></span>
-<span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold"><span style="font-size:13px">Solution</span>:  <span style="font-family:courier new;font-weight:normal">darwinbuild bootstrap_cmds</span></span></span>
-<span style="font-family:courier new;font-size:12px">darwinbuild -load bootstrap_cmds</span>
-<span style="font-family:courier new;font-size:12px">cp BuildRoot/usr/bin/arch BuildRoot/usr/bin/mig BuildRoot/XCD/loper/usr/bin/</span>
-<span style="font-family:courier new;font-size:12px">mkdir BuildRoot/XCD/loper/usr/libexec/</span>
-<span style="font-family:courier new;font-size:12px">cp BuildRoot/usr/libexec/migcom BuildRoot/XCD/loper/usr/libexec</span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-
-<span style="font-weight:bold"><span style="font-size:small">Problem</span><span style="font-size:small">:<span style="font-weight:normal"> Something related to [Carbon](http://www.oofile.com.au/pp2mfc_ref/html/a00288.html#a47) and to [OStype](http://en.wikipedia.org/wiki/OSType)</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecBase.h:63: error: syntax error before 'SecKeychainAttrType'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecBase.h:74: error: syntax error before 'SecKeychainAttrType'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecBase.h:77: error: syntax error before '}' token</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:78: error: syntax error before 'SecAuthenticationType'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:117: error: syntax error before 'SecProtocolType'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:526: error: syntax error before 'SecProtocolType'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:549: error: syntax error before 'SecProtocolType'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:45: error: syntax error before 'SecItemClass'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:75: error: syntax error before 'SecItemAttr'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:186: error: syntax error before 'itemClass'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:211: error: syntax error before 'SecItemClass'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:232: error: syntax error before 'SecItemClass'</span></span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/SecKeychainSearch.h:55: error: syntax error before 'SecItemClass'</span></span></span>
-<span style="font-weight:bold"><span style="font-size:small">Pseudo-Solution</span>: </span>Comment all the problematic lines in <span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Headers/*h</span></span>
-<span style="font-weight:bold"><span style="font-size:small">Solution</span>:</span> Add in SecBase.h <span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CarbonCore/MacTypes.h&gt;</span></span>
+**TODO: **clean location please..
 
 
-<span style="font-family:Helvetica"><span style="font-weight:bold"><span style="font-size:small">Problem</span>: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/IOKitLib.c:347: error: 'kNilOptions' undeclared (first use in this function)</span></span></span></span></span>
-<span style="font-family:Helvetica"><span style="font-weight:bold"><span style="font-size:small">Pseudo-Solution</span>:</span> Patch <span style="font-style:italic">BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/IOKitLib.h</span> with</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">#ifndef kNilOptions 
-</span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">    </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">#define kNilOptions 0
-#endif</span></span>
+<span style="font-family:Helvetica;font-size:12px">**** </span>/XCD/loper/usr/bin/mig: line 147: : command not found
 
-<span style="font-weight:bold"><span style="font-size:small">Solution</span>:</span> Add in SecBase.h <span style="font-family:courier new"><span style="font-size:12px">#include &lt;CarbonCore/MacTypes.h&gt;</span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
-<span style="font-weight:bold">Problem:</span><span> It seems related to [FourCC](http://en.wikipedia.org/wiki/FourCC) (and Carbon?)</span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/IOKit/graphics/IOGraphicsInterface.h:92: error: syntax error before 'FourCharCode'</span></span></span></span>
-<span style="font-weight:bold">Pseudo-Solution: </span>Comment line 91 and line 92 in BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/graphics/IOGraphicsInterface.h<span style="font-family:Helvetica;font-size:13px"> as </span>
-
-<span style="font-family:courier new,monospace"><span style="font-size:small">//    IOReturn (*CopyCapabilities)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">//        (void *thisPointer, FourCharCode select, CFTypeRef * capabilities);</span></span>
-<span style="font-weight:bold">TODO:</span> FourCharCode needs to be included instead of disabled, there is a definition somewhere to include in the proper way at the right place
-
-
-<span style="font-family:Helvetica"><span style="font-weight:bold"><span style="font-size:small">Problem</span>: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:65: error: syntax error before 'LogicalAddress'</span></span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:65: warning: no semicolon at end of struct or union</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:183: error: syntax error before 'LogicalAddress'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:193: error: syntax error before 'thePEFPtr'</span></span>
-<span style="font-family:Helvetica"><span style="font-weight:bold"><span style="font-size:small">Pseudo-Solution</span>: </span>Replace the unknown types with "</span><span style="font-family:courier new,monospace"><span style="font-size:small">void *</span></span><span style="font-family:Helvetica">", recreate missing variable declaration.</span>
-
-
-<span style="font-family:Helvetica;font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:121: error: syntax error before 'thePEFPtr'</span></span></span></span>
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:136: error: 'sectionHeaderPtr' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:136: error: (Each undeclared identifier is reported only once</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:136: error: for each function it appears in.)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:142: error: 'nil' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:148: error: 'thePEFPtr' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:294: error: 'theData' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:296: error: 'noErr' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:300: error: 'Ptr' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:300: error: syntax error before 'originalUnpackBuffer'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:315: error: syntax error before 'thePEFPtr'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:318: error: invalid storage class for function 'GetSymbolFromPEF'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:319: error: 'inSymbolName' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:331: error: 'LogicalAddress' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:331: error: syntax error before 'expandedDataPtr'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:338: error: dereferencing pointer to incomplete type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:342: error: dereferencing pointer to incomplete type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:347: error: 'theSymbolPtr' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:354: error: dereferencing pointer to incomplete type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:358: error: invalid application of 'sizeof' to incomplete type 'ContainerHeader' </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:410: error: invalid application of 'sizeof' to incomplete type 'ContainerHeader' </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:413: error: 'expandedDataPtr' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:437: error: 'theSymbolSize' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:444: error: syntax error before 'expandedDataPtr'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:454: error: syntax error before 'thePEFPtr'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:455: error: invalid storage class for function 'GetPEFLen'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:465: error: dereferencing pointer to incomplete type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:470: error: dereferencing pointer to incomplete type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:475: error: invalid use of undefined type 'struct ContainerHeader'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:477: error: dereferencing pointer to incomplete type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:496: error: invalid storage class for function 'SymbolCompare'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:548: error: invalid storage class for function 'ExaminePEF'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:645: error: syntax error before 'LogicalAddress'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:727: error: invalid storage class for function 'PEFExamineFile'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:793: error: invalid storage class for function '_PEFExamineFile'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:810: error: invalid storage class for function 'PEFExamineBundle'</span></span>
-<span style="font-size:13px"><span style="font-weight:bold">Pseudo-Solution: </span>Replace the unknown types with "<span style="font-family:courier new,monospace"><span style="font-size:small">void *</span></span>", recreate missing variable declaration.</span>
-
-
-<span style="font-family:Helvetica"><span style="font-family:Arial"></span></span>
-
-<span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreServices.framework/Headers/../Frameworks/CarbonCore.framework/Headers/MacTypes.h:352: error: syntax error before numeric constant</span></span></span></span>
-<span style="font-weight:bold">Pseudo-Solution: </span>Comment at line 352 in <span><span style="font-family:courier new,monospace"><span style="font-size:small">MacTypes.h</span></span></span>
-
-<span style="font-family:courier new,monospace"><span style="font-size:small">//enum {</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">//  kNilOptions                   = 0</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">//};</span></span>
-
-<span style="font-weight:bold">TODO:</span> This looks like what we need just above.. what a paradox.
+darwinbuild -load bootstrap_cmds
+cp BuildRoot/usr/bin/arch BuildRoot/usr/bin/mig BuildRoot/XCD/loper/usr/bin/
+mkdir BuildRoot/XCD/loper/usr/libexec/
+cp BuildRoot/usr/libexec/migcom BuildRoot/XCD/loper/usr/libexec
 
 
 
-<span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">mig: fatal: "/SourceCache/IOKitUser/IOKitUser-388.2.1/hid.subproj/IOHIDEventSystem.defs", line 1: no SubSystem declaration</span></span></span></span>
-<span style="font-weight:bold">Pseudo-Solution: </span><span>Feed the empty file with a subsystem declaration as:</span>
+<span style="font-weight:bold">Problem</span>
+`/System/Library/Frameworks/Security.framework/Headers/SecBase.h:63: error: syntax error before 'SecKeychainAttrType'`
+<span style="font-family:courier new,monospace"><span>/System/Library/Frameworks/Security.framework/Headers/SecBase.h:74: error: syntax error before 'SecKeychainAttrType'</span></span>
+<span style="font-family:courier new,monospace"><span>/System/Library/Frameworks/Security.framework/Headers/SecBase.h:77: error: syntax error before '}' token</span></span>
+<span style="font-family:courier new,monospace"><span>/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:78: error: syntax error before 'SecAuthenticationType'</span></span>
+<span style="font-family:courier new,monospace"><span>/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:117: error: syntax error before 'SecProtocolType'</span></span>
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:526: error: syntax error before 'SecProtocolType'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychain.h:549: error: syntax error before 'SecProtocolType'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:45: error: syntax error before 'SecItemClass'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:75: error: syntax error before 'SecItemAttr'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:186: error: syntax error before 'itemClass'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:211: error: syntax error before 'SecItemClass'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychainItem.h:232: error: syntax error before 'SecItemClass'`
+`/System/Library/Frameworks/Security.framework/Headers/SecKeychainSearch.h:55: error: syntax error before 'SecItemClass'`
+****Comment all the problematic lines in `/System/Library/Frameworks/Security.framework/Headers/*h`
+**Solution:** Add in SecBase.h `#include <CarbonCore/MacTypes.h>`
 
-<span style="font-family:courier new,monospace">subsystem IOHIDEventSystem 71000;</span>
 
-<span style="font-weight:bold">TODO:</span> What should we really do?
+<span style="font-family:Helvetica"><span style="font-weight:bold">Problem: /SourceCache/IOKitUser/IOKitUser-388.2.1/IOKitLib.c:347: error: 'kNilOptions' undeclared (first use in this function)</span></span>
+<span style="font-family:Helvetica"><span style="font-weight:bold">Pseudo-Solution:</span> Patch *BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/IOKitLib.h* with</span>
+`#ifndef kNilOptions 
+`    `#define kNilOptions 0
+#endif`
 
-
-
-<span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">ld64: warning, -seg_addr_table file cannot be read: /AppleInternal/XCD/loper/seg_addr_table</span></span></span></span>
-<span style="font-weight:bold">Solution: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">chroot BuildRoot</span></span></span></span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">mkdir -p /AppleInternal/XCD/loper</span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">ln -s /usr/local/bin/seg_addr_table /AppleInternal/XCD/loper/</span></span>
-<span style="font-family:Helvetica;font-size:12px">
-</span>
-<span style="font-weight:bold">Problem:</span> Ruby is (implicitly) missing:
-<span style="font-family:courier new,monospace"><span style="font-size:small">error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist: No such file or directory</span></span>
-<span style="font-size:12px"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings: No such file or directory</span></span>
-<span style="font-weight:bold">Pseudo-Solution: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">cp /usr/bin/ruby BuildRoot/usr/bin/</span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/libruby.1.dylib BuildRoot/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/libruby.1.dylib</span></span>
-<span style="font-weight:bold">
-</span>
-<span style="font-weight:bold"><span><span style="font-family:arial,sans-serif"><span style="font-size:small">Problem</span></span></span><span style="font-family:Arial;font-size:13px">:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist:15:in `require': no such file to load -- optparse (LoadError)</span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings:16:in `require': no such file to load -- optparse (LoadError)</span></span>
-<span style="font-weight:bold"><span style="font-family:Arial;font-size:13px">Solution: </span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-weight:normal">cp -R /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/optparse* BuildRoot/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/</span></span></span></span>
-
-<span style="font-family:courier new;font-size:12px"><span style="font-family:arial,sans-serif"><span style="font-size:small">Here, compilation pseudo-success for the first time after 94 attempts... o/
-</span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">
-</span></span>Copying IOKitUser from /Volumes/Builds/9F33/Roots/IOKitUser/IOKitUser-388.2.1.root~95 ...</span>
-
-<span style="font-size:12px"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">IOKitUser - 70 files registered.</span></span>
+**Solution:** Add in SecBase.h #include <CarbonCore/MacTypes.h>
 
 
 
-<span style="text-decoration:underline">Notes:</span> Do not alter the prototype of functions, or you will end with undefined symbols at linking as:
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">Undefined symbols:</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_GetSymbolFromPEF", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      __PEFExamineFile in PEFSupport.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      __PEFExamineFile in PEFSupport.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_GetPEFLen", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      __PEFExamineFile in PEFSupport.o</span></span>
-<span style="font-family:courier new">
-</span>
-<span style="font-family:courier new"><span style="font-family:Arial;font-size:13px;font-weight:bold">Problem: </span><span style="font-family:Arial;font-size:13px"><span style="font-style:italic">IOKit</span> is linked to <span style="font-style:italic">CoreFoundation</span> instead of <span style="font-style:italic">CoreFoundation<span style="font-weight:bold">.framework</span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit:</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/</span><span style="color:rgb(255,0,0)"><span style="font-size:small">CoreFoundation</span></span><span style="font-size:small">/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libz.1.dylib (compatibility version 1.0.0, current version 1.2.3)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span>
-<span style="font-family:Arial;font-size:13px"></span>
-<span style="font-weight:bold">Solution: <span style="font-size:12px;font-weight:normal"><span style="font-size:13px">In fact, the problem comes from </span><span style="font-size:13px">compiled CF which is linked to a wrong path.</span></span></span>
+**Problem:** It seems related to [FourCC](http://en.wikipedia.org/wiki/FourCC) (and Carbon?)
+**/private/var/tmp/IOKitUser/IOKitUser-388.2.1.sym/BuiltProducts/include/IOKit/graphics/IOGraphicsInterface.h:92: error: syntax error before 'FourCharCode'**
+**Pseudo-Solution: **Comment line 91 and line 92 in BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/graphics/IOGraphicsInterface.h as 
 
-<span style="font-family:courier new"><span style="font-size:12px">/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
+`//    IOReturn (*CopyCapabilities)`
+`//        (void *thisPointer, FourCharCode select, CFTypeRef * capabilities);`
+**TODO:** FourCharCode needs to be included instead of disabled, there is a definition somewhere to include in the proper way at the right place
 
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then rebuild CF:
+
+<span style="font-family:Helvetica"><span style="font-weight:bold">Problem: /SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:65: error: syntax error before 'LogicalAddress'</span></span>
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:65: warning: no semicolon at end of struct or union`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:183: error: syntax error before 'LogicalAddress'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/GetSymbolFromPEF.h:193: error: syntax error before 'thePEFPtr'`
+<span style="font-family:Helvetica">****Replace the unknown types with "</span>`void *`", recreate missing variable declaration.
+
+
+****
+
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:136: error: 'sectionHeaderPtr' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:136: error: (Each undeclared identifier is reported only once`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:136: error: for each function it appears in.)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:142: error: 'nil' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:148: error: 'thePEFPtr' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:294: error: 'theData' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:296: error: 'noErr' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:300: error: 'Ptr' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:300: error: syntax error before 'originalUnpackBuffer'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:315: error: syntax error before 'thePEFPtr'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:318: error: invalid storage class for function 'GetSymbolFromPEF'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:319: error: 'inSymbolName' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:331: error: 'LogicalAddress' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:331: error: syntax error before 'expandedDataPtr'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:338: error: dereferencing pointer to incomplete type`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:342: error: dereferencing pointer to incomplete type`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:347: error: 'theSymbolPtr' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:354: error: dereferencing pointer to incomplete type`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:358: error: invalid application of 'sizeof' to incomplete type 'ContainerHeader' `
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:410: error: invalid application of 'sizeof' to incomplete type 'ContainerHeader' `
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:413: error: 'expandedDataPtr' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:437: error: 'theSymbolSize' undeclared (first use in this function)`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:444: error: syntax error before 'expandedDataPtr'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:454: error: syntax error before 'thePEFPtr'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:455: error: invalid storage class for function 'GetPEFLen'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:465: error: dereferencing pointer to incomplete type`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:470: error: dereferencing pointer to incomplete type`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:475: error: invalid use of undefined type 'struct ContainerHeader'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:477: error: dereferencing pointer to incomplete type`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:496: error: invalid storage class for function 'SymbolCompare'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:548: error: invalid storage class for function 'ExaminePEF'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:645: error: syntax error before 'LogicalAddress'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:727: error: invalid storage class for function 'PEFExamineFile'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:793: error: invalid storage class for function '_PEFExamineFile'`
+`/SourceCache/IOKitUser/IOKitUser-388.2.1/graphics.subproj/PEFSupport.c:810: error: invalid storage class for function 'PEFExamineBundle'`
+<span style="font-size:13px">**Pseudo-Solution: **Replace the unknown types with "`void *`", recreate missing variable declaration.</span>
+
+
+
+
+****
+**Pseudo-Solution: **Comment at line 352 in MacTypes.h
+
+`//enum {`
+`//  kNilOptions                   = 0`
+`//};`
+
+**TODO:** This looks like what we need just above.. what a paradox.
+
+
+
+****
+**Pseudo-Solution: **Feed the empty file with a subsystem declaration as:
+
+`subsystem IOHIDEventSystem 71000;`
+
+**TODO:** What should we really do?
+
+
+
+****
+<span style="font-weight:bold">Solution: <span style="font-weight:normal">`chroot BuildRoot`</span></span>
+**mkdir -p /AppleInternal/XCD/loper**
+`ln -s /usr/local/bin/seg_addr_table /AppleInternal/XCD/loper/`
+
+
+**Problem:** Ruby is (implicitly) missing:
+`error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist: No such file or directory`
+
+`error: couldn't exec /XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings: No such file or directory`
+****
+`cp /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/libruby.1.dylib BuildRoot/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/libruby.1.dylib`
+**
+**
+<span style="font-weight:bold"><span>Problem</span>:<span style="font-family:courier new,monospace"> </span>/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist:15:in `require': no such file to load -- optparse (LoadError)</span>
+`/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings:16:in `require': no such file to load -- optparse (LoadError)`
+****
+
+<span style="font-family:courier new;font-size:12px">Here, compilation pseudo-success for the first time after 94 attempts... o/
+
+Copying IOKitUser from /Volumes/Builds/9F33/Roots/IOKitUser/IOKitUser-388.2.1.root~95 ...</span>
+
+
+`IOKitUser - 70 files registered.`
+
+
+
+__Notes:__ Do not alter the prototype of functions, or you will end with undefined symbols at linking as:
+Undefined symbols:
+`  "_GetSymbolFromPEF", referenced from:`
+`      __PEFExamineFile in PEFSupport.o`
+`      __PEFExamineFile in PEFSupport.o`
+`  "_GetPEFLen", referenced from:`
+`      __PEFExamineFile in PEFSupport.o`
+
+
+<span style="font-family:courier new">**Problem: **</span>
+`/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit:`
+ `/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)`
+ ``
+ `/usr/lib/libz.1.dylib (compatibility version 1.0.0, current version 1.2.3)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)`
+
+****
+
+/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
+
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then rebuild CF:
 
 <span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1 && darwinbuild CF && darwinbuild -load CF</span></span>
 The plist file above contains some patches that tend to avoid most of the errors just below.
 After recompilation of CF, dependency is fixed:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="font-weight:bold">Next solution: </span>See <http://darwinbuild.macosforge.org/trac/ticket/41#comment:1> / [rdar://problem/6488974](http://rdar://problem/6488974)
-<span style="font-size:12px"><span style="font-size:13px">[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/IOKitUser.png)](IOKitUser.png%3Fattredirects=0)</span></span>
+`/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
+**Next solution: **See <http://darwinbuild.macosforge.org/trac/ticket/41#comment:1> / [rdar://problem/6488974](http://rdar://problem/6488974)
+[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/IOKitUser.png)](IOKitUser.png%3Fattredirects=0)
 
 
 
 
 
-<span style="font-family:Helvetica;font-size:12px"><span style="text-decoration:underline"><span style="font-size:13px">Notes</span></span><span style="font-size:13px">:</span></span>
+
 
 <span style="font-family:Helvetica;font-size:12px"><span style="font-size:13px"><http://darwinbuild.macosforge.org/trac/ticket/9></span></span>
 
@@ -11075,7 +11060,7 @@ After recompilation of CF, dependency is fixed:
 
 <span style="font-family:Helvetica"><span style="font-family:Arial"><http://darwinbuild.macosforge.org/trac/ticket/41#comment:1></span></span>
 
-<span style="font-family:Helvetica"><span style="font-family:Arial">[rdar://problem/6488974](http://rdar://problem/6488974)</span></span>
+[rdar://problem/6488974](http://rdar://problem/6488974)
 
 ------------------------------------------------------------------------
 ### IOKitTools
@@ -11083,176 +11068,176 @@ After recompilation of CF, dependency is fixed:
 See the n-pass + IOKitUser stories..
 
 
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitTools/IOKitTools-76/ioreg.tproj/ioreg.c:25:78: error: IOKit/IOCFSerialize.h: No such file or directory</span></span>
+**Problem: **`/SourceCache/IOKitTools/IOKitTools-76/ioreg.tproj/ioreg.c:25:78: error: IOKit/IOCFSerialize.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitTools/IOKitTools-76/ioreg.tproj/ioreg.c:26:77: error: IOKit/IOKitLib.h: No such file or directory</span></span>
+`/SourceCache/IOKitTools/IOKitTools-76/ioreg.tproj/ioreg.c:26:77: error: IOKit/IOKitLib.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/IOKitTools/IOKitTools-76/ioreg.tproj/ioreg.c:27:82: error: IOKit/IOKitLibPrivate.h: No such file or directory</span></span>
+`/SourceCache/IOKitTools/IOKitTools-76/ioreg.tproj/ioreg.c:27:82: error: IOKit/IOKitLibPrivate.h: No such file or directory`
 
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders</span></span>
+**Solution:** `cp -R BuildRoot/XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders/* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/PrivateHeaders`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot /XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/Headers/* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/Headers</span></span>
+`cp -R BuildRoot /XCD/SY/Library/Frameworks/IOKit.framework/Versions/A/Headers/* BuildRoot/System/Library/Frameworks/IOKit.framework/Versions/A/Headers`
 ------------------------------------------------------------------------
-<span style="font-family:Helvetica"><span style="font-family:Arial"></span></span>
+
 ### Libc
 #### 9J61pd1
 
-**Problem:** <span style="font-family:Courier,Verdana,sans-serif">/private/var/tmp/Libc/Libc-498.1.7.sym/include/plockstat.h:116: error: syntax error before '*' token</span>
+**Problem:** /private/var/tmp/Libc/Libc-498.1.7.sym/include/plockstat.h:116: error: syntax error before '*' token
 **Solution:** patch plockstat.h "on the fly" (comments error lines). It is generated via DTrace it seems at compilation time, and all error are some prototypes without name, only the parameters (e.g., (int a, int b..) instead of fctname(int a, int b..)).
 
-<span style="font-family:Helvetica"><span style="font-family:Arial">+ see patch</span></span>
++ see patch
 
-<span style="font-family:Helvetica"><span style="font-family:Arial"></span></span>
+
 ------------------------------------------------------------------------
 ### Libc_debug
-<span style="font-size:13px"></span>
-<span style="font-size:12px"></span>
-#### 9J61pd1
-**Problem: <span style="font-weight:normal"><span style="font-size:small">sh: line 2: 58568 Trace/BPT trap          dtrace -o /private/var/tmp/Libc_debug/Libc_debug-498.1.7.sym/include/plockstat.h -C -h -s /SourceCache/Libc_debug/Libc-498.1.7/pthreads/plockstat.d</span></span>**
 
-<span style="font-size:small">*** Error code 133</span>
-<span style="font-size:small">1 error</span>
+
+#### 9J61pd1
+**Problem: sh: line 2: 58568 Trace/BPT trap          dtrace -o /private/var/tmp/Libc_debug/Libc_debug-498.1.7.sym/include/plockstat.h -C -h -s /SourceCache/Libc_debug/Libc-498.1.7/pthreads/plockstat.d**
+
+*** Error code 133
+1 error
 
 ------------------------------------------------------------------------
 ### Libc_profile
-<span style="font-size:12px"></span>
-#### 9J61pd1
-**Problem:** <span style="font-size:small">sh: line 2: 60868 Trace/BPT trap          dtrace -o /private/var/tmp/Libc_profile/Libc_profile-498.1.7.sym/include/plockstat.h -C -h -s /SourceCache/Libc_profile/Libc-498.1.7/pthreads/plockstat.d</span>
 
-<span style="font-size:small">*** Error code 133</span>
-<span style="font-size:small">1 error</span>
-<span style="font-size:small">*** Error code 2</span>
-<span style="font-size:small">1 error</span>
-<span style="font-size:small">*** Error code 2</span>
+#### 9J61pd1
+**Problem:** sh: line 2: 60868 Trace/BPT trap          dtrace -o /private/var/tmp/Libc_profile/Libc_profile-498.1.7.sym/include/plockstat.h -C -h -s /SourceCache/Libc_profile/Libc-498.1.7/pthreads/plockstat.d
+
+*** Error code 133
+1 error
+*** Error code 2
+1 error
+*** Error code 2
 ------------------------------------------------------------------------
 
 ### Libsystem
-<span style="font-weight:bold"><span style="font-weight:normal"></span></span>
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild Libsystem</span></span>
+****
+darwinbuild Libsystem
 #### 9J61 ?
 #### 9F33
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ar: libc-partial_debug.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)</span></span>
+**Problem:** `ar: libc-partial_debug.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">ar: libc-partial_debug.a: Inappropriate file type or format</span></span>
+`ar: libc-partial_debug.a: Inappropriate file type or format`
 
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">lipo BuildRoot/usr/local/lib/system/libc-partial_debug.a -thin i386 -output libc-partial_debug.a</span></span>
+**Solution:** `lipo BuildRoot/usr/local/lib/system/libc-partial_debug.a -thin i386 -output libc-partial_debug.a`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">mv libc-partial_debug.a BuildRoot/usr/local/lib/system/libc-partial_debug.a</span></span>
-
-<span style="font-family:courier new;font-size:12px">
-</span>
-
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new"><span style="font-size:12px">ar: libsyscall_debug.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)</span></span>
-
-<span style="font-family:courier new"><span style="font-size:12px">ar: libsyscall_debug.a: Inappropriate file type or format</span></span>
-
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="font-size:12px">lipo BuildRoot/usr/local/lib/system/libsyscall_debug.a -thin i386 -output libsyscall_debug.a</span></span>
-
-<span style="font-family:courier new"><span style="font-size:12px">mv libsyscall_debug.a BuildRoot/usr/local/lib/system/libsyscall_debug.a</span></span>
+`mv libc-partial_debug.a BuildRoot/usr/local/lib/system/libc-partial_debug.a`
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new"><span style="font-size:12px">ar: libc-partial.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)</span></span>
-
-<span style="font-family:courier new"><span style="font-size:12px">ar: libc-partial.a: Inappropriate file type or format</span></span>
-
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="font-size:12px">lipo BuildRoot/usr/local/lib/system/libc-partial.a -thin i386 -output libc-partial.a</span></span>
-
-<span style="font-family:courier new"><span style="font-size:12px">mv libc-partial.a BuildRoot/usr/local/lib/system/libc-partial.a</span></span>
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new"><span style="font-size:12px">ar: libsyscall.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)</span></span>
 
-<span style="font-family:courier new"><span style="font-size:12px">ar: libsyscall.a: Inappropriate file type or format</span></span>
+**Problem:** ar: libsyscall_debug.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)
 
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="font-size:12px">lipo BuildRoot/usr/local/lib/system/libsyscall.a -thin i386 -output libsyscall.a</span></span>
+ar: libsyscall_debug.a: Inappropriate file type or format
 
-<span style="font-family:courier new"><span style="font-size:12px">mv libsyscall.a BuildRoot/usr/local/lib/system/libsyscall.a</span></span>
+**Solution:** lipo BuildRoot/usr/local/lib/system/libsyscall_debug.a -thin i386 -output libsyscall_debug.a
 
-
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new"><span style="font-size:12px">ar: libc-partial_profile.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)</span></span>
-
-<span style="font-family:courier new"><span style="font-size:12px">ar: libc-partial_profile.a: Inappropriate file type or format</span></span>
-
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="font-size:12px">lipo BuildRoot/usr/local/lib/system/libc-partial_profile.a -thin i386 -output libc-partial_profile.a</span></span>
-
-<span style="font-family:courier new"><span style="font-size:12px">mv libc-partial_profile.a BuildRoot/usr/local/lib/system/libc-partial_profile.a</span></span>
+mv libsyscall_debug.a BuildRoot/usr/local/lib/system/libsyscall_debug.a
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new"><span style="font-size:12px">ar: libsyscall_profile.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)</span></span>
+**Problem:** ar: libc-partial.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)
 
-<span style="font-family:courier new"><span style="font-size:12px">ar: libsyscall_profile.a: Inappropriate file type or format</span></span>
+ar: libc-partial.a: Inappropriate file type or format
 
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="font-size:12px">lipo BuildRoot/usr/local/lib/system/libsyscall_profile.a -thin i386 -output libsyscall_profile.a</span></span>
+**Solution:** lipo BuildRoot/usr/local/lib/system/libc-partial.a -thin i386 -output libc-partial.a
 
-<span style="font-family:courier new"><span style="font-size:12px">mv libsyscall_profile.a BuildRoot/usr/local/lib/system/libsyscall_profile.a</span></span>
+mv libc-partial.a BuildRoot/usr/local/lib/system/libc-partial.a
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ld: library not found for -llaunch</span></span>
-<span style="font-weight:bold">Solution: <span style="color:rgb(255,0,0)">Please, let us know if know how to compile and deploy liblaunch.</span></span>
+**Problem:** ar: libsyscall.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)
+
+ar: libsyscall.a: Inappropriate file type or format
+
+**Solution:** lipo BuildRoot/usr/local/lib/system/libsyscall.a -thin i386 -output libsyscall.a
+
+mv libsyscall.a BuildRoot/usr/local/lib/system/libsyscall.a
+
+
+**Problem:** ar: libc-partial_profile.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)
+
+ar: libc-partial_profile.a: Inappropriate file type or format
+
+**Solution:** lipo BuildRoot/usr/local/lib/system/libc-partial_profile.a -thin i386 -output libc-partial_profile.a
+
+mv libc-partial_profile.a BuildRoot/usr/local/lib/system/libc-partial_profile.a
+
+
+**Problem:** ar: libsyscall_profile.a is a fat file (use libtool(1) or lipo(1) and ar(1) on it)
+
+ar: libsyscall_profile.a: Inappropriate file type or format
+
+**Solution:** lipo BuildRoot/usr/local/lib/system/libsyscall_profile.a -thin i386 -output libsyscall_profile.a
+
+mv libsyscall_profile.a BuildRoot/usr/local/lib/system/libsyscall_profile.a
+
+
+**Problem:** `ld: library not found for -llaunch`
+****
 See <http://darwinbuild.macosforge.org/trac/ticket/10>
 ------------------------------------------------------------------------
 ### NFS
 #### 9J61 (ok)
-<span style="font-weight:bold">Problems:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> /SourceCache/NFS/NFS-25.2/showmount/mshow.c:31:20: error: dns_sd.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/NFS/NFS-25.2/showmount/mshow.c:31:20: error: dns_sd.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">cp -R /Developer/SDKs/MacOSX10.5.sdk/usr/include/dns* BuildRoot/usr/include</span></span>
+**Problems:**` /SourceCache/NFS/NFS-25.2/showmount/mshow.c:31:20: error: dns_sd.h: No such file or directory`
+`/SourceCache/NFS/NFS-25.2/showmount/mshow.c:31:20: error: dns_sd.h: No such file or directory`
+**Solution:** `cp -R /Developer/SDKs/MacOSX10.5.sdk/usr/include/dns* BuildRoot/usr/include`
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/NFS/NFS-25.2/nfsd/main.c:86:20:/SourceCache/NFS/NFS-25.2/nfsd/main.c:86:20:  error: error: launch.h: No such file or directorylaunch.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution: </span><span style="font-family:courier new,monospace"><span style="font-size:small">cp /Users/aladin/PureDarwin/darwinbuild/9J61/.build/buildroot.nfs/private/var/tmp/launchd_libs/launchd_libs-258.22.root/usr/include/* BuildRoot/usr/include</span></span>
+**Problem:** `/SourceCache/NFS/NFS-25.2/nfsd/main.c:86:20:/SourceCache/NFS/NFS-25.2/nfsd/main.c:86:20:  error: error: launch.h: No such file or directorylaunch.h: No such file or directory`
+**Solution: **`cp /Users/aladin/PureDarwin/darwinbuild/9J61/.build/buildroot.nfs/private/var/tmp/launchd_libs/launchd_libs-258.22.root/usr/include/* BuildRoot/usr/include`
 
 Then !
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">BUILD TIME: 0h 0m 14s</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">EXIT STATUS: 0</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">NFS - 25 files registered.</span></span></span>
+`BUILD TIME: 0h 0m 14s`
+`EXIT STATUS: 0`
+`NFS - 25 files registered.`
 
 
 
-<span style="font-family:Helvetica"></span>
+
 ------------------------------------------------------------------------
 
-<span style="font-family:Helvetica"></span>
+
 ### PowerManagement
 #### 9J61
-<span style="font-family:Arial">Problem: </span>
+Problem: 
 /SourceCache/PowerManagement/PowerManagement-158.10/AppleSmartBatteryManager/AppleSmartBatteryManager.h:28:43: error: IOKit/smbus/IOSMBusController.h: No such file or directory
 Solution: ? Headers seems not available on macosx too.
 See <http://darwinbuild.macosforge.org/trac/ticket/80>
 
 
-<span style="font-family:Helvetica"></span>
+
 ------------------------------------------------------------------------
 
-<span style="font-family:Helvetica"><span style="font-family:Arial"></span></span>
+
 
 ### Security
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild Security</span></span>
+`darwinbuild Security`
 #### 9J61?
 #### 9F33
-<span style="font-weight:bold">Problem: <span style="font-family:courier new;font-size:12px;font-weight:normal">darwinbuild Security</span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal"><span style="color:rgb(68,68,68)">[...]</span></span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal"><span style="color:rgb(68,68,68)">2008-10-20 06:32:44.589 xcodebuild[65272:713] [MT] ASSERTION FAILURE in /SourceCache/DevToolsBase/DevToolsBase-1114/pbxcore/SpecificationTypes/XCPlatformSpecification.m:421</span></span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal"><span style="color:rgb(68,68,68)"><span style="color:rgb(255,0,0)">Details:  The Mac OS X platform is missing - cannot set a default platform.</span></span></span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal"><span style="color:rgb(68,68,68)"><span style="color:rgb(255,0,0)"><span style="color:rgb(0,0,0)"><span style="font-family:arial;font-size:13px;font-weight:bold">Solution: </span><span style="font-family:arial;font-size:13px">Use an UFS disk image.</span></span></span></span></span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal"><span style="color:rgb(68,68,68)"><span style="color:rgb(255,0,0)"><span style="color:rgb(0,0,0)"><span style="font-family:arial;font-size:13px"><span style="text-decoration:underline">Note:</span> The cause is Xcode 3.1 running in a chroot on not-UFS</span></span></span></span></span></span>
+****
+**[...]**
+**2008-10-20 06:32:44.589 xcodebuild[65272:713] [MT] ASSERTION FAILURE in /SourceCache/DevToolsBase/DevToolsBase-1114/pbxcore/SpecificationTypes/XCPlatformSpecification.m:421**
+**Details:  The Mac OS X platform is missing - cannot set a default platform.**
+****
+****
 
 
 
 
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-weight:bold"><span style="font-size:13px">Problem</span>:</span> <span style="font-family:courier new">generateErrStrings.mm:5:35: error: Foundation/Foundation.h: No such file or directory</span>
-<span style="font-weight:bold"><span style="font-family:Arial;font-size:13px">Solution</span>:</span> <span style="color:rgb(255,0,0);font-family:Arial;font-size:13px;font-weight:bold">Please, let us know if you have one. </span><span style="font-family:Arial;font-size:13px">Since Foundation is not part of Darwin, we need to patch the source so that it doesn't need Foundation any more (Sometimes older versions of the same source can give a hint).</span>
-<span style="font-family:Arial;font-size:13px">
-</span>
+
+**** generateErrStrings.mm:5:35: error: Foundation/Foundation.h: No such file or directory
+**** **Please, let us know if you have one. **Since Foundation is not part of Darwin, we need to patch the source so that it doesn't need Foundation any more (Sometimes older versions of the same source can give a hint).
+
+
 
 [![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/Security.png)](Security.png%3Fattredirects=0)
 
 ------------------------------------------------------------------------
 
 
-<span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span>
+
 ### SecurityTool
 #### 9J61
 /usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':
@@ -11263,181 +11248,177 @@ See <http://darwinbuild.macosforge.org/trac/ticket/80>
 
 security.c:62:34: error: security_asn1/secerr.h: No such file or directory
 
-<span style="font-family:Arial;font-size:13px"></span>
+
 
 ------------------------------------------------------------------------
 ### SystemStubs
 #### 9J61 (ok)
 #### 9F33 (ok)
 
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">Error: couldn't exec /XCD/loper/usr/bin/libtool: No such file or directory</span></span>
+**Problem: **`Error: couldn't exec /XCD/loper/usr/bin/libtool: No such file or directory`
 
-<span style="font-weight:bold">Solution: </span><span style="font-family:courier new,monospace"><span style="font-size:small">cp BuildRoot/usr/bin/libtool BuildRoot/XCD/loper/usr/bin/</span></span>
+**Solution: **`cp BuildRoot/usr/bin/libtool BuildRoot/XCD/loper/usr/bin/`
 
 
 
 ------------------------------------------------------------------------
 
 ### TargetConfig
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild TargetConfig</span></span>
+`darwinbuild TargetConfig`
 #### 9J61 (ok)
 #### 9F33pd1 (ok)
-<span style="font-family:Helvetica;font-weight:bold">Problem:</span><span style="font-family:Helvetica"> <span style="font-style:italic">CoreFoundation</span> has no <span style="font-style:italic">.framework</span> extension.</span>
+**Problem:**<span style="font-family:Helvetica"> *CoreFoundation* has no *.framework* extension.</span>
 
-<span style="font-family:Helvetica;font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal">dyld: Library not loaded: /System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation</span></span>
+**dyld: Library not loaded: /System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation**
 
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-family:Arial;font-size:13px"></span>
-<span style="font-weight:bold">Solution: <span style="font-size:12px;font-weight:normal"><span style="font-size:13px">In fact, the problem comes from </span><span style="font-size:13px">compiled CF which is linked to a wrong path.</span></span></span>
 
-<span style="font-family:courier new"><span style="font-size:12px">/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
 
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then rebuild CF:
+****
+
+/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
+
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then rebuild CF:
 
 <span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1 && darwinbuild CF && darwinbuild -load CF</span></span>
 The plist file above contains some patches that tend to avoid most of the errors just below.
 After recompilation of CF, dependency is fixed:
 
-<span style="font-family:courier new"><span style="font-size:12px">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
+/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
 
 
-<span style="font-size:small">Since </span><span style="font-style:italic"><span style="font-size:small">TargetConfig</span></span><span style="font-size:small"> is available and can be built, we will fix `tconf' with the right framework pathname instead of using a symbolic link or copying the framework.</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild TargetConfig</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -load TargetConfig</span></span>
 
-<span style="font-size:small">Now tconf is linked to the correct framework:</span>
-<span style="font-size:small"><span style="font-family:courier new;font-size:12px">otool -L BuildRoot/usr/local/bin/tconf </span></span>
-<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)">BuildRoot/usr/local/bin/tconf:</span></span></span>
-<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0);font-family:Helvetica"><span style="white-space:pre"><span style="font-family:courier new,monospace"><span> </span></span></span><span style="font-family:courier new,monospace"><span>/System/Library/Frameworks/CoreFoundation<span style="color:rgb(0,0,0)">.</span><span style="color:rgb(0,0,0)">framework</span>/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.15.0)</span></span></span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0);font-family:Helvetica"><span style="font-family:courier new,monospace"><span><span style="white-space:pre"> </span>/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span></span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0);font-family:Helvetica"><span style="font-family:courier new,monospace"><span><span style="white-space:pre"> </span>/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span></span></span></span></span>
-<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0);font-family:Helvetica"><span style="font-family:courier new,monospace"><span><span style="color:rgb(0,0,0);font-family:Helvetica;font-size:13px">So we can remove the previous temporary CoreFoundation directory:</span></span></span></span></span></span></span>
-<span><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0)"><span style="font-family:courier new,monospace"><span style="font-size:small">rm -fR BuildRoot/System/Library/Frameworks/CoreFoundation</span></span></span></span></span>
-<span style="font-size:small"></span>
+
+Since *TargetConfig* is available and can be built, we will fix `tconf' with the right framework pathname instead of using a symbolic link or copying the framework.
+`darwinbuild TargetConfig`
+`darwinbuild -load TargetConfig`
+
+Now tconf is linked to the correct framework:
+otool -L BuildRoot/usr/local/bin/tconf 
+BuildRoot/usr/local/bin/tconf:
+
+<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0);font-family:Helvetica"><span style="font-family:courier new,monospace"><span> /usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span></span></span></span></span>
+<span style="font-size:small"><span style="font-family:courier new;font-size:12px"><span style="color:rgb(68,68,68)"><span style="color:rgb(0,0,0);font-family:Helvetica"><span style="font-family:courier new,monospace"><span> /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span></span></span></span></span>
+So we can remove the previous temporary CoreFoundation directory:
+rm -fR BuildRoot/System/Library/Frameworks/CoreFoundation
+
 ------------------------------------------------------------------------
-<span style="font-size:13px;font-family:Arial,Verdana,sans-serif"></span>
+
 ### WebCore
 #### 9J61
 make: *** No rule to make target `JSEventTargetBase.lut.h', needed by `all'.  Stop.
 
 
 ------------------------------------------------------------------------
-### at_cmds<span style="font-size:12px;font-weight:normal"> </span>
+### at_cmds 
 #### 9J61pd1 (ok)
 **Problem:** appletalk.c:44:29: error: SystemIntegrity.h: No such file or directory 
 **Solution:** **excellent project option**, which helps us to easily make a patch, it is almost like we do not have the need(s) to bother about some side effects (consequences of the patch) because the developers have the big picture of their project. It's a real thank you.
  cf the src: 
-<span style="font-size:small">#ifndef _OPEN_SOURCE_ 
-SystemIntegrityCheck('atlk', kSystemIntegrityHasRootEUID); 
-#endif 
-<span style="font-size:12px">see Patch.
-</span></span>
-<span style="font-family:Arial"></span>
+
+
 ------------------------------------------------------------------------
 ### autofs
 #### 9J61
-<span style="font-weight:bold">Problem: </span>/SourceCache/autofs/autofs-109.8/autofsd/autofsd.c:36:43: error: CoreFoundation/CoreFoundation.h: No such file or directory
-<span style="font-weight:bold">Solution:</span> 
+**Problem: **/SourceCache/autofs/autofs-109.8/autofsd/autofsd.c:36:43: error: CoreFoundation/CoreFoundation.h: No such file or directory
+**Solution:** 
 
 ------------------------------------------------------------------------
 
-<span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span>
+
 
 
 ### bootp
-<span style="font-size:12px"></span>
+
 #### 9J61
-<span style="font-size:12px"><span style="font-weight:bold">Problem:</span> <span style="font-size:small">/XCD/loper/usr/bin/gcc-4.0 -x c -arch ppc -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -mtune=G4 -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/private/var/tmp/bootp/bootp-170.1.obj/bootp.build/bootpd.build/bootpd.hmap -Wall -Wno-four-char-constants -Wno-unknown-pragmas -F/private/var/tmp/bootp/bootp-170.1.sym/BuiltProducts -F/XCD/SY/Library/PrivateFrameworks -I/private/var/tmp/bootp/bootp-170.1.sym/BuiltProducts/include -I/private/var/tmp/bootp/bootp-170.1.obj/bootp.build/bootpd.build/DerivedSources -c /SourceCache/bootp/bootp-170.1/bootpd.tproj/bsdpd.c -o /private/var/tmp/bootp/bootp-170.1.obj/bootp.build/bootpd.build/Objects-normal/ppc/bsdpd.o In file included from /SourceCache/bootp/bootp-170.1/bootpd.tproj/bsdpd.c:89: /SourceCache/bootp/bootp-170.1/bootpd.tproj/AFPUsers.h:32:41: error: OpenDirectory/OpenDirectory.h: No such file or directory</span>
+<span style="font-size:12px">**Problem:** /XCD/loper/usr/bin/gcc-4.0 -x c -arch ppc -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -mtune=G4 -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/private/var/tmp/bootp/bootp-170.1.obj/bootp.build/bootpd.build/bootpd.hmap -Wall -Wno-four-char-constants -Wno-unknown-pragmas -F/private/var/tmp/bootp/bootp-170.1.sym/BuiltProducts -F/XCD/SY/Library/PrivateFrameworks -I/private/var/tmp/bootp/bootp-170.1.sym/BuiltProducts/include -I/private/var/tmp/bootp/bootp-170.1.obj/bootp.build/bootpd.build/DerivedSources -c /SourceCache/bootp/bootp-170.1/bootpd.tproj/bsdpd.c -o /private/var/tmp/bootp/bootp-170.1.obj/bootp.build/bootpd.build/Objects-normal/ppc/bsdpd.o In file included from /SourceCache/bootp/bootp-170.1/bootpd.tproj/bsdpd.c:89: /SourceCache/bootp/bootp-170.1/bootpd.tproj/AFPUsers.h:32:41: error: OpenDirectory/OpenDirectory.h: No such file or directory
 **Solution:** chroot BuildRoot
 ln -s /System/Library/PrivateFrameworks/OpenDirectory.framework /XCD/SY/Library/PrivateFrameworks/
 </span>
-<span style="font-size:12px">then</span>
-<span style="font-size:12px">
-</span>
-<span style="font-size:12px"></span>
-<span style="font-weight:bold">Problem:</span> <span style="font-size:small">/XCD/SY/Library/PrivateFrameworks/OpenDirectory.framework/Headers/OpenDirectory.h:27:51: error: CFOpenDirectory/CFOpenDirectoryConsts.h: No such file or directory</span>
-<span style="font-size:small">/XCD/SY/Library/PrivateFrameworks/OpenDirectory.framework/Headers/OpenDirectory.h:28:45: error: CFOpenDirectory/CFOpenDirectory.h: No such file or directory</span>
-
-**Solution:** <span style="font-size:small">mkdir -p BuildRoot/usr/include/CFOpenDirectoryroot</span>
-
-<span style="font-size:small">cp BuildRoot/private/var/tmp/CFOpenDirectory/CFOpenDirectory-39.root/XCD/SY/Library/PrivateFrameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/Headers/CFOpenDirectory* BuildRoot/usr/include/CFOpenDirectory</span>
 then
-**Problem:** <span style="font-size:small">ld: file not found: /System/Library/PrivateFrameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory</span>
 
 
 
-<span style="font-family:courier new"><span style="font-family:Arial;font-size:13px"></span></span>
+**Problem:** /XCD/SY/Library/PrivateFrameworks/OpenDirectory.framework/Headers/OpenDirectory.h:27:51: error: CFOpenDirectory/CFOpenDirectoryConsts.h: No such file or directory
+/XCD/SY/Library/PrivateFrameworks/OpenDirectory.framework/Headers/OpenDirectory.h:28:45: error: CFOpenDirectory/CFOpenDirectory.h: No such file or directory
+
+**Solution:** mkdir -p BuildRoot/usr/include/CFOpenDirectoryroot
+
+cp BuildRoot/private/var/tmp/CFOpenDirectory/CFOpenDirectory-39.root/XCD/SY/Library/PrivateFrameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/Headers/CFOpenDirectory* BuildRoot/usr/include/CFOpenDirectory
+then
+**Problem:** ld: file not found: /System/Library/PrivateFrameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+
+
+
+
 
 ------------------------------------------------------------------------
 
 
 ### bootstrap_cmds
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild bootstrap_cmds</span></span>
+`darwinbuild bootstrap_cmds`
 #### 9J61 (ok)
 #### 9G55 (ok)
 #### 9F33 (ok)
 
-<span style="font-weight:bold">Problem: <span style="font-family:courier new;font-size:12px;font-weight:normal">/bin/sh: /usr/bin/lex: No such file or directory</span></span>
+****
 <span style="font-weight:bold">Solution: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild flex && darwinbuild -load flex</span></span></span></span>
 [![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/bootstrap_cmds.png)](bootstrap_cmds.png%3Fattredirects=0)
 ------------------------------------------------------------------------
 ### configd
 darwinbuild configd
 #### 9J61
-<span style="font-weight:bold">Problem:</span> CompileC /private/var/tmp/configd_plugins/configd_plugins-91.obj/configd_plugins.build/InterfaceNamer.build/Objects-normal/ppc/ifnamer.o 
+**Problem:** CompileC /private/var/tmp/configd_plugins/configd_plugins-91.obj/configd_plugins.build/InterfaceNamer.build/Objects-normal/ppc/ifnamer.o 
 InterfaceNamer.bproj/ifnamer.c:72:58: error: SystemConfiguration/VLANConfigurationPrivate.h: No such file or directory
 
 #### 9F33 (ok)
-<span style="font-family:courier new;font-size:12px"></span>
-<span style="font-family:arial,sans-serif"><span style="font-size:small">Fetch </span></span>[<span style="font-family:arial,sans-serif"><span style="font-size:small">9F33pd1.plist</span></span>](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist)<span style="font-family:arial,sans-serif"><span style="font-size:small"> into </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">.build</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> directory of your DarwinBuild repository, then:</span></span>
+
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -init 9F33pd1</span></span></span>
+darwinbuild -init 9F33pd1
 
-<span style="font-family:arial,sans-serif"><span style="font-size:small">The plist file above contains some patches that tend to avoid most of the errors just below.</span></span>
+The plist file above contains some patches that tend to avoid most of the errors just below.
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild configd</span></span>
+`darwinbuild configd`
 
-<span style="font-weight:bold">Problem: <span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-weight:normal">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/LinkConfiguration.c:39:29: error: net/if_vlan_var.h: No such file or directory</span></span></span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/System/Library/Frameworks/System.framework BuildRoot/XCD/SY/Library/Frameworks/</span></span>
+****
+**Solution:** `cp -R BuildRoot/System/Library/Frameworks/System.framework BuildRoot/XCD/SY/Library/Frameworks/`
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:47:42: error: EAP8021X/EAPClientProperties.h: No such file or directory</span></span>
+**Problem:** `/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:47:42: error: EAP8021X/EAPClientProperties.h: No such file or directory`
 consequently..
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceCheckPassword':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:3825: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceCopyPassword':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:3911: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceRemovePassword':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:4010: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceSetPassword':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:4208: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)</span></span>
-<span style="font-weight:bold">Solution: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/System/Library/PrivateFrameworks/EAP8021X.framework/ ../../XCD/SY/Library/PrivateFrameworks/</span></span></span></span>
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">Undefined symbols:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_CFPreferencesAppValueIsForced", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      _processPreferences in SCNetworkConnectionPrivate.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      _SCUserPreferencesIsForced in SCNetworkConnectionPrivate.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_CFStringTransform", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      __SC_dos_copy_string in SCDPrivate.o</span></span>
-<span style="font-family:Times;font-size:16px"><span style="font-family:Arial;font-size:13px;font-weight:bold">Solution:</span> </span><span><span style="font-family:arial,sans-serif"><span style="font-size:small">Fetch </span></span>[<span style="font-family:arial,sans-serif"><span style="font-size:small">9F33pd1.plist</span></span>](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist)<span style="font-family:arial,sans-serif"><span style="font-size:small"> into </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">.build</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> directory of your DarwinBuild repository, then rebuild configd:</span></span></span>
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceCheckPassword':`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:3825: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceCopyPassword':`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:3911: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceRemovePassword':`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:4010: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c: In function 'SCNetworkInterfaceSetPassword':`
+`/SourceCache/configd/configd-212.2/SystemConfiguration.fproj/SCNetworkInterface.c:4208: error: 'kEAPClientPropUserPasswordKeychainItemID' undeclared (first use in this function)`
+****
+**Problem: **`Undefined symbols:`
+`  "_CFPreferencesAppValueIsForced", referenced from:`
+`      _processPreferences in SCNetworkConnectionPrivate.o`
+`      _SCUserPreferencesIsForced in SCNetworkConnectionPrivate.o`
+`  "_CFStringTransform", referenced from:`
+`      __SC_dos_copy_string in SCDPrivate.o`
+<span>Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then rebuild configd:</span>
 
 <span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -init 9F33pd1 && darwinbuild configd</span></span></span>
 The plist file above contains some patches that tend to avoid the undefined symbols.
 
 
-<span style="font-weight:bold">Problem:</span> The framework is registered in /XCD/SY:
-<span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">40555 0 0 0 ./XCD/SY/Library/Frameworks/SystemConfiguration.framework</span></span></span></span>
-<span style="font-weight:bold">Solution:</span> <span style="color:rgb(255,0,0);font-family:Arial;font-size:13px;font-weight:bold">Please, let us know if you have one.</span>
+**Problem:** The framework is registered in /XCD/SY:
+**40555 0 0 0 ./XCD/SY/Library/Frameworks/SystemConfiguration.framework**
+**Solution:** **Please, let us know if you have one.**
 
 ------------------------------------------------------------------------
 ### configd_executables
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild configd_executables</span></span>
+`darwinbuild configd_executables`
 
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small">Problem: </span></span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">ld: library not found for -lATconfig</span></span></span></span>
-<span style="font-family:arial,sans-serif"><span style="font-size:small">but also -<span style="font-family:courier new,monospace">lKernelEventMonitor -lInterfaceNamer -lIPMonitor -lLinkConfiguration -lNetworkIdentification -lPreferencesMonitor </span></span></span>
-<span style="font-weight:bold">Solution: <span style="color:rgb(255,0,0)">Please, let us know if you have one.</span></span>
+****
+
+****
 ****
 ------------------------------------------------------------------------
 
@@ -11451,16 +11432,16 @@ Problem: /SourceCache/copyfile/copyfile-42/copyfile.c:48:24: error: quarantine.
 ------------------------------------------------------------------------
 ### cron
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory</span></span></span></span>
+****
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:39:35: error: IOKit/pwr_mgt/IOPMLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:40:32: error: IOKit/pwr_mgt/IOPM.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:41:28: error: IOKit/IOReturn.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:39:35: error: IOKit/pwr_mgt/IOPMLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:40:32: error: IOKit/pwr_mgt/IOPM.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:41:28: error: IOKit/IOReturn.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild IOKitUser && darwinbuild -load IOKitUser</span></span> (note: plan to keep some effort and coffee probably involved in building IOKitUser.
+`/SourceCache/cron/cron-30/cron/do_command.c:39:35: error: IOKit/pwr_mgt/IOPMLib.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:40:32: error: IOKit/pwr_mgt/IOPM.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:41:28: error: IOKit/IOReturn.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:39:35: error: IOKit/pwr_mgt/IOPMLib.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:40:32: error: IOKit/pwr_mgt/IOPM.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:41:28: error: IOKit/IOReturn.h: No such file or directory`
+**Solution:** <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild IOKitUser && darwinbuild -load IOKitUser</span></span> (note: plan to keep some effort and coffee probably involved in building IOKitUser.
 ------------------------------------------------------------------------
 
 ### cups
@@ -11485,20 +11466,20 @@ collect2: ld returned 1 exit status
 ------------------------------------------------------------------------
 ### dtrace
 ### 
-<span style="font-size:12px"></span>
-Run-time problem:<span style="font-weight:normal"> dtrace: failed to compile script [...] "/usr/lib/dtrace/darwin.d", line 26: syntax error near "uthread_t"</span>
-<span style="font-weight:normal">Solution: related mach_kernel.ctfsys? some probe not available?
-</span>
+
+Run-time problem: dtrace: failed to compile script [...] "/usr/lib/dtrace/darwin.d", line 26: syntax error near "uthread_t"
+Solution: related mach_kernel.ctfsys? some probe not available?
+
 9J61
 
 
 
 
-<span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-weight:normal"></span></span>
+****
 
-<span style="font-family:Helvetica;font-size:12px"></span>
 
-<span style="font-family:courier new"><span style="font-family:Arial;font-size:13px"></span></span>
+
+
 
 Problem: /SourceCache/dtrace/dtrace-48.1/libproc/libproc.m:10:40: error: Symbolication/Symbolication.h: No such file or directory
 /SourceCache/dtrace/dtrace-48.1/libproc/libproc.m:11:47: error: Symbolication/SymbolicationPrivate.h: No such file or directory
@@ -11508,28 +11489,28 @@ Solution: 
 DTrace compilation fails.
 
 
-<span style="font-weight:bold"><span style="font-family:Helvetica"><span style="font-size:small">Problem</span></span>:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> In file included from /SourceCache/dtrace/dtrace-48/libctf/ctf_lib.c:30:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/include/sys/stat.h:75:26: error: Availability.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">In file included from /SourceCache/dtrace/dtrace-48/libctf/ctf_lib.c:30:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/include/sys/stat.h:460: error: syntax error before '__OSX_AVAILABLE_BUT_DEPRECATED'</span></span>
-<span style="font-weight:bold">Solution: ... </span>Found in two locations into the host system:
+****` In file included from /SourceCache/dtrace/dtrace-48/libctf/ctf_lib.c:30:`
+`/usr/include/sys/stat.h:75:26: error: Availability.h: No such file or directory`
+`In file included from /SourceCache/dtrace/dtrace-48/libctf/ctf_lib.c:30:`
+`/usr/include/sys/stat.h:460: error: syntax error before '__OSX_AVAILABLE_BUT_DEPRECATED'`
+**Solution: ... **Found in two locations into the host system:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/Developer/SDKs/MacOSX10.5.sdk/usr/include/Availability.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/include/Availability.h</span></span>
+`/Developer/SDKs/MacOSX10.5.sdk/usr/include/Availability.h`
+`/usr/include/Availability.h`
 <span style="font-weight:bold">Availability.h should be soon available: <span style="font-weight:normal"><http://darwinbuild.macosforge.org/trac/changeset/459> </span></span>
 
 ### 9F33 (ok)
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then:
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -init 9F33pd1</span></span></span>
+darwinbuild -init 9F33pd1
 
 The plist file above contains some patches that tend to avoid most of the errors just below.
 
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"></span>
-<span style="text-decoration:underline"><span style="font-family:arial,sans-serif"><span style="font-size:small">Note:</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> dtrace compilation needs </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">libdwarf</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> to be installed in the BuildRoot, and </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">libdwarf</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> depends on </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">libelf</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">. Both </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">libdwarf</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> and </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">libelf</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> projects aren't available in darwinbuild, so they have been added in the custom plist to satisfy dtrace requirements.</span></span>
+
+
+
+__Note:__ dtrace compilation needs *libdwarf* to be installed in the BuildRoot, and *libdwarf* depends on *libelf*. Both *libdwarf* and *libelf* projects aren't available in darwinbuild, so they have been added in the custom plist to satisfy dtrace requirements.
 
 So before building dtrace.
 
@@ -11537,72 +11518,72 @@ So before building dtrace.
 
 <span style="font-size:12px">darwinbuild libdwarf && darwinbuild -load libdwarf</span>
 
-<span style="font-family:arial,sans-serif"><span style="font-size:small">This should be done automatically with dtrace dependencies, </span></span><span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small">but how</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">?</span></span>
+This should be done automatically with dtrace dependencies, **but how**?
 
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace</span></span></span>
+darwinbuild dtrace
 
-<span style="font-weight:bold"><span style="font-family:Helvetica"><span style="font-size:small"><span style="color:rgb(204,204,204)">Problem</span></span></span><span style="color:rgb(204,204,204)">:</span></span><span style="color:rgb(204,204,204)"> </span><span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">error: couldn't exec /XCD/loper/usr/bin/yacc: No such file or directory</span></span></span></span>
-<span style="font-weight:bold"><span style="font-size:small"><span style="color:rgb(204,204,204)">Old-Solution</span></span><span style="color:rgb(204,204,204)">: </span><span style="font-family:courier new;font-weight:normal"><span style="font-size:small"><span style="font-family:courier new,monospace"><span style="color:rgb(204,204,204)">darwinbuild</span></span></span><span style="color:rgb(204,204,204)"> </span><span style="font-size:13px"><span style="font-size:12px"><span style="color:rgb(204,204,204)">bison</span></span></span></span></span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">darwinbuild -load bison</span></span></span></span></span></span>
-<span style="font-weight:bold"><span style="font-weight:normal"><span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">cp BuildRoot/usr/bin/yacc BuildRoot/XCD/loper/usr/bin/ </span></span></span></span></span></span>
+**** error: couldn't exec /XCD/loper/usr/bin/yacc: No such file or directory
+<span style="font-weight:bold">Old-Solution: <span style="font-family:courier new;font-weight:normal">darwinbuild bison</span></span>
+**darwinbuild -load bison**
+**cp BuildRoot/usr/bin/yacc BuildRoot/XCD/loper/usr/bin/ **
 
-<span style="font-weight:bold"><span style="font-size:13px"><span style="color:rgb(204,204,204)">Problem</span></span><span style="color:rgb(204,204,204)">: </span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">error: couldn't exec /XCD/loper/usr/bin/lex: No such file or directory</span></span></span>
-<span style="font-weight:bold"><span style="font-size:13px"><span style="color:rgb(204,204,204)">Old-Solution</span></span><span style="color:rgb(204,204,204)">: </span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">darwinbuild flex && darwinbuild -load flex</span></span></span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">cp BuildRoot/usr/bin/lex BuildRoot/XCD/loper/usr/bin</span></span></span></span>
-<span style="font-weight:bold"><span style="color:rgb(204,204,204)">Solution: </span></span>[<span style="color:rgb(204,204,204)">http://darwinbuild.macosforge.org/trac/ticket/43</span>](http://darwinbuild.macosforge.org/trac/ticket/43)<span style="color:rgb(204,204,204)"> </span>
+**Problem: **`error: couldn't exec /XCD/loper/usr/bin/lex: No such file or directory`
+<span style="font-weight:bold"><span style="font-size:13px">Old-Solution</span>: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">darwinbuild flex && darwinbuild -load flex</span></span></span></span></span>
+cp BuildRoot/usr/bin/lex BuildRoot/XCD/loper/usr/bin
+**Solution: **[http://darwinbuild.macosforge.org/trac/ticket/43](http://darwinbuild.macosforge.org/trac/ticket/43) 
 
-<span style="font-weight:bold"><span style="font-size:13px">Problem</span>:</span> <span><span style="font-family:courier new,monospace"><span style="font-size:small">/XCD/loper/usr/bin/mig: line 147: : command not found</span></span></span>
-<span style="font-weight:bold"><span style="font-size:13px">Solution</span>:  <span style="font-weight:normal"><span style="font-size:small"><span style="font-family:courier new,monospace">darwinbuild bootstrap_cmds</span></span></span></span>
-<span style="font-family:courier new;font-size:12px">darwinbuild -load bootstrap_cmds</span>
-<span style="font-family:courier new;font-size:12px">cp BuildRoot/usr/bin/arch BuildRoot/usr/bin/mig BuildRoot/XCD/loper/usr/bin/</span>
-<span style="font-family:courier new;font-size:12px">mkdir BuildRoot/XCD/loper/usr/libexec/</span>
-<span style="font-family:courier new;font-size:12px">cp BuildRoot/usr/libexec/migcom BuildRoot/XCD/loper/usr/libexec</span>
+**** /XCD/loper/usr/bin/mig: line 147: : command not found
+<span style="font-weight:bold">Solution:  darwinbuild bootstrap_cmds</span>
+darwinbuild -load bootstrap_cmds
+cp BuildRoot/usr/bin/arch BuildRoot/usr/bin/mig BuildRoot/XCD/loper/usr/bin/
+mkdir BuildRoot/XCD/loper/usr/libexec/
+cp BuildRoot/usr/libexec/migcom BuildRoot/XCD/loper/usr/libexec
 
-<span style="text-decoration:underline">Note:</span> we used `dtrace' to dtrace dtrace, e.g.:
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  18390             write_nocancel:entry sh /XCD/loper/usr/bin/mig: line 60: pushd: /XCD/loper/usr/bin/../libexec: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  18390             write_nocancel:entry grep migcomPath=$(realpath "${scriptRoot}/../libexec/migcom")</span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-size:13px">Problem</span>:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation</span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">  Referenced from: /usr/bin/arch</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">  Reason: image not found</span></span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:Arial;font-size:13px;font-weight:normal"><span style="font-weight:bold"><span style="font-family:Helvetica">Solution</span>: </span>We're creating a trivial hook where `arch' calls `uname -p' (Alternatively, we could patch the sources to use `uname -p').</span></span>
-<span style="font-family:courier new;font-size:12px">mv /usr/bin/arch /usr/bin/arch.origin</span>
-<span style="font-family:courier new;font-size:12px">echo 'uname -p' &gt; /usr/bin/arch</span>
-<span style="font-family:courier new;font-size:12px">chmod +x /usr/bin/arch</span>
-<span style="font-size:12px"><span style="text-decoration:underline"><span style="font-family:arial,sans-serif">Notes:</span></span><span style="font-family:arial,sans-serif"> It appears that (TODO: verify that please) on PPC arch, `arch' result != `uname -p' result. This should be tested though we don't focus (at this time) on PPC, but this behavior could be the same for other future processor architectures too.</span></span>
-<span style="font-weight:bold">Alternative solution:</span> PureFoundation can be used (from <http://www.hereapi.com/pf/index.html>), it really seems interesting as showed just below, it works for `arch':
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">root@europa:/Volumes/Builds/</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">9G55/BuildRoot# mv PureFoundation/Foundation.</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">framework System/Library/Frameworks
-root@europa:/Volumes/Builds/</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">9G55/BuildRoot# chroot .
+__Note:__ we used `dtrace' to dtrace dtrace, e.g.:
+`  0  18390             write_nocancel:entry sh /XCD/loper/usr/bin/mig: line 60: pushd: /XCD/loper/usr/bin/../libexec: No such file or directory`
+`  0  18390             write_nocancel:entry grep migcomPath=$(realpath "${scriptRoot}/../libexec/migcom")`
+<span style="font-family:Helvetica;font-size:12px;font-weight:bold">Problem:</span> `dyld: Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation`
+  Referenced from: /usr/bin/arch
+  Reason: image not found
+****
+mv /usr/bin/arch /usr/bin/arch.origin
+echo 'uname -p' > /usr/bin/arch
+chmod +x /usr/bin/arch
+
+**Alternative solution:** PureFoundation can be used (from <http://www.hereapi.com/pf/index.html>), it really seems interesting as showed just below, it works for `arch':
+<span>`root@europa:/Volumes/Builds/``9G55/BuildRoot# mv PureFoundation/Foundation.``framework System/Library/Frameworks
+root@europa:/Volumes/Builds/``9G55/BuildRoot# chroot .
 europa# arch
 NSObject +load
 i386
-</span></span></span>
+`</span>
 
-<span style="font-weight:bold"><span style="font-family:Helvetica">Problem</span>:</span> <span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/dtrace/dtrace-48/libproc/libproc.m:10:40: error: Symbolication/Symbolication.h: No such file or directory</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/dtrace/dtrace-48/libproc/libproc.m:11:47: error: Symbolication/SymbolicationPrivate.h: No such file or directory</span></span></span>
-<span style="font-size:12px"><span style="font-weight:bold"><span><span style="font-family:arial,sans-serif"><span style="font-size:small">Solution</span></span></span>: </span><span>Since Symbolication is not part of Darwin, all references to it need to be patched out of the source.</span></span>
-<span style="text-decoration:underline">Notes:</span> <http://darwinbuild.macosforge.org/trac/ticket/23> / <http://darwinbuild.macosforge.org/trac/ticket/24>
+**** /SourceCache/dtrace/dtrace-48/libproc/libproc.m:10:40: error: Symbolication/Symbolication.h: No such file or directory
+/SourceCache/dtrace/dtrace-48/libproc/libproc.m:11:47: error: Symbolication/SymbolicationPrivate.h: No such file or directory
+<span style="font-size:12px"><span style="font-weight:bold"><span><span style="font-family:arial,sans-serif">Solution</span></span>: </span>Since Symbolication is not part of Darwin, all references to it need to be patched out of the source.</span>
+__Notes:__ <http://darwinbuild.macosforge.org/trac/ticket/23> / <http://darwinbuild.macosforge.org/trac/ticket/24>
 
 On PureDarwin, the patched `dtrace' built from darwinbuild looks like:
 
-<span style="font-family:courier new;font-size:12px">/usr/sbin/dtrace:</span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libdtrace.dylib (compatibility version 1.0.0, current version 48.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
+/usr/sbin/dtrace:
+ `/usr/lib/libdtrace.dylib (compatibility version 1.0.0, current version 48.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)`
+ `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
 
 [![](../../../_/rsrc/1226262995845/developers/darwinbuild/troubleshooting/dtrace%20patched.png)](dtrace%20patched.png%3Fattredirects=0)
 
 
 On Mac OS X, `dtrace' looks like:
 
-<span style="font-family:courier new;font-size:12px">/usr/sbin/dtrace:</span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 674.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication (compatibility version 1.0.0, current version 35.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libdtrace.dylib (compatibility version 1.0.0, current version 48.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 474.0.0)</span></span>
+/usr/sbin/dtrace:
+ `/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 674.0.0)`
+ `/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication (compatibility version 1.0.0, current version 35.0.0)`
+ `/usr/lib/libdtrace.dylib (compatibility version 1.0.0, current version 48.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.0.0)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+ `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 474.0.0)`
 
 
 [![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/dtrace.png)](dtrace.png%3Fattredirects=0)
@@ -11612,20 +11593,20 @@ On Mac OS X, `dtrace' looks like:
 
 ### eap8021x
 #### 9J61pd1
-**Problem:** <span style="font-size:small">ld64: warning, -seg_addr_table file cannot be read: /AppleInternal/Developer/seg_addr_table</span>
-<span style="font-size:small">ld64: warning, -seg_addr_table file cannot be read: /AppleInternal/Developer/seg_addr_table</span>
-<span style="font-size:small">ld64ld64: warning, :- seg_addr_tablewarning, -seg_addr_table file cannot be read: /AppleInternal/Developer/seg_addr_table</span>
-<span style="font-size:small">ld: warning in /System/Library/Frameworks//Security.framework/Security, missing required architecture ppc64 in file</span>
-<span style="font-size:small">ld: warning in /usr/lib/libSystemStubs.a, missing required architecture ppc64 in  file cannot be read:file</span>
-<span style="font-size:small">Undefined symbols:</span>
-<span style="font-size:small">  "_SecIdentityCreateWithCertificate" /AppleInternal/Developer/, referenced from:</span>
+**Problem:** ld64: warning, -seg_addr_table file cannot be read: /AppleInternal/Developer/seg_addr_table
+ld64: warning, -seg_addr_table file cannot be read: /AppleInternal/Developer/seg_addr_table
+ld64ld64: warning, :- seg_addr_tablewarning, -seg_addr_table file cannot be read: /AppleInternal/Developer/seg_addr_table
+ld: warning in /System/Library/Frameworks//Security.framework/Security, missing required architecture ppc64 in file
+ld: warning in /usr/lib/libSystemStubs.a, missing required architecture ppc64 in  file cannot be read:file
+Undefined symbols:
+  "_SecIdentityCreateWithCertificate" /AppleInternal/Developer/, referenced from:
 **Solution:**
 
-**Problem:** <span style="font-size:small">/usr/bin/cc -arch i386 -Os -pipe -no-cpp-precomp -Wmost  -g  -fno-common -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/ProjectHeaders -I -I -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/derived_src/eapolclient.tproj -I. -pipe        -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/Headers -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/PrivateHeaders -F/private/var/tmp/eap8021x/eap8021x-49.8.sym  -F/System/Library/PrivateFrameworks -F/System/Library/PrivateFrameworks -mdynamic-no-pic -fconstant-cfstrings   -c -o /private/var/tmp/eap8021x/eap8021x-49.8.obj/objects-optimized/eapolclient.tproj/wireless.i386.o wireless.c</span>
-<span style="font-size:small">wireless.c:37:38: error: Apple80211/Apple80211API.h: No such file or directory</span>
-<span style="font-size:small">wireless.c:38:37: error: Apple80211/Apple80211IE.h: No such file or directory</span>
-<span style="font-size:small">wireless.c:47:54: error: Kernel/IOKit/apple80211/apple80211_ioctl.h: No such file or directory</span>
-<span style="font-size:12px"><span style="font-family:Arial,Verdana,sans-serif;font-size:13px;font-weight:bold">Solution:</span></span>
+**Problem:** /usr/bin/cc -arch i386 -Os -pipe -no-cpp-precomp -Wmost  -g  -fno-common -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/ProjectHeaders -I -I -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/derived_src/eapolclient.tproj -I. -pipe        -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/Headers -I/private/var/tmp/eap8021x/eap8021x-49.8.sym/eapol.build/PrivateHeaders -F/private/var/tmp/eap8021x/eap8021x-49.8.sym  -F/System/Library/PrivateFrameworks -F/System/Library/PrivateFrameworks -mdynamic-no-pic -fconstant-cfstrings   -c -o /private/var/tmp/eap8021x/eap8021x-49.8.obj/objects-optimized/eapolclient.tproj/wireless.i386.o wireless.c
+wireless.c:37:38: error: Apple80211/Apple80211API.h: No such file or directory
+wireless.c:38:37: error: Apple80211/Apple80211IE.h: No such file or directory
+wireless.c:47:54: error: Kernel/IOKit/apple80211/apple80211_ioctl.h: No such file or directory
+Solution:
 
 ------------------------------------------------------------------------
 ### efax
@@ -11637,10 +11618,10 @@ Problem: /SourceCache/efax/efax-28/efax/efaxos.c:144: error: 'kCFNotificationDe
 ------------------------------------------------------------------------
 ### efiboot 
 **Problem:** make: *** No rule to make target `install'.  Stop.
-<span style="font-weight:bold">&lt;- no source available, only binary form.</span>
+**<- no source available, only binary form.**
 ****
 ------------------------------------------------------------------------
-**<span style="font-weight:normal"></span>**
+****
 ### gcc_os
 checking if mkdir takes one argument... yes
 /SourceCache/gcc_os/gcc_os-1823/gcc/config.gcc: line 2971: out_file: command not found
@@ -11648,9 +11629,9 @@ checking if mkdir takes one argument... yes
 Using `/SourceCache/gcc_os/gcc_os-1823/gcc/config/rs6000/rs6000.c' for machine-specific logic.
 Using `/SourceCache/gcc_os/gcc_os-1823/gcc/config/rs6000/rs6000.md' as machine description file.
 Using the following target machine macro files:
-<span style="white-space:pre"> </span>/SourceCache/gcc_os/gcc_os-1823/gcc/config/rs6000/rs6000.h
-<span style="white-space:pre"> </span>/SourceCache/gcc_os/gcc_os-1823/gcc/config/darwin.h
-<span style="white-space:pre"> </span>/SourceCache/gcc_os/gcc_os-1823/gcc/config/rs6000/darwin.h
+ /SourceCache/gcc_os/gcc_os-1823/gcc/config/rs6000/rs6000.h
+ /SourceCache/gcc_os/gcc_os-1823/gcc/config/darwin.h
+ /SourceCache/gcc_os/gcc_os-1823/gcc/config/rs6000/darwin.h
 Using host-darwin.o for host machine hooks.
 /APPLE_LICENSE: line 1: APPLE: command not found
 /APPLE_LICENSE: line 2: Version: command not found
@@ -11663,9 +11644,9 @@ checking if mkdir takes one argument... yes
 Using `/SourceCache/gccfast/gccfast-1626/gcc/config/i386/i386.c' for machine-specific logic.
 Using `/SourceCache/gccfast/gccfast-1626/gcc/config/i386/i386.md' as machine description file.
 Using the following target machine macro files:
-<span style="white-space:pre"> </span>/SourceCache/gccfast/gccfast-1626/gcc/config/i386/i386.h
-<span style="white-space:pre"> </span>/SourceCache/gccfast/gccfast-1626/gcc/config/darwin.h
-<span style="white-space:pre"> </span>/SourceCache/gccfast/gccfast-1626/gcc/config/i386/darwin.h
+ /SourceCache/gccfast/gccfast-1626/gcc/config/i386/i386.h
+ /SourceCache/gccfast/gccfast-1626/gcc/config/darwin.h
+ /SourceCache/gccfast/gccfast-1626/gcc/config/i386/darwin.h
 Using host-darwin.o for host machine hooks.
 /APPLE_LICENSE: line 1: APPLE: command not found
 /APPLE_LICENSE: line 2: Version: command not found
@@ -11675,8 +11656,8 @@ Using host-darwin.o for host machine hooks.
 ### gnuserv
 #### 9J61
 /usr/bin/emacs-undumped -batch -l loadup 
-<span style="white-space:pre"> </span>--eval "(add-to-list 'load-path ".")" 
-<span style="white-space:pre"> </span>-l gnuserv-compat  -f batch-byte-compile gnuserv-compat.el
+ --eval "(add-to-list 'load-path ".")" 
+ -l gnuserv-compat  -f batch-byte-compile gnuserv-compat.el
 dyld: Library not loaded: /System/Library/Frameworks/Carbon.framework/Versions/A/Carbon
   Referenced from: /usr/bin/emacs-undumped
   Reason: image not found
@@ -11701,39 +11682,39 @@ libraries/service.c:854: error: 'kCFUserNotificationLocalizationURLKey' undeclar
 ****
 ------------------------------------------------------------------------
 
-<span style="font-size:15px;font-weight:bold">isoutil</span>
+**isoutil**
 #### 9J61 (ok)
-<span style="font-weight:bold">problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">cd9660.util_main.m:52:28: error: IOKit/IOKitLib.h: No such file or directory</span></span>
-<span style="font-size:12px"></span>
-<span style="font-weight:bold">Solution: <span style="font-family:courier new;font-size:12px;font-weight:normal">mkdir BuildRoot/usr/include/IOKit</span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal">cp -R /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/* BuildRoot/usr/include/IOKit</span></span>
+**problem:** `cd9660.util_main.m:52:28: error: IOKit/IOKitLib.h: No such file or directory`
+
+****
+**cp -R /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/* BuildRoot/usr/include/IOKit**
 
 Consequently, next error will be..
-<span style="font-size:12px">
-</span>
-<span style="font-size:12px"></span>
-<span style="font-weight:bold">Problem: </span>c<span style="font-family:courier new,monospace"><span style="font-size:small">d9660.util_main.m:757: error: 'kNilOptions' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">cd9660.util_main.m:757: error: (Each undeclared identifier is reported only once</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">cd9660.util_main.m:757: error: for each function it appears in.)</span></span>
-<span style="font-weight:bold">Pseudo-solution:</span> Add in BuildRoot/usr/include/IOKit/IOKitLib.h #include &lt;CarbonCore/MacTypes.h&gt;
+
+
+
+**Problem: **c`d9660.util_main.m:757: error: 'kNilOptions' undeclared (first use in this function)`
+`cd9660.util_main.m:757: error: (Each undeclared identifier is reported only once`
+`cd9660.util_main.m:757: error: for each function it appears in.)`
+**Pseudo-solution:** Add in BuildRoot/usr/include/IOKit/IOKitLib.h #include &lt;CarbonCore/MacTypes.h&gt;
 
 
 Then,
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ld: framework not found IOKit</span></span>
+**Problem:** `ld: framework not found IOKit`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">ld: framework not found IOKit</span></span>
-<span style="font-weight:bold">PseudoSolution:</span> install <span style="font-style:italic">IOKitUser</span> from <span style="font-style:italic">9F33pd1</span> using a custom plist:
+`ld: framework not found IOKit`
+**PseudoSolution:** install *IOKitUser* from *9F33pd1* using a custom plist:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -load IOKitUser   </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">Downloading http://src.macosforge.org/Roots/9J61//IOKitUser.root.tar.gz ...</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">Downloading http://puredarwin.googlecode.com/svn/Roots/9G55pd1//IOKitUser.root.tar.gz ...</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">Downloading http://puredarwin.googlecode.com/svn/Roots/9F33pd1//IOKitUser.root.tar.gz ...</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">Download complete</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(102,102,102)">IOKitUser - 137 files registered.</span></span></span>
+`darwinbuild -load IOKitUser   `
+`Downloading http://src.macosforge.org/Roots/9J61//IOKitUser.root.tar.gz ...`
+`Downloading http://puredarwin.googlecode.com/svn/Roots/9G55pd1//IOKitUser.root.tar.gz ...`
+`Downloading http://puredarwin.googlecode.com/svn/Roots/9F33pd1//IOKitUser.root.tar.gz ...`
+`Download complete`
+`IOKitUser - 137 files registered.`
 
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -load IOKitUser</span></span> &lt;- unfortunately, it doesn't built without patch
+**Solution:** `darwinbuild -load IOKitUser` &lt;- unfortunately, it doesn't built without patch
 
 But another problem will come if the default IOKitUser binaryroot from 9F33pd1 is used, because it as been built only for the arch i386. So either building isoutil only for i386 (not tested) or removing the arch restriction on IOKItUser in 9F33pd1 to ppc could work (test).
 
@@ -11741,427 +11722,426 @@ But another problem will come if the default IOKitUser binaryroot from 9F33pd1 i
 ------------------------------------------------------------------------
 ### kext_tools
 
-<span style="font-family:courier new,monospace;font-size:small">darwinbuild kext_tools</span><span style="font-family:courier new;font-size:12px"></span>
+`darwinbuild kext_tools`
 #### 9J61 ??
-<span style="font-size:13px">
-</span>
+
+
 #### 9F33pd1 (ok)
-<span style="font-family:arial,sans-serif"><span style="font-size:small">Fetch </span></span>[<span style="font-family:arial,sans-serif"><span style="font-size:small">9F33pd1.plist</span></span>](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist)<span style="font-family:arial,sans-serif"><span style="font-size:small"> into </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">.build</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> directory of your DarwinBuild repository, then init:</span></span>
-<span style="font-family:arial;font-size:13px">
-</span>
-
-<span style="font-size:12px">darwinbuild -init 9F33pd1</span>
-
-<span style="font-family:arial,sans-serif"><span style="font-size:small">The plist file above contains some patches that tend to avoid most of the errors just below.</span></span>
-<span style="text-decoration:underline"><span style="font-family:arial,sans-serif"><span style="font-size:small">Note:</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> No BuildRoot alteration, hopefully.</span></span>
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then init:
 
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild kext_tools</span></span>
+darwinbuild -init 9F33pd1
+
+The plist file above contains some patches that tend to avoid most of the errors just below.
+__Note:__ No BuildRoot alteration, hopefully.
 
 
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/kext_tools/kext_tools-117/prelink.c:800: error: 'kNilOptions' undeclared (first use in this function)</span></span>
 
-<span style="font-family:courier new;font-size:12px"></span>
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem: </span>/SourceCache/kext_tools/kext_tools-117/bootcaches.c:925: error: 'kNilOptions' undeclared (first use in this function)
+`darwinbuild kext_tools`
 
-<span style="font-weight:bold">Pseudo-solution: <span style="font-weight:normal">Add</span></span>
-<span style="font-family:courier new;font-size:12px">#ifndef kNilOptions </span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">    </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">#define kNilOptions 0
-#endif</span></span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-weight:bold">Solution:</span> Add <span><span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CarbonCore/MacTypes.h&gt;</span></span></span></span></span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"></span>
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif">Problem: </span></span>/SourceCache/kext_tools/kext_tools-117/bootcaches.c:143: error: 'nil' undeclared (first use in this function)
+
+**Problem: **`/SourceCache/kext_tools/kext_tools-117/prelink.c:800: error: 'kNilOptions' undeclared (first use in this function)`
+
+
+**Problem: **/SourceCache/kext_tools/kext_tools-117/bootcaches.c:925: error: 'kNilOptions' undeclared (first use in this function)
+
+****
+#ifndef kNilOptions 
+    `#define kNilOptions 0
+#endif`
+<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal">**Solution:** Add <span>`#include <CarbonCore/MacTypes.h>`</span></span></span></span>
+
+
+
+**Problem: **/SourceCache/kext_tools/kext_tools-117/bootcaches.c:143: error: 'nil' undeclared (first use in this function)
 
 /SourceCache/kext_tools/kext_tools-117/bootcaches.c:403: error: 'nil' undeclared (first use in this function)
 
 /SourceCache/kext_tools/kext_tools-117/bootcaches.c:774: error: 'nil' undeclared (first use in this function)
 
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Solution: </span><span style="font-family:arial,sans-serif">Add</span> <span>#</span><span>include &lt;objc/objc.h&gt;</span>
+**Solution: **Add #include <objc/objc.h>
 
 
 Compilation success, let's look the patched `kextcache' binary for "purity" purpose:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/sbin/kextcache:</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(255,0,0)">/XCD/SY/</span>Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span>
+`/usr/sbin/kextcache:`
+ ``
+ `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
+ `/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration (compatibility version 1.0.0, current version 1.0.0)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)`
 
 And the Mac OS X `kextcache' binary:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/sbin/kextcache:</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices (compatibility version 1.0.0, current version 34.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.0.0)</span></span>
+`/usr/sbin/kextcache:`
+ `/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)`
+ `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
+ `/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration (compatibility version 1.0.0, current version 1.0.0)`
+ `/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices (compatibility version 1.0.0, current version 34.0.0)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.0.0)`
 
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem:</span> /XCD/SY <span style="font-family:arial,sans-serif"><span style="font-size:small">should not be.</span></span>
-<span style="font-weight:bold"><span style="font-family:arial,sans-serif"><span style="font-size:small">Solution</span></span><span style="font-family:arial,sans-serif"><span style="font-size:small">:</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> <span style="color:rgb(255,0,0)"><span style="font-weight:bold">Please, let us know if you have one</span></span>.</span></span>
-
-
+**Problem:** /XCD/SY should not be.
+<span style="font-weight:bold"><span style="font-family:arial,sans-serif">Solution</span><span style="font-family:arial,sans-serif">:</span></span>
 
 
-<span style="font-family:courier new"></span>
+
+
+
 ------------------------------------------------------------------------
 
 
 ### launchd
-<span style="font-family:courier new,monospace">darwinbuild launchd<span style="font-family:Arial"><span style="font-size:14px;font-weight:bold">
-</span></span></span>
+``
 #### 9J61 ?
-<span style="font-size:12px">Problem:</span><span style="font-size:12px;font-weight:normal"> ERROR: could not find root: IOKitUser</span><span style="font-size:12px;font-weight:normal">
-</span><span style="font-size:12px">Solution:</span><span style="font-size:12px;font-weight:normal"> darwinbuild IOKitUser && darwinbuild -load IOKitUser
+Problem: ERROR: could not find root: IOKitUser
+Solution:<span style="font-size:12px;font-weight:normal"> darwinbuild IOKitUser && darwinbuild -load IOKitUser
 </span>
 #### 9G55
-### <span style="font-size:12px;font-weight:normal">?</span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
+### ?
+
 #### 9F33pd1 (ok)
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then:
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
 
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1</span></span>
+darwinbuild -init 9F33pd1
 
 The plist file above contains some patches that tend to avoid most of the errors just below.
 
 
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild launchd</span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ERROR: could not find root: IOKitUser</span></span>
-<span style="font-weight:bold">Pseudo-solution:</span> <span style="font-family:courier new;font-size:12px">darwinbuild IOKitUser && darwinbuild -load IOKitUser</span>
-
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Library not loaded: /usr/lib/libauto.dylib</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Referenced from: /usr/lib/libobjc.A.dylib</span></span>
-<span style="font-family:courier new,monospace"><span><span style="font-size:small">  Reason: image not found</span></span></span>
-<span style="font-weight:bold"><span style="color:rgb(153,153,153)">Old-Solution: </span></span><span style="font-weight:bold"><span style="font-weight:normal"><span style="color:rgb(153,153,153)">The dependency on libauto is due to autoconf invoking </span><span style="font-style:italic"><span style="color:rgb(153,153,153)">gcc</span></span><span style="color:rgb(153,153,153)"> with libauto. Replace </span><span style="font-style:italic"><span style="color:rgb(153,153,153)">BuildRoot/usr/bin/dsymutil</span></span><span style="color:rgb(153,153,153)"> with a copy of </span><span style="font-style:italic"><span style="color:rgb(153,153,153)">BuildRoot/usr/bin/true </span></span><span style="color:rgb(153,153,153)">to remove the dependency on libauto, but make sure to restore the original </span><span style="font-style:italic"><span style="color:rgb(153,153,153)">BuildRoot/usr/bin/dsymutil</span></span><span style="color:rgb(153,153,153)"> afterwards.</span></span></span>
-<span style="font-weight:bold">Solution:</span> Good [news](../../../news/autozone.html) on 11/12/2008, the AutoZone project sources have been released by Apple: <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild autozone && darwinbuild -load autozone</span></span>
-
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:37:28: error: IOKit/IOKitLib.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution: <span style="font-family:courier new;font-size:12px;font-weight:normal">mkdir BuildRoot/usr/include/IOKit</span></span>
-<span style="font-weight:bold"><span style="font-family:courier new;font-size:12px;font-weight:normal">cp -R /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/* BuildRoot/usr/include/IOKit</span></span>
+darwinbuild launchd
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:73:23: error: bootfiles.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution: <span style="border-collapse:separate;font-weight:normal;white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small">cp BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/kext.subproj/bootfiles.h BuildRoot/usr/local/include/</span></span></span></span>
-<span style="text-decoration:underline">Note:</span> See <http://darwinbuild.macosforge.org/trac/ticket/9> 
+
+**Problem:** `ERROR: could not find root: IOKitUser`
+**Pseudo-solution:** <span style="font-family:courier new;font-size:12px">darwinbuild IOKitUser && darwinbuild -load IOKitUser</span>
+
+**Problem:** `dyld: Library not loaded: /usr/lib/libauto.dylib`
+`  Referenced from: /usr/lib/libobjc.A.dylib`
+<span style="font-family:courier new,monospace"><span>  Reason: image not found</span></span>
+**Old-Solution: ******
+**Solution:** Good [news](../../../news/autozone.html) on 11/12/2008, the AutoZone project sources have been released by Apple: <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild autozone && darwinbuild -load autozone</span></span>
+
+**Problem:** `/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:37:28: error: IOKit/IOKitLib.h: No such file or directory`
+****
+**cp -R /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/* BuildRoot/usr/include/IOKit**
 
 
-<span style="font-weight:bold">Problem: <span style="font-family:courier new;font-size:12px;font-weight:normal">/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:68:31: error: readline/readline.h: No such file or directory</span></span>
-<span style="font-family:courier new"><span style="font-size:12px">/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:69:30: error: readline/history.h: No such file or directory</span></span>
+**Problem:** `/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:73:23: error: bootfiles.h: No such file or directory`
+****
+__Note:__ See <http://darwinbuild.macosforge.org/trac/ticket/9> 
 
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new"><span style="font-size:12px">darwinbuild libedit</span></span>
-<span style="font-family:courier new"><span style="font-size:12px">darwinbuild -load libedit</span></span>
-<span style="font-family:courier new;font-size:12px">
-</span>
-<span style="font-family:courier new;font-size:12px"></span>
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem: </span>gcc -no-cpp-precomp -isysroot / -F//System/Library/PrivateFrameworks -Wall -Wextra -Waggregate-return -Wshadow -Wmissing-prototypes -Wmissing-declarations -Werror -D__MigTypeCheck=1 -fvisibility=hidden -Dmig_external=__private_extern__ -I//System/Library/Frameworks/System.framework/PrivateHeaders -arch ppc -arch i386 -g -Os -pipe -pipe -no-cpp-precomp -arch ppc -arch i386 -Wl,-syslibroot,/ -framework CoreFoundation -framework IOKit -framework Security -weak_library /usr/lib/libedit.dylib -arch ppc -arch i386             -o <span style="color:rgb(255,0,0)">launchctl</span> launchctl-launchctl.o  
+
+****
+/SourceCache/launchd/launchd-258.18/launchd/src/launchctl.c:69:30: error: readline/history.h: No such file or directory
+
+**Solution:** darwinbuild libedit
+darwinbuild -load libedit
+
+
+
+**Problem: **gcc -no-cpp-precomp -isysroot / -F//System/Library/PrivateFrameworks -Wall -Wextra -Waggregate-return -Wshadow -Wmissing-prototypes -Wmissing-declarations -Werror -D__MigTypeCheck=1 -fvisibility=hidden -Dmig_external=__private_extern__ -I//System/Library/Frameworks/System.framework/PrivateHeaders -arch ppc -arch i386 -g -Os -pipe -pipe -no-cpp-precomp -arch ppc -arch i386 -Wl,-syslibroot,/ -framework CoreFoundation -framework IOKit -framework Security -weak_library /usr/lib/libedit.dylib -arch ppc -arch i386             -o launchctl launchctl-launchctl.o  
 ld: framework not found IOKit
-<span style="font-family:Arial;font-size:13px"><span style="font-weight:bold">Solution:</span><span> See above for <span style="font-style:italic">IOKitUser</span> project.</span></span>
-<span style="font-family:Arial;font-size:13px">
-</span>
-<span style="font-family:Arial;font-size:13px"><span style="font-weight:bold">Problem:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/launchd/launchd-258.1/launchd/src/launchd_core_logic.c:76:21: error: sandbox.h: No such file or directory</span></span></span>
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Solution:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span><span style="font-family:courier new,monospace"><span style="font-size:small">cp /usr/include/sandbox.h BuildRoot/usr/include/</span></span>
-<span style="font-family:Arial;font-size:13px">
-</span>
-<span style="font-family:Arial;font-size:13px"></span>
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/launchd/launchd-258.1/launchd/src/SystemStarter.c:159: error: 'kCFNotificationDeliverImmediately' undeclared (first use in this function)</span></span>
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Pseudo-Solution:</span> <span style="font-family:Courier New;font-size:12px">cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span>
-<span style="font-family:arial,sans-serif"><span style="font-size:small">Edit <span style="font-style:italic">SystemStarter.c</span> and add:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CoreFoundation/CFNotificationCenter.h&gt;</span></span>
-<span style="font-family:Helvetica">Also comment in  from line 156 to line 161 in order to avoid missing symbols</span>
-<span style="font-family:Helvetica"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/*</span></span><span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">CFNotificationCenterPostNotificationWithOptions(</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">CFNotificationCenterGetDistributedCenter(),</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">CFSTR("com.apple.startupitems.completed"),</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">NULL, NULL,</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">kCFNotificationDeliverImmediately | kCFNotificationPostToAllSessions);</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">*/</span></span>
-<span style="text-decoration:underline">Note:</span> This is what is happening about missing symbols:
-<span style="font-family:courier new,monospace"><span style="font-size:small">Undefined symbols for architecture i386:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_CFNotificationCenterGetDistributedCenter", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      _main in SystemStarter-SystemStarter.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_CFNotificationCenterPostNotificationWithOptions", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      _main in SystemStarter-SystemStarter.o</span></span>
-<span style="font-weight:bold">
-</span>
-
-Compilation pseudo-success: <span style="font-family:courier new,monospace"><span style="font-size:small">launchd - 27 files registered.</span></span>
-<span style="font-family:courier new,monospace">darwinbuild -load launchd</span>
-<span style="font-family:Helvetica;font-size:12px">launchd also works:</span>
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">launchd </span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">launchd: This program is not meant to be run directly.</span></span></span>
+<span style="font-family:Arial;font-size:13px">**Solution:**<span> See above for *IOKitUser* project.</span></span>
 
 
-<span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-weight:normal"><span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-style:italic">launchctl</span> is linked to <span style="font-style:italic">CoreFoundation</span><span>, not <span style="font-style:italic">CoreFoundation.framework </span></span></span></span></span></span></span></span>
-<span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-weight:normal"><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="font-style:italic"><span style="font-family:courier new;font-size:12px;font-style:normal">launchctl </span></span></span></span></span></span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Library not loaded: /System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Referenced from: /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Reason: image not found</span></span>
+<span style="font-family:Arial;font-size:13px">**Problem:**<span style="font-family:courier new,monospace"> </span>`/SourceCache/launchd/launchd-258.1/launchd/src/launchd_core_logic.c:76:21: error: sandbox.h: No such file or directory`</span>
+**Solution:**<span style="font-family:courier new,monospace"> </span>`cp /usr/include/sandbox.h BuildRoot/usr/include/`
 
-<span style="font-weight:bold">Solution: <span style="font-size:12px;font-weight:normal"><span style="font-size:13px">In fact, the problem comes from </span><span style="font-size:13px">compiled CF which is linked to a wrong path.</span></span></span>
 
-<span style="font-family:courier new"><span style="font-size:12px">/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
 
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then rebuild CF:
+**Problem:** `/SourceCache/launchd/launchd-258.1/launchd/src/SystemStarter.c:159: error: 'kCFNotificationDeliverImmediately' undeclared (first use in this function)`
+**Pseudo-Solution:** cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/
+
+`#include <CoreFoundation/CFNotificationCenter.h>`
+Also comment in  from line 156 to line 161 in order to avoid missing symbols
+
+`/*` `CFNotificationCenterPostNotificationWithOptions(`
+ `CFNotificationCenterGetDistributedCenter(),`
+ `CFSTR("com.apple.startupitems.completed"),`
+ `NULL, NULL,`
+ `kCFNotificationDeliverImmediately | kCFNotificationPostToAllSessions);`
+`*/`
+__Note:__ This is what is happening about missing symbols:
+`Undefined symbols for architecture i386:`
+`  "_CFNotificationCenterGetDistributedCenter", referenced from:`
+`      _main in SystemStarter-SystemStarter.o`
+`  "_CFNotificationCenterPostNotificationWithOptions", referenced from:`
+`      _main in SystemStarter-SystemStarter.o`
+**
+**
+
+Compilation pseudo-success: `launchd - 27 files registered.`
+`darwinbuild -load launchd`
+launchd also works:
+
+`launchd `
+`launchd: This program is not meant to be run directly.`
+
+
+<span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-weight:normal"><span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">*launchctl* is linked to *CoreFoundation*</span></span></span></span></span></span>
+**launchctl **
+`dyld: Library not loaded: /System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation`
+`  Referenced from: /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit`
+`  Reason: image not found`
+
+****
+
+/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
+
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then rebuild CF:
 
 <span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1 && darwinbuild CF && darwinbuild -load CF</span></span>
 The plist file above contains some patches that tend to avoid most of the related errors.
 After recompilation of CF, dependency is fixed:
 
-<span style="font-family:courier new"><span style="font-size:12px">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
+/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)
 
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">launchctl help</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Symbol not found: __kCFBundleResourceSpecificationKey</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Referenced from: /System/Library/Frameworks/Security.framework/Versions/A/Security</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation</span></span>
-<span style="font-weight:bold">Solution: </span>Same problem as investigation below. So we recreate the expected method (empty foobar) in CF to satisfy Security.
+**Problem:** `launchctl help`
+`dyld: Symbol not found: __kCFBundleResourceSpecificationKey`
+`  Referenced from: /System/Library/Frameworks/Security.framework/Versions/A/Security`
+`  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation`
+**Solution: **Same problem as investigation below. So we recreate the expected method (empty foobar) in CF to satisfy Security.
 
 [![](../../../_/rsrc/1230089096739/developers/darwinbuild/troubleshooting/launchd_9F33pd1.png)](launchd_9F33pd1.png%3Fattredirects=0)
-<span style="color:rgb(0,102,204);text-decoration:underline">
-</span>
+__
+__
 
-<span style="font-family:arial;font-weight:bold">Comparison with launchd from Darwin 8:</span>
+**Comparison with launchd from Darwin 8:**
 
-<span style="font-weight:bold">
-</span>
+**
+**
 
-<span style="font-family:arial;font-weight:bold"><span style="font-family:Arial;font-weight:normal"><span style="font-style:italic"><span style="font-size:small"><span style="font-family:arial,sans-serif">launchd</span></span></span><span style="font-size:small"><span style="font-family:arial,sans-serif"> from Darwin 8 and 9 appear to have the same dependencies (the following is taken from a Mac with Mac OS X 10.4):</span></span></span></span>
+****
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/sbin/launchd:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">        /usr/lib/libbsm.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">        /usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 88.3.3)</span></span>
-
-
-<span style="font-family:arial,sans-serif"><span style="font-size:small">Leopard's launchd binary still links to the same three libraries only.</span></span>
-<span style="font-family:arial,sans-serif"><span style="font-size:small">However, there's quite a difference in launchctl between Darwin 8 and 9, as shown below.</span></span>
-<span style="font-family:arial,sans-serif"><span style="font-size:small">Mac OS X 10.4 (Darwin 8):</span></span>
+`/sbin/launchd:`
+`        /usr/lib/libbsm.dylib (compatibility version 1.0.0, current version 1.0.0)`
+`        /usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+`        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 88.3.3)`
 
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">/bin/launchctl:</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">        /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 368.27.0)</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">        /usr/lib/libedit.2.dylib (compatibility version 2.0.0, current version 2.0.0)</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">        /usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 88.3.3)</span></span></span>
-<span style="font-family:courier new">
-</span>
-
-<span style="font-family:arial,sans-serif"><span style="font-size:small">Mac OS X 10.5 (Darwin 9):</span></span>
+Leopard's launchd binary still links to the same three libraries only.
+However, there's quite a difference in launchctl between Darwin 8 and 9, as shown below.
+Mac OS X 10.4 (Darwin 8):
 
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">/bin/launchctl:</span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.14.0)</span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)</span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Versions/A/Security (compatibility version 1.0.0, current version 34102.0.0)</span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libedit.2.dylib (compatibility version 2.0.0, current version 2.9.0)</span></span></span>
-<span style="white-space:pre"><span><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span></span><span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span></span>
-<span style="font-family:courier new"></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.0.0)</span></span>
+/bin/launchctl:
+        /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 368.27.0)
+        /usr/lib/libedit.2.dylib (compatibility version 2.0.0, current version 2.0.0)
+<span>`        /usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`</span>
+<span>`        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 88.3.3)`</span>
 
 
-<span style="font-family:arial"><span style="font-size:13px">PureDarwin (Darwin 9):</span></span>
-<span style="font-family:arial;font-size:13px">
-</span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
 
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(255,0,0)">/XCD/SY</span>/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/Security.framework/Versions/A/Security (compatibility version 1.0.0, current version 33532.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libedit.2.dylib (compatibility version 2.0.0, current version 2.9.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"> </span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span>
-<span style="font-size:12px">
-</span>
-<span style="font-size:12px"><span style="font-family:Helvetica"></span></span>
+Mac OS X 10.5 (Darwin 9):
+
+
+/bin/launchctl:
+<span style="white-space:pre"><span>` `</span></span>/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.14.0)
+<span style="white-space:pre"><span>` `</span></span><span>`/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (compatibility version 1.0.0, current version 275.0.0)`</span>
+<span style="white-space:pre"><span>` `</span></span>/System/Library/Frameworks/Security.framework/Versions/A/Security (compatibility version 1.0.0, current version 34102.0.0)
+<span style="white-space:pre"><span>` `</span></span>/usr/lib/libedit.2.dylib (compatibility version 2.0.0, current version 2.9.0)
+<span style="white-space:pre"><span>` `</span></span><span>`/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`</span>
+
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.0.0)`
+
+
+PureDarwin (Darwin 9):
+
+
+ `/System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
+
+ ``
+ `/System/Library/Frameworks/Security.framework/Versions/A/Security (compatibility version 1.0.0, current version 33532.0.0)`
+ `/usr/lib/libedit.2.dylib (compatibility version 2.0.0, current version 2.9.0)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)`
 
 
 
 
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem:</span> /XCD/SY should not be.
-<span style="font-weight:bold">Solution:</span> <span style="color:rgb(255,0,0);font-weight:bold">Please, let us know if you have one.</span>
+
+
+
+**Problem:** /XCD/SY should not be.
+**Solution:** **Please, let us know if you have one.**
 ------------------------------------------------------------------------
 ### launchd_libs
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> mig in XCD related error.
-<span style="font-weight:bold">Solution:</span> cf above/below.
+**Problem:** mig in XCD related error.
+**Solution:** cf above/below.
 
 
-<span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0);font-weight:normal"></span></span>
+****
 ------------------------------------------------------------------------
 ### libdwarf
-<span style="font-family:courier new,monospace">darwinbuild libdwarf</span>
+`darwinbuild libdwarf`
 #### 9J61
 ?
 #### 9G55
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">lipo: /SourceCache/libdwarf/libdwarf-8/dwarf/dwarfdump/dwarfdump.i386 and /SourceCache/libdwarf/libdwarf-8/dwarf/dwarfdump/dwarfdump.ppc have the same architectures (i386) and can't be in the same fat output file</span></span>
-<span style="font-family:Helvetica;font-size:13px;font-weight:bold">Solution:</span><span style="font-family:Helvetica;font-size:13px"> ?</span>
+**Problem:** `lipo: /SourceCache/libdwarf/libdwarf-8/dwarf/dwarfdump/dwarfdump.i386 and /SourceCache/libdwarf/libdwarf-8/dwarf/dwarfdump/dwarfdump.ppc have the same architectures (i386) and can't be in the same fat output file`
+**Solution:** ?
 #### 9F33 (ok)
 ------------------------------------------------------------------------
 ### libgcc
 #### 9J61pd1
 /usr/include/stdlib.h:283: error: expected ',' or ';' before '__OSX_AVAILABLE_BUT_DEPRECATED'
-&gt;&gt; int<span style="white-space:pre"> </span> daemon(int, int) __DARWIN_1050(daemon) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
+&gt;&gt; int  daemon(int, int) __DARWIN_1050(daemon) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
 &gt;&gt;&gt;
-//int<span style="white-space:pre"> </span> daemon(int, int) __DARWIN_1050(daemon) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
-int<span style="white-space:pre"> </span> daemon(int, int) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
+//int  daemon(int, int) __DARWIN_1050(daemon) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
+int  daemon(int, int) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_2_0,__IPHONE_2_0);
 ------------------------------------------------------------------------
-<span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span>
+
 ### libsecurity_apple_csp
 #### 9J61
 not present in macosx too:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">lib/FEEKeys.h:34:40: error: security_cryptkit/feeTypes.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">lib/FEEKeys.h:43: error: expected `)' before 'feeKey'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">lib/FEEKeys.h:53: error: 'feePubKey' does not name a type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">lib/FEEKeys.h:55: error: 'feePubKey' does not name a type</span></span>
+`lib/FEEKeys.h:34:40: error: security_cryptkit/feeTypes.h: No such file or directory`
+`lib/FEEKeys.h:43: error: expected `)' before 'feeKey'`
+`lib/FEEKeys.h:53: error: 'feePubKey' does not name a type`
+`lib/FEEKeys.h:55: error: 'feePubKey' does not name a type`
 
 patch + <http://lists.apple.com/archives/apple-cdsa/2003/Feb/msg00017.html>
 and
-<span style="text-decoration:underline">Notes:</span> *The current use of FEE by the CSP enables CryptKit routines which need pseudorandom numbers (e.g., signature generation) to obtain pseudorandom data via callbacks specified when calling the relevant function. The callback is defined (as a feeRandFcn) in feeTypes.h. The CSP provides a function in such cases which obtain data from the kernelâ€™s Yarrow implementation, which is believed to be cryptographically secure on the MacOS X platform. All of the CryptKit functions which provide for this callback treat the callback parameter as optional; when not present, CryptKit uses its own FEE-based PRNG.* 
+__Notes:__ *The current use of FEE by the CSP enables CryptKit routines which need pseudorandom numbers (e.g., signature generation) to obtain pseudorandom data via callbacks specified when calling the relevant function. The callback is defined (as a feeRandFcn) in feeTypes.h. The CSP provides a function in such cases which obtain data from the kernelâ€™s Yarrow implementation, which is believed to be cryptographically secure on the MacOS X platform. All of the CryptKit functions which provide for this callback treat the callback parameter as optional; when not present, CryptKit uses its own FEE-based PRNG.* 
 then
 
-<span style="font-family:courier new,monospace;font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope</span>
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h:90: error: 'nil' was not declared in this scope</span></span>
+`/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h:90: error: 'nil' was not declared in this scope`
 
-<span style="font-weight:bold">Solution:</span> Add <span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CarbonCore/MacTypes.h&gt;</span></span> in <span style="font-style:italic">BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFBase.h</span>
-<span style="text-decoration:underline">Notes:</span> See <http://darwinbuild.macosforge.org/trac/ticket/85>
+**Solution:** Add `#include <CarbonCore/MacTypes.h>` in *BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFBase.h*
+__Notes:__ See <http://darwinbuild.macosforge.org/trac/ticket/85>
 
 
 ------------------------------------------------------------------------
 ### libsecurity_cdsa_plugin
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':</span></span>
+**Problem:** `/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope</span></span>
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope`
 <span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h: In member function 'bool Security::DbName::operator&lt;(const Security::DbName&) const':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h:90: error: 'nil' was not declared in this scope</span></span>
-<span style="font-weight:bold">Solution:</span> Apply the libsecurityd fix and build libsecurity_utilities
+`/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h:90: error: 'nil' was not declared in this scope`
+**Solution:** Apply the libsecurityd fix and build libsecurity_utilities
 ------------------------------------------------------------------------
-<span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span>
+
 ### libsecurity_cdsa_utilities
 #### 9J61
-<span style="font-family:courier new,monospace"><span style="font-size:small">lib/osxverifier.cpp:27:46: error: security_codesigning/requirement.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">lib/osxverifier.cpp:30:44: error: security_codesigning/reqdumper.h: No such file or directory</span></span>
+`lib/osxverifier.cpp:27:46: error: security_codesigning/requirement.h: No such file or directory`
+`lib/osxverifier.cpp:30:44: error: security_codesigning/reqdumper.h: No such file or directory`
 depend on security_codesigning
 
 
 ------------------------------------------------------------------------
 ### libsecurity_codesigning
-<span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span>
-#### 9J61
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/bin/sh -c ""/private/var/tmp/libsecurity_codesigning/libsecurity_codesigning-36591.obj/libsecurity_codesigning.build/Requirements Language.build/Script-C2D383B70A23A8C4005C63A2.sh""</span></span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/libsecurity_codesigning/libsecurity_codesigning-36591.obj/libsecurity_codesigning.build/Requirements Language.build/Script-C2D383B70A23A8C4005C63A2.sh: line 6: java: command not found</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">chroot BuildRoot</span></span>
+#### 9J61
+**Problem:** `/bin/sh -c ""/private/var/tmp/libsecurity_codesigning/libsecurity_codesigning-36591.obj/libsecurity_codesigning.build/Requirements Language.build/Script-C2D383B70A23A8C4005C63A2.sh""`
+
+`/private/var/tmp/libsecurity_codesigning/libsecurity_codesigning-36591.obj/libsecurity_codesigning.build/Requirements Language.build/Script-C2D383B70A23A8C4005C63A2.sh: line 6: java: command not found`
+**Solution:** `chroot BuildRoot`
 ??? cf java
 But..
 
-<span style="font-size:small">Error occurred during initialization of VM</span>
-<span style="font-size:small">Unable to load native library: libjava.jnilib</span>
+Error occurred during initialization of VM
+Unable to load native library: libjava.jnilib
 
 + JavaVM blocker, because linked to Foundation with symbols not provided by PureFoundation.
 Consequently codesigning stuff cannot be built. Since a long time.. <http://lists.apple.com/archives/darwin-development/2003/Jan/msg00227.html>
 the script in cause:
 
-<span style="font-size:small">#!/bin/bash</span>
-<span style="font-size:small">antlr=/usr/local/bin/antlr.jar</span>
-<span style="font-size:small">DEBUG=""</span>
-<span style="font-size:small">mkdir -p $TEMPDIR</span>
-<span style="font-size:small">rm -f $TEMPDIR/Requirement{Parser,Lexer}*</span>
-<span style="font-size:small">java -cp "$antlr" antlr.Tool -o $TEMPDIR $DEBUG requirements.grammar</span>
+#!/bin/bash
+antlr=/usr/local/bin/antlr.jar
+DEBUG=""
+mkdir -p $TEMPDIR
+rm -f $TEMPDIR/Requirement{Parser,Lexer}*
+java -cp "$antlr" antlr.Tool -o $TEMPDIR $DEBUG requirements.grammar
 
 and more, no antlr found.. MacPorts says about:
 
-<span style="font-size:small">Description:          ANTLR, ANother Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, compilers, and translators from grammatical descriptions</span>
-<span style="font-size:small">                      containing Java, C#, or C++ actions.</span>
-<span style="font-size:small">Homepage:             http://www.antlr2.org/</span>
+Description:          ANTLR, ANother Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, compilers, and translators from grammatical descriptions
+                      containing Java, C#, or C++ actions.
+Homepage:             http://www.antlr2.org/
 
 Then trying to build it (libsecurity_codesigning) outside the chroot leads to:
 
-<span style="font-size:small">    /bin/sh -c ""/Users/aladin/PureDarwin/darwinbuild/9J61/BuildRoot/private/var/tmp/libsecurity_codesigning/libsecurity_codesigning-36591.obj/libsecurity_codesigning.build/Requirements Language.build/Script-C2D383B70A23A8C4005C63A2.sh""</span>
-<span style="font-size:small">Exception in thread "main" java.lang.NoClassDefFoundError: antlr/Tool</span>
-<span style="font-size:small">** BUILD FAILED **</span>
+    /bin/sh -c ""/Users/aladin/PureDarwin/darwinbuild/9J61/BuildRoot/private/var/tmp/libsecurity_codesigning/libsecurity_codesigning-36591.obj/libsecurity_codesigning.build/Requirements Language.build/Script-C2D383B70A23A8C4005C63A2.sh""
+Exception in thread "main" java.lang.NoClassDefFoundError: antlr/Tool
+** BUILD FAILED **
 
 So, let's see what can we do we the previous discovered port.
- <span style="font-size:small">port install antlr</span>
+ port install antlr
 
-<span style="font-size:small">ln -fs /opt/local/lib/antlr.jar /usr/local/bin </span>
+ln -fs /opt/local/lib/antlr.jar /usr/local/bin 
 
 
-<span style="font-size:small">lib/cserror.h:30:44: error: security_utilities/cfutilities.h: No such file or directory</span>
-<span style="font-size:small">lib/cserror.h:31:42: error: security_utilities/debugging.h: No such file or directory</span>
+lib/cserror.h:30:44: error: security_utilities/cfutilities.h: No such file or directory
+lib/cserror.h:31:42: error: security_utilities/debugging.h: No such file or directory
 
-<span style="font-size:small">lib/cs.h:33:34: error: Security/SecBasePriv.h: No such file or directory</span>
-<span style="font-size:small">lib/cs.h:35:43: error: security_utilities/globalizer.h: No such file or directory</span>
-<span style="font-size:small">lib/cs.h:36:44: error: security_utilities/seccfobject.h: No such file or directory</span>
-<span style="font-size:small">lib/cs.h:37:40: error: security_utilities/cfclass.h: No such file or directory</span>
-<span style="font-size:small">lib/cs.h:38:39: error: security_utilities/errors.h: No such file or directory</span>
+lib/cs.h:33:34: error: Security/SecBasePriv.h: No such file or directory
+lib/cs.h:35:43: error: security_utilities/globalizer.h: No such file or directory
+lib/cs.h:36:44: error: security_utilities/seccfobject.h: No such file or directory
+lib/cs.h:37:40: error: security_utilities/cfclass.h: No such file or directory
+lib/cs.h:38:39: error: security_utilities/errors.h: No such file or directory
 
-<span style="font-size:small">lib/codedirectory.h:36:39: error: security_utilities/unix++.h: No such file or directory</span>
-<span style="font-size:small">lib/codedirectory.h:37:37: error: security_utilities/blob.h: No such file or directory</span>
-<span style="font-size:small">lib/codedirectory.h:39:40: error: security_utilities/hashing.h: No such file or directory</span>
+lib/codedirectory.h:36:39: error: security_utilities/unix++.h: No such file or directory
+lib/codedirectory.h:37:37: error: security_utilities/blob.h: No such file or directory
+lib/codedirectory.h:39:40: error: security_utilities/hashing.h: No such file or directory
 
-<span style="font-size:small">lib/requirement.h:31:42: error: security_utilities/superblob.h: No such file or directory</span>
+lib/requirement.h:31:42: error: security_utilities/superblob.h: No such file or directory
 etc..
 
 
 
-<span style="font-size:small">lib/bundlediskrep.cpp:25:41: error: CoreFoundation/CFBundlePriv.h: No such file or directory</span>
+lib/bundlediskrep.cpp:25:41: error: CoreFoundation/CFBundlePriv.h: No such file or directory
 Remarquable! For the first time, "it's" the contrary:
 
-<span style="font-size:small">cp -R BuildRoot/usr/local/SecurityPieces /usr/local/</span>
+cp -R BuildRoot/usr/local/SecurityPieces /usr/local/
 something from the buildroot finally goes outside!
 
 then
-<span style="font-size:small">lib/cs.h:33:34: error: Security/SecBasePriv.h: No such file or directory
+lib/cs.h:33:34: error: Security/SecBasePriv.h: No such file or directory
 /usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/seccfobject.h:29:38: error: CoreFoundation/CFRuntime.h: No such file or directory
-</span>
+
 
 To be continued..
 ------------------------------------------------------------------------
 ### libsecurity_dotmacdl
 #### 9J61
-<span style="font-size:small">**Problem:** /SourceCache/libsecurity_dotmacdl/libsecurity_dotmacdl-29745/lib/DotMacRelation.cpp:30:39: error: CoreServices/CoreServices.h: No such file or directory</span>
+**Problem:** /SourceCache/libsecurity_dotmacdl/libsecurity_dotmacdl-29745/lib/DotMacRelation.cpp:30:39: error: CoreServices/CoreServices.h: No such file or directory
 
 
 ------------------------------------------------------------------------
 ### libsecurity_filevault
 #### 9J61
-**Problem:** <span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':</span>
-<span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope</span>
+**Problem:** /usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':
+/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope
 ------------------------------------------------------------------------
 ### libsecurity_keychain
 #### 9J61
-<span style="font-weight:bold">Problem:</span> /private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecBase.h:63: error: 'OSType' does not name a type
+**Problem:** /private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecBase.h:63: error: 'OSType' does not name a type
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecBase.h:74: error: 'SecKeychainAttrType' does not name a type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/cfutilities.h: At global scope:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/cfutilities.h:443: error: 'noErr' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/cfutilities.h:450: error: 'noErr' was not declared in this scope</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:78: error: 'FourCharCode' does not name a type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:117: error: 'FourCharCode' does not name a type</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:526: error: 'SecProtocolType' has not been declared</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:526: error: 'SecAuthenticationType' has not been declared</span></span>
-<span style="font-weight:bold">Solution:</span> Add <span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CarbonCore/MacTypes.h&gt;</span></span> in <span style="font-style:italic">BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFBase.h</span>
+`/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecBase.h:74: error: 'SecKeychainAttrType' does not name a type`
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':`
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope`
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/cfutilities.h: At global scope:`
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/cfutilities.h:443: error: 'noErr' was not declared in this scope`
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/cfutilities.h:450: error: 'noErr' was not declared in this scope`
+`/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:78: error: 'FourCharCode' does not name a type`
+`/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:117: error: 'FourCharCode' does not name a type`
+`/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:526: error: 'SecProtocolType' has not been declared`
+`/private/var/tmp/libsecurity_keychain/libsecurity_keychain-36620.sym/BuiltProducts/SecurityPieces/Headers/Security/SecKeychain.h:526: error: 'SecAuthenticationType' has not been declared`
+**Solution:** Add `#include <CarbonCore/MacTypes.h>` in *BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFBase.h*
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace;font-size:small">lib/KCEventNotifier.h:31:49: error: CoreFoundation/CFNotificationCenter.h: No such file or directory</span>
+**Problem:** `lib/KCEventNotifier.h:31:49: error: CoreFoundation/CFNotificationCenter.h: No such file or directory`
 
-<span style="font-size:22px;font-weight:bold"><span><span style="font-size:small">Pseudosolution: </span></span><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span><span style="font-size:small">cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span></span></span></span></span>
+<span style="font-size:22px;font-weight:bold">Pseudosolution: cp /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFNotificationCenter.h BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/</span>
 
-<span style="font-weight:bold">Problem: </span><span style="font-size:small">lib/CertificateRequest.cpp:34:41: error: security_dotmac_tp/dotMacTp.h: No such file or directory</span>
-<span style="font-size:small"></span>
+**Problem: **lib/CertificateRequest.cpp:34:41: error: security_dotmac_tp/dotMacTp.h: No such file or directory
+
 **Solution: ...**
 **Problem: ...**
 **Solution:**
@@ -12171,42 +12151,42 @@ root@europa:/Users/aladin/PureDarwin/darwinbuild/9J61# cp BuildRoot/private/var/
 ------------------------------------------------------------------------
 ### libsecurity_ldap_dl
 #### 9J61
-**Problem:** <span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:266: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '8' to 'tDirStatus dsGetRecordList(tDirNodeReference, tDataBuffer*, tDataList*, tDirPatternMatch, tDataList*, tDataList*, int, UInt32*, tContextData*)'</span>
+**Problem:** /SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:266: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '8' to 'tDirStatus dsGetRecordList(tDirNodeReference, tDataBuffer*, tDataList*, tDirPatternMatch, tDataList*, tDataList*, int, UInt32*, tContextData*)'
 
 <span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp: In member function 'void DSNode::Search(DSRecordList&, DSDataList&, DSDataNode&, tDirPatternMatch, DSDataNode&, long unsigned int&, DSContext&)':</span>
-<span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:279: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '7' to 'tDirStatus dsDoAttributeValueSearch(tDirNodeReference, tDataBuffer*, tDataList*, tDataNode*, tDirPatternMatch, tDataNode*, UInt32*, tContextData*)'</span>
-<span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp: In member function 'void DirectoryService::CreateNodeList(const char*)':</span>
-<span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:347: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '2' to 'tDirStatus dsGetDirNodeCount(tDirReference, UInt32*)'</span>
-<span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:363: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '3' to 'tDirStatus dsGetDirNodeList(tDirReference, tDataBuffer*, UInt32*, tContextData*)'</span>
-<span style="font-size:small">/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:393: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '3' to 'tDirStatus dsGetDirNodeList(tDirReference, tDataBuffer*, UInt32*, tContextData*)'</span>
+/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:279: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '7' to 'tDirStatus dsDoAttributeValueSearch(tDirNodeReference, tDataBuffer*, tDataList*, tDataNode*, tDirPatternMatch, tDataNode*, UInt32*, tContextData*)'
+/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp: In member function 'void DirectoryService::CreateNodeList(const char*)':
+/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:347: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '2' to 'tDirStatus dsGetDirNodeCount(tDirReference, UInt32*)'
+/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:363: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '3' to 'tDirStatus dsGetDirNodeList(tDirReference, tDataBuffer*, UInt32*, tContextData*)'
+/SourceCache/libsecurity_ldap_dl/libsecurity_ldap_dl-30174/lib/DirectoryServices.cpp:393: error: cannot convert 'long unsigned int*' to 'UInt32*' for argument '3' to 'tDirStatus dsGetDirNodeList(tDirReference, tDataBuffer*, UInt32*, tContextData*)'
 **Solution:** Cast & Patch.
 
 ------------------------------------------------------------------------
 ### libsecurity_manifest
 #### 9J61
-**Problem:** <span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':</span>
+**Problem:** /usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':
 
-<span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope</span>
+/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope
 
 Solution: 
 ------------------------------------------------------------------------
 
 ### libsecurityd
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span><span style="font-family:courier new,monospace"><span style="font-size:small"> /usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope</span></span>
+**Problem:**` /usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h: In static member function 'static void Security::MacOSError::check(OSStatus)':`
+`/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Headers/errors.h:103: error: 'noErr' was not declared in this scope`
 
 <span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h: In member function 'bool Security::DbName::operator&lt;(const Security::DbName&) const':</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h:90: error: 'nil' was not declared in this scope</span></span>
-<span style="font-weight:bold">PseudoSolution: <span style="font-weight:normal">Add in <span style="font-style:italic">BuildRoot/usr/local/SecurityPieces/Frameworks/security_utilities.framework/Versions/A/Headers/utilities.h</span> </span></span>
+`/usr/local/SecurityPieces/Frameworks/security_cdsa_utilities.framework/Headers/cssmdbname.h:90: error: 'nil' was not declared in this scope`
+****
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CarbonCore/MacTypes.h&gt;</span></span>
+`#include <CarbonCore/MacTypes.h>`
 
 
-Then you should see <span style="font-family:courier new,monospace"><span style="font-size:small">** BUILD SUCCEEDED **</span></span>
-<span style="font-size:small"></span>
+Then you should see `** BUILD SUCCEEDED **`
+
 ------------------------------------------------------------------------
-<span style="font-size:13px;font-family:Arial,Verdana,sans-serif"></span>
+
 
 libstdcxx_
 
@@ -12216,22 +12196,22 @@ checking how to run the C preprocessor... /lib/cpp
 configure: error: C preprocessor "/lib/cpp" fails sanity check
 
 
-<span style="font-family:Arial"></span>
+
 ------------------------------------------------------------------------
 ### libxml2
-<span style="font-size:small">libxml2 is a dependency of </span><span style="font-style:italic"><span style="font-size:small">xar</span></span><span style="font-size:small"> and </span><span style="font-style:italic"><span style="font-size:small">headerdoc.</span></span>
-<span style="font-style:italic"><span style="font-size:small">
-</span></span>
+libxml2 is a dependency of *xar* and *headerdoc.*
+<span style="font-style:italic">
+</span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild libxml2</span></span>
+`darwinbuild libxml2`
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ld: can't open order file: /usr/local/lib/OrderFiles/libxml2.order</span></span>
-<span style="font-weight:bold">Solution:</span> ?? no OrderFiles nor libxml2.order exists on my mac.
-<span style="font-family:courier new,monospace"><span style="font-size:small">mkdir BuildRoot/usr/local/lib/OrderFiles</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">touch BuildRoot/usr/local/lib/OrderFiles/libxml2.order </span></span>
+**Problem:** `ld: can't open order file: /usr/local/lib/OrderFiles/libxml2.order`
+**Solution:** ?? no OrderFiles nor libxml2.order exists on my mac.
+`mkdir BuildRoot/usr/local/lib/OrderFiles`
+`touch BuildRoot/usr/local/lib/OrderFiles/libxml2.order `
 See <http://darwinbuild.macosforge.org/trac/ticket/72>.
 ------------------------------------------------------------------------
-### <span style="font-size:18px">l</span>ibxslt
+### libxslt
 darwinbuild libxslt
 #### 9J61 (ok)
 could need <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild libxml2 && darwinbuild -load xml2</span></span>
@@ -12245,219 +12225,219 @@ could need <span style="font-family:courier new,monospace"><span style="font-si
 #### 9J61?
 .
 #### 9F33pd1 (ok)
-<span style="font-family:courier new,monospace"><span style="font-size:small"></span></span>
-Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then:
+<span style="font-family:courier new,monospace"></span>
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
 
-<span>darwinbuild -init 9F33pd1</span>
+darwinbuild -init 9F33pd1
 
-<span style="font-family:courier new"><span style="font-family:Arial">The plist file above contains some patches that tend to avoid most of the errors just below.</span></span>
+The plist file above contains some patches that tend to avoid most of the errors just below.
 
 darwinbuild mDNSResponder
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/mDNSMacOSX.c:913: error: 'kCFUserNotificationStopAlertLevel' undeclared (first use in this function)</span></span>
-<span style="font-weight:bold">Solution:</span> The patch which includes <span style="font-family:courier new,monospace"><span style="font-size:small">&lt;CarbonCore/MacTypes.h&gt;</span></span> and <span style="font-family:courier new,monospace"><span style="font-size:small">&lt;CoreFoundation/CFUserNotification.h&gt;</span></span>
+**Problem:** `/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/mDNSMacOSX.c:913: error: 'kCFUserNotificationStopAlertLevel' undeclared (first use in this function)`
+**Solution:** The patch which includes `<CarbonCore/MacTypes.h>` and `<CoreFoundation/CFUserNotification.h>`
 
 
-<span style="font-weight:bold">Problem:</span> /SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2785: error: size of array 'sizecheck_DNSQuestion' is negative
+**Problem:** /SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2785: error: size of array 'sizecheck_DNSQuestion' is negative
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2786: error: size of array 'sizecheck_ZoneData' is negative</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2793: error: size of array 'sizecheck_ServiceInfoQuery' is negative</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2795: error: size of array 'sizecheck_ClientTunnel' is negative</span></span>
+`/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2786: error: size of array 'sizecheck_ZoneData' is negative`
+`/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2793: error: size of array 'sizecheck_ServiceInfoQuery' is negative`
+`/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/mDNSEmbeddedAPI.h:2795: error: size of array 'sizecheck_ClientTunnel' is negative`
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new"><span style="font-size:12px">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/uDNS.c:4990: error: size of array 'sizecheck_SearchListElem' is negative</span></span>
+**Problem:** /SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSCore/uDNS.c:4990: error: size of array 'sizecheck_SearchListElem' is negative
 
-<span style="font-family:Arial;font-size:13px;font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSShared/uds_daemon.c:3958: error: size of array 'sizecheck_registered_record_entry' is negative</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSShared/uds_daemon.c:3959: error: size of array 'sizecheck_service_instance' is negative</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSShared/uds_daemon.c:3962: error: size of array 'sizecheck_reply_state' is negative</span></span>
+**Problem: **`/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSShared/uds_daemon.c:3958: error: size of array 'sizecheck_registered_record_entry' is negative`
+`/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSShared/uds_daemon.c:3959: error: size of array 'sizecheck_service_instance' is negative`
+`/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/../mDNSShared/uds_daemon.c:3962: error: size of array 'sizecheck_reply_state' is negative`
 
-<span style="font-weight:bold">Solution:</span><span> We can comment the problematic lines.</span> <span style="color:rgb(255,0,0);font-weight:bold">Please, let us know if you have an alternative way.</span>
+**Solution:** We can comment the problematic lines. **Please, let us know if you have an alternative way.**
 
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ld: warning in /usr/local/lib/libdnsinfo.a, file is not of required architecture</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">Undefined symbols:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_dns_configuration_copy", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      _mDNSPlatformSetDNSConfig in mDNSMacOSX.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  "_dns_configuration_free", referenced from:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">      _mDNSPlatformSetDNSConfig in mDNSMacOSX.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">ld: symbol(s) not found</span></span>
-<span style="font-weight:bold">Solution:</span> Rebuild and load <span style="font-style:italic">configd</span> with all the required archs (cf plist).
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/helper.c:303: error: syntax error before 'gNotification'</span></span>
-<span style="font-weight:bold">Solution: ?</span> add <span style="font-family:courier new,monospace"><span style="font-size:small">#include &lt;CoreFoundation/CFUserNotification.h&gt;</span></span> 
+**Problem:** `ld: warning in /usr/local/lib/libdnsinfo.a, file is not of required architecture`
+`Undefined symbols:`
+`  "_dns_configuration_copy", referenced from:`
+`      _mDNSPlatformSetDNSConfig in mDNSMacOSX.o`
+`  "_dns_configuration_free", referenced from:`
+`      _mDNSPlatformSetDNSConfig in mDNSMacOSX.o`
+`ld: symbol(s) not found`
+**Solution:** Rebuild and load *configd* with all the required archs (cf plist).
+**Problem:** `/SourceCache/mDNSResponder/mDNSResponder-176.2/mDNSMacOSX/helper.c:303: error: syntax error before 'gNotification'`
+**Solution: ?** add `#include <CoreFoundation/CFUserNotification.h>` 
 ------------------------------------------------------------------------
 ### mDNSResponderSystemLibraries (ok)
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild </span></span><span style="font-family:courier new,monospace"><span style="font-size:small">mDNSResponderSystemLibraries</span></span>
-<span style="font-family:arial"></span>
+`darwinbuild ``mDNSResponderSystemLibraries`
+
 ------------------------------------------------------------------------
 ### msdosfs
 #### 9J61 (ok)
-<span style="font-size:12px"><span style="font-weight:bold">problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:78:23: error: sys/param.h: No such file or directory</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:79:22: error: sys/time.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:80:23: error: sys/systm.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:81:24: error: sys/dirent.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">It seems it looks like in XCD ([...]cts/include -I/XCD/SY/Library/Frameworks/Kernel.framework/PrivateHeaders -I/XCD/SY/Library/Frameworks/Kernel.framework/Headers -I/priva[...]) but there is no Kernel.framework originally.</span></span>
-<span style="font-size:12px"><span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">chroot BuildRoot </span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">ln -s /System/Library/Frameworks/Kernel.framework /XCD/SY/Library/Frameworks/Kernel.framework</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">exit</span></span>
+
+`/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:79:22: error: sys/time.h: No such file or directory`
+`/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:80:23: error: sys/systm.h: No such file or directory`
+`/SourceCache/msdosfs/msdosfs-136.5/msdosfs.kextproj/msdosfs.kmodproj/msdosfs_conv.c:81:24: error: sys/dirent.h: No such file or directory`
+`It seems it looks like in XCD ([...]cts/include -I/XCD/SY/Library/Frameworks/Kernel.framework/PrivateHeaders -I/XCD/SY/Library/Frameworks/Kernel.framework/Headers -I/priva[...]) but there is no Kernel.framework originally.`
+<span style="font-size:12px">**Solution:** `chroot BuildRoot `</span>
+`ln -s /System/Library/Frameworks/Kernel.framework /XCD/SY/Library/Frameworks/Kernel.framework`
+`exit`
 
 then
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/msdosfs/msdosfs-136.5/newfs_msdos.tproj/newfs_msdos.c:55:27: error: sys/disklabel.h: No such file or directory</span></span>
+**Problem:** `/SourceCache/msdosfs/msdosfs-136.5/newfs_msdos.tproj/newfs_msdos.c:55:27: error: sys/disklabel.h: No such file or directory`
 Now it looks in XCD again ([...]ude -I/XCD/SY/Library/Frameworks/System.framework/PrivateHeaders -I/priva[...]...)
-<span style="font-weight:bold">Solution:</span> chroot BuildRoot 
-<span style="font-family:courier new,monospace"><span style="font-size:small">ln -s /System/Library/Frameworks/System.framework XCD/SY/Library/Frameworks/System.framework/</span></span>
+**Solution:** chroot BuildRoot 
+`ln -s /System/Library/Frameworks/System.framework XCD/SY/Library/Frameworks/System.framework/`
 exit
 
 Though it has been succesfully built, the project remains in XCD (because of inheritance from the compilation which inherits that probably from another project built before).
-<span style="font-weight:bold">Problem:</span> XCD should not be here.
+**Problem:** XCD should not be here.
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">** BUILD SUCCEEDED **</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> BUILD TIME: 0h 0m 10s</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">EXIT STATUS: 0</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">msdosfs - 12 files registered.</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Extensions</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Extensions/msdosfs.kext</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">5b9a6e0ff3b5cc110a4411d1befd26e7f1e95042 100644 0 0 1050 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents/Info.plist</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents/MacOS</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">da39a3ee5e6b4b0d3255bfef95601890afd80709 100644 0 0 172844 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents/MacOS/msdosfs</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Filesystems</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs/Contents</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">2260276cf80b31121312a84960b02313b5de152c 100644 0 0 7370 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Info.plist</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Resources</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Resources/English.lproj</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">7fba01433478b730cb5223e8020f73f238175537 100644 0 0 652 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Resources/English.lproj/InfoPlist.strings</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">a0d40033156fff78a4da42fc71d6610cbf8e4375 100755 0 0 45996 ./XCD/SY/Library/Filesystems/msdos.fs/msdos.util</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./sbin</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">91567a895ccaf37aefaf038859e349643d2304ae 100755 0 0 70668 ./sbin/fsck_msdos</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">d90105816c3bcca49c590d567b953d53517da82e 100755 0 0 38556 ./sbin/mount_msdos</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">9419c51c15a47d4d68942272f3dff58640f1457f 100755 0 0 54284 ./sbin/newfs_msdos</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./usr</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./usr/share</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./usr/share/man</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">                                         40755 0 0 0 ./usr/share/man/man8</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">9bf0b30b84ac2c58fdc021cb52d91bb6b65515f4 100644 0 0 3856 ./usr/share/man/man8/fsck_msdos.8</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">a8f9318a3d0558133ffc70bac75f013153cd8e70 100644 0 0 4080 ./usr/share/man/man8/mount_msdos.8</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">5ae5813033108e545cc0241ac25dda3935c2415e 100644 0 0 1864 ./usr/share/man/man8/msdos.util.8</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">b2ad8ef73fcc0f64b6ad4ed0852f336956d2ee3e 100644 0 0 5579 ./usr/share/man/man8/newfs_msdos.8</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-weight:bold"><span style="color:rgb(255,0,0)">let us now if you have one</span></span>
+`** BUILD SUCCEEDED **`
+`++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+` BUILD TIME: 0h 0m 10s`
+`EXIT STATUS: 0`
+`msdosfs - 12 files registered.`
+`                                         40755 0 0 0 ./XCD`
+`                                         40755 0 0 0 ./XCD/SY`
+`                                         40755 0 0 0 ./XCD/SY/Library`
+`                                         40755 0 0 0 ./XCD/SY/Library/Extensions`
+`                                         40755 0 0 0 ./XCD/SY/Library/Extensions/msdosfs.kext`
+`                                         40755 0 0 0 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents`
+`5b9a6e0ff3b5cc110a4411d1befd26e7f1e95042 100644 0 0 1050 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents/Info.plist`
+`                                         40755 0 0 0 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents/MacOS`
+`da39a3ee5e6b4b0d3255bfef95601890afd80709 100644 0 0 172844 ./XCD/SY/Library/Extensions/msdosfs.kext/Contents/MacOS/msdosfs`
+`                                         40755 0 0 0 ./XCD/SY/Library/Filesystems`
+`                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs`
+`                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs/Contents`
+`2260276cf80b31121312a84960b02313b5de152c 100644 0 0 7370 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Info.plist`
+`                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Resources`
+`                                         40755 0 0 0 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Resources/English.lproj`
+`7fba01433478b730cb5223e8020f73f238175537 100644 0 0 652 ./XCD/SY/Library/Filesystems/msdos.fs/Contents/Resources/English.lproj/InfoPlist.strings`
+`a0d40033156fff78a4da42fc71d6610cbf8e4375 100755 0 0 45996 ./XCD/SY/Library/Filesystems/msdos.fs/msdos.util`
+`                                         40755 0 0 0 ./sbin`
+`91567a895ccaf37aefaf038859e349643d2304ae 100755 0 0 70668 ./sbin/fsck_msdos`
+`d90105816c3bcca49c590d567b953d53517da82e 100755 0 0 38556 ./sbin/mount_msdos`
+`9419c51c15a47d4d68942272f3dff58640f1457f 100755 0 0 54284 ./sbin/newfs_msdos`
+`                                         40755 0 0 0 ./usr`
+`                                         40755 0 0 0 ./usr/share`
+`                                         40755 0 0 0 ./usr/share/man`
+`                                         40755 0 0 0 ./usr/share/man/man8`
+`9bf0b30b84ac2c58fdc021cb52d91bb6b65515f4 100644 0 0 3856 ./usr/share/man/man8/fsck_msdos.8`
+`a8f9318a3d0558133ffc70bac75f013153cd8e70 100644 0 0 4080 ./usr/share/man/man8/mount_msdos.8`
+`5ae5813033108e545cc0241ac25dda3935c2415e 100644 0 0 1864 ./usr/share/man/man8/msdos.util.8`
+`b2ad8ef73fcc0f64b6ad4ed0852f336956d2ee3e 100644 0 0 5579 ./usr/share/man/man8/newfs_msdos.8`
+**Solution:** **let us now if you have one**
 
 ------------------------------------------------------------------------
 
 ### netinfo
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">nibind_prot.x:1: error: netinfo/nibind_prot.x: No such file or directory</span></span>
+**Problem:** `nibind_prot.x:1: error: netinfo/nibind_prot.x: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">ni_prot.x:1: error: netinfo/ni_prot.x: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> ..According to DTrace, nibind_prot.x is searched in many locations:
+`ni_prot.x:1: error: netinfo/ni_prot.x: No such file or directory`
+**Solution:** ..According to DTrace, nibind_prot.x is searched in many locations:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 nibind_prot.x</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/local/include/netinfo/nibind_prot.x</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/netinfo/nibind_prot.x</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/include/netinfo/nibind_prot.x</span></span>
-So the trick would be to <span style="font-family:courier new,monospace"><span style="font-size:small">touch BuildRoot/usr/local/include/netinfo/ni_prot.x BuildRoot/usr/local/include/netinfo/nibind_prot.x</span></span>
+`  0  17720                       open:entry cc1 nibind_prot.x`
+`  0  17720                       open:entry cc1 /usr/local/include/netinfo/nibind_prot.x`
+`  0  17720                       open:entry cc1 /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/netinfo/nibind_prot.x`
+`  0  17720                       open:entry cc1 /usr/include/netinfo/nibind_prot.x`
+So the trick would be to `touch BuildRoot/usr/local/include/netinfo/ni_prot.x BuildRoot/usr/local/include/netinfo/nibind_prot.x`
 Do not use the real .x and its content, it will lead to a too deep nested include error.
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ld: can't open order file: /AppleInternal/OrderFiles/NetInfo.order</span></span>
+**Problem:** `ld: can't open order file: /AppleInternal/OrderFiles/NetInfo.order`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">ld: can't open order file: /AppleInternal/OrderFiles/NetInfo.order</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">mkdir -p BuildRoot/AppleInternal/OrderFiles</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">touch BuildRoot/AppleInternal/OrderFiles/NetInfo.order</span></span>
-<span style="font-size:small"></span>
+`ld: can't open order file: /AppleInternal/OrderFiles/NetInfo.order`
+**Solution:** `mkdir -p BuildRoot/AppleInternal/OrderFiles`
+`touch BuildRoot/AppleInternal/OrderFiles/NetInfo.order`
+
 ------------------------------------------------------------------------
-<span style="font-family:Arial,Verdana,sans-serif;font-size:13px"></span>
+
 net_snmp
 9J61
 
 gcc -dynamiclib -single_module ${wl}-undefined ${wl}dynamic_lookup -o .libs/libnetsnmpagent.15.1.2.dylib  .libs/snmp_agent.o .libs/snmp_vars.o .libs/agent_read_config.o .libs/agent_registry.o .libs/agent_index.o .libs/agent_trap.o .libs/kernel.o .libs/agent_handler.o mibgroup/snmpv3/.libs/usmConf.o mibgroup/agentx/.libs/master.o mibgroup/agentx/.libs/subagent.o mibgroup/utilities/.libs/execute.o mibgroup/utilities/.libs/iquery.o mibgroup/mibII/.libs/vacm_conf.o mibgroup/agentx/.libs/protocol.o mibgroup/agentx/.libs/client.o mibgroup/agentx/.libs/master_admin.o mibgroup/agentx/.libs/agentx_config.o  ../snmplib/.libs/libnetsnmp.dylib  -arch ppc -arch i386 -F/System/Library/PrivateFrameworks/ -F/System/Library/Frameworks/ -arch ppc -arch i386 -arch ppc -arch i386 -framework IOKit -framework CoreFoundation -framework CoreServices -framework ApplicationServices -framework DiskArbitration -install_name  /usr/lib/libnetsnmpagent.15.dylib -compatibility_version 17 -current_version 17.2 -Wl,-single_module
 ldld:: framework not found CoreServices
 
-<span style="font-size:small">
-</span>
-<span style="font-size:12px"></span>
+
+
+
 ------------------------------------------------------------------------
-<span style="font-size:12px"></span>
+
 ### ntfs
 #### 9J61 (ok)
-<span style="font-size:12px"><span style="font-weight:bold">Problem:</span></span>
-<span style="font-size:12px"></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:44:23: error: sys/cdefs.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:45:22: error: sys/attr.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:46:21: error: sys/buf.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:47:22: error: sys/disk.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:48:23: error: sys/errno.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:49:23: error: sys/fcntl.h: No such file or directory</span></span>
+<span style="font-size:12px">**Problem:**</span>
+
+`/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:44:23: error: sys/cdefs.h: No such file or directory`
+`/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:45:22: error: sys/attr.h: No such file or directory`
+`/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:46:21: error: sys/buf.h: No such file or directory`
+`/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:47:22: error: sys/disk.h: No such file or directory`
+`/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:48:23: error: sys/errno.h: No such file or directory`
+`/SourceCache/ntfs/ntfs-52/kext/ntfs_vfsops.c:49:23: error: sys/fcntl.h: No such file or directory`
 It also seek into: [...]lude -I/XCD/SY/Library/Frameworks/Kernel.framework/PrivateHeaders -I/XCD/SY/Library/Frameworks/Kernel.framework/Headers -I/pri[...]
-<span style="font-weight:bold">Solution:</span> see below/above (copy/link required headers).
+**Solution:** see below/above (copy/link required headers).
 ------------------------------------------------------------------------
 
 ### objc4
 #### 9J61 (ok)
 #### 9F33 (ok)
-<span style="font-size:small">Fetch </span>[<span style="font-size:small">9F33pd1.plist</span>](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist)<span style="font-size:small"> into </span><span style="font-style:italic"><span style="font-size:small">.build</span></span><span style="font-size:small"> directory of your DarwinBuild repository, then:</span>
-<span style="font-size:small">
-</span>
+Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
-<span><span style="font-size:small"><span style="font-family:courier new,monospace">darwinbuild -init 9F33pd1</span></span></span>
-<span style="font-size:small">
-</span>
-<span style="font-family:courier new"><span style="font-family:Arial"><span style="font-size:small">The plist file above contains some patches that tend to avoid most of the errors just below.</span></span></span>
-<span style="font-size:small">
-</span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild objc4</span></span>
-<span style="font-size:small">
-</span>
-<span style="font-weight:bold"><span style="font-size:small">Problem:</span></span><span style="font-size:small"> </span><span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/objc4/objc4-371.2/runtime/objc-private.h:49:22: error: auto_zone.h: No such file or directory</span></span>
-<span style="font-family:Helvetica;font-weight:bold"><span style="font-family:Arial"><span style="font-size:small">Solution</span></span><span style="font-size:small">: </span><span style="color:rgb(255,0,0);font-family:Arial"><span style="font-size:small"><span style="color:rgb(0,0,0);font-weight:normal">11/12/2008, the AutoZone project sources have been released by Apple: <span style="font-family:courier new"><span style="font-size:12px">darwinbuild autozone && darwinbuild -load autozone</span></span></span> </span></span></span>
 
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">couldn't exec /XCD/loper/usr/bin/libtool: No such file or directory</span></span>
-<span style="font-weight:bold">Solution: `</span>cp' or `ln' -s from <span style="font-family:courier new,monospace"><span style="font-size:small">usr/bin/libtool</span></span>
+darwinbuild -init 9F33pd1
 
-<span style="color:rgb(204,204,204)">In fact, the patches remove the </span><span style="font-style:italic"><span style="color:rgb(204,204,204)">libauto</span></span><span style="color:rgb(204,204,204)"> dependency and </span><span style="font-style:italic"><span style="color:rgb(204,204,204)">libobjc</span></span><span style="color:rgb(204,204,204)"> is now "pure":</span>
 
-<span style="text-decoration:underline"><span style="color:rgb(204,204,204)">
-</span></span>
+The plist file above contains some patches that tend to avoid most of the errors just below.
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(204,204,204)">otool -L /usr/lib/libobjc.A.dylib</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)">/usr/lib/libobjc.A.dylib:</span></span></span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)"> </span></span></span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)">/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 227.0.0)</span></span></span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)"> </span></span></span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)">/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)</span></span></span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)"> </span></span></span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="color:rgb(204,204,204)">/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)</span></span></span></span>
-<span style="color:rgb(204,204,204)">
-</span>
-<span style="color:rgb(204,204,204)">Of course, we still need and hope to have GC support a day.</span>
-<span style="color:rgb(204,204,204)">11/12/2008, the AutoZone project sources have been released by Apple: </span><span style="font-family:courier new"><span style="font-size:12px"><span style="color:rgb(204,204,204)">darwinbuild autozone && darwinbuild -load autozone</span></span></span>
+
+
+`darwinbuild objc4`
+
+
+**Problem:** `/SourceCache/objc4/objc4-371.2/runtime/objc-private.h:49:22: error: auto_zone.h: No such file or directory`
+<span style="font-family:Helvetica;font-weight:bold"><span style="font-family:Arial">Solution</span>: <span style="color:rgb(255,0,0);font-family:Arial"><span style="font-size:small"><span style="color:rgb(0,0,0);font-weight:normal">11/12/2008, the AutoZone project sources have been released by Apple: <span style="font-family:courier new"><span style="font-size:12px">darwinbuild autozone && darwinbuild -load autozone</span></span></span> </span></span></span>
+
+**Problem:** `couldn't exec /XCD/loper/usr/bin/libtool: No such file or directory`
+**Solution: `**cp' or `ln' -s from `usr/bin/libtool`
+
+In fact, the patches remove the *libauto* dependency and *libobjc* is now "pure":
+
+__
+__
+
+`otool -L /usr/lib/libobjc.A.dylib`
+`/usr/lib/libobjc.A.dylib:`
+ `/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 227.0.0)`
+ `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
+ `/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.1)`
+
+
+Of course, we still need and hope to have GC support a day.
+11/12/2008, the AutoZone project sources have been released by Apple: <span style="font-family:courier new"><span style="font-size:12px"><span style="color:rgb(204,204,204)">darwinbuild autozone && darwinbuild -load autozone</span></span></span>
 ------------------------------------------------------------------------
 ### pam_modules
 #### 9J61
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">/private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.c:40:46: error: AppleSystemInfo/ASI_SerialNumber.h: No such file or directory/private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.c:40:46:</span></span>
+**Problem: **`/private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.c:40:46: error: AppleSystemInfo/ASI_SerialNumber.h: No such file or directory/private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.c:40:46:`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small"> error: AppleSystemInfo/ASI_SerialNumber.h: No such file or directory</span></span>
-<span style="font-weight:bold">Pseudo-solution: <span style="font-weight:normal">DTrace reports where the file is expected to be:</span></span>
+` error: AppleSystemInfo/ASI_SerialNumber.h: No such file or directory`
+****
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/include/pam/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/local/include/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  0  17720                       open:entry cc1 /usr/include/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  1  17720                       open:entry cc1 /usr/include/pam/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  1  17720                       open:entry cc1 /usr/local/include/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  1  17720                       open:entry cc1 /usr/lib/gcc/powerpc-apple-darwin9/4.0.1/include/AppleSystemInfo/ASI_SerialNumber.h</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">  1  17720                       open:entry cc1 /usr/include/AppleSystemInfo/ASI_SerialNumber.h</span></span>
+`  0  17720                       open:entry cc1 /usr/include/pam/AppleSystemInfo/ASI_SerialNumber.h`
+`  0  17720                       open:entry cc1 /usr/local/include/AppleSystemInfo/ASI_SerialNumber.h`
+`  0  17720                       open:entry cc1 /usr/lib/gcc/i686-apple-darwin9/4.0.1/include/AppleSystemInfo/ASI_SerialNumber.h`
+`  0  17720                       open:entry cc1 /usr/include/AppleSystemInfo/ASI_SerialNumber.h`
+`  1  17720                       open:entry cc1 /usr/include/pam/AppleSystemInfo/ASI_SerialNumber.h`
+`  1  17720                       open:entry cc1 /usr/local/include/AppleSystemInfo/ASI_SerialNumber.h`
+`  1  17720                       open:entry cc1 /usr/lib/gcc/powerpc-apple-darwin9/4.0.1/include/AppleSystemInfo/ASI_SerialNumber.h`
+`  1  17720                       open:entry cc1 /usr/include/AppleSystemInfo/ASI_SerialNumber.h`
 Then
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">mkdir -p BuildRoot/usr/include/pam/AppleSystemInfo</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">touch BuildRoot/usr/include/pam/AppleSystemInfo/ASI_SerialNumber.h</span></span>
+`mkdir -p BuildRoot/usr/include/pam/AppleSystemInfo`
+`touch BuildRoot/usr/include/pam/AppleSystemInfo/ASI_SerialNumber.h`
 This leads to:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/usr/bin/cc   -lpam -pipe -no-cpp-precomp -arch ppc -arch i386          -L/usr/local/lib -lAppleSystemInfo -framework CoreFoundation -framework IOKit  -g -Os -pipe -Ddarwin -no-cpp-precomp -Wall -I/usr/include/pam -pipe -no-cpp-precomp -arch ppc -arch i386 -bundle -o /private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.so /private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.o</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">ld: library not found for -lAppleSystemInfo</span></span>
-<span style="font-weight:bold">Solution: <span style="color:rgb(255,0,0)">let us know if you have one</span>.</span>
-<span style="font-weight:bold"><span style="font-weight:normal"></span></span>
-<span style="text-decoration:underline">Notes:</span> no path with <span style="font-style:italic">AppleSystemInfo</span> as a directory exist on my mac (10.5.7).
+`/usr/bin/cc   -lpam -pipe -no-cpp-precomp -arch ppc -arch i386          -L/usr/local/lib -lAppleSystemInfo -framework CoreFoundation -framework IOKit  -g -Os -pipe -Ddarwin -no-cpp-precomp -Wall -I/usr/include/pam -pipe -no-cpp-precomp -arch ppc -arch i386 -bundle -o /private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.so /private/var/tmp/pam_modules/pam_modules-36.2.obj/pam_serialnumber/pam_serialnumber.o`
+`ld: library not found for -lAppleSystemInfo`
+****
+****
+__Notes:__ no path with *AppleSystemInfo* as a directory exist on my mac (10.5.7).
 
 See <http://darwinbuild.macosforge.org/trac/ticket/79>
 ------------------------------------------------------------------------
@@ -12480,33 +12460,33 @@ xsasl_cyrus_server.c:78:22: xsasl_cyrus_server.c:78:22:error: saslutil.h: No suc
 ------------------------------------------------------------------------
 ### pdisk
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:39:35: error: IOKit/pwr_mgt/IOPMLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:40:32: error: IOKit/pwr_mgt/IOPM.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:41:28: error: IOKit/IOReturn.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">need IOKitUser</span></span>
+**Problem:** `/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:39:35: error: IOKit/pwr_mgt/IOPMLib.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:40:32: error: IOKit/pwr_mgt/IOPM.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:41:28: error: IOKit/IOReturn.h: No such file or directory`
+`/SourceCache/cron/cron-30/cron/do_command.c:38:28: error: IOKit/IOKitLib.h: No such file or directory`
+`need IOKitUser`
 ------------------------------------------------------------------------
 ### ruby
-<span style="font-family:Helvetica;font-size:12px"><span style="font-size:13px"><span style="font-family:arial">(Implicitly needed for copystrings & copyplist in </span></span>**<span style="font-size:13px"><span style="font-family:arial">IOKitUser</span></span>**<span style="font-size:13px"><span style="font-family:arial">) and explicitly needed for many projects using ruby scripts.</span></span></span>
+<span style="font-family:Helvetica;font-size:12px"><span style="font-size:13px"><span style="font-family:arial">(Implicitly needed for copystrings & copyplist in </span></span>**IOKitUser**) and explicitly needed for many projects using ruby scripts.</span>
 #### 9J61
-<span style="font-weight:bold">Problem:</span> <span style="font-size:12px"><span style="font-family:courier new,monospace"><span style="font-size:small">ld: warning in /usr/lib/libSystemStubs.a, missing required architecture ppc64 in </span></span>file</span>
-<span style="font-size:12px"><span style="font-weight:bold">Solution:</span> rebuild SystemStubs with a custom plist including all arch.</span>
+**Problem:** 
+<span style="font-size:12px">**Solution:** rebuild SystemStubs with a custom plist including all arch.</span>
 #### 9G55
 
-<span style="font-size:small"><span style="font-family:arial,sans-serif"><span style="font-weight:bold"><span style="font-family:Helvetica">Problem</span>:</span> <span style="font-family:courier new,monospace">ld: couldn't dlopen() /usr/lib/libdtrace.dylib: dlopen(/usr/lib/libdtrace.dylib, 1): image not found</span></span></span>
-<span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold"><span style="font-size:13px">Solution</span>:</span> </span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace && darwinbuild -load dtrace</span></span>
+<span style="font-size:small"><span style="font-family:arial,sans-serif">**** `ld: couldn't dlopen() /usr/lib/libdtrace.dylib: dlopen(/usr/lib/libdtrace.dylib, 1): image not found`</span></span>
+<span style="font-family:Helvetica;font-size:12px">**Solution:** </span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace && darwinbuild -load dtrace</span></span>
 
 
 #### 9F33
-<span style="font-size:small"><span style="font-family:arial,sans-serif"><span style="font-weight:bold"><span style="font-family:Helvetica">Problem</span>:</span> <span style="font-family:courier new,monospace">ld: couldn't dlopen() /usr/lib/libdtrace.dylib: dlopen(/usr/lib/libdtrace.dylib, 1): image not found</span></span></span>
-<span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold"><span style="font-size:small">Solution</span>:</span> </span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace && darwinbuild -load dtrace</span></span>
+<span style="font-size:small"><span style="font-family:arial,sans-serif">**** `ld: couldn't dlopen() /usr/lib/libdtrace.dylib: dlopen(/usr/lib/libdtrace.dylib, 1): image not found`</span></span>
+<span style="font-family:Helvetica;font-size:12px">**Solution:** </span><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild dtrace && darwinbuild -load dtrace</span></span>
 
-<span style="font-size:small"><span style="font-family:arial,sans-serif">
-</span></span>
 
-<span style="font-family:arial"><span style="font-weight:bold"><span style="font-family:Helvetica"><span style="font-size:small">Problem</span></span><span style="font-size:small">: </span></span><span style="font-size:small">Symbolication error..</span></span>
-<span style="font-family:Helvetica"><span style="font-weight:bold"><span style="font-size:small">Solution:</span></span><span style="font-size:small"> </span><span style="color:rgb(255,0,0);font-family:Arial;font-weight:bold"><span style="font-size:small">Please, let us know if you have one!</span></span></span>
+
+
+<span style="font-family:arial">**Problem: **Symbolication error..</span>
+<span style="font-family:Helvetica">**Solution:** **Please, let us know if you have one!**</span>
 
 [![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/ruby.png)](ruby.png%3Fattredirects=0)
 
@@ -12538,19 +12518,19 @@ src/SharedMemoryServer.h:8:49: error: securityd_client/SharedMemoryCommon.h: No 
 
 ### screen
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span>
+**Problem:**
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/screen/screen-12/screen/screen.c:105:19:/SourceCache/screen/screen-12/screen/screen.c:105:19:  error: error: vproc.h: No such file or directory</span></span>
+`/SourceCache/screen/screen-12/screen/screen.c:105:19:/SourceCache/screen/screen-12/screen/screen.c:105:19:  error: error: vproc.h: No such file or directory`
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/screen/screen-12/screen/screen.c:106:24: error: vproc_priv.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">/SourceCache/screen/screen-12/screen/screen.c:106:24: error: vproc_priv.h: No such file or directory</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/private/var/tmp/launchd_libs/launchd_libs-258.22.root/usr/include/* BuildRoot/usr/include/ 
-</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">cp -R BuildRoot/private/var/tmp/launchd_libs/launchd_libs-258.22.root/usr/local/include/* BuildRoot/usr/local/include/</span></span>
+`/SourceCache/screen/screen-12/screen/screen.c:106:24: error: vproc_priv.h: No such file or directory`
+`/SourceCache/screen/screen-12/screen/screen.c:106:24: error: vproc_priv.h: No such file or directory`
+**Solution:** `cp -R BuildRoot/private/var/tmp/launchd_libs/launchd_libs-258.22.root/usr/include/* BuildRoot/usr/include/ 
+`
+`cp -R BuildRoot/private/var/tmp/launchd_libs/launchd_libs-258.22.root/usr/local/include/* BuildRoot/usr/local/include/`
 ------------------------------------------------------------------------
 ### smb
 #### 9J61
-<span style="font-weight:bold">Problem:</span> /SourceCache/smb/smb-348.7/lib/smb/ctx.c:45:31: error: URLMount/URLMount.h: No such file or directory
+**Problem:** /SourceCache/smb/smb-348.7/lib/smb/ctx.c:45:31: error: URLMount/URLMount.h: No such file or directory
 
 /SourceCache/smb/smb-348.7/lib/smb/ctx.c:49:39: error: CoreServices/CoreServices.h: No such file or directory
 /SourceCache/smb/smb-348.7/lib/smb/ctx.c:50:37: error: CFNetwork/CFNetServices.h: No such file or directory
@@ -12571,7 +12551,7 @@ configure: error: no - APXS refers to an old version of Apache
 /usr/bin/cc -arch ppc -arch i386 -g -Os -pipe -Wall -mdynamic-no-pic -DINET6 -pipe -no-cpp-precomp -arch ppc -arch i386 -I/private/var/tmp/syslog/syslog-69.0.4.obj/aslmanager -c -o /private/var/tmp/syslog/syslog-69.0.4.obj/aslmanager/aslmanager.o aslmanager.c
 ===== Linking aslmanager RELEASE =====
 /usr/bin/cc -arch ppc -arch i386            -dead_strip -o /private/var/tmp/syslog/syslog-69.0.4.sym/aslmanager 
-<span style="white-space:pre"> </span> /private/var/tmp/syslog/syslog-69.0.4.obj/aslmanager/aslmanager.o
+  /private/var/tmp/syslog/syslog-69.0.4.obj/aslmanager/aslmanager.o
 Undefined symbols for architecture ppc:
   "_asl_file_close", referenced from:
       _do_match in aslmanager.o
@@ -12610,45 +12590,44 @@ ld: symbol(s) not found for architecture i386
 
 
 ### system_cmds
-<span style="font-family:Helvetica;font-size:12px"></span>
-<span style="font-family:courier new">darwinbuild system_cmds<span style="font-family:Helvetica"><span style="font-family:Arial;font-size:14px;font-weight:bold"><span style="font-size:12px"><span style="font-weight:normal">
-</span></span></span></span></span>
+
+
 #### 9J61
-Problem:<span style="font-size:12px;font-weight:normal"> <span style="font-family:courier new,monospace">dyld</span><span style="font-size:small"><span style="font-family:courier new,monospace">: </span></span><span style="font-family:courier new,monospace;font-size:small">Library not loaded: /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation</span></span>
-<span style="font-family:courier new"><span style="font-family:Helvetica"><span style="font-family:Arial;font-size:14px;font-weight:bold"><span style="font-size:12px;font-weight:normal"><span style="font-family:courier new,monospace;font-size:small">Referenced from: /usr/bin/arch</span></span></span></span></span>
-<span style="font-family:courier new"><span style="font-family:Helvetica"><span style="font-family:Arial;font-size:14px;font-weight:bold"><span style="font-size:12px;font-weight:normal"><span style="font-family:courier new,monospace;font-size:small">Reason: image not found</span></span></span></span></span>
-<span style="font-family:courier new"><span style="font-family:Helvetica"><span style="font-family:Arial;font-size:14px;font-weight:bold"><span style="font-size:12px;font-weight:normal"><span style="font-family:courier new,monospace;font-size:small">gcc-4.0: Invalid arch name : -D__MACH30__</span></span></span></span></span>
-<span style="font-family:courier new"><span style="font-family:Helvetica"><span style="font-family:Arial;font-size:14px;font-weight:bold"><span style="font-size:12px;font-weight:normal"><span style="font-family:courier new,monospace;font-size:small"><span style="font-family:Arial"><span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild  -load system_cmds</span></span> (also add manually [PureFoundation](../../../purefoundation.html).root.tar.bz2 in order to satisfy arch dependency to Foundation.framework)</span></span></span></span></span></span>
+Problem:
+Referenced from: /usr/bin/arch
+Reason: image not found
+gcc-4.0: Invalid arch name : -D__MACH30__
+<span style="font-family:courier new"><span style="font-family:Helvetica"><span style="font-family:Arial;font-size:14px;font-weight:bold"><span style="font-size:12px;font-weight:normal"><span style="font-family:courier new,monospace;font-size:small"><span style="font-family:Arial">**Solution:** `darwinbuild  -load system_cmds` (also add manually [PureFoundation](../../../purefoundation.html).root.tar.bz2 in order to satisfy arch dependency to Foundation.framework)</span></span></span></span></span></span>
 
 dynamic_pager.c:35:42: error: IOKit/pwr_mgt/IOPMLibPrivate.h: No such file or directory
 dynamic_pager.c:36:37: error: IOKit/ps/IOPowerSources.h: No such file or directory
 dynamic_pager.c:37:44: error: IOKit/ps/IOPowerSourcesPrivate.h: No such file or directory
-<span style="font-family:courier new">darwinbuild -headers IOKitUser</span>
+darwinbuild -headers IOKitUser
 
 #### 9G55
 #### 9F33
-<span style="font-weight:bold"><span style="font-size:13px">Problem:</span></span> <span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:35:42: error: IOKit/pwr_mgt/IOPMLibPrivate.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:36:37: error: IOKit/ps/IOPowerSources.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:37:44: error: IOKit/ps/IOPowerSourcesPrivate.h: No such file or directory</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:569: error: 'kIOMasterPortDefault' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:569: error: (Each undeclared identifier is reported only once</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:569: error: for each function it appears in.)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:570: error: 'kIOReturnSuccess' undeclared (first use in this function)</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">dynamic_pager.c:582: error: syntax error before 'kIOPMBatteryPowerKey'</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-family:Arial;font-size:13px">Solution:</span> <span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px">mv BuildRoot/System/Library/Frameworks/IOKit.framework BuildRoot/System/Library/Frameworks/IOKit.framework.origin</span></span></span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px">darwinbuild -headers IOKitUser</span></span></span></span></span></span>
-<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild IOKitUser </span></span></span></span></span>
-<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild -load IOKitUser</span></span></span></span></span>
-<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">chroot BuildRoot</span></span></span></span></span>
-<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">cp -R /XCD/SY/Library/Frameworks/IOKit.framework /System/Library/Frameworks</span></span></span></span></span>
-<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">cp -R /System/Library/Frameworks/IOKit.framework.origin/* /System/Library/Frameworks/IOKit.framework/</span></span></span></span></span>
-<span style="font-family:Arial;font-size:13px">
-</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px"><span style="font-family:Arial;font-size:13px"><span style="font-family:Helvetica;font-weight:bold">Problem: <span style="color:rgb(255,0,0);font-weight:bold"><span style="color:rgb(0,0,0)">arch.m:38:35: error: Foundation/Foundation.h: No such file or directory</span></span></span></span></span></span></span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px"><span style="font-family:Arial;font-size:13px"><span style="font-family:Helvetica;font-weight:bold"><span style="font-family:Arial;font-size:12px;font-weight:normal"><span style="font-family:arial;font-size:13px;color:rgb(255,0,0);font-weight:bold"><span style="font-family:Arial"><span style="color:rgb(0,0,0)">Solution: </span></span>Please, let us know if you have one.</span></span></span></span></span></span></span></span></span></span>
-<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-size:small"><span style="font-family:arial,sans-serif">Since Foundation is not part of Darwin, we need to patch the source so that it doesn't need Foundation any more (Sometimes older versions of the same source can give a hint).<span style="font-family:Helvetica;font-size:12px"><span style="font-family:Arial;font-size:13px">
-</span></span></span></span></span></span></span>
-Alternative Solution: [PureFoundation](../../../purefoundation.html) can be added manually to satisfy arch dependency to <span style="font-style:italic">Foundation.framework</span>.
+**Problem:** `dynamic_pager.c:35:42: error: IOKit/pwr_mgt/IOPMLibPrivate.h: No such file or directory`
+`dynamic_pager.c:36:37: error: IOKit/ps/IOPowerSources.h: No such file or directory`
+`dynamic_pager.c:37:44: error: IOKit/ps/IOPowerSourcesPrivate.h: No such file or directory`
+`dynamic_pager.c:569: error: 'kIOMasterPortDefault' undeclared (first use in this function)`
+`dynamic_pager.c:569: error: (Each undeclared identifier is reported only once`
+`dynamic_pager.c:569: error: for each function it appears in.)`
+`dynamic_pager.c:570: error: 'kIOReturnSuccess' undeclared (first use in this function)`
+`dynamic_pager.c:582: error: syntax error before 'kIOPMBatteryPowerKey'`
+``
+`darwinbuild -headers IOKitUser`
+darwinbuild IOKitUser 
+darwinbuild -load IOKitUser
+chroot BuildRoot
+cp -R /XCD/SY/Library/Frameworks/IOKit.framework /System/Library/Frameworks
+cp -R /System/Library/Frameworks/IOKit.framework.origin/* /System/Library/Frameworks/IOKit.framework/
+
+
+``
+``
+<span><span style="font-weight:bold"><span style="font-weight:normal"><span style="font-size:small"><span style="font-family:arial,sans-serif">Since Foundation is not part of Darwin, we need to patch the source so that it doesn't need Foundation any more (Sometimes older versions of the same source can give a hint).
+</span></span></span></span></span>
+Alternative Solution: [PureFoundation](../../../purefoundation.html) can be added manually to satisfy arch dependency to *Foundation.framework*.
 root@europa:/Volumes/Builds/9G55/BuildRoot# mv PureFoundation/Foundation.framework System/Library/Frameworks
 root@europa:/Volumes/Builds/9G55/BuildRoot# chroot .
 europa# arch
@@ -12656,67 +12635,67 @@ NSObject +load
 i386
 
 
-<span style="font-weight:bold"><span style="font-size:13px">Problem</span>: <span style="font-family:courier new;font-weight:normal">arch</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px"><span style="font-family:Arial;font-size:13px"><span style="font-family:Helvetica;font-size:12px"><span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:courier new;font-weight:normal">dyld: <span style="color:rgb(255,0,0)">Symbol not found: __kCFBundleResourceSpecificationKey</span></span></span></span></span></span></span></span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px"><span style="font-family:Arial;font-size:13px"><span style="font-family:Helvetica;font-size:12px"><span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:courier new;font-weight:normal">  Referenced from: /System/Library/Frameworks/Security.framework/Versions/A/Security</span></span></span></span></span></span></span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="font-family:Arial;font-size:13px;font-weight:bold"><span style="font-weight:normal"><span style="font-family:courier new"><span style="font-size:12px"><span style="font-family:Arial;font-size:13px"><span style="font-family:Helvetica;font-size:12px"><span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:courier new;font-weight:normal">  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation</span></span></span></span></span></span></span></span></span></span>
-<span style="font-family:courier new"><span style="font-family:Arial;font-size:13px"></span></span>
-<span style="font-family:Helvetica;font-size:12px;font-weight:bold"><span style="font-family:Arial;font-size:13px;font-weight:normal"><span style="font-weight:bold">Pseudo-solution: <span style="font-weight:normal">This workaround has been mentioned several times above. We're creating a trivial hook where `arch' calls `uname -p' (Alternatively, we could patch the sources to use `uname -p').</span></span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">mv /usr/bin/arch /usr/bin/arch.origin</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">echo 'uname -p' &gt; /usr/bin/arch</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">chmod +x /usr/bin/arch</span></span>
-<span style="font-family:Helvetica;font-size:13px;font-weight:bold">Alterative-solution:</span><span style="font-family:Helvetica;font-size:13px"> Satisfy the expected dependency with a patched CF-lite.</span>
-<span style="font-family:Arial"></span>
-<span style="font-weight:bold">
-</span>
+<span style="font-weight:bold">Problem: arch</span>
+``
+`  Referenced from: /System/Library/Frameworks/Security.framework/Versions/A/Security`
+`  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation`
+
+****
+`mv /usr/bin/arch /usr/bin/arch.origin`
+`echo 'uname -p' > /usr/bin/arch`
+`chmod +x /usr/bin/arch`
+**Alterative-solution:** Satisfy the expected dependency with a patched CF-lite.
+
+**
+**
 Let's look the dependencies of `arch' with `otool'.
 
-<span style="font-family:courier new;font-size:12px">otool -L /usr/bin/arch</span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span><span style="font-family:Helvetica">              </span></span><span style="color:rgb(68,68,68)">[...]</span></span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation...</span></span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)"> [...]</span></span></span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)"> </span></span></span></span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation...</span></span></span>
-<span style="color:rgb(68,68,68);font-family:courier new">
-</span>
-> > <span style="font-family:courier new;font-size:12px">otool -L /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation</span>
-> > <span style="font-family:courier new;font-size:12px;white-space:pre"><span style="color:rgb(68,68,68)"> [...]</span></span><span style="color:rgb(68,68,68)">
-> > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">/System/Library/Frameworks/Security.framework/Versions/A/Security...</span></span></span><span style="color:rgb(68,68,68)">
-> > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">[...]
+otool -L /usr/bin/arch
+<span style="font-family:courier new,monospace"><span style="font-size:small">              [...]</span></span>
+ `/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation...`
+ [...]
+ `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation...`
+
+
+> > otool -L /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+> > <span style="font-family:courier new;font-size:12px;white-space:pre"> [...]</span><span style="color:rgb(68,68,68)">
+> > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span>/System/Library/Frameworks/Security.framework/Versions/A/Security...</span><span style="color:rgb(68,68,68)">
+> > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">[...]
 > > </span></span></span>
-> > > > <span style="font-family:courier new;font-size:12px">otool -L /System/Library/Frameworks/Security.framework/Versions/A/Security</span>
-> > > > <span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">/System/Library/Frameworks/Security.framework/Versions/A/Security...</span></span></span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">/usr/lib/libstdc++.6.dylib...</span></span></span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation...</span></span></span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">/usr/lib/libgcc_s.1.dylib...</span></span></span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"><span style="color:rgb(68,68,68)"> </span></span></span><span style="font-family:courier new"><span style="color:rgb(68,68,68)">/usr/lib/libSystem.B.dylib...</span></span></span>
-
-<span style="font-family:Helvetica;font-size:12px">
-</span>
-<span><span style="font-family:arial,sans-serif"><span style="font-size:small">The problem is  </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">__kCFBundleResourceSpecificationKey</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> symbol referenced by the available </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">Security.framework</span></span></span><span style="font-family:arial,sans-serif"><span style="font-size:small"> should be present in </span></span><span style="font-style:italic"><span style="font-family:arial,sans-serif"><span style="font-size:small">CoreFoundation.framework:</span></span></span></span>
-<span style="font-family:Helvetica;font-size:12px;font-style:italic">
-</span>
-<span style="font-family:Helvetica;font-size:12px;font-style:italic"></span>
-<span style="font-style:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">grep kCFBundleResourceSpecificationKey /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation</span></span></span>
-<span style="font-style:normal"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">Binary file /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation matches</span></span></span></span>
-<span style="font-family:courier new;font-style:normal">
-</span>
-<span style="font-family:courier new;font-style:normal"><span style="font-family:Arial;font-size:13px"></span></span>
-<span style="font-style:normal"><span style="font-size:small">In the BuildRoot, </span></span><span style="font-size:small">CF-lite</span><span style="font-style:normal"><span style="font-size:small"> returns nothing.</span></span>
-<span style="font-style:normal">
-</span>
-
-<span style="font-style:normal"><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">grep kCFBundleResourceSpecificationKey /Volumes/Builds/9F33/BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation </span></span></span></span>
-
-
-<span style="font-family:Helvetica;font-size:12px">So we have mainly three choices:</span>
--   <span style="font-family:Helvetica;font-size:12px">to build and remove this symbol from <span style="font-style:italic">Security.framework</span></span>
--   <span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold">to build and have the reference satisfied in </span><span style="font-style:italic"><span style="font-weight:bold">CoreFoundation.framework</span></span></span>
--   <span style="font-family:Helvetica;font-size:12px"><span style="font-weight:bold">to short-circuit `arch'</span></span>
-We use <span style="font-style:italic">CF-lite</span>, but this time it seems to light. 
+> > > > otool -L /System/Library/Frameworks/Security.framework/Versions/A/Security
+> > > > <span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span>/System/Library/Frameworks/Security.framework/Versions/A/Security...</span><span style="color:rgb(68,68,68)">
+> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span>/usr/lib/libstdc++.6.dylib...</span><span style="color:rgb(68,68,68)">
+> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span><span style="font-family:courier new">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation...</span></span><span style="color:rgb(68,68,68)">
+> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span>/usr/lib/libgcc_s.1.dylib...</span><span style="color:rgb(68,68,68)">
+> > > > </span><span style="font-family:Helvetica;font-size:12px"><span style="white-space:pre"><span style="font-family:courier new"> </span></span>/usr/lib/libSystem.B.dylib...</span>
 
 
 
-A workaround in this case consists to recreate the missing prototype and method <span style="font-family:arial;font-style:italic">__kCFBundleResourceSpecificationKey <span style="font-family:Arial;font-style:normal">expected in <span style="font-style:italic">CF-lite</span>, build and then deploy it. </span></span>
+
+*
+*
+**
+grep kCFBundleResourceSpecificationKey /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+Binary file /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation matches
+
+
+<span style="font-family:courier new;font-style:normal"></span>
+In the BuildRoot, CF-lite returns nothing.
+
+
+
+grep kCFBundleResourceSpecificationKey /Volumes/Builds/9F33/BuildRoot/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation 
+
+
+So we have mainly three choices:
+-   
+-   
+-   to short-circuit `arch'
+We use *CF-lite*, but this time it seems to light. 
+
+
+
+A workaround in this case consists to recreate the missing prototype and method <span style="font-family:arial;font-style:italic">__kCFBundleResourceSpecificationKey <span style="font-family:Arial;font-style:normal">expected in *CF-lite*, build and then deploy it. </span></span>
 
 The real state looks like:
 
@@ -12724,65 +12703,65 @@ The real state looks like:
 [![](../../../_/rsrc/1230088495565/developers/darwinbuild/troubleshooting/system_cmds_9F33pd1.png)](system_cmds_9F33pd1.png%3Fattredirects=0)
 
 
-In fact, there is also <span style="font-weight:bold">Foundation.framework missing</span>.
+In fact, there is also **Foundation.framework missing**.
 **Solution: **See PureFoundation. e.g., with arch:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">root@europa:/Volumes/Builds/</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">9G55/BuildRoot# mv PureFoundation/Foundation.</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">framework System/Library/Frameworks</span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">root@europa:/Volumes/Builds/</span></span><span style="font-family:courier new,monospace"><span style="font-size:small">9G55/BuildRoot# chroot .
+`root@europa:/Volumes/Builds/``9G55/BuildRoot# mv PureFoundation/Foundation.``framework System/Library/Frameworks`
+<span>`root@europa:/Volumes/Builds/``9G55/BuildRoot# chroot .
 europa# arch
 NSObject +load
-i386</span></span></span>
+i386`</span>
 
 ------------------------------------------------------------------------
 ### tcl
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild tcl</span></span>
-<span style="font-weight:bold"></span>
+`darwinbuild tcl`
+****
 #### 9J61
 #### 9G55
 
-<span style="font-size:small">Fetch </span>[<span style="font-size:small">9G55pd1.plist</span>](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9G55pd1.plist)<span style="font-size:small"> into </span><span style="font-style:italic"><span style="font-size:small">.build</span></span><span style="font-size:small"> directory of your DarwinBuild repository, then:</span>
-<span style="font-size:small">
-</span>
+Fetch [9G55pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9G55pd1.plist) into *.build* directory of your DarwinBuild repository, then:
 
-<span><span style="font-size:small"><span style="font-family:courier new,monospace">darwinbuild -init 9G55pd1</span></span></span>
-<span style="font-size:small">
-</span>
-<span style="font-family:courier new"><span style="font-family:Arial"><span style="font-size:small">The plist file above contains some patches that tend to avoid some errors.</span></span></span>
-<span style="font-size:small">
-</span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild tcl</span></span>
 
-<span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">xcodebuild[49094:4607] Warning:  Couldn't discover the 'gcc' compiler's built-in search paths and preprocessor definitions for language dialect 'c'.  This may lead to indexing issues.</span></span></span></span>
+darwinbuild -init 9G55pd1
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">Compiler: /XCD/loper/Library/Xcode/Plug-ins/GCC 4.0.xcplugin/Contents/Resources/gcc</span></span>
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">Reason:   sh: /XCD/loper/Library/Xcode/Plug-ins/GCC 4.0.xcplugin/Contents/Resources/gcc: No such file or directory</span></span>
+The plist file above contains some patches that tend to avoid some errors.
 
-<span style="font-weight:bold">Solution: <span style="color:rgb(255,0,0)">Please, let us know if you have a solution</span></span>
 
-<span style="font-weight:bold">
-</span>
 
-<span style="font-weight:bold">Problem: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">/var/tmp/tcl/tcl-64.sym/SRC/tk/tk/macosx/tkMacOSX.h:18:27: error: Carbon/Carbon.h: No such file or directory</span></span></span></span>
+`darwinbuild tcl`
 
-<span style="font-weight:bold">Solution:<span style="color:rgb(255,0,0)"> Please, let us know if you have a solution</span></span>
+****
 
-<span style="font-weight:bold">
-</span>
+`Compiler: /XCD/loper/Library/Xcode/Plug-ins/GCC 4.0.xcplugin/Contents/Resources/gcc`
 
-<span style="font-weight:bold">Problem: </span><span style="font-family:courier new,monospace"><span style="font-size:small">dyld: Library not loaded: /System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation
+`Reason:   sh: /XCD/loper/Library/Xcode/Plug-ins/GCC 4.0.xcplugin/Contents/Resources/gcc: No such file or directory`
+
+****
+
+**
+**
+
+****
+
+****
+
+**
+**
+
+**Problem: **`dyld: Library not loaded: /System/Library/Frameworks/CoreFoundation/Versions/A/CoreFoundation
 Referenced from: /private/var/tmp/tcl/tcl-64.sym/tcl/tclsh8.4
-Reason: image not found</span></span>
+Reason: image not found`
 
-<span style="font-weight:bold">Solution:</span> Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into <span style="font-style:italic">.build</span> directory of your DarwinBuild repository, then rebuild CF:
+**Solution:** Fetch [9F33pd1.plist](http://code.google.com/p/puredarwin/source/browse/trunk/plists/9F33pd1.plist) into *.build* directory of your DarwinBuild repository, then rebuild CF:
 
 <span style="font-family:courier new"><span style="font-size:12px">darwinbuild -init 9F33pd1 && darwinbuild CF && darwinbuild -load CF</span></span>
-<span style="font-family:courier new;font-size:12px"><span style="font-family:Arial;font-size:13px"></span></span>
+
 After recompilation of CF, dependency is fixed:
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)</span></span>
-<span style="font-weight:bold">Next solution: </span>See <http://darwinbuild.macosforge.org/trac/ticket/41#comment:1> / [rdar://problem/6488974](http://rdar://problem/6488974)
+`/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
+**Next solution: **See <http://darwinbuild.macosforge.org/trac/ticket/41#comment:1> / [rdar://problem/6488974](http://rdar://problem/6488974)
 ------------------------------------------------------------------------
 ### tcl_ext
 9J61
@@ -12797,73 +12776,72 @@ After recompilation of CF, dependency is fixed:
 ------------------------------------------------------------------------
 ### tidy
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">ld: can't open order file: /usr/local/lib/OrderFiles/libtidy.order</span></span>
-<span style="font-weight:bold">Solution:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">touch BuildRoot/usr/local/lib/OrderFiles/libtidy.order</span></span>
+**Problem:** `ld: can't open order file: /usr/local/lib/OrderFiles/libtidy.order`
+**Solution:** `touch BuildRoot/usr/local/lib/OrderFiles/libtidy.order`
 then
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> BUILD TIME: 0h 0m 43s</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small">EXIT STATUS: 0</span></span>
+`++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++`
+` BUILD TIME: 0h 0m 43s`
+`EXIT STATUS: 0`
 
-<span style="font-family:courier new;font-size:12px"></span>
+
 ------------------------------------------------------------------------
 ### usertemplate
 #### 9J61 (ok)
-<span style="font-weight:bold">Problem:</span> <span style="font-family:courier new,monospace"><span style="font-size:small">/bin/sh: /Developer/Tools/SetFile: No such file or directory</span></span>
+**Problem:** `/bin/sh: /Developer/Tools/SetFile: No such file or directory`
 
-<span style="font-weight:bold">Solution: </span>SetFile appears to not be available.
+**Solution: **SetFile appears to not be available.
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">ln -fs /usr/bin/true /Developer/Tools/SetFile</span></span>
+`ln -fs /usr/bin/true /Developer/Tools/SetFile`
 
-<span style="font-family:courier new">
-</span>
+
+
 Then it builds.
 
 ------------------------------------------------------------------------
 
-<span style="font-size:13px"></span>
+
 ### webdavfs
 #### 9J61
-<span style="font-weight:bold">Problem: </span>dependency on cocoa header
+**Problem: **dependency on cocoa header
 
 /SourceCache/webdavfs/webdavfs-252.8/webdav_cert_ui.tproj/webdav_cert_ui_Prefix.pch:29:28: error: Cocoa/Cocoa.h: No such file or directory
 
 ------------------------------------------------------------------------
 ### xnu
-<span style="font-size:12px;font-weight:normal"><span style="color:rgb(153,153,153)"><span style="color:rgb(0,0,0)"><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild xnu</span></span>
-</span></span></span>
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #### 9J61 (ok)
 .
 #### 9G55 (ok)
 .
 #### 9F33
-<span style="font-size:12px;font-weight:normal"><span style="color:rgb(153,153,153)"><span style="color:rgb(0,0,0)"><span style="font-weight:bold">Problem (9F33): </span>/bin/sh: /usr/local/bin/ctfmerge: No such file or directory
-<span style="font-weight:bold">Solution:</span> It needs libdwarf and libelf
-<span style="font-weight:bold">Problem (9F33)</span><span style="font-weight:bold">:</span></span>/</span><span style="font-family:courier new"><span style="font-size:12px"><span style="color:rgb(153,153,153)">usr/local/bin/ctfmerge -l xnu -o /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.ctfsys........</span></span></span></span>
+<span style="font-size:12px;font-weight:normal"><span style="color:rgb(153,153,153)"><span style="color:rgb(0,0,0)">**Problem (9F33): **/bin/sh: /usr/local/bin/ctfmerge: No such file or directory
+**Solution:** It needs libdwarf and libelf
+**Problem (9F33)****:**</span>/</span>usr/local/bin/ctfmerge -l xnu -o /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.ctfsys........</span>
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">[...]</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">install: /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.sys.dSYM/./Contents/Resources/DWARF//mach_kernel.sys: No such file or directory</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">make[2]: *** [/private/var/tmp/xnu/xnu-1228.7.58.sym/mach_kernel] Error 71</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">make[2]: *** Waiting for unfinished jobs....</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">WARNING: ctfmerge: Can't read input file /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/*/RELEASE/*.*o.ctf: No such file or directory</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">ERROR: ctfmerge: Some input files were inaccessible</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">Removing /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.ctfsys</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">install: /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.ctfsys: No such file or directory</span></span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(153,153,153)">make[2]: *** [/private/var/tmp/xnu/xnu-1228.7.58.root/mach_kernel] Error 71</span></span></span>
-<span style="font-weight:bold"><span style="color:rgb(153,153,153)">Solution: ?</span></span>
+`[...]`
+`install: /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.sys.dSYM/./Contents/Resources/DWARF//mach_kernel.sys: No such file or directory`
+`make[2]: *** [/private/var/tmp/xnu/xnu-1228.7.58.sym/mach_kernel] Error 71`
+`make[2]: *** Waiting for unfinished jobs....`
+`WARNING: ctfmerge: Can't read input file /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/*/RELEASE/*.*o.ctf: No such file or directory`
+`ERROR: ctfmerge: Some input files were inaccessible`
+`Removing /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.ctfsys`
+`install: /private/var/tmp/xnu/xnu-1228.7.58.obj/RELEASE_I386/./mach_kernel.ctfsys: No such file or directory`
+`make[2]: *** [/private/var/tmp/xnu/xnu-1228.7.58.root/mach_kernel] Error 71`
+**Solution: ?**
 ------------------------------------------------------------------------
 ### xar
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild xar</span></span>
+`darwinbuild xar`
 #### 96J1 (ok)
 darwinbuild -load libxml2 is needed
 ------------------------------------------------------------------------
 ### zsh
-<span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild zsh</span></span>
-<span style="font-weight:bold"></span>
+`darwinbuild zsh`
+****
 #### 96J1 (ok)
-<span style="color:rgb(56,118,29)"></span>
-#### <span style="color:rgb(0,0,0)">9G55 (ok)</span>
+
+#### 9G55 (ok)
 
 ------------------------------------------------------------------------
 To be continued...

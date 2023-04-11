@@ -6,7 +6,7 @@ The PureDarwin project tries and tends to respect as much as possible the legal 
 Please understand that PureDarwin is a community project. It is not affiliated with Apple Inc.
 ### Licensed material
 Substantial parts of this project are bound to the following licenses. Please make sure that you fully understand them and comply with them before you begin to use or contribute to any software or information provided by the PureDarwin project. Please check the documentation that comes with each individual part.
--   [Apple Public Source License (APSL)](http://www.opensource.apple.com/apsl/) ([<span style="font-weight:bold">excerpt</span>](legal/apsl.html))
+-   [Apple Public Source License (APSL)](http://www.opensource.apple.com/apsl/) ([**excerpt**](legal/apsl.html))
 -   [Apple Binary Driver Software License Agreement](http://www.opensource.apple.com/darwinsource/APPLE_DRIVER_LICENSE)
 -   [VMware Tools Distribution Policy](http://www.vmware.com/download/eula/tools_policy.html)
 -   Other licensed Open Source material, see /usr/local/OpenSourceLicenses for license information
@@ -14,35 +14,35 @@ Substantial parts of this project are bound to the following licenses. Please ma
 Material originally engineered within the PureDarwin project is licensed under the BSD license as follows, unless specifically stated otherwise in the respective files or directories:
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">/*-</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * Copyright (c) 2007-2009 The PureDarwin Project.</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * All rights reserved.</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * @LICENSE_HEADER_START@</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * Redistribution and use in source and binary forms, with or without</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * modification, are permitted provided that the following conditions</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * are met:</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * 1. Redistributions of source code must retain the above copyright</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *    notice, this list of conditions and the following disclaimer.</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * 2. Redistributions in binary form must reproduce the above copyright</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *    notice, this list of conditions and the following disclaimer in the</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *    documentation and/or other materials provided with the distribution.</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> *</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> * @LICENSE_HEADER_END@</span></span>
-<span style="font-family:courier new,monospace"><span style="font-size:small"> */</span></span>
+`/*-`
+` * Copyright (c) 2007-2009 The PureDarwin Project.`
+` * All rights reserved.`
+` *`
+` * @LICENSE_HEADER_START@`
+` *`
+` * Redistribution and use in source and binary forms, with or without`
+` * modification, are permitted provided that the following conditions`
+` * are met:`
+` * 1. Redistributions of source code must retain the above copyright`
+` *    notice, this list of conditions and the following disclaimer.`
+` * 2. Redistributions in binary form must reproduce the above copyright`
+` *    notice, this list of conditions and the following disclaimer in the`
+` *    documentation and/or other materials provided with the distribution.`
+` *`
+` * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS`
+` * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,`
+` * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR`
+` * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR`
+` * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,`
+` * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,`
+` * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR`
+` * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF`
+` * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING`
+` * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS`
+` * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.`
+` *`
+` * @LICENSE_HEADER_END@`
+` */`
 
 
 We kindly suggest (but do not require) that you contribute any modifications back to the project.

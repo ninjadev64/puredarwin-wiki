@@ -25,7 +25,7 @@ This is useful for downstream projects like PureDarwin, since we can take most o
 
 #### Editing plists
 
-Property list files can be edited using any text editor. On Mac OS X, they can also be comfortably edited with the Property List Editor that comes with Xcode Tools. Mac OS X also comes with <span style="font-family:courier new,monospace"><span style="font-size:small">plutil</span></span>, a command line tool that can be used to verify that the syntax of a plist file is correct.
+Property list files can be edited using any text editor. On Mac OS X, they can also be comfortably edited with the Property List Editor that comes with Xcode Tools. Mac OS X also comes with `plutil`, a command line tool that can be used to verify that the syntax of a plist file is correct.
 
 ### Sample custom plist
 
@@ -70,7 +70,7 @@ Now DarwinBuild will use the modifications specified in the file above. Specific
 ### File name conventions
 
 DarwinBuild assumes certain conventions are met with regard to filenames.
--   If you have a <span style="font-weight:bold">source tarball</span>, it should be named projectname-version.tar.gz
+-   If you have a **source tarball**, it should be named projectname-version.tar.gz
      Note that a version must always be specified, added to the project name (upper/lowercase matters) with a dash, and followed by `.tar.gz`
      Example: `ACPIPS2Nub-1.tar.gz`
 -   If you have a **patch**, it should be named with the name, a dash, version, followed by `.p0.patch`

@@ -55,10 +55,8 @@ Add to *com.apple.Boot.plist*:
 
 
 ### Customizable UI
-<span style="font-family:courier new,monospace;font-size:small"><span style="font-size:13px">It is be possible to customize the bootloader UI.</span><span style="font-size:13px">
-</span><span style="font-size:13px">/Extra/Themes/ folder should contain some themes and /Extra/com.apple.Boot.plist should references one of them with:
-</span>&lt;key&gt;Theme&lt;/key&gt;</span>
-<span style="font-size:small">&lt;string&gt;**theme_folder_name**&lt;/string&gt;</span>
+``
+<string>**theme_folder_name**</string>
 
 #### Custom UI
 [![](../../_/rsrc/1247935767327/developers/booting/chameleon/Chameleon%20PureDarwin%20theme%200%20wait.png%3Fheight=327&width=420)](chameleon/Chameleon%20PureDarwin%20theme%200%20wait.png%3Fattredirects=0)

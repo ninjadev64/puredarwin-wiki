@@ -28,8 +28,8 @@ This should get the system booting from USB (At the very least, it should go bey
 
 Copy the KEXT to `$VOLUME/System/Library/Extensions/` and fix permissions (important):
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">chown -R root:wheel $VOLUME/System/Library/Extensions/</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">chmod -R 755 $VOLUME/System/Library/Extensions/</span></span></span>
+chown -R root:wheel $VOLUME/System/Library/Extensions/
+chmod -R 755 $VOLUME/System/Library/Extensions/
 ### Determining kext dependencies
 The minimal set of KEXTs above cannot, for example, boot from a CD, since the CD driver is not there. Hence, if we want to boot from CD, for example, we need to install the CD driver KEXT and its dependencies. Thus, we need to identify the dependencies.
 
@@ -37,17 +37,17 @@ In order to determine the dependencies of a KEXT, we can use [kextlibs](http://d
 Example:
 
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">kextlibs $VOLUME/System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDC.kext</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">com.apple.kpi.libkern = 9.2.2</span></span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">com.apple.kpi.iokit = 9.2.2</span></span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">com.apple.iokit.IOUSBFamily = 3.0.8</span></span></span></span>
+kextlibs $VOLUME/System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDC.kext
+com.apple.kpi.libkern = 9.2.2
+com.apple.kpi.iokit = 9.2.2
+com.apple.iokit.IOUSBFamily = 3.0.8
 
-So in this example, <span style="font-family:courier new,monospace"><span style="font-size:small">AppleUSBCDC.kext</span></span> has three dependencies. To see which KEXT satisfies a dependency (aka dependents), use [kextfind](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man8/kextfind.8.html):
+So in this example, `AppleUSBCDC.kext` has three dependencies. To see which KEXT satisfies a dependency (aka dependents), use [kextfind](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man8/kextfind.8.html):
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">kextfind -case-insensitive -bundle-id -substring 'com.apple.iokit.IOUSBFamily' -print</span></span></span>
-<span><span style="font-family:courier new,monospace"><span style="font-size:small"><span style="color:rgb(68,68,68)">/System/Library/Extensions/IOUSBFamily.kext</span></span></span></span>
+kextfind -case-insensitive -bundle-id -substring 'com.apple.iokit.IOUSBFamily' -print
+/System/Library/Extensions/IOUSBFamily.kext
 
-Of course, <span style="font-family:courier new,monospace"><span style="font-size:small">IOUSBFamily.kext</span></span> itself has its own dependencies, so we need to make that recursive if we want to find out all dependencies.
+Of course, `IOUSBFamily.kext` itself has its own dependencies, so we need to make that recursive if we want to find out all dependencies.
 #### A visual overview of dependencies
 Take a look at [Visualize KEXTs dependencies](kexts/kexts-dependencies-overview.html) page.
 ### Extensions.mkext
@@ -55,13 +55,13 @@ A cache of installed KEXTs is kept in order to speed up boot time.
 #### Unpack Extensions.mkext
 Extensions.mkext can be unpacked with the [mkextunpack](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man8/mkextunpack.8.html) command:
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">mkextunpack -v -d /tmp/Extensions Extensions.mkext</span></span></span>
+mkextunpack -v -d /tmp/Extensions Extensions.mkext
 ### Force cache update {style="margin:10px 10px 10px 0px;color:rgb(0,0,0)"}
-<span style="font-size:small">Normally, <span style="font-family:courier new,monospace">Extensions.mkext</span> is updated whenever we add or remove extensions using the Finder on a Mac OS X system. However, if you install an extension as a plug-in of another (a subfolder into<span style="font-style:italic"> $VOLUME/System/Library/Extensions</span>), the automatic cache updater is not triggered.</span>
 
-To force cache update, simply change the modification date of <span style="font-style:italic">$VOLUME/System/Library/Extensions</span>:
 
-<span><span style="font-family:courier new,monospace"><span style="font-size:small">touch $VOLUME/System/Library/Extensions</span></span></span>
+To force cache update, simply change the modification date of *$VOLUME/System/Library/Extensions*:
+
+touch $VOLUME/System/Library/Extensions
 
 ### Types of kexts
 #### Driver KEXTs

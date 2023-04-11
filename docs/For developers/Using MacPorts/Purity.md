@@ -1,10 +1,10 @@
 Purity checking
 ===============
 This page is about checking the "purity" (read: absence of links to ApplicationServices, CoreServices and other proprietary, closed-source frameworks and libraries).
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 
 Contents
 
@@ -18,7 +18,7 @@ Contents
 
 Since the proprietary, closed-source frameworks and libraries that are part of Mac OS X but not Darwin, we must ensure that none of the binaries generated through the MacPorts project link to any of them.
 
-What additionally complicates the matter is that links are "inherited" in the Darwin linker system. Say, <span style="font-style:italic">liba</span> links to ApplicationServices by mistake, <span style="font-style:italic">libb</span> links to <span style="font-style:italic">liba</span>, and <span style="font-style:italic">libc</span> links to <span style="font-style:italic">libb</span>. In this case, even <span style="font-style:italic">libc</span> now has the "wrong" link to ApplicationServices, even though <span style="font-style:italic">libc</span> itself wouldn't need it.
+What additionally complicates the matter is that links are "inherited" in the Darwin linker system. Say, *liba* links to ApplicationServices by mistake, *libb* links to *liba*, and *libc* links to *libb*. In this case, even *libc* now has the "wrong" link to ApplicationServices, even though *libc* itself wouldn't need it.
 
 [![](https://raw.github.com/wiki/PureDarwin/PureDarwin/images/libalibblibc.png)](purity/libalibblibc.png%3Fattredirects=0)
 
@@ -28,8 +28,8 @@ So it is really crucial to check that no unneccessary links are introduced into 
 
 ### Script
 
-The script at the bottom of this page will help you checking the "purity" of a given RPM package <span style="color:rgb(255,0,0)">(todo: include this in MacPorts before/after building the RPM...)<span style="color:rgb(0,0,0)">.</span></span>
-<span style="color:rgb(255,0,0)"><span style="color:rgb(0,0,0)">Also, take a look at [Visualize dependencies in MacPorts page](macports-dependencies-overview.html) if you want to check (and have an overview) of the "purity" of all dependencies (installed ports) for a given portname.</span></span>
+The script at the bottom of this page will help you checking the "purity" of a given RPM package 
+Also, take a look at [Visualize dependencies in MacPorts page](macports-dependencies-overview.html) if you want to check (and have an overview) of the "purity" of all dependencies (installed ports) for a given portname.
     Alternatively, you can use something like this to see impurities as they happen during the build process:sh-3.2# port clean cairo
     --->  Cleaning cairo
     sh-3.2# port -v -d build cairo +puredarwin 2>&1 | grep Services

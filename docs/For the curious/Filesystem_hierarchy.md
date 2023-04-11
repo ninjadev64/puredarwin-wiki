@@ -5,10 +5,10 @@ Ever wondered what /etc, /usr, /opt, and so on mean?
 Ever wondered what the differences between /lib, /usr/lib, /usr/local/lib are?
 Ever wondered what libexec and standalone mean?
 
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:280px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** BSD man hier](hier.html#TOC-BSD-man-hier)
 2.  [**2** Commonly used Darwin specialties](hier.html#TOC-Commonly-used-Darwin-specialties)
@@ -20,9 +20,9 @@ Contents
 4.  [**4** Library path](hier.html#TOC-Library-path)
 
 
-<span style="font-weight:bold">Commonly used Darwin specialties at the bottom of this page.</span>
+**Commonly used Darwin specialties at the bottom of this page.**
 ### BSD man hier
-<span style="border-collapse:separate;font-family:verdana;font-size:11px"> </span>
+ 
 ``` {style="font-family:monospace"}
 HIER(7)       FreeBSD Miscellaneous Information Manual        HIER(7)
 NAME
@@ -392,10 +392,10 @@ HISTORY
 ```
     FreeBSD 7.0            June 28, 2007             FreeBSD 7.0
 ### Commonly used Darwin specialties
--   <span style="font-weight:bold">/opt/local/</span> MacPorts-installed software
--   <span style="font-weight:bold">/sw/ </span>fink-installed software
--   <span style="font-weight:bold">/usr/local/</span> Some DarwinBuild-installed software
--   <span style="font-weight:bold">/usr/standalone/i386/ </span>Darwin bootloader
+-   **/opt/local/** MacPorts-installed software
+-   **/sw/ **fink-installed software
+-   **/usr/local/** Some DarwinBuild-installed software
+-   **/usr/standalone/i386/ **Darwin bootloader
 ### $PATH
 Note that in the BSD paths, /usr/local/bin comes after /usr/bin (unlike in GNU world, where /usr/local/bin might come before /usr/bin)
 #### Darwin 9
@@ -407,6 +407,6 @@ to be posted
 #### Ubuntu (example for "GNU world")
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 ### Library path
-Darwin world: $<span style="border-collapse:separate;font-size:12px">DYLD_LIBRARY_PATH</span>
+Darwin world: $DYLD_LIBRARY_PATH
 GNU world: $LD_LIBRARY_PATH
 

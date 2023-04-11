@@ -1,10 +1,10 @@
 launchd
 =======
 launchd is a central component of the Darwin and Mac OS X boot process.
-<div class="sites-embed-align-left-wrapping-off">
+
 <div class="sites-embed-border-off sites-embed" style="width:250px;">
-<div class="sites-embed-content sites-embed-type-toc">
-<div class="goog-toc sites-embed-toc-maxdepth-6">
+
+
 Contents
 1.  [**1** About launchd](launchd.html#TOC-About-launchd)
 2.  [**2** Making launchd verbose](launchd.html#TOC-Making-launchd-verbose)
@@ -20,7 +20,7 @@ Whenever you need to debug boot problems that occur after the root device has be
 and append the following to your /etc/syslog.conf:
     *.debug     /dev/console
 ### Runtime dependencies
-<span style="font-size:13px;font-weight:normal">The 9F33 binary root of the launchd project has runtime dependencies on the following libraries and frameworks:</span>
+The 9F33 binary root of the launchd project has runtime dependencies on the following libraries and frameworks:
     find /Users/user/Downloads/launchd.root -exec otool -L {} 2>&1 ; 
     | grep "compatibility version" | sort | uniq
 -   /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation 
@@ -36,12 +36,12 @@ The launchd project is developed in a publicly accessible subversion repository.
 To check out the latest development version of launchd, use 
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">svn co http://svn.macosforge.org/repository/launchd/trunk launchd</span></span>
+`svn co http://svn.macosforge.org/repository/launchd/trunk launchd`
 
 
 Note that this might be developed against a later version of the Core OS than what is publicly available. So something like
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">svn co http://svn.macosforge.org/repository/launchd/branches/SULeopard launchd</span></span>
+`svn co http://svn.macosforge.org/repository/launchd/branches/SULeopard launchd`
 
 might be more appropriate for Darwin 9.
 ### References

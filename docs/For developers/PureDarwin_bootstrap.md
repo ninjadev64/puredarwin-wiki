@@ -10,9 +10,9 @@ TODO: ramdisk (compressed) really begins to lack.
 
 
 ### Generating a "bootstrap" release
-<span style="font-size:small">PUREDARWIN_RELEASE="bootstrap" ./pd_setup ../../vm/bootstrap.vmwarevm PureDarwin</span>
-<span style="font-size:small">
-</span>
+PUREDARWIN_RELEASE="bootstrap" ./pd_setup ../../vm/bootstrap.vmwarevm PureDarwin
+
+
 
 pd_installer
 
@@ -31,10 +31,10 @@ Short count-down for the BIOS stage, where IDE devices are reported:
 
 The screen can sometimes been entirely filled by the error below:
 
-<span style="font-size:small">EBIOS read error: Error 0x31</span>
+EBIOS read error: Error 0x31
 
-<span><span style="font-size:small">    Block 0 Sectors 4</span></span><span style="font-size:small">
-</span>
+    Block 0 Sectors 4
+
 
 [![](../../_/rsrc/1263857961350/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20seek%20errors.png%3Fheight=262&width=400)](puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20seek%20errors.png%3Fattredirects=0)
 
