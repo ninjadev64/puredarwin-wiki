@@ -66,8 +66,8 @@ Thanks to Apple's Damien Sorresso on the launchd-dev mailing list for providing
 And then...
 
 
-Welcome to PureDarwin!<span style="border-collapse:separate">`
-`</span>
+Welcome to PureDarwin!`
+`
 
 
 

@@ -133,7 +133,7 @@ The modifications are automatically reflected in description:
 The modifications are also reflected in the final binary:
 
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">port install vim **-macosx **+**puredarwin** +tiny</span></span>
+`port install vim **-macosx **+**puredarwin** +tiny`
 `Portfile changed since last build; discarding previous state.`
 
 `---> Fetching vim`

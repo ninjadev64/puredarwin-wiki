@@ -255,11 +255,11 @@ Here an example of impurities detected in a port:
 
 `[...]`
 
-` 1` <span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz **impure!** /ApplicationServices.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/graphviz </span></span>
+` 1` ` + graphviz **impure!** /ApplicationServices.framework -> /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/graphviz `
 
-` 1` <span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz **impure!** /ApplicationServices.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/Versions/A/graphviz </span></span>
+` 1` ` + graphviz **impure!** /ApplicationServices.framework -> /Applications/MacPorts/Graphviz.app/Contents/Frameworks/graphviz.framework/Versions/A/graphviz `
 
-` 1` <span style="font-family:courier new,monospace"><span style="font-size:small"> + graphviz **impure!** /Cocoa.framework -&gt; /Applications/MacPorts/Graphviz.app/Contents/MacOS/Graphviz </span></span>
+` 1` ` + graphviz **impure!** /Cocoa.framework -> /Applications/MacPorts/Graphviz.app/Contents/MacOS/Graphviz `
 
 ` 1` ` + graphviz (universal darwin_6 darwin_7 darwin_8 darwin_9 guile lua ocaml perl php python ruby tcl smyrna no_pangocairo no_x11 gui)`
 

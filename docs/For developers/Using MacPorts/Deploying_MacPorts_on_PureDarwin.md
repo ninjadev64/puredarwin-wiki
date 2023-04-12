@@ -51,7 +51,7 @@ MacPorts 1.8.0 states depending its host.
   ** build and deployement **         **YES**   ** YES**      ** YES**
   ** port fetch <port>**         **YES**   ** YES**       ****
    **port install <port>**    **YES**                                                                                **YES**                                              **YES**
-  **/opt/local/[...]/<port>**                                     <span style="color:rgb(56,118,29)"><span style="font-weight:bold">YES</span></span>   <span style="color:rgb(56,118,29)"><span style="font-weight:bold"> YES</span></span>       **YES**
+  **/opt/local/[...]/<port>**                                     YES    YES       **YES**
   ----------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 As an example, the fortune project (one workaround consists to fetch the source only in a puredarwin chroot where the network is available from Mac OS X or to use [QEMU](../qemu.html) user mode network stack ) built and run:
@@ -140,14 +140,14 @@ How can we tell to darwinbuild to configure & make the project (except the way c
 We can continue the compilation process by hand for now..
 
 `cd /Volumes/Builds/9G55/BuildRoot `
-<span style="font-family:arial,sans-serif">
-</span>
+
+
 TCL is a must for MacPorts.
 
 
 tar xjvf /opt/local/var/macports/packages/darwin/i386/tcl-8.5.6_0+threads.i386.tbz2
-<span style="font-family:arial,sans-serif">
-</span>
+
+
 Obviously, we need curl.
 
 
@@ -425,7 +425,7 @@ tar xzvf [...]9J61/Packages/CarbonHeaders.root.tar.gz
 `    invoked from within`
 `"package require registry 1.0"`
 `    (file "src/dep_map_clean.tcl" line 10)`
-<span style="font-family:courier new;font-size:12px"></span>
+
 ****
 Seems to be fixed since MacPorts v1.7.1
 Deprecated stuff
@@ -493,7 +493,7 @@ Without X11:
 With X11 from MacPorts:
 
 `tar xjvf /opt/local/var/macports/packages/darwin/i386/xorg-libX11-1.1.5_1+x11_xcb.i386.tbz2`
-<span>`TCLSH=/opt/local/bin/tclsh ``./configure --without-objc-foundation --without-objc-runtime --with-x --x-includes=/usr/X11R6/include/ --x-libraries=/usr/X11R6/lib/ --with-tcl=/opt/local/lib --with-tclinclude=/opt/local/include --with-included-tclthread`</span>
+`TCLSH=/opt/local/bin/tclsh ``./configure --without-objc-foundation --without-objc-runtime --with-x --x-includes=/usr/X11R6/include/ --x-libraries=/usr/X11R6/lib/ --with-tcl=/opt/local/lib --with-tclinclude=/opt/local/include --with-included-tclthread`
 
 Then simply:
 
@@ -521,7 +521,7 @@ or alternatively, use some binary roots from MacPorts:
 
 `cd BuildRoot`
 `tar xjvf /opt/local/var/macports/packages/darwin/i386/tcl-8.5.4_0+threads.i386.tbz2`
-<span style="font-family:courier new">chroot .</span>
+chroot .
 
 `ln -s /opt/local/bin/tclsh8.5 /usr/bin/   `
 `ln -s /opt/local/bin/tclsh8.5 /usr/bin/tclsh`

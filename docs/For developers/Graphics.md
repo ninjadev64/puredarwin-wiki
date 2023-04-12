@@ -67,7 +67,7 @@ GraphicsDrivers is a proprietary, closed-source project that consists (or doesn'
     found in the Mac mini and early MacBook 
     (AppleIntelIntegratedFramebuffer.kext, AppleIntelGMA950.kext, AppleIntelGMA950GA.plugin, 
     AppleIntelGMA950GLDriver.bundle, AppleIntelGMA950VADriver.bundle)
--   <span style="color:rgb(255,0,0)">**AppleIntelGMAX3100**<span style="font-weight:bold"> (missing)</span>: Drivers for a series of Intel </span>[GMA X3100](http://en.wikipedia.org/wiki/Intel_GMA#GMA_X3100)-based on-board graphics from 2007
+-   **AppleIntelGMAX3100 (missing)**: Drivers for a series of Intel [GMA X3100](http://en.wikipedia.org/wiki/Intel_GMA#GMA_X3100)-based on-board graphics from 2007
     found in the MacBook
     (AppleIntelGMAX3100.kext, AppleIntelGMAX3100FB.kext, AppleIntelGMAX3100GA.plugin, 
     AppleIntelGMAX3100GLDriver.bundle, AppleIntelGMAX3100VADriver.bundle)

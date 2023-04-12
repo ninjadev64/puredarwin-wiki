@@ -49,7 +49,7 @@ In this example, _NSInvalidArgumentException should be exported by CF. (Please n
 
 nm -an /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation | grep _NSInvalidArgumentException
 ``
-<span style="font-family:courier new,monospace"><span style="font-size:small">0013b444 **S** _NSInvalidArgumentException</span></span>
+`0013b444 **S** _NSInvalidArgumentException`
 `nm -an /System/Library/Frameworks/Foundation.framework/Foundation | grep _NSInvalidArgumentException `
 `         `**U**` _NSInvalidArgumentException`
 `00272c70 S $ld$add$os10.4$_NSInvalidArgumentException`

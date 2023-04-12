@@ -37,8 +37,8 @@ Ensure that the following options are present.
 
 ethernet0.present = "TRUE"`
 `
-ethernet0.virtualDev = "e1000"<span>`
-`</span>
+ethernet0.virtualDev = "e1000"`
+`
 
 
 

@@ -44,14 +44,14 @@ Running PureDarwin Xmas on QEMU
 
 or
 
-<span style="border-collapse:separate;font-family:Monaco;font-size:9px">`-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.vmdk `-boot d -m 512
-</span>
+`-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.vmdk `-boot d -m 512
+
 
 or
 
 
-<span style="border-collapse:separate;font-family:Monaco;font-size:9px">`-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.iso `-boot d -m 512
-</span>
+`-hda puredarwinxmas.vmdk -cdrom purdarwinxmas.iso `-boot d -m 512
+
 
 
 QEMU can (at least on some platforms) emulate the Realtek RTL8139 network interface.
@@ -246,7 +246,7 @@ i82551, i82557b, i82559er, ne2k_pci, ne2k_isa, pcnet, rtl8139, e1000, sm
 
 
 `-net nic[,vlan=n][,macaddr=addr][,model=type]`
-<span style="font-family:courier new,monospace"><span style="font-size:small">                create a new Network Interface Card and connect it to VLAN 'n' <span style="font-family:Arial;font-size:13px"><span style="font-weight:bold"><span style="color:rgb(56,118,29)">-net nic,model=rtl8139 is enabled by PureFoundation. Need investigations.</span></span></span></span></span>
+create a new Network Interface Card and connect it to VLAN 'n'-net nic,model=rtl8139 is enabled by PureFoundation. Need investigations.
 
 
 `-boot [a|c|d|n] boot on floppy (a), hard disk (c), CD-ROM (d), or network (n)`** "d" with the corresponding target is functional.**

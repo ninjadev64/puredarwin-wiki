@@ -299,7 +299,7 @@ sudo mv /usr/X11R6 /usr/X11R6.apple
 Problem:
 port install xfree86 +puredarwin
 <div style="font-family:arial,sans-serif">
-<span style="font-family:courier new"><span style="font-size:small"><span style="font-family:courier new,monospace">[...]</span></span></span>
+[...]
 <div style="font-family:arial,sans-serif">
 
 
@@ -323,8 +323,8 @@ Error: Status 1 encountered during processing.
 <span style="color:rgb(0,0,0);font-family:arial;font-size:13px">
  </span>
  
-`--- xc/lib/xtrans/Xtranssock.c.origin`<span style="white-space:pre">` `</span>`2008-09-29 21:07:46.000000000 +0200`
-`+++ xc/lib/xtrans/Xtranssock.c`<span style="white-space:pre">` `</span>`2008-09-29 21:40:00.000000000 +0200`
+`--- xc/lib/xtrans/Xtranssock.c.origin`` ``2008-09-29 21:07:46.000000000 +0200`
+`+++ xc/lib/xtrans/Xtranssock.c`` ``2008-09-29 21:40:00.000000000 +0200`
 `@@ -284,6 +284,8 @@`
 ` #ifndef __USLC__`
 ` #pragma weak getaddrinfo`
@@ -338,7 +338,7 @@ Error: Status 1 encountered during processing.
 Problem:
 port install xfree86 +puredarwin
 [...]
-<span style="color:rgb(0,0,0)"><span style="color:rgb(68,68,68);font-family:Helvetica">`/usr/bin/cc -c -Wall -Wpointer-arith -no-cpp-precomp -fno-common -I. -I../include -I../../../programs/Xserver/include -I../../../exports/include "-I/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_x11_XFree86/work/include" -D__i386__ -D__DARWIN__ -DNO_ALLOCA -DCSRG_BASED -DFONTDIRATTRIB `<span style="white-space:pre">` `</span>` -DBUILD_SPEEDO -DBUILD_TYPE1 -DBUILD_CID `<span style="white-space:pre">` `</span>` -DBUILD_FREETYPE -DFONT_ENCODINGS_DIRECTORY="/usr/X11R6/lib/X11/fonts/encodings/encodings.dir" -DX_GZIP_FONT_COMPRESSION `<span style="white-space:pre">` `</span>`-Os -fno-strict-aliasing decompress.c -o unshared/decompress.o`</span></span>
+<span style="color:rgb(0,0,0)"><span style="color:rgb(68,68,68);font-family:Helvetica">`/usr/bin/cc -c -Wall -Wpointer-arith -no-cpp-precomp -fno-common -I. -I../include -I../../../programs/Xserver/include -I../../../exports/include "-I/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_x11_XFree86/work/include" -D__i386__ -D__DARWIN__ -DNO_ALLOCA -DCSRG_BASED -DFONTDIRATTRIB `` `` -DBUILD_SPEEDO -DBUILD_TYPE1 -DBUILD_CID `` `` -DBUILD_FREETYPE -DFONT_ENCODINGS_DIRECTORY="/usr/X11R6/lib/X11/fonts/encodings/encodings.dir" -DX_GZIP_FONT_COMPRESSION `` ``-Os -fno-strict-aliasing decompress.c -o unshared/decompress.o`</span></span>
 `decompress.c:96: error: syntax error before 'z_magic'`
 `[...]`
 `decompress.c:464: error: dereferencing pointer to incomplete type
@@ -359,8 +359,8 @@ Changes are minimal:
 <span style="color:rgb(0,0,0);font-family:arial;font-size:13px">
  </span>
  
-`--- xc/lib/font/fontfile/decompress.c.origin`<span style="white-space:pre">` `</span>`2008-09-29 22:08:09.000000000 +0200`
-`+++ xc/lib/font/fontfile/decompress.c`<span style="white-space:pre">` `</span>`2008-09-29 22:06:41.000000000 +0200`
+`--- xc/lib/font/fontfile/decompress.c.origin`` ``2008-09-29 22:08:09.000000000 +0200`
+`+++ xc/lib/font/fontfile/decompress.c`` ``2008-09-29 22:06:41.000000000 +0200`
 `@@ -77,7 +77,7 @@`
 ` `
 ` #include "fontmisc.h"`
@@ -395,7 +395,7 @@ Also, the option `-nokeymap` is still present and working, it makes X to attem
 
 
 
-<span style="font-family:Helvetica;font-size:13px;font-weight:normal"></span>
+
 
 [![](../_/rsrc/1222635272162/developers/xorg/X%20notcp%20on%20puredarwin.png)](xorg/X%20notcp%20on%20puredarwin.png%3Fattredirects=0)
 
@@ -432,13 +432,13 @@ Please let us know if you know how to generate a .keymapping file.
  
 #### Font-related problem when launching xterm
 
-<span style="font-family:courier new,monospace"><span style="font-size:small">**Problem:**</span></span>
+`**Problem:**`
 `XFree86 Version 4.7.0 / X Window System`
 `(protocol Version 11, revision 0)`
 `Release Date: 12 August 2007`
-<span style="white-space:pre">` `</span>`If the server is older than 6-12 months, or if your hardware is`
-<span style="white-space:pre">` `</span>`newer than the above date, look for a newer version before`
-<span style="white-space:pre">` `</span>`reporting problems. (See http://www.XFree86.Org/FAQ)`
+` ``If the server is older than 6-12 months, or if your hardware is`
+` ``newer than the above date, look for a newer version before`
+` ``reporting problems. (See http://www.XFree86.Org/FAQ)`
 `Operating System: Darwin Apple Computer, Inc.`
 `Using keymapping provided in /USA.keymapping.`
 `Display mode: IOKit`
@@ -485,20 +485,20 @@ Attempting to use width x height = 800 x 600
 
 <span style="font-family:courier new,monospace"><span>
  </span></span>
-<span style="font-family:courier new,monospace"><span>XFree86 Version 4.7.0 / X Window System</span></span>
-<span style="font-family:courier new,monospace"><span>(protocol Version 11, revision 0)</span></span>
-<span style="font-family:courier new,monospace"><span>Release Date: 12 August 2007</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span> </span></span></span><span style="font-family:courier new,monospace"><span>If the server is older than 6-12 months, or if your hardware is</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span> </span></span></span><span style="font-family:courier new,monospace"><span>newer than the above date, look for a newer version before</span></span>
-<span style="white-space:pre"><span style="font-family:courier new,monospace"><span> </span></span></span><span style="font-family:courier new,monospace"><span>reporting problems. (See http://www.XFree86.Org/FAQ)</span></span>
-<span style="font-family:courier new,monospace"><span>Operating System: Darwin Apple Computer, Inc.</span></span>
+`XFree86 Version 4.7.0 / X Window System`
+`(protocol Version 11, revision 0)`
+`Release Date: 12 August 2007`
+ `If the server is older than 6-12 months, or if your hardware is`
+ `newer than the above date, look for a newer version before`
+ `reporting problems. (See http://www.XFree86.Org/FAQ)`
+`Operating System: Darwin Apple Computer, Inc.`
 `Using keymapping provided in USA.keymapping.`
-<span style="font-family:courier new,monospace"><span>Display mode: IOKit</span></span>
+`Display mode: IOKit`
 `Couldn't set hardware cursor visible with kernel return 0xe00002c7.`
-<span style="font-family:courier new,monospace"><span>Screen 0 added: 800x600 @ (0,0)</span></span>
+`Screen 0 added: 800x600 @ (0,0)`
 `Could not init font path element /usr/X11R6/lib/X11/fonts/CID/, removing from list!`
 `Using keymapping provided in USA.keymapping.`
-<span style="font-family:courier new,monospace"><span>Display mode: IOKit</span></span>
+`Display mode: IOKit`
 `Failed to connect to the HID System as the window server!`
 <span style="font-family:courier new,monospace"><span>
  </span></span>
@@ -528,7 +528,7 @@ On VMware, ensure that VMwareIOFramebuffer.kext is loaded.
 A blue frozen screen and the message "assert failed on line 416 of xfIOKit.c!" in the (redirected) &2</span>
 
 
-<span style="font-family:Helvetica">**Solution:**</span>
+**Solution:**
 Unknown, please let us know.
 
 

@@ -14,7 +14,7 @@ Each piece is build and then "assembled" on this example:
 
 
 
-<span style="font-size:small">   3:           Apple_HFS PureDarwin 305056 @ 2080   (149.0M)   </span>
+   3:           Apple_HFS PureDarwin 305056 @ 2080   (149.0M)   
 
 
 

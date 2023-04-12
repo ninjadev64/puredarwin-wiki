@@ -19,12 +19,12 @@ On Darwin, you can quickly check for the presence of a code signature with otool
  Without grepping, output similar to the following is produced:
 
  Load command 13`
-`` `<span><span style="font-family:courier new,monospace">cmd LC_CODE_SIGNATURE</span></span>`
+`` `cmd LC_CODE_SIGNATURE`
 `` `cmdsize 16`
-`` `dataoff 574<span>`704``
+`` `dataoff 574`704``
 `` ``datasize 7968``
 `
- The binary used in the example above was (naturally) *otool* from Mac OS X Leopard.</span>
+ The binary used in the example above was (naturally) *otool* from Mac OS X Leopard.
 ### Other ways
 strings YourBinaryOfChoice | grep "Apple Code Signing Certification Authority"
 

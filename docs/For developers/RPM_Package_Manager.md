@@ -81,9 +81,9 @@ Should you get an error about missing parts, then do `/opt/local/bin/port unarc
 To run commands on RPMs that are not installed yet, add the `p` option as shown below.
 -   Install a package rpm -ivh --noparentdirs somepackage.rpm
 -   Show which packages are installed `rpm -qa`
--   Show information about an package `rpm -qi `<span style="font-family:courier new,monospace"><span style="font-size:small">somepackage or rpm -q**p**i somepackage**.rpm**</span></span>
--   Show which files are in an package <span style="font-family:courier new,monospace"><span style="font-size:small">rpm -ql somepackage or rpm -q**p**l somepackage**.rpm**</span></span>
--   <span style="font-family:courier new;font-size:12px;font-weight:bold"><span style="font-family:Arial;font-size:13px;font-weight:normal">Show which dependencies a package requires <span style="font-family:courier new,monospace"><span style="font-size:small">rpm -qR somepackage or rpm -q**p**R somepackage**.rpm**</span></span></span></span>
+-   Show information about an package `rpm -qi ``somepackage or rpm -q**p**i somepackage**.rpm**`
+-   Show which files are in an package `rpm -ql somepackage or rpm -q**p**l somepackage**.rpm**`
+-   **Show which dependencies a package requires `rpm -qR somepackage or rpm -qpR somepackage.rpm**
 -   Remove an installed package rpm -e somepackage
 -   Show help rpm --help
 ### Troubleshooting

@@ -297,9 +297,9 @@ FIXME
 
 References
 ----------
-<span>[`man dtrace`](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtrace.1.html)`
+[`man dtrace`](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtrace.1.html)`
 `[`man dtruss`](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/dtruss.1m.html)`
-`</span>[man procsystime](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/procsystime.1m.html)
+`[man procsystime](http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/procsystime.1m.html)
 
 <span style="font-size:small">Jon Haslam. <http://wikis.sun.com/display/DTrace/Security>, Sun Microsystems, 2008.</span>
 <span style="font-size:small">Glenn Brunette & Jon Haslam. *Enhancing Security Awareness with DTrace*, Sun Microsystems, 2006.</span>

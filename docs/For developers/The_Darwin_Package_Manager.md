@@ -108,7 +108,7 @@ __Note:__ If we choose to patch `port' from the MacPorts project, this repositor
 
   ----------------------------------------------------- -------------------------------------------------------------------------
   **Filename**        *To be determined...*
-  **Permissions**     <span>*To be determined...*</span>
+  **Permissions**     *To be determined...*
   **Path**            *To be determined...*
   **Miscellaneous**   The (Pure)Darwin Package Database
                                                         
@@ -204,7 +204,7 @@ So, could it be also possible that "dm" is a patch of `port' command (from the M
 <div style="direction:ltr">
  ```--info { package | group | system }`
 <div style="direction:ltr">
-<span style="white-space:pre"><span style="font-family:courier new,monospace">     </span></span>`--list { installed | available }`
+     `--list { installed | available }`
 <div style="direction:ltr">
 `--get [config_setting]`
 <div style="direction:ltr">
@@ -253,7 +253,7 @@ So, could it be also possible that "dm" is a patch of `port' command (from the M
 
 > perl python ruby <span style="font-size:small">will add the curl, perl, python and ruby packages
 > </span>
-> <span style="font-family:courier new">--add recovery_tools file_servers emacs    </span>will add the emacs package, all packages from the file_servers group, and all packages from the recovery_tools system
+> --add recovery_tools file_servers emacs    will add the emacs package, all packages from the file_servers group, and all packages from the recovery_tools system
 > --add Chess packages.txt will add the Chess package, and any packages, groups or systems listed in packages.txt
 <div style="direction:ltr">
 

@@ -41,9 +41,9 @@ The user will be asked a quick list of questions. The question must always have
 -   **Interactive mode** (advanced)
     Questions, questions and questions...
 -   **Semi interactive mode**
--   <span style="border-collapse:separate">**Non interactive mode** (full)
+-   **Non interactive mode** (full)
     MODE=1
-    </span>
+    
 -   **Non interactive mode** (automatic)
     MODE=0
     When the second stage installer runs, it should check for the presence of a configuration file in a specific location.

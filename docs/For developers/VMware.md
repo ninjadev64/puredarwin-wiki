@@ -231,7 +231,7 @@ VMware emulates an Intel e1000 network card.
 82546GB-B0 8086h       1079h     Copper; Dual Port **
 **82546GB-B0 8086h       107Ah     Fiber; Dual Port 
 82546GB-B0 8086h       107Bh     SerDes; Dual Port **
-<span style="font-family:Arial,Verdana,sans-serif;font-size:16px;font-weight:bold"><span style="font-size:13px;font-weight:normal">**<span style="font-size:small">82545EM-A  8086h<span style="font-weight:normal">      ** 100Fh     Copper **</span></span>**</span></span>
+**82545EM-A  8086h       100Fh     Copper**
 **82545EM-A  8086h       1011h     Fiber**
 **82545GM-B  8086h       1026h     Copper MAC Default **
 **82545GM-B  8086h       1027h     Fiber **
@@ -333,7 +333,7 @@ Vendor ID: 0x8086
 Primary device ID: 0x1000 or 0x100F
 
 `<key>IOPCIMatch</key>`
-<span style="font-family:courier new,monospace;font-size:small"><string>0x10008086 0x100F8086</string></span>
+`0x10008086 0x100F8086`
 
 
 
@@ -357,7 +357,7 @@ Which is confirmed on
 -   **e1000 from sourceforge:** *82540EP/EM, 82541xx, 82544GC/EI, 82545GM/EM, 82546GB/EB, and 82547xx*
     <http://kent.dl.sourceforge.net/sourceforge/e1000/OpenSDM_8254x-37.pdf>
 -   <http://www.pcidatabase.com/vendor_details.php?id=1302> also.
-<span style="font-size:small"><span style="font-size:x-small"><span style="font-size:13px">__Note:__ "When running VMware ESX Server 3.0.0, you can experience a kernel panic if you use Intel e1000 network adapters with any of the following PCI IDs: </span><span style="font-size:13px">**0x100F**[...]" - <http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2221></span></span></span>
+<span style="font-size:small"><span style="font-size:x-small">__Note:__ "When running VMware ESX Server 3.0.0, you can experience a kernel panic if you use Intel e1000 network adapters with any of the following PCI IDs: <span style="font-size:13px">**0x100F**[...]" - <http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2221></span></span></span>
 ### Real KEXTs
 
 #### w/o KEXT
@@ -389,7 +389,7 @@ even the IOName and name are the only "ethernet" occurence found
 
     | |   |   |     "acpi-path" = "IOACPIPlane:/_SB/PCI0@0/P2P0@110000/S2F0@10000"
     | |   |   |     "subsystem-vendor-id" = <ad150000>
-<span style="font-size:x-small">    | |   |   |     "name" = "ethernet"</span>
+    | |   |   |     "name" = "ethernet"
     | |   |   |     "reg" = <00080200000000000000000000000000000000001008020200000000000000000000000000000200180802020000000000$
     | |   |   |     "compatible" = <"pci15ad,750","pci8086,100f","pciclass,020000">
     | |   |   |   }
@@ -744,7 +744,7 @@ Values found (non exhaustive) interesting have been highlighted.
 
 
 A // with its Info.plist (.. file) can be established:
-<span style="font-size:small"></span>
+
 [...]
 &lt;dict&gt;
 
@@ -752,15 +752,15 @@ A // with its Info.plist (.. file) can be established:
 > ``
 >
 > > `<key>IOClass</key>`
-> > <span style="font-family:courier new,monospace;font-size:small"><string>AppleIntel8254XEthernet</string></span>
+> > `AppleIntel8254XEthernet`
 > > `<key>IODefaultMedium</key>`
-> > <span style="font-family:courier new,monospace;font-size:small"><string>00000020</string></span>
+> > `00000020`
 > > `<key>IOPCIClassMatch</key>`
 > > <span style="font-family:courier new,monospace;font-size:small"><string>0x02000000&0xffff0000</string></span>
 > > `<key>IOPCIPrimaryMatch</key>`
 > > <span style="font-family:courier new,monospace;font-size:small"><string>0x10008086&0x0000ffff</string></span>
 > > `<key>IOProviderClass</key>`
-> > <span style="font-family:courier new,monospace;font-size:small"><string>IOPCIDevice</string></span>
+> > `IOPCIDevice`
 > 
 ``
 

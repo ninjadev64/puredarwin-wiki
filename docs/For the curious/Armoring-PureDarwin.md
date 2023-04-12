@@ -304,7 +304,7 @@ id
 uid=501(aladin) gid=20(staff) groups=20(staff),98(_lpadmin),80(admin)
 
 osascript -e "tell app "ARDAgent" to do shell script "whoami""
-<span style="font-family:courier new,monospace"></span>
+``
 <div style="font-family:courier new,monospace;color:rgb(102,102,102)">
 root
 <div style="font-family:courier new,monospace">
@@ -1044,8 +1044,8 @@ From the man:
 
 ` The following example tunnels an IRC session from client machine ``127.0.0.1'' (localhost) to remote server`
 `     ``server.example.com'':`
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 `         $ ssh -f -L 1234:localhost:6667 server.example.com sleep 10`
 `         $ irc -c '#users' -p 1234 pinky 127.0.0.1`
 
@@ -1165,51 +1165,51 @@ Write somewhere (away from your computer) as serials you will find as possible:
 
 ioreg -c "IOPlatformExpertDevice" | awk -F '"' '/IOPlatformSerialNumber/ {print $4}'
 Q723******
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 ioreg -c "IOPlatformExpertDevice" | awk -F '"' '/product-name/ {print $4}'
 MacBook2,1
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 ioreg -c "IOPlatformExpertDevice" | awk -F '"' '/board-id/ {print $4}'
 Mac-F420****
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 ioreg -c "IOPlatformExpertDevice" | awk -F '"' '/IOPlatformUUID/ {print $4}'
 00000000-0000-**00-**00-0019E33****
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 ioreg -c "ATADeviceNub" | awk -F '"' '/device serial/ {print $4}'          
 K0075******
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 ioreg -c "AppleAHCIDiskDriver" | awk -F '"' '/Serial Number/ {print $4}'
         K439T7******
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 
 ioreg -l | grep -i 'serial number'
     | |   |         |   "Serial Number" = "        K439********"
-<span><span style="font-family:courier new,monospace">
-</span></span>
+<span>`
+`</span>
 
 ioreg -l | grep -i 'serialnumber'
     |   "IOPlatformSerialNumber" = "WQ7********"
 
     | |           "BatterySerialNumber" = "DP-ASM****-3***-3***"
     | |           "SerialNumber" = 12***
-<span><span style="font-family:courier new,monospace">
-</span></span>
+<span>`
+`</span>
 
 ioreg -l | grep -i 'serial-number' 
     |   "serial-number" = <594***0000000000000000000057513************941**00000000000000000000000000000000000000>
-<span><span style="font-family:courier new,monospace">
-</span></span>
+<span>`
+`</span>
 
 ioreg -l | grep -i 'device serial'
     | |   |   |     |   "device serial" = "K0075S*****         "
-<span style="font-family:courier new,monospace">
-</span>
+`
+`
 
 ioreg -l -w0 -p IODeviceTree | grep device-prop
 ``

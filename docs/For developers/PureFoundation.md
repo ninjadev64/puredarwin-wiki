@@ -81,8 +81,8 @@ arch -p
 <span style="font-family:courier new,monospace"><span style="font-size:small">
  </span></span>
 `EXCEPTION!!!!`
-<span style="white-space:pre">` `</span>`  name: NSInvalidArgumentException`
-<span style="white-space:pre">` `</span>`reason: Attempting mutable dictionary op on a static NSDictionary`
+` ``  name: NSInvalidArgumentException`
+` ``reason: Attempting mutable dictionary op on a static NSDictionary`
 
 __Note:__ This version, we have placed *Foundation.framework* and replaced *CoreFoundation.framework* plus *libobjc.A.dylib* in the BuildRoot.
 
