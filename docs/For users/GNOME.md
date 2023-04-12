@@ -1,7 +1,7 @@
 GNOME
 =====
 <div style="display:inline;float:right;margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px">
-[![](../_/rsrc/1264268603393/users/gnome/gnome-logo.jpg)](gnome/gnome-logo.jpg%3Fattredirects=0)
+![](/img/users/gnome/gnome-logo.jpg)
 GNOME is a graphical desktop environment and development platform. For more information, see <http://www.gnome.org/>.
 This page is about running GNOME components on a PureDarwin system.
 

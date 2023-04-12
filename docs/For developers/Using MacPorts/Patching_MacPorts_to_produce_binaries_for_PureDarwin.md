@@ -1,7 +1,7 @@
 Patching MacPorts to produce binaries for PureDarwin
 ====================================================
 <div style="margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px;display:inline;float:right">
-[![](../../_/rsrc/1222694606788/developers/macports/macports-logo-top.png)](http://sites.google.com/a/puredarwin.org/puredarwin/developers/goog_1222698405894)
+![](/img/developers/macports/macports-logo-top.png)
 [MacPorts](http://www.macports.org/), formerly known as DarwinPorts, is a variant of the BSD ports system for Darwin and Mac OS X.
 
 Since the focus of the MacPorts project has shifted away from Darwin toward Mac OS X lately, it may be necessary create some patches in order to be able to use MacPorts-built software on PureDarwin.

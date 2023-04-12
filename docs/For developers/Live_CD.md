@@ -178,7 +178,7 @@ There are (unverified) news reports that cite "ImageBoot" as an official feature
 However, all attempts to make this work on a Darwin host so far resulted in 
 
 According to Singh, the kernel can be forced to use the BSD vndevice instead of hdix by specifying vndevice=1 as a boot argument. In this case, the function netboot_setup() from netboot.c is supposed to mount the file system contained in the vndevice node. But we can't get it to work yet (and it would only work for uncompressed images).
-[![](../_/rsrc/1248650808188/developers/live-cd/imageboot%20failed%20ro.png)](live-cd/imageboot%20failed%20ro.png%3Fattredirects=0)
+![](/img/developers/live-cd/imageboot%20failed%20ro.png)
 
 Please let us know if you know if you are aware of a working solution that does not involve IOHDIXController.kext, or where  a recent version of IOHDIXController.kext can be downloaded under a suitable license. (It used to be available under the Apple Binary License, but it made its last appearance in Darwin 6...)
 

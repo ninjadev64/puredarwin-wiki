@@ -283,7 +283,7 @@ Please also note that at this point I see the "dm" tool more as a binary install
 #### dbaudit
 `dbaudit` does a brute-force audit of a darwinbuild environment, finding which packages have binary roots and attempting to calculate dependencies for those that do.
 <div style="display:block;margin-right:auto;margin-left:auto;text-align:center">
-[![](../../_/rsrc/1237804812020/developers/package-management/the-darwin-package-manager/dbaudit.png%3Fheight=237&width=420)](the-darwin-package-manager/dbaudit.png%3Fattredirects=0)
+![](/img/developers/package-management/the-darwin-package-manager/dbaudit.png)
 The output package list is a simple text file with one line per package found. Each line has the format:
     PackageName Y build version { dependency1 dependency2 ... dependencyN }
 Where "Y" could also be "N" and signals that a binary root was found. If no root was found, no version or dependency information will be provided.
@@ -297,7 +297,7 @@ package_list.zip contains the package list which `dbaudit` produced for a 9G55pd
 #### pdpdmake
 `pdpdmake` takes a number of input files and either creates or updates a SQLite database file according to their contents.
 <div style="display:block;margin-right:auto;margin-left:auto;text-align:center">
-[![](../../_/rsrc/1237805196013/developers/package-management/the-darwin-package-manager/pdpdmake.png%3Fheight=356&width=420)](the-darwin-package-manager/pdpdmake.png%3Fattredirects=0)
+![](/img/developers/package-management/the-darwin-package-manager/pdpdmake.png)
 <div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
 As a minimum, at least one package list must be provided.
 #### dtbi

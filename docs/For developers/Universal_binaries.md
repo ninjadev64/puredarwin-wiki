@@ -2,7 +2,7 @@ Universal binaries
 ==================
 
 <div style="display:inline;float:right;margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px">
-[![](../_/rsrc/1227613163252/developers/universal-binaries/175px-Universal_Binary_Logo.png%3Fheight=200&width=147)](universal-binaries/175px-Universal_Binary_Logo.png%3Fattredirects=0)
+![](/img/developers/universal-binaries/175px-Universal_Binary_Logo.png)
 Mac OS X and Darwin can use so-called Mach-O (Mach Object) "fat" files, or universal binaries that contain code for more than one architecture, e.g., ppc and i386.
 PureDarwin, however, currently uses i386 only (also referred to as "x86") but hopes to use x86_64 a day and future architectures.
 

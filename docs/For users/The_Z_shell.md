@@ -1,7 +1,7 @@
 The Z shell
 ===========
 <div style="margin:5px 10px;display:inline;float:right">
-[![](../_/rsrc/1223242963057/users/zsh/wizard.gif)](zsh/wizard.gif%3Fattredirects=0)
+![](/img/users/zsh/wizard.gif)
 This page is about using zsh on PureDarwin system.
 Normally, PureDarwin comes with the bash shell which most users will be familiar with.
 Some users might prefer to use zsh however. This page is a work in progress, please feel free to contribute.
@@ -33,7 +33,7 @@ Take a look at [Using the MacPorts project](../developers/macports.1.html) pag
 __Note:__ You should also take a look in the available variants (you can use `port info zsh` or `port variants zsh` if you want to know the description associated to the respective variant).
 The zsh port appears to be "[pure](../developers/macports/purity.html)" as shown below.
 
-[![](../_/rsrc/1224017323026/users/zsh/pd_portviz%20zsh_directed.png%3Fheight=200&width=143)](zsh/pd_portviz%20zsh_directed.png%3Fattredirects=0)
+![](/img/users/zsh/pd_portviz%20zsh_directed.png)
 
 ### Changing an user's default shell
 To use zsh as the default shell of the currently logged-in user, do

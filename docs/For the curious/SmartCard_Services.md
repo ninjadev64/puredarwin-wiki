@@ -3,7 +3,7 @@ SmartCard Services
 
 ****
 <div style="display:inline;float:right;margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px">
-[![](../_/rsrc/1258934378474/curious/smartcard/SCChip-1.png%3Fheight=200&width=181)](smartcard/SCChip-1.png%3Fattredirects=0)
+![](/img/curious/smartcard/SCChip-1.png)
 
 **draft.**
 **The [SmartCard Services](http://smartcardservices.macosforge.org/) project. **

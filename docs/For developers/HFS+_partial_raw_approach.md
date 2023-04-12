@@ -61,14 +61,14 @@ etc..
 The HFS partition can be mounted in a running PureDarwin OS.
 If the cdrom device is attached to the node /dev/disk1: mount -o ro -t hfs /dev/disk1s0s3 /mnt
 
-[![](../../_/rsrc/1263579413219/developers/hfsplus/hfs-partial-raw-approach/mount%20puredarwin%20iso%20from%20puredarwin.png)](hfs-partial-raw-approach/mount%20puredarwin%20iso%20from%20puredarwin.png%3Fattredirects=0)
+![](/img/developers/hfsplus/hfs-partial-raw-approach/mount%20puredarwin%20iso%20from%20puredarwin.png)
 
 
 The "phys_blksz 2048 does not match journal header size 512" error message is not the first symptom of this problem, because after disabling the journalization (removing -J in `newfs_hfs'), the previous error message will not appear but the same kernel panic for same reason(s) will occur.
 
 The `fsck' tool will complain about bad volume header, as Disk Utility (front-end of fsck for this part).
 
-[![](../../_/rsrc/1263579479736/developers/hfsplus/hfs-partial-raw-approach/HFS%20and%20disk%20utility%20repair.png)](hfs-partial-raw-approach/HFS%20and%20disk%20utility%20repair.png%3Fattredirects=0)
+![](/img/developers/hfsplus/hfs-partial-raw-approach/HFS%20and%20disk%20utility%20repair.png)
 
 
 It boots up to 'jnl' in case of a "bootstrap" or a "full" release, and without any problem if it is a "nano" release.
@@ -76,13 +76,13 @@ It boots up to 'jnl' in case of a "bootstrap" or a "full" release, and without a
 kernel panic if `fsck -fy' has not been run on this image before as show just below:
 
 
-[![](../../_/rsrc/1263577921945/developers/hfsplus/hfs-partial-raw-approach/HFS%20bad%20volume%20header%20kernel%20panic.png)](hfs-partial-raw-approach/HFS%20bad%20volume%20header%20kernel%20panic.png%3Fattredirects=0)
+![](/img/developers/hfsplus/hfs-partial-raw-approach/HFS%20bad%20volume%20header%20kernel%20panic.png)
 
 Diffing the volume header
 -------------------------
 Diff a partition built with `dd' and `vndevice' against the same one but after `fsck -fy' on it reveals differences.
 
-[![](../../_/rsrc/1263577672858/developers/hfsplus/hfs-partial-raw-approach/HFS%20diff%20part3.png)](hfs-partial-raw-approach/HFS%20diff%20part3.png%3Fattredirects=0)
+![](/img/developers/hfsplus/hfs-partial-raw-approach/HFS%20diff%20part3.png)
 
 This documentation has been really usefull in this process of problem resolution: http://developer.apple.com/mac/library/technotes/tn/tn1150.html
 

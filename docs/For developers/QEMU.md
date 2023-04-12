@@ -69,7 +69,7 @@ PureDarwin Xmas running on openSUSE. __Credits:__ oxygene 
 
 
 
-[![](../_/rsrc/1237829354226/developers/qemu/qemu-ubuntu.png%3Fheight=336&width=420)](qemu/qemu-ubuntu.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-ubuntu.png)
 PureDarwin Xmas on Ubuntu 8.10 (using the binary linked below) and mach_kernel.voodoo. 
 
 Command used:
@@ -99,10 +99,10 @@ qemu -L ./pc-bios/ -hda puredarwinxmas.vmdk -cdrom puredarwinxmas.vmdk -boot d 
 
 
 
-[![](../_/rsrc/1237722501980/developers/qemu/Qemu%20first%20stage.png%3Fheight=263&width=420)](qemu/Qemu%20first%20stage.png%3Fattredirects=0)
+![](/img/developers/qemu/Qemu%20first%20stage.png)
 
 If you don't boot by default with the Voodoo kernel (xnu-dev), at boot press F8...
-[![](../_/rsrc/1237722807563/developers/qemu/Qemu%20bootloader%20stage.png%3Fheight=263&width=420)](qemu/Qemu%20bootloader%20stage.png%3Fattredirects=0)
+![](/img/developers/qemu/Qemu%20bootloader%20stage.png)
 
 And enter
 `mach_kernel.voodoo rd=disk1s3 -v`
@@ -113,14 +113,14 @@ or, if you have the vmdk as -hda:
 
 Wait for a bit on `failed to open/create the journal`... if that happens.
 
-[![](../_/rsrc/1237722991136/developers/qemu/Qemu%20PD%20booting.png%3Fheight=263&width=420)](qemu/Qemu%20PD%20booting.png%3Fattredirects=0)
+![](/img/developers/qemu/Qemu%20PD%20booting.png)
 
 At the end of the KEXTs decompression phase, the CPU FSB clock and ration should be adjusted by the voodoo kernel.
 
-[![](../_/rsrc/1237723452364/developers/qemu/Qemu%20PD%20booting2.png%3Fheight=255&width=420)](qemu/Qemu%20PD%20booting2.png%3Fattredirects=0)
+![](/img/developers/qemu/Qemu%20PD%20booting2.png)
 After the KEXTs decompression phase, you should see the kernel booting (notice the network adapter supported).
 
-[![](../_/rsrc/1237723486088/developers/qemu/Qemu%20PD%20booting3.png%3Fheight=331&width=420)](qemu/Qemu%20PD%20booting3.png%3Fattredirects=0)
+![](/img/developers/qemu/Qemu%20PD%20booting3.png)
 Then depending your settings, a login prompt or X should be waiting for you.
 
 It is necessary to launch X11 manually by issuing /usr/X11R6/bin/startx.
@@ -128,7 +128,7 @@ It is necessary to launch X11 manually by issuing /usr/X11R6/bin/startx.
 
 
 
-[![](../_/rsrc/1239274247269/developers/qemu/pd-qemu-mp.jpg%3Fheight=310&width=420)](qemu/pd-qemu-mp.jpg%3Fattredirects=0)
+![](/img/developers/qemu/pd-qemu-mp.jpg)
 
 QEMU 0.10.1 from MacPorts running PureDarwin on Mac OS X 10.5.
 QEMU devices
@@ -167,12 +167,12 @@ Of course, it's mandatory to have a Kernel EXTension matching its respective dev
 
 E.g. below with the realtek kext matching its respective virtual RTL8139 device in QEMU:
 
-[![](../_/rsrc/1246698469464/developers/qemu/guest%20ip%20auto%20set.png%3Fheight=223&width=420)](qemu/guest%20ip%20auto%20set.png%3Fattredirects=0)
+![](/img/developers/qemu/guest%20ip%20auto%20set.png)
 
 ### DHCP (IPv4)
 An example of a "correct" configuration, where everything has been provided automatically (KernelEventMonitor) via DHCP.
 
-[![](../_/rsrc/1246830041720/developers/qemu/qemunusermodenetworkstacksupport.png)](qemu/qemunusermodenetworkstacksupport.png%3Fattredirects=0)
+![](/img/developers/qemu/qemunusermodenetworkstacksupport.png)
 
 **What expected:**
 
@@ -193,23 +193,23 @@ As user inp reported on #puredarwin, adding '-no-kvm-irqchip' to the qemu call s
 Depending the ping interval (-i) against the virtual gateway, the bandwith varies (a pseudo bandwith control state; qos?).
 Below is an example across the time, where the interval took the no value, then 0.9, 0.5, 0.1 and 0 (This example was done downloading nmap).
 
-[![](../_/rsrc/1246836722256/developers/qemu/picbd.png)](qemu/picbd.png%3Fattredirects=0)
+![](/img/developers/qemu/picbd.png)
 ### Miscellaneous
 #### Guest fingerprint (10.0.2.15)
 The famous Fyodor `[nmap](http://nmap.org/)' basic fingerprint result against 10.0.2.15 (guest: en0) looks like (X running without --no-listen tcp as shown).
 
-[![](../_/rsrc/1246919277534/developers/qemu/nmapinqemuusermodenetstack.png)](qemu/nmapinqemuusermodenetstack.png%3Fattredirects=0)
+![](/img/developers/qemu/nmapinqemuusermodenetstack.png)
 
 #### Gateway fingerprint (10.0.2.2)
 Interesting to see what looks like from nmap point of view the virtual gateway (user mode network stack):
 
 
-[![](../_/rsrc/1246919580801/developers/qemu/nmapinqemuusermodethegw.png)](qemu/nmapinqemuusermodethegw.png%3Fattredirects=0)
+![](/img/developers/qemu/nmapinqemuusermodethegw.png)
 #### DNS server fingerprint (10.0.2.3)
 
 ..
 
-[![](../_/rsrc/1246920031759/developers/qemu/nmapinqemuusermodednsd.png)](qemu/nmapinqemuusermodednsd.png%3Fattredirects=0)
+![](/img/developers/qemu/nmapinqemuusermodednsd.png)
 
 QEMU options
 ------------
@@ -266,25 +266,25 @@ create a new Network Interface Card and connect it to VLAN 'n'-net nic,model=rtl
 The option "-net nic,model={i82551|i82557b}" seems to match with [AppletIntel8255x](http://src.macosforge.org/Roots/9A581/AppleIntel8255x.root.tar.gz) from DarwinBuild:
 
 
-[![](../_/rsrc/1241395561706/developers/qemu/qemu%20net%208255x%20bis.png%3Fheight=41&width=200)](qemu/qemu%20net%208255x%20bis.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu%20net%208255x%20bis.png)
 
 
-[![](../_/rsrc/1241395552721/developers/qemu/qemu%20net%208255x.png%3Fheight=126&width=420)](qemu/qemu%20net%208255x.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu%20net%208255x.png)
 ### Live options
 Press ctrl+alt+2 to switch to QEMU monitor:
 
-[![](../_/rsrc/1242469974108/developers/qemu/qemu%20ctrl%20alt%202.png%3Fheight=279&width=420)](qemu/qemu%20ctrl%20alt%202.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu%20ctrl%20alt%202.png)
 
-[![](../_/rsrc/1242469999869/developers/qemu/qemu%20ctrl%20alt%202%20help.png%3Fheight=283&width=420)](qemu/qemu%20ctrl%20alt%202%20help.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu%20ctrl%20alt%202%20help.png)
 
 
 Press ctrl+alt+3 to switch to serial0 console:
 
-[![](../_/rsrc/1242470018471/developers/qemu/qemu%20ctrl%20alt%203.png%3Fheight=275&width=420)](qemu/qemu%20ctrl%20alt%203.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu%20ctrl%20alt%203.png)
 
 Press ctrl+alt+4 to switch to parallel0 console:
 
-[![](../_/rsrc/1242470037379/developers/qemu/qemu%20ctrl%20alt%204.png%3Fheight=283&width=420)](qemu/qemu%20ctrl%20alt%204.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu%20ctrl%20alt%204.png)
 
 **Patches to run stock XNU on QEMU**
 

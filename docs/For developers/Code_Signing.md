@@ -87,7 +87,7 @@ Miscellaneous
 -------------
 Related fields found in Xcode:
 
-[![](../../_/rsrc/1227919887971/developers/universal-binaries/code-signing/Xcode%20codesign%20options.png)](code-signing/Xcode%20codesign%20options.png%3Fattredirects=0)
+![](/img/developers/universal-binaries/code-signing/Xcode%20codesign%20options.png)
 
 Resources
 ---------

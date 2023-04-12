@@ -46,13 +46,13 @@ Note: Pressing *?* + *Enter *doesn't give any output.
 *?video* works in booter and returns:
 
 
-[![](_/rsrc/1217701995353/developers/virtualbox/video.png%3Fheight=376&width=420)](developers/virtualbox/video.png%3Fattredirects=0)
+![](/img/developers/virtualbox/video.png)
 
 
 __Note:__ Passing kernel flag "Graphics Mode"="&lt;value&gt;" also seems to work.
 #### ?memory flag
 
-[![](_/rsrc/1217702113592/developers/virtualbox/memory.png%3Fheight=79&width=420)](developers/virtualbox/memory.png%3Fattredirects=0)
+![](/img/developers/virtualbox/memory.png)
 
 A bit obscure...
 Please let us know if you know about.
@@ -77,16 +77,16 @@ See corresponding VirtualBox log of pressing 'y':
 We can bypass the error above about CPU:FSB multiplier with the boot argument *busratio=...*
 
 
-[![](_/rsrc/1226191734836/developers/virtualbox/Virtualbox%20voodoo%20chameleon%20bootloader.png%3Fheight=263&width=420)](developers/virtualbox/Virtualbox%20voodoo%20chameleon%20bootloader.png%3Fattredirects=0)
+![](/img/developers/virtualbox/Virtualbox%20voodoo%20chameleon%20bootloader.png)
 
 
 With ACPI enabled in VirtualBox, the vm hangs at "Local APIC version not 0x14 as expected":
 
-[![](_/rsrc/1226191756456/developers/virtualbox/Virtualbox%20voodoo%20chameleon%20ACPI.png%3Fheight=122&width=420)](developers/virtualbox/Virtualbox%20voodoo%20chameleon%20ACPI.png%3Fattredirects=0)
+![](/img/developers/virtualbox/Virtualbox%20voodoo%20chameleon%20ACPI.png)
 
 Without ACPI, it complains about and irremediably lead to a kernel panic.
 ****
-[![](_/rsrc/1226191822137/developers/virtualbox/Virtualbox%20voodoo%20chameleon%20NOACPI.png%3Fheight=239&width=420)](developers/virtualbox/Virtualbox%20voodoo%20chameleon%20NOACPI.png%3Fattredirects=0)
+![](/img/developers/virtualbox/Virtualbox%20voodoo%20chameleon%20NOACPI.png)
 
 ### Troubleshooting
 Problem: "Unable to find SMBIOS table"
@@ -129,7 +129,7 @@ The highlighted line could explain why suddenly the screen is auto resized, and 
 
 **Footnotes**
 ^1^Why PAE/NX seems to be needed?
-[![](_/rsrc/1217285973856/developers/virtualbox/ExperimentalPAE.png)](developers/virtualbox/ExperimentalPAE.png%3Fattredirects=0)
+![](/img/developers/virtualbox/ExperimentalPAE.png)
 ^2^How to enable PAE/NX?
 Via command-line, assuming `PureDarwin` is the name of your vm:
 ``Via gui, a simple checkbox in the settings.

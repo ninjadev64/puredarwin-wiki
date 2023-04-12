@@ -114,7 +114,7 @@ Then simply connect your favorite VNC client to localhost.
 ### Faking guest OS detection
 We need to fake VMware guest OS detection in order to avoid error message "*The guest operating system is not Mac OS X Server*" (implicitly to simply boot).
 
-[![](../_/rsrc/1247429745836/developers/vmware/VMware%20guest%20os%20detection.png)](vmware/VMware%20guest%20os%20detection.png%3Fattredirects=0)
+![](/img/developers/vmware/VMware%20guest%20os%20detection.png)
 
 VMware guest OS detection is trivial, and so the way to avoid it:
 
@@ -154,11 +154,11 @@ Boot
 ### VMware Fusion BIOS
 VMware Fusion comes with a combo PhoenixBIOS/VMware BIOS.
 
-[![](../_/rsrc/1247951753818/developers/vmware/VMware%20fusion%20bios%20boot.png%3Fheight=291&width=420)](vmware/VMware%20fusion%20bios%20boot.png%3Fattredirects=0)
+![](/img/developers/vmware/VMware%20fusion%20bios%20boot.png)
 
-[![](../_/rsrc/1247951748803/developers/vmware/VMware%20fusion%20bios.png%3Fheight=371&width=420)](vmware/VMware%20fusion%20bios.png%3Fattredirects=0)
+![](/img/developers/vmware/VMware%20fusion%20bios.png)
 
-[![](../_/rsrc/1247951743546/developers/vmware/VMware%20fusion%20bios%202.png%3Fheight=371&width=420)](vmware/VMware%20fusion%20bios%202.png%3Fattredirects=0)
+![](/img/developers/vmware/VMware%20fusion%20bios%202.png)
 ### Bootloader
 VMware uses darwin.iso (VMware Tools) which contains the DFE bootloader (Stage 2 boot file < 128K) to provide a bootloader.
 #### darwin.iso
@@ -184,7 +184,7 @@ In order to compare the siwe, Chameleon takes 295328B and the latest DFE 63648B.
 
 
 Facing the bootloader size limitation:
-[![](../_/rsrc/1248034226480/developers/vmware/VMware%20booter%20size%20limitation.png)](vmware/VMware%20booter%20size%20limitation.png%3Fattredirects=0)
+![](/img/developers/vmware/VMware%20booter%20size%20limitation.png)
 
 
 It is possible to alter the content of darwin.iso, but the package needs to be signed again.
@@ -473,7 +473,7 @@ At "free()", it's already too late anyway..
 
 After altering a bit the code, we can go further.. but not so far.
 
-[![](../_/rsrc/1247615901391/developers/vmware/8266MM%20debug%20I.png%3Fheight=366&width=420)](vmware/8266MM%20debug%20I.png%3Fattredirects=0)
+![](/img/developers/vmware/8266MM%20debug%20I.png)
 
 In the FreeBSD src code:
 
@@ -513,7 +513,7 @@ In the FreeBSD src code:
 <div style="display:block">
 
 <div style="display:block">
-[![](../_/rsrc/1234903619594/developers/vmware/82566MM.png)](vmware/82566MM.png%3Fattredirects=0)
+![](/img/developers/vmware/82566MM.png)
 <div style="display:block">
 
 <div style="display:block">

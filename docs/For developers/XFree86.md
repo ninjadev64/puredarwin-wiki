@@ -1,7 +1,7 @@
 XFree86
 =======
 <div style="display:inline;float:right;margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px">
-[![](../_/rsrc/1222686502548/developers/xfree86/Xfree86.logo.gif%3Fheight=100&width=200)](xfree86/Xfree86.logo.gif%3Fattredirects=0)
+![](/img/developers/xfree86/Xfree86.logo.gif)
 This page is about [XFree86](http://www.xfree86.org/) on Darwin.
 <div style="margin:5px 10px;display:inline;float:right">
 __
@@ -203,20 +203,20 @@ Launch X with
 <span style="font-family:courier new,monospace"><span><span style="font-size:small">X -nolisten tcp -size 800 600 -keymap USA.keymapping & sleep 3 && xeyes</span></span></span>
 
 
-[![](../_/rsrc/1222645430661/developers/xorg/XFree86%204.7.0%20xeyes%20vmware.png%3Fheight=342&width=420)](xorg/XFree86%204.7.0%20xeyes%20vmware.png%3Fattredirects=0)
+![](/img/developers/xorg/XFree86%204.7.0%20xeyes%20vmware.png)
 
 ### Screenshots
 The oldschool *twm* remains functional.
 
 
-[![](../_/rsrc/1223002130567/developers/xfree86/XFree86%20on%20puredarwin%20nano.png%3Fheight=337&width=420)](xfree86/XFree86%20on%20puredarwin%20nano.png%3Fattredirects=0)
+![](/img/developers/xfree86/XFree86%20on%20puredarwin%20nano.png)
 
 
 
 Also the minimalist *wmii.*
 
 
-[![](../_/rsrc/1223036210964/developers/xfree86/wmii%20XFree86%20wmware.png%3Fheight=277&width=420)](xfree86/wmii%20XFree86%20wmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/wmii%20XFree86%20wmware.png)
 
 
 
@@ -224,44 +224,44 @@ Also the minimalist *wmii.*
 <span style="font-size:13px">
  </span>
 
-[![](../_/rsrc/1223036971869/developers/xfree86/glxgears%20XFree86%20vmware.png%3Fheight=279&width=420)](xfree86/glxgears%20XFree86%20vmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/glxgears%20XFree86%20vmware.png)
 
 
 
 *Fluxbox* now!
 
 
-[![](../_/rsrc/1223054667768/developers/xfree86/fluxbox%20XFree86%20vmware.png%3Fheight=278&width=420)](xfree86/fluxbox%20XFree86%20vmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/fluxbox%20XFree86%20vmware.png)
 
 
-[![](../_/rsrc/1223058912929/developers/xfree86/xterm%20fluxbox%20bis%20XFree86%20vmware.png%3Fheight=277&width=420)](xfree86/xterm%20fluxbox%20bis%20XFree86%20vmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/xterm%20fluxbox%20bis%20XFree86%20vmware.png)
 
 
 
 *Windowmaker* compiles and runs like a charm as soon as we get rid of problematic dependencies.
 
 
-[![](../_/rsrc/1223112720564/developers/xfree86/windowmaker%20XFree86%20vmware.png%3Fheight=278&width=420)](xfree86/windowmaker%20XFree86%20vmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/windowmaker%20XFree86%20vmware.png)
 
 
 
 Idem for *enlightenment* 17.
 
 
-[![](../_/rsrc/1223252476544/developers/xfree86/enlightenment%20starting%20in%20XFree86%20in%20vmware.png%3Fheight=276&width=420)](xfree86/enlightenment%20starting%20in%20XFree86%20in%20vmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/enlightenment%20starting%20in%20XFree86%20in%20vmware.png)
 
 
-[![](../_/rsrc/1223252291709/developers/xfree86/enlightenment%20XFree86%20vmware.png%3Fheight=278&width=420)](xfree86/enlightenment%20XFree86%20vmware.png%3Fattredirects=0)
+![](/img/developers/xfree86/enlightenment%20XFree86%20vmware.png)
 
 
 
 *qt3* and *qt4-x11* are almost ok.
 
 
-[![](../_/rsrc/1223416292080/developers/xfree86/filelight%20with%20qt3.png%3Fheight=337&width=420)](xfree86/filelight%20with%20qt3.png%3Fattredirects=0)
+![](/img/developers/xfree86/filelight%20with%20qt3.png)
 
 
-[![](../_/rsrc/1223416289644/developers/xfree86/some%20qt3%20apps.png%3Fheight=332&width=420)](xfree86/some%20qt3%20apps.png%3Fattredirects=0)
+![](/img/developers/xfree86/some%20qt3%20apps.png)
 
 
 
@@ -377,7 +377,7 @@ Problem:
 It fails because missing network support:
 
 
-[![](../_/rsrc/1222632254842/developers/xorg/XFree86%204.7.0%20on%20puredarwin.png)](xorg/XFree86%204.7.0%20on%20puredarwin.png%3Fattredirects=0)
+![](/img/developers/xorg/XFree86%204.7.0%20on%20puredarwin.png)
 
 
 **Solution:**
@@ -397,7 +397,7 @@ Also, the option `-nokeymap` is still present and working, it makes X to attem
 
 
 
-[![](../_/rsrc/1222635272162/developers/xorg/X%20notcp%20on%20puredarwin.png)](xorg/X%20notcp%20on%20puredarwin.png%3Fattredirects=0)
+![](/img/developers/xorg/X%20notcp%20on%20puredarwin.png)
 
 
 **Solution:**

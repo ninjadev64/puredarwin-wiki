@@ -29,7 +29,7 @@ The *[pd_kextviz](http://code.google.com/p/puredarwin/source/browse/trunk/scrip
 #### Preliminary
 A rudimentary legend is generated in the DOT language:
 
-[![](../../_/rsrc/1224217629680/developers/kexts/kexts-dependencies-overview/pd_kextviz%20legend.png)](kexts-dependencies-overview/pd_kextviz%20legend.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20legend.png)
 
 
 A KEXT is simply linked to ia bundle identifier (which can be linked to one or many KEXTs).
@@ -42,11 +42,11 @@ The number of symbols missing (returned by *kextlibs*) is also displayed on the 
 #### An example across IOBDStorageFamily.kext
 The hierarchical view:
 
-[![](../../_/rsrc/1224170222152/developers/kexts/kexts-dependencies-overview/pd_kextviz%20IOBDStorageFamily%20hierarchical%20view.png%3Fheight=241&width=420)](kexts-dependencies-overview/pd_kextviz%20IOBDStorageFamily%20hierarchical%20view.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20IOBDStorageFamily%20hierarchical%20view.png)
 
 This circular view:
 
-[![](../../_/rsrc/1224170219802/developers/kexts/kexts-dependencies-overview/pd_kextviz%20IOBDStorageFamily%20circular%20view.png%3Fheight=310&width=420)](kexts-dependencies-overview/pd_kextviz%20IOBDStorageFamily%20circular%20view.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20IOBDStorageFamily%20circular%20view.png)
 
 
 The corresponding script output:
@@ -112,7 +112,7 @@ Generation of IOBDStorageFamily.kext_directed.png complete.
 The example below has been generated on Mac OS X with *IOSerialFamily.kext*, since we don't have any blocker on PureDarwin.
 
 
-[![](../../_/rsrc/1224171074199/developers/kexts/kexts-dependencies-overview/pd_kextviz%20impure%20IOSerialFamily.png)](kexts-dependencies-overview/pd_kextviz%20impure%20IOSerialFamily.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20impure%20IOSerialFamily.png)
 
 The corresponding output:
 
@@ -143,14 +143,14 @@ We generate the whole dependencies tree with:
 
 At this time, it looks like:
 
-[![](../../_/rsrc/1224212607569/developers/kexts/kexts-dependencies-overview/pd_kextviz%20all%20KEXTs.png%3Fheight=420&width=272)](kexts-dependencies-overview/pd_kextviz%20all%20KEXTs.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20all%20KEXTs.png)
 
 The circular overview is usefull (but often too big) to isolate node with a number of links lower than 2:
-[![](../../_/rsrc/1224212618987/developers/kexts/kexts-dependencies-overview/pd_kextviz%20circular%20all%20kexts%20in%20puredarwin.png%3Fheight=410&width=420)](kexts-dependencies-overview/pd_kextviz%20circular%20all%20kexts%20in%20puredarwin.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20circular%20all%20kexts%20in%20puredarwin.png)
 #### Miscellaneous
 The Mac OS X whole graph:
 
-[![](../../_/rsrc/1224217472176/developers/kexts/kexts-dependencies-overview/pd_kextviz%20all%20KEXTs%20in%20MacOSX.png%3Fheight=420&width=168)](kexts-dependencies-overview/pd_kextviz%20all%20KEXTs%20in%20MacOSX.png%3Fattredirects=0)
+![](/img/developers/kexts/kexts-dependencies-overview/pd_kextviz%20all%20KEXTs%20in%20MacOSX.png)
 ### Ressources
 [http://www.graphviz.org](http://www.graphviz.org/)
 The [Kernel Extensions (KEXTs)](../kexts.html) page

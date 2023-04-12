@@ -29,38 +29,38 @@ UI
 --
 ### Q control manager
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20manager.png%3Fheight=199&width=420)](qemu-q/Q%20manager.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20manager.png)
 ### Configuration
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20config.png%3Fheight=420&width=314)](qemu-q/Q%20config.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20config.png)
 Boot sequence
 -------------
 ### DFE bootloader
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20dfe%20bootloader.png%3Fheight=268&width=420)](qemu-q/Q%20dfe%20bootloader.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20dfe%20bootloader.png)
 #### CPU:FSB multiplier detection fails
 **Please, let us know if you have a solution.
 **
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20CPUFSB%20detection%20fails.png%3Fheight=269&width=420)](qemu-q/Q%20CPUFSB%20detection%20fails.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20CPUFSB%20detection%20fails.png)
 ### Chameleon bootloader
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20chameleon%20bootloader.png%3Fheight=267&width=420)](qemu-q/Q%20chameleon%20bootloader.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20chameleon%20bootloader.png)
 
 SMBIOS well-known problem is bypassed with Voodoo kernel (xnu-dev).
 
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20SMBIOS%20not%20found.png%3Fheight=268&width=420)](qemu-q/Q%20SMBIOS%20not%20found.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20SMBIOS%20not%20found.png)
 
 Then, the real boot begins, but quickly ends with a problem related to APIC similar to the one in [VirtualBox](../virtualbox.html) page.
 
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20local%20APIC%20version%20not%20as%20expected.png%3Fheight=101&width=420)](qemu-q/Q%20local%20APIC%20version%20not%20as%20expected.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20local%20APIC%20version%20not%20as%20expected.png)
 
 
 Then, with `<string>-f -v -x cpus=1 busratio=16 io=0x21</string>` in */Library/Preferences/SystemConfiguration/com.apple.Boot.plist*, things go far:
 
 
-[![](../../_/rsrc/1237726830785/developers/qemu/qemu-q/Q%20busration%20and%20io.png%3Fheight=311&width=420)](qemu-q/Q%20busration%20and%20io.png%3Fattredirects=0)
+![](/img/developers/qemu/qemu-q/Q%20busration%20and%20io.png)
 
 
 **Ressources**

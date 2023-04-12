@@ -7,7 +7,7 @@ So (at the time of 9F33), we patched the kext_tools project for purity purpose,
 Surprisedly, now \`halt' and \`shutdown' **work perfectly** (note: it has yet been tested with CF-lite though, and \`kextcache' depends on):
 
 
-[![](../_/rsrc/1225463972197/developers/halt/halt%20in%20puredarwin.png)](halt/halt%20in%20puredarwin.png%3Fattredirects=0)
+![](/img/developers/halt/halt%20in%20puredarwin.png)
 
 In case, \`halt' fails, this is what could happening:
 
@@ -20,10 +20,10 @@ In case, \`halt' fails, this is what could happening:
 At this time, `shutdown -s now' is failing because of *sleep*:
 
 
-[![](../_/rsrc/1225466088081/developers/halt/shutdown%20failing.png)](halt/shutdown%20failing.png%3Fattredirects=0)
+![](/img/developers/halt/shutdown%20failing.png)
 
 
 *kext_tools* and its dependencies are missing in PureDarwin nano releases because they will make PureDarwin nano not "nano" anymore, explaining why halt didn't work. halt involves IOKitUser, CF, DiskArbitration.framework and Security.framework...
 
-[![](../_/rsrc/1247364785038/developers/halt/kextd.png%3Fheight=360&width=420)](halt/kextd.png%3Fattredirects=0)
+![](/img/developers/halt/kextd.png)
 

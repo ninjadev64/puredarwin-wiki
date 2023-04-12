@@ -10206,13 +10206,7 @@ security_crlrefresh-31832~10
 |                                      |                                      |
 | </div>                               |                                      |
 +--------------------------------------+--------------------------------------+
-| <span                                | <span                                |
-| style="border-collapse:separate">[![ | style="border-collapse:separate">[![ |
-| ](../../../_/rsrc/1244314527545/deve | ](../../../_/rsrc/1244282861424/deve |
-| lopers/darwinbuild/troubleshooting/9 | lopers/darwinbuild/troubleshooting/s |
-| J6111pass.png%3Fheight=420&width=126 | ecuritystuff.png%3Fheight=420&width= |
-| )](9J6111pass.png%3Fattredirects=0)< | 366)](securitystuff.png%3Fattredirec |
-| /span>                               | ts=0)</span>                         |
+| Image 9J6111pass.png                 | Image securitystuff.png              |
 +--------------------------------------+--------------------------------------+
 
 Below are errors related to the project described just above.
@@ -10259,7 +10253,7 @@ libsecurity_apple_file_dl
 let's fix more and more..
 
 After applying some patches and rebuild some dependents where their dependencies just have been patched, the picture looks like:
-<span style="font-size:x-small">[![](../../../_/rsrc/1245014664511/developers/darwinbuild/troubleshooting/9J61pd1-n.png%3Fheight=420&width=165)](9J61pd1-n.png%3Fattredirects=0)</span>
+<span style="font-size:x-small">![](/img/developers/darwinbuild/troubleshooting/9J61pd1-n.png)</span>
 
 
 The state is beyond the 12th pass now..
@@ -10426,7 +10420,7 @@ then 
 #### 9F33 (ok)
 ****
 
-[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/CF.png)](CF.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/CF.png)
 
 **Problem: **In fact, CF-lite appears to missing many functions. Although the CF-lite built just above is enough for [PureDarwin nano](../../../downloads/puredarwin-nano.html), it won't be sufficient in a full PureDarwin release since many vital daemons may use these missing functions. Some have been already patched or can be short-circuited with an empty body, but others clearly need some code inside their body.
 
@@ -11046,7 +11040,7 @@ After recompilation of CF, dependency is fixed:
 
 `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
 **Next solution: **See <http://darwinbuild.macosforge.org/trac/ticket/41#comment:1> / [rdar://problem/6488974](http://rdar://problem/6488974)
-[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/IOKitUser.png)](IOKitUser.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/IOKitUser.png)
 
 
 
@@ -11232,7 +11226,7 @@ See <http://darwinbuild.macosforge.org/trac/ticket/80>
 
 
 
-[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/Security.png)](Security.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/Security.png)
 
 ------------------------------------------------------------------------
 
@@ -11362,7 +11356,7 @@ then
 
 ****
 <span style="font-weight:bold">Solution: <span style="font-weight:normal"><span style="font-family:courier new,monospace"><span style="font-size:small">darwinbuild flex && darwinbuild -load flex</span></span></span></span>
-[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/bootstrap_cmds.png)](bootstrap_cmds.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/bootstrap_cmds.png)
 ------------------------------------------------------------------------
 ### configd
 darwinbuild configd
@@ -11572,7 +11566,7 @@ On PureDarwin, the patched `dtrace' built from darwinbuild looks like:
  `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 476.0.0)`
  `/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)`
 
-[![](../../../_/rsrc/1226262995845/developers/darwinbuild/troubleshooting/dtrace%20patched.png)](dtrace%20patched.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/dtrace%20patched.png)
 
 
 On Mac OS X, `dtrace' looks like:
@@ -11586,7 +11580,7 @@ On Mac OS X, `dtrace' looks like:
  `/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 474.0.0)`
 
 
-[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/dtrace.png)](dtrace.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/dtrace.png)
 
 ------------------------------------------------------------------------
 
@@ -11906,7 +11900,7 @@ After recompilation of CF, dependency is fixed:
 `  Expected in: /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation`
 **Solution: **Same problem as investigation below. So we recreate the expected method (empty foobar) in CF to satisfy Security.
 
-[![](../../../_/rsrc/1230089096739/developers/darwinbuild/troubleshooting/launchd_9F33pd1.png)](launchd_9F33pd1.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/launchd_9F33pd1.png)
 __
 __
 
@@ -12488,7 +12482,7 @@ xsasl_cyrus_server.c:78:22: xsasl_cyrus_server.c:78:22:error: saslutil.h: No suc
 **Problem: **Symbolication error..
 **Solution:** **Please, let us know if you have one!**
 
-[![](../../../_/rsrc/1226248233847/developers/darwinbuild/troubleshooting/ruby.png)](ruby.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/ruby.png)
 
 ------------------------------------------------------------------------
 
@@ -12700,7 +12694,7 @@ A workaround in this case consists to recreate the missing prototype and method�
 The real state looks like:
 
 
-[![](../../../_/rsrc/1230088495565/developers/darwinbuild/troubleshooting/system_cmds_9F33pd1.png)](system_cmds_9F33pd1.png%3Fattredirects=0)
+![](/img/developers/darwinbuild/troubleshooting/system_cmds_9F33pd1.png)
 
 
 In fact, there is also **Foundation.framework missing**.

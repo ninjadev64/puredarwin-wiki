@@ -1,7 +1,7 @@
 Using MacPorts
 ==============
 
-[![](../_/rsrc/1222694606788/developers/macports/macports-logo-top.png)](http://www.puredarwin.org/developers/goog_1222698405894)
+![](/img/developers/macports/macports-logo-top.png)
 [MacPorts](http://www.macports.org/), formerly known as DarwinPorts, is a variant of the BSD ports system for Darwin and Mac OS X.
 This page describes how to use MacPorts to create binary packages that can be deployed to PureDarwin. We now have [MacPorts running on PureDarwin](macports/macportsonpuredarwin.html) itself. Deploying MacPorts on a PureDarwin system and building binaries there is preferable, since you will save a lot of hassle.
 
@@ -101,7 +101,7 @@ The resulting package should be located at */opt/local/var/macports/packages/dar
 MacPorts includes various build targets or "variants". Here is a quick, approximate overview:
 
 
-[![](../_/rsrc/1223575691028/developers/macports/Bild%208.png)](macports/Bild%208.png%3Fattredirects=0)
+![](/img/developers/macports/Bild%208.png)
 
 
 Maybe you noticed the "+puredarwin" build target in the command above. Note that "+darwin" is a superset of both "+puredarwin" and "+macosx", so binaries made using the "+darwin" variant will in many cases **not** run on PureDarwin. 

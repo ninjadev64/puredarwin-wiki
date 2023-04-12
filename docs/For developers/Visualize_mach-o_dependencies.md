@@ -28,7 +28,7 @@ The *[pd_machviz](http://code.google.com/p/puredarwin/source/browse/trunk/scrip
 #### A simple example across otool dependencies
 A hierarchical view:
 
-[![](../../_/rsrc/1224966874878/developers/otool/mach-o-dependencies-overview/otool.dot_directed.png)](mach-o-dependencies-overview/otool.dot_directed.png%3Fattredirects=0)
+![](/img/developers/otool/mach-o-dependencies-overview/otool.dot_directed.png)
 
 The corresponding script output:
 
@@ -94,10 +94,10 @@ Generation of otool.dot_undirected.png complete.
 Generation of otool.dot_undirectedBIS.png complete.
 #### A circular view of xterm dependencies
 
-[![](../../_/rsrc/1224967011322/developers/otool/mach-o-dependencies-overview/xterm.dot_circular.png%3Fheight=346&width=420)](mach-o-dependencies-overview/xterm.dot_circular.png%3Fattredirects=0)
+![](/img/developers/otool/mach-o-dependencies-overview/xterm.dot_circular.png)
 #### Checking for purity in passwd
 
-[![](../../_/rsrc/1233266186202/developers/otool/mach-o-dependencies-overview/passwd.dot_undirectedBIS.png%3Fheight=420&width=399)](mach-o-dependencies-overview/passwd.dot_undirectedBIS.png%3Fattredirects=0)
+![](/img/developers/otool/mach-o-dependencies-overview/passwd.dot_undirectedBIS.png)
 
 ### Resources {style="margin:10px 10px 10px 0px;background-color:transparent;color:rgb(0,0,0);font-family:Arial,Verdana,sans-serif;font-size:18px"}
 [http://www.graphviz.org](http://www.graphviz.org/)

@@ -59,16 +59,16 @@ Add to *com.apple.Boot.plist*:
 <string>**theme_folder_name**</string>
 
 #### Custom UI
-[![](../../_/rsrc/1247935767327/developers/booting/chameleon/Chameleon%20PureDarwin%20theme%200%20wait.png%3Fheight=327&width=420)](chameleon/Chameleon%20PureDarwin%20theme%200%20wait.png%3Fattredirects=0)
+![](/img/developers/booting/chameleon/Chameleon%20PureDarwin%20theme%200%20wait.png)
 
 #### Default UI
-[![](../../_/rsrc/1247890788671/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20timeout.png%3Fheight=327&width=420)](chameleon/chameleon%20v2.0-RC1-r431%20timeout.png%3Fattredirects=0)
+![](/img/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20timeout.png)
 
-[![](../../_/rsrc/1247890781208/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20memory%20info.png%3Fheight=330&width=420)](chameleon/chameleon%20v2.0-RC1-r431%20memory%20info.png%3Fattredirects=0)
+![](/img/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20memory%20info.png)
 
-[![](../../_/rsrc/1247890794899/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20video%20info.png%3Fheight=330&width=420)](chameleon/chameleon%20v2.0-RC1-r431%20video%20info.png%3Fattredirects=0)
+![](/img/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20video%20info.png)
 
-[![](../../_/rsrc/1247890785709/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20%20boot%20devices.png%3Fheight=330&width=420)](chameleon/chameleon%20v2.0-RC1-r431%20%20boot%20devices.png%3Fattredirects=0)
+![](/img/developers/booting/chameleon/chameleon%20v2.0-RC1-r431%20%20boot%20devices.png)
 
 ### RAM speed
 &lt;key&gt;SMmemspeed&lt;/key&gt;

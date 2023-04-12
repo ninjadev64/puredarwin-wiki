@@ -27,7 +27,7 @@ Short count-down for the BIOS stage, where IDE devices are reported:
 -   A cd device (bootstrap.iso)
 -   An hd device (2 GB, non formated)
 
-[![](../../_/rsrc/1263857828263/developers/repository/puredarwin-bootstrap/boostrap%20vmware%20bios.png%3Fheight=335&width=400)](puredarwin-bootstrap/boostrap%20vmware%20bios.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/boostrap%20vmware%20bios.png)
 
 The screen can sometimes been entirely filled by the error below:
 
@@ -36,7 +36,7 @@ EBIOS read error: Error 0x31
     Block 0 Sectors 4
 
 
-[![](../../_/rsrc/1263857961350/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20seek%20errors.png%3Fheight=262&width=400)](puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20seek%20errors.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20seek%20errors.png)
 
 This is not really problematic and should lead to the next screen.
 
@@ -46,18 +46,18 @@ The bootloader does not come from the media (bootstrap.iso) but from VMware (as 
 
 See the [VMware](../vmware.html#TOC-darwin.iso) page for more information.
 
-[![](../../_/rsrc/1263858200290/developers/repository/puredarwin-bootstrap/boostrap%20vmware%20bootloader%20countdown.png%3Fheight=262&width=400)](puredarwin-bootstrap/boostrap%20vmware%20bootloader%20countdown.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/boostrap%20vmware%20bootloader%20countdown.png)
 If [F8] is pressed, additional boot arguments can be passed to the kernel.
 
-[![](../../_/rsrc/1263858485530/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20f8.png%3Fheight=262&width=400)](puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20f8.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20bootloader%20f8.png)
 
 A Kernel EXTens decompression might occur.
 
-[![](../../_/rsrc/1263858631045/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20kext%20decompression.png%3Fheight=262&width=400)](puredarwin-bootstrap/bootstrap%20vmware%20kext%20decompression.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/bootstrap%20vmware%20kext%20decompression.png)
 
 Notice the cd-rom icon blinking while reading.
 
-[![](../../_/rsrc/1263243391341/developers/repository/puredarwin-bootstrap/vmware%20cd%20blink.png)](puredarwin-bootstrap/vmware%20cd%20blink.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/vmware%20cd%20blink.png)
 
 etc..
 
@@ -73,7 +73,7 @@ etc..
 disk device detection (iofindwholemedia)
 
 
-[![](../../_/rsrc/1263243397363/developers/repository/puredarwin-bootstrap/pd_installer%20intro.png)](puredarwin-bootstrap/pd_installer%20intro.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/pd_installer%20intro.png)
 
 
 PureDarwin release
@@ -86,9 +86,9 @@ Boot on cd, deploy to hd (no ramdisk).
 cd to hd
 
 
-[![](../../_/rsrc/1263243391341/developers/repository/puredarwin-bootstrap/vmware%20cd%20blink.png)](puredarwin-bootstrap/vmware%20cd%20blink.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/vmware%20cd%20blink.png)
 
-[![](../../_/rsrc/1263243384855/developers/repository/puredarwin-bootstrap/vmware%20hd%20blink.png)](puredarwin-bootstrap/vmware%20hd%20blink.png%3Fattredirects=0)
+![](/img/developers/repository/puredarwin-bootstrap/vmware%20hd%20blink.png)
 
 
 

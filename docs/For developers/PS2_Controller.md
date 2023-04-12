@@ -1,7 +1,7 @@
 PS2 Controller
 ==============
 <div style="display:inline;float:right;margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px">
-[![](../../_/rsrc/1247875684014/developers/xnu/ps2-controller/voodoolabs_500.png%3Fheight=71&width=96)](ps2-controller/voodoolabs_500.png%3Fattredirects=0)
+![](/img/developers/xnu/ps2-controller/voodoolabs_500.png)
 Draft.
 
 <div class="sites-embed-border-off sites-embed" style="width:250px;">

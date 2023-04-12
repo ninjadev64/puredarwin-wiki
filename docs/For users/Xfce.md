@@ -6,7 +6,7 @@ Xfce
 
 <img border="0" height="300" src="https://raw.github.com/wiki/PureDarwin/PureDarwin/images/pd201001.jpg?height=300&amp;width=400" width="400">
 
-[![](../_/rsrc/1264331892311/screenshots/pd201001.jpg%3Fheight=300&width=400)](../screenshots/pd201001.jpg%3Fattredirects=0)
+![](/img/screenshots/pd201001.jpg)
 
 The screenshot above shows Xfce compiled on a PureDarwin 9 system from MacPorts, using xfce4_axiom_theme and a background from psdgraphics.com.
 

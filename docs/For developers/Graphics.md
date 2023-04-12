@@ -106,7 +106,7 @@ This is a framebuffer kext included in the VMware Tools for Mac.
 
 <div style="display:inline;float:right;margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px">
 
-[![](http://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1212143130425/users/prerequisites/xicon.jpg)](http://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1212143130425/users/prerequisites/xicon.jpg)
+![](/img/users/prerequisites/xicon.jpg)
 
 What follows is an overview about the various terms and components that make up the graphical infrastructure of Mac OS X.
 

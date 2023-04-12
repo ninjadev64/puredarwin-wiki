@@ -4,7 +4,7 @@ This page is about the well-known UNIX tool 'top', which display and update sort
 
 **Problem:** logged as a user, `top' fails in "Bus error" as illustrated below:
 
-[![](../_/rsrc/1238319956058/users/top/top%20fails%20as%20user.png)](top/top%20fails%20as%20user.png%3Fattredirects=0)
+![](/img/users/top/top%20fails%20as%20user.png)
 
 **
 Solution:** Unknown. Please contact us if you know a solution.
@@ -23,5 +23,5 @@ Solution:** Unknown. Please contact us if you know a solution.
 
 As root, there is no problem:
 
-[![](../_/rsrc/1238319790319/users/top/top%20classic.png%3Fheight=335&width=420)](top/top%20classic.png%3Fattredirects=0)
+![](/img/users/top/top%20classic.png)
 

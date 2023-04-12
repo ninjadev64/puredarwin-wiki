@@ -2,7 +2,7 @@ Visualize dependencies in MacPorts
 ==================================
 <div style="margin-top:5px;margin-right:10px;margin-bottom:5px;margin-left:10px;display:inline;float:right">
 <div style="display:block;margin-left:auto;text-align:right">
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/graphviz.png)](macports-dependencies-overview/graphviz.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/graphviz.png)
 
 
 This page describes a way to track dependencies and related satellite information (e.g: as variants or blockers) in MacPorts.
@@ -37,7 +37,7 @@ The *[pd_portviz](http://code.google.com/p/puredarwin/source/browse/trunk/script
 #### Preliminary {style="background-color:transparent;color:rgb(0,0,0);font-family:Arial,Verdana,sans-serif;font-size:14px;margin-top:10px;margin-right:10px;margin-bottom:10px;margin-left:0px"}
 A rudimentary legend is generated in the DOT language:
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/portviz%20legend.png)](macports-dependencies-overview/portviz%20legend.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/portviz%20legend.png)
 
 Three kinds of dependencies can be found in MacPorts:
 -   Build dependencies
@@ -227,27 +227,27 @@ The dot file, then five PNG graphs are generated.
 
 The directed (hierarchical) view:
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/rrdtool_directed.png%3Fheight=219&width=420)](macports-dependencies-overview/rrdtool_directed.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/rrdtool_directed.png)
 
 
 The circular view:
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/rrdtool_circular.png%3Fheight=420&width=401)](macports-dependencies-overview/rrdtool_circular.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/rrdtool_circular.png)
 
 
 The radial view:
 
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/rrdtool_radial.png%3Fheight=349&width=420)](macports-dependencies-overview/rrdtool_radial.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/rrdtool_radial.png)
 
 
 The first undirected view:
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/rrdtool_undirected.png%3Fheight=372&width=420)](macports-dependencies-overview/rrdtool_undirected.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/rrdtool_undirected.png)
 
 The second undirected view:
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/rrdtool_undirectedBIS.png%3Fheight=229&width=420)](macports-dependencies-overview/rrdtool_undirectedBIS.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/rrdtool_undirectedBIS.png)
 
 #### Purity?
 Here an example of impurities detected in a port:
@@ -268,7 +268,7 @@ Here an example of impurities detected in a port:
 
 And the corresponding result:
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/pd_portviz%20graphviz%20radial.png%3Fheight=380&width=420)](macports-dependencies-overview/pd_portviz%20graphviz%20radial.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/pd_portviz%20graphviz%20radial.png)
 
 
 
@@ -278,17 +278,17 @@ Also, see the [purity checking](purity.html) page.
 ### Miscellaneous
 Illustration of irony?
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/graphviz_undirectedBIS.png%3Fheight=304&width=420)](macports-dependencies-overview/graphviz_undirectedBIS.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/graphviz_undirectedBIS.png)
 
 
 Why is it hard to compile a "pure" *kde3*?
 
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/pd_portviz%20kde_directed.png%3Fheight=267&width=420)](macports-dependencies-overview/pd_portviz%20kde_directed.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/pd_portviz%20kde_directed.png)
 
 Why is it also hard to compile a "pure" *gnome?*
 
-[![](../../_/rsrc/1224167778940/developers/macports/macports-dependencies-overview/pd_portviz%20gnome_directed.png%3Fheight=119&width=420)](macports-dependencies-overview/pd_portviz%20gnome_directed.png%3Fattredirects=0)
+![](/img/developers/macports/macports-dependencies-overview/pd_portviz%20gnome_directed.png)
 Ressources
 ----------
 <http://www.graphviz.org> 

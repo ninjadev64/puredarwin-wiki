@@ -18,7 +18,7 @@ Status
 ------
 ### system-info v1.1.3
 
-[![](../_/rsrc/1247939340160/users/system-info/system-info%20v1.1.3.png%3Fheight=330&width=420)](system-info/system-info%20v1.1.3.png%3Fattredirects=0)
+![](/img/users/system-info/system-info%20v1.1.3.png)
 Resource
 --------
 <http://code.google.com/p/system-info/>

@@ -36,7 +36,7 @@ Status
 
 **Nasty nasty fix:** `securityd' seems to work reliably if you force it to stick to a single thread (by adding -`t 1` to its .plist). Which is bound to cause us more problems in the future. The most problematic point is the frequency of deadlock (significant impact) with this workaround.
 
-[![](../_/rsrc/1237640633039/users/users/login%20with%20security%20running%20in%20single%20thread.png)](users/login%20with%20security%20running%20in%20single%20thread.png%3Fattredirects=0)
+![](/img/users/users/login%20with%20security%20running%20in%20single%20thread.png)
 
 
 **Less nasty nasty fix:** `securityd' seems also to work reliably with 10 threads. Add `-t 10` to its .plist, that will also decrease the chance to hit a deadlock.
@@ -71,7 +71,7 @@ Welcome to PureDarwin!`
 
 
 
-[![](../_/rsrc/1237640751991/users/users/login%20via%20ssh.png)](users/login%20via%20ssh.png%3Fattredirects=0)
+![](/img/users/users/login%20via%20ssh.png)
 
 
 Old problem:

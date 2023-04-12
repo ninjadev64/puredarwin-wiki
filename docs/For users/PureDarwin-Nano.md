@@ -4,14 +4,16 @@ This page describes the minimal components needed for a minimal PureDarwin syste
 
 ## Contents
 
-1.  [Download](#Download)
-2.  [Components](#Components)
-    1.  [Bootloader](#C-Bootloader)
-    2.  [Installer](#C-Installer)
-    3.  [Interactive mode](#C-Interactive-mode)
-3.  [Virtual machine](#Virtual-machine)
-    1.  [VMware](#VM-VMware)
-    2.  [QEMU](#VM-QEMU)  
+- [PureDarwin Nano](#puredarwin-nano)
+    - [Contents](#contents)
+    - [Download](#download)
+    - [Components](#components)
+        - [Bootloader](#bootloader)
+        - [Installer](#installer)
+        - [Interactive mode](#interactive-mode)
+    - [Virtual machine](#virtual-machine)
+        - [VMware](#vmware)
+        - [QEMU](#qemu)
 
 This system is a **proof-of-concept** of a minimal bootable Darwin 9 system that can be built from the components that Apple provides through the [DarwinBuild](http://darwinbuild.macosforge.org/) project.
 
@@ -34,7 +36,7 @@ The virtual machine contains an ISO that could be used on real hardware as well.
 Here is what such a minimal system needs to consist of:
 
 
-[![Components Screenshot](https://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1234090957898/downloads/puredarwin-nano/Bild%202.png)](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/Bild%202.png?attredirects=0)
+![](/img/downloads/puredarwin-nano/Bild%202.png)
 
 Notes: [VoodooPS2*](https://github.com/PureDarwin/PureDarwin/wiki/PS2_Controller) or (exclusively) [ACPIPS2Nub.kext](http://code.google.com/p/puredarwin/source/browse/Roots/pd/ACPIPS2Nub.root.tar.gz) and [ApplePS2Controller.kext](http://code.google.com/p/puredarwin/source/browse/Roots/pd/ApplePS2Controller.root.tar.gz) ([sources](http://tgwbd.org/darwin/extensions.html)) are only required if you want to use a PS/2 keyboard and/or mouse.
 The number of files can be further brought down by using a [prelinked mach_kernel](https://github.com/PureDarwin/PureDarwin/wiki/XNU,_the_kernel). This removes the need for the System directory.
@@ -53,11 +55,11 @@ An installer is currently being prepared.
 
 An interactive shell is run by default. In fact, `/sbin/launchd` is replaced by a shell script that runs `/bin/bash`.
 
-[![Interactive Mode Screenshot](https://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1234090957898/downloads/puredarwin-nano/bash%20interactive%20mode%20in%20nano.png)](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/bash%20interactive%20mode%20in%20nano.png?attredirects=0)
+![](/img/downloads/puredarwin-nano/bash%20interactive%20mode%20in%20nano.png)
 
 The Z shell (zsh) is also usable as an interactive UNIX command interpreter (shell).
 
-[![ZSH Screenshot](https://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1234090957898/downloads/puredarwin-nano/VMware%20running%20PureDarwin%20nano%20with%20interactive%20commands.png)](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/VMware%20running%20PureDarwin%20nano%20with%20interactive%20commands.png?attredirects=0)
+![](/img/downloads/puredarwin-nano/VMware%20running%20PureDarwin%20nano%20with%20interactive%20commands.png)
 
 <a name="Virtual-machine"></a>Virtual machine
 ---------------
@@ -66,8 +68,8 @@ See [VMware](https://github.com/PureDarwin/PureDarwin/wiki/vmware) page, [QEM
 
 ### <a name="VM-VMWarwe"></a>VMware
 
-[![VMWare Screenshot](https://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1234090957898/downloads/puredarwin-nano/nanovmwarelittlegray.png)](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/nanovmwarelittlegray.png?attredirects=0)
+![](/img/downloads/puredarwin-nano/nanovmwarelittlegray.png)
 
 ### <a name="VM-QEMU"></a>QEMU
 
-[![QEMU Screenshot](https://sites.google.com/a/puredarwin.org/puredarwin/_/rsrc/1254082132956/downloads/puredarwin-nano/qemu1.png?height=321&width=420)](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/qemu1.png?attredirects=0)
+![](/img/downloads/puredarwin-nano/qemu1.png)

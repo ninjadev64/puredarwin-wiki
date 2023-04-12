@@ -70,7 +70,7 @@ Simply fetch binaryroots, thin them and build/deploy PureDarwin to the requested
 3.  `./pd_setup` (a usage should display potential choices)
     **Important:** Be aware that a full (non-nano) PureDarwin system currently cannot be run from a read-only disk such as a CD-ROM, DVD, or an ISO file. It needs a r/w hard disk (real hardware) or virtual disk. This might be solved once we go the [Live CD](live-cd.html) way.
 
-![![](../_/rsrc/1260870057546/developers/repository/setup_process_overview.gif)](repository/setup_process_overview.gif%3Fattredirects=0)
+!![](/img/developers/repository/setup_process_overview.gif)
 
 ### Configuration
 In case you decided to edit [pd_config](http://code.google.com/p/puredarwin/source/browse/setup/pd_config) to reflect your needs, keep in mind only few variables need to be edited in the most cases.
@@ -126,7 +126,7 @@ By default, the `BINARYROOTS_LIST_FILE` variable is automatically set to the c
 
 **Note: Most of the time, the choice should be "synced" with the `PUREDARWIN_RELEASE` variable.**
 
-[![](../_/rsrc/1260870064777/developers/repository/pd_roots_overview.gif)](repository/pd_roots_overview.gif%3Fattredirects=0)
+![](/img/developers/repository/pd_roots_overview.gif)
 
 > `BINARYROOTS_LIST_FILE="pd_roots"`
 > or
@@ -179,7 +179,7 @@ This variable is used by
 Which kind of PureDarwin you will be able to generate from the PureDarwin you generated is conditioned by the couple of (`PUREDARWIN_RELEASE`/`BINARYROOTS_LIST_FILE`) and `ADD_CLONE`.
 
 
-[![](../_/rsrc/1260876454164/developers/repository/releases_chicken_egg.gif)](repository/releases_chicken_egg.gif%3Fattredirects=0)
+![](/img/developers/repository/releases_chicken_egg.gif)
 
 The picture above shows that nothing can be generated from PureDarwin nano.
 
@@ -194,7 +194,7 @@ PureDarwin will contains the same packages (c.f. pd_roots) which have been used
 PureDarwin bootstrap will contains the same packages (c.f. pd_roots.bootstrap)  which have been used to make it. Because "`pd_roots.nano` âˆˆ `pd_roots.bootstrap` âˆˆ `pd_roots", PureDarwin bootstrap will be only able to generate itself or a PureDarwin nano.</span>
 
 
-[![](../_/rsrc/1263245272700/developers/repository/pd_roots_overview_without_shortcircuiting_arcs.gif)](repository/pd_roots_overview_without_shortcircuiting_arcs.gif%3Fattredirects=0)
+![](/img/developers/repository/pd_roots_overview_without_shortcircuiting_arcs.gif)
 
 #### Zooming chickens and eggs
 This is a more detailed and realistic, where there is (by default) no alteration of the couple of (`PUREDARWIN_RELEASE`/`BINARYROOTS_LIST_FILE`) and `ADD_CLONE`.
@@ -209,7 +209,7 @@ A blue dotted arrow shows that the deployment could be successful if the expecte
 A red one faces [a blocker](../blockers.html).
 
 
-[![](../_/rsrc/1263244777135/developers/repository/releases_chicken_egg_x2.gif)](repository/releases_chicken_egg_x2.gif%3Fattredirects=0)
+![](/img/developers/repository/releases_chicken_egg_x2.gif)
 
 Resources
 ---------

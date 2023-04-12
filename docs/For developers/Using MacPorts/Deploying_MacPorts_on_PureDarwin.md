@@ -39,7 +39,7 @@ Status
 MacPorts is functional on PureDarwin 9 using the "quick method" at the end of this page.
 
 
-[![](../../_/rsrc/1264333931811/developers/macports/macportsonpuredarwin/macports_on_pd.jpg%3Fheight=300&width=400)](macportsonpuredarwin/macports_on_pd.jpg%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/macports_on_pd.jpg)
 
 
 
@@ -57,7 +57,7 @@ MacPorts 1.8.0 states depending its host.
 As an example, the fortune project (one workaround consists to fetch the source only in a puredarwin chroot where the network is available from Mac OS X or to use [QEMU](../qemu.html) user mode network stack ) built and run:
 
 
-[![](../../_/rsrc/1246401686874/developers/macports/macportsonpuredarwin/fortune_from_macports.png)](macportsonpuredarwin/fortune_from_macports.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/fortune_from_macports.png)
 
 
 __Notes:__ On Mac OS X (the host and build environment), darwinbuild comes from macports (port install darwinbuild).
@@ -68,14 +68,14 @@ Then, in the BuildRoot, the freshly installed MacPorts project could be used to 
 
 To illustrate:
 
-[![](../../_/rsrc/1234066038309/developers/macports/macportsonpuredarwin/macportsvsdarwinbuild.png)](macportsonpuredarwin/macportsvsdarwinbuild.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/macportsvsdarwinbuild.png)
 Getting MacPorts
 ----------------
 ### Fetching MacPorts in a PureDarwin VM
 #### Via Network
 With [QEMU user mode network stack](../qemu.html), retrieve MacPorts sources via curl 
 
-[![](../../_/rsrc/1246837422604/developers/macports/macportsonpuredarwin/macportscurldownload.png)](macportsonpuredarwin/macportscurldownload.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/macportscurldownload.png)
 #### Local copy
 Opening the archive file in rw (.vmdk, .iso, etc..), and drop the source inside.
 
@@ -110,14 +110,14 @@ With X11 from MacPorts:
 `TCLSH=/opt/local/bin/tclsh ``./configure --without-objc-foundation --without-objc-runtime --with-x --x-includes=/usr/X11R6/include/ --x-libraries=/usr/X11R6/lib/ --with-tcl=/opt/local/lib --with-tclinclude=/opt/local/include --with-included-tclthread`
 
 
-[![](../../_/rsrc/1246397774959/developers/macports/macportsonpuredarwin/compiling_macports_in_puredarwin_configure.png%3Fheight=364&width=420)](macportsonpuredarwin/compiling_macports_in_puredarwin_configure.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/compiling_macports_in_puredarwin_configure.png)
 
 #### make
 
-[![](../../_/rsrc/1246397789524/developers/macports/macportsonpuredarwin/compiling_macports_in_puredarwin_make_install.png%3Fheight=366&width=420)](macportsonpuredarwin/compiling_macports_in_puredarwin_make_install.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/compiling_macports_in_puredarwin_make_install.png)
 #### make install
 
-[![](../../_/rsrc/1246397782884/developers/macports/macportsonpuredarwin/compiling_macports_in_puredarwin_make.png%3Fheight=366&width=420)](macportsonpuredarwin/compiling_macports_in_puredarwin_make.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/compiling_macports_in_puredarwin_make.png)
 
 ### Compiling MacPorts 1.7.0 in DarwinBuild
 
@@ -250,16 +250,16 @@ port install fortune
 Running MacPorts
 ----------------
 ### Running a compiled MacPorts on PureDarwin
-<span style="font-family:courier new,monospace;white-space:pre">[![](../../_/rsrc/1246398754457/developers/macports/macportsonpuredarwin/running_macports_in_puredarwin.png%3Fheight=366&width=420)](macportsonpuredarwin/running_macports_in_puredarwin.png%3Fattredirects=0)</span>
+<span style="font-family:courier new,monospace;white-space:pre">![](/img/developers/macports/macportsonpuredarwin/running_macports_in_puredarwin.png)</span>
 
 The next step involves network support (but could be also done via a local repository (see MacPorts documentation for more information)), which is at this time only functional via [QEMU](../qemu.html) user mode network stack and some workaround.
 #### port selfupdate
 
-[![](../../_/rsrc/1246830815984/developers/macports/macportsonpuredarwin/macportsselfupdateqemu.png%3Fheight=330&width=420)](macportsonpuredarwin/macportsselfupdateqemu.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/macportsselfupdateqemu.png)
 
 The end of the selfupdate process should look like:
 
-[![](../../_/rsrc/1246830807822/developers/macports/macportsonpuredarwin/macportsselfupdated.png)](macportsonpuredarwin/macportsselfupdated.png%3Fattredirects=0)
+![](/img/developers/macports/macportsonpuredarwin/macportsselfupdated.png)
 #### port install most
 For more information, see the [Using MacPorts](../macports.1.html) page.
 

@@ -19,11 +19,11 @@ Maybe you are looking for a nice [folder icon](http://stenosis.deviantart.com/a
 Random found on the web:
 
 
-[![](../_/rsrc/1226674275776/curious/hexley/Hexley_by_fsck3r.png%3Fheight=150&width=200)](hexley/Hexley_by_fsck3r.png%3Fattredirects=0)[![](../_/rsrc/1226673887777/curious/hexley/Hexley2.jpg%3Fheight=150&width=200)](hexley/Hexley2.jpg%3Fattredirects=0)
+![](/img/curious/hexley/Hexley2.jpg)
 
-[![](../_/rsrc/1223390651416/curious/hexley/NO_more_Mr_Nice_Guy_1024x768.jpg%3Fheight=150&width=200)](hexley/NO_more_Mr_Nice_Guy_1024x768.jpg%3Fattredirects=0)[![](../_/rsrc/1223390633119/curious/hexley/Whos_NeXT_1024x768.jpg%3Fheight=150&width=200)](hexley/Whos_NeXT_1024x768.jpg%3Fattredirects=0)
+![](/img/curious/hexley/Whos_NeXT_1024x768.jpg)
 
-[![](../_/rsrc/1226674426805/curious/hexley/Visitor_15K__s_gift_by_LordZoltan.png%3Fheight=122&width=200)](hexley/Visitor_15K__s_gift_by_LordZoltan.png%3Fattredirects=0)
+![](/img/curious/hexley/Visitor_15K__s_gift_by_LordZoltan.png)
 
 
 
@@ -38,5 +38,5 @@ http://LordZoltan.deviantart.com/art/Visitor-15K-s-gift-52907225
 Hexley has also appeared in [supertuxkart](http://supertuxkart.sourceforge.net/)..
 
 
-[![](../_/rsrc/1223390918966/curious/hexley/Hexley%20in%20supertuxkart.jpg%3Fheight=150&width=200)](hexley/Hexley%20in%20supertuxkart.jpg%3Fattredirects=0)[![](../_/rsrc/1223390939855/curious/hexley/hexley%20face%20in%20supertuxkart.png%3Fheight=150&width=200)](hexley/hexley%20face%20in%20supertuxkart.png%3Fattredirects=0)
+![](/img/curious/hexley/hexley%20face%20in%20supertuxkart.png)
 

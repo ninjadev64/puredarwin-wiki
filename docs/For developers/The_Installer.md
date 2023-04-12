@@ -23,7 +23,7 @@ The Installation Process
 Installing PureDarwin should be a two stage process, as illustrated here.
 
 <div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
-[![](../../_/rsrc/1263242453465/developers/repository/the-installer/install.png%3Fheight=221&width=420)](the-installer/install.png%3Fattredirects=0)
+![](/img/developers/repository/the-installer/install.png)
 ### First stage
 <div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
 The first stage installer is run from either a PureDarwin CD image, or from another operating system on the target computer. The first stage should:
@@ -33,7 +33,7 @@ The first stage installer is run from either a PureDarwin CD image, or from anot
 -   Install the PureDarwin Core package. This will provide all of the utilities and services necessary to allow the second stage installer to complete successfully.
 -   Install the appropriate bootloaders (*/usr/standalone/i386 -> install bootloader into MBR (beginning of disk), boot sector (beginning of partition), grub and HFS startup file (alternatively /boot)*), according to user choice and whether it will be a multi-boot system. The user will have the choice of MBR (Chameleon) or EFI. The question should be "Is this a Mac or VMware Fusion?" If they answer "yes", install the EFI bootloader; if they answer "no", install MBR.
 -   Reboot the system when done.
-[![](../../_/rsrc/1263242453465/developers/repository/the-installer/firststage.png)](the-installer/firststage.png%3Fattredirects=0)
+![](/img/developers/repository/the-installer/firststage.png)
 <div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
 **
 #### Pre-configuration and questions
@@ -94,7 +94,7 @@ Correctly setting up bootloaders is a tricky business, especially in a multi-boo
 ### Second stage
 The second stage installer will be designed to run in a Darwin environment, meaning that it will be exactly the same no matter what the first stage installer was.
 
-[![](../../_/rsrc/1263242453465/developers/repository/the-installer/secondstage.png)](the-installer/secondstage.png%3Fattredirects=0)
+![](/img/developers/repository/the-installer/secondstage.png)
 
 In this way we will be moving the environment-specific parts of setup into the first stage (of which there will be a few different platform-specific versions), consequently we only need to maintain a single version of the main installation code.
 It will possibly need access to a network connection, although providing a local cache of packages will make this unnecessary.
