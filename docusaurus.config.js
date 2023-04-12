@@ -37,12 +37,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      colorMode: {
-        switchConfig: {
-          darkIcon: '☾',
-          lightIcon: '☀︎',
-        },
-      },
       navbar: {
         title: 'PureDarwin',
         logo: {
