@@ -3,7 +3,7 @@ Interprocess Communication (IPC)
 Interprocess communication is a "means of information sharing and synchronization" (Singh) between processs. This page describes the various forms of IPC on a Darwin system and also shows forms of IPC not present in Darwin, but in Mac OS X.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

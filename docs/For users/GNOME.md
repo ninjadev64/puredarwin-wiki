@@ -6,7 +6,7 @@ GNOME is a graphical desktop environment and development platform. For more info
 This page is about running GNOME components on a PureDarwin system.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

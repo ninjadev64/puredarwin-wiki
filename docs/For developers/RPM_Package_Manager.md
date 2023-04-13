@@ -6,7 +6,7 @@ The RPM Package Manager is a package manager and package format commonly used fo
 This page describes how to use RPM on a PureDarwin system.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

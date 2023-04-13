@@ -4,7 +4,7 @@ This page describes the HFS+ filesystem and how to interact with it.
 This is a work in progress; please contribute to this page.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

@@ -2,7 +2,7 @@ New PureDarwin 1.3 beta release
 ===============================
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

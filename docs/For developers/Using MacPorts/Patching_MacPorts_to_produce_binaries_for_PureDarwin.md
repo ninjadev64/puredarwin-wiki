@@ -10,7 +10,7 @@ You can check [here](https://trac.macports.org/query?status=assigned&status=clos
  This page describes how to create such patches.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:430px;">
+
 
 
 Contents

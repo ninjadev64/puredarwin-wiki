@@ -8,7 +8,7 @@ Visualize dependencies in MacPorts
 This page describes a way to track dependencies and related satellite information (e.g: as variants or blockers) in MacPorts.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:360px;">
+
 
 
 Contents

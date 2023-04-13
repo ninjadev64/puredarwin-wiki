@@ -2,7 +2,7 @@ Purity checking
 ===============
 This page is about checking the "purity" (read: absence of links to ApplicationServices, CoreServices and other proprietary, closed-source frameworks and libraries).
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 

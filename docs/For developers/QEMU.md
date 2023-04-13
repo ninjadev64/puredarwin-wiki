@@ -8,7 +8,7 @@ The ability to run PureDarwin on emulated hardware can be very useful, especiall
 
 <!--
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 -->
 Contents
@@ -251,7 +251,7 @@ create a new Network Interface Card and connect it to VLAN 'n'-net nic,model=rtl
 
 `-boot [a|c|d|n] boot on floppy (a), hard disk (c), CD-ROM (d), or network (n)`** "d" with the corresponding target is functional.**
 ****
-<div style="display:block">
+
 -redir to test. **Need investigations**
 **-tftp prefix**
 -smb
@@ -306,26 +306,26 @@ probono's networking experiments 12/2011
 ----------------------------------------
 The experiments are done with a "fuller" PureDarwin installation than Xmas or Nano. Above it says "everything has been provided automatically (KernelEventMonitor) via DHCP", however it doesn't do that for me (I must be missing something still). Hence I set up networking by hand, which is a bit cumbersome:
 <!--
-<span style="font-family:courier new,monospace">The following are my tests on Ubuntu 12/2011; probono</span>
-<span style="font-family:courier new,monospace"># qemu: pci_add_option_rom: failed to find romfile "pxe-rtl8139.bin"</span>
-<span style="font-family:courier new,monospace"># can be solved with</span>
-<span style="font-family:courier new,monospace">sudo apt-get install kvm-pxe</span>
-<span style="font-family:courier new,monospace"># Launch qemu as root and with -redir tcp:22::22 for SSH access</span>
-<span style="font-family:courier new,monospace">sudo qemu -hda /dev/sdc -net nic,model=rtl8139 -no-kvm-irqchip -net user -redir tcp:22::22</span>
-<span style="font-family:courier new,monospace"># Inside qemu</span>
-<span style="font-family:courier new,monospace">ifconfig en2 10.0.2.15 up</span>
-<span style="font-family:courier new,monospace">ping 10.0.2.2 # works (which is the gateway provided by qemu)</span>
-<span style="font-family:courier new,monospace"># Create /etc/rc.local with the following content to</span>
-<span style="font-family:courier new,monospace"># bring en2 up automatically at boot time </span>
-<span style="font-family:courier new,monospace">#!/bin/bash</span>
-<span style="font-family:courier new,monospace">ifconfig en2 10.0.2.15 up</span>
-<span style="font-family:courier new,monospace">sudo route add 0.0.0.0 10.0.2.2</span>
-<span style="font-family:courier new,monospace"># Headless SSH server inside qemu</span>
-<span style="font-family:courier new,monospace">sudo qemu -hda /dev/sdc -net nic,model=rtl8139 -no-kvm-irqchip -net user -redir tcp:22::22 -vnc :1 -redir tcp:80::80</span>
-<span style="font-family:courier new,monospace"># Works :-)</span>
-<span style="font-family:courier new,monospace"># The only thing that does not work yet is DNS</span>
-<span style="font-family:courier new,monospace"># scutil --dns # resolver #1 is empty, which is a problem -- very ugly workaround:
-</span>echo 'nameserver 10.0.2.3' &gt; /etc/resolver/com
+`The following are my tests on Ubuntu 12/2011; probono`
+`# qemu: pci_add_option_rom: failed to find romfile "pxe-rtl8139.bin"`
+`# can be solved with`
+`sudo apt-get install kvm-pxe`
+`# Launch qemu as root and with -redir tcp:22::22 for SSH access`
+`sudo qemu -hda /dev/sdc -net nic,model=rtl8139 -no-kvm-irqchip -net user -redir tcp:22::22`
+`# Inside qemu`
+`ifconfig en2 10.0.2.15 up`
+`ping 10.0.2.2 # works (which is the gateway provided by qemu)`
+`# Create /etc/rc.local with the following content to`
+`# bring en2 up automatically at boot time `
+`#!/bin/bash`
+`ifconfig en2 10.0.2.15 up`
+`sudo route add 0.0.0.0 10.0.2.2`
+`# Headless SSH server inside qemu`
+`sudo qemu -hda /dev/sdc -net nic,model=rtl8139 -no-kvm-irqchip -net user -redir tcp:22::22 -vnc :1 -redir tcp:80::80`
+`# Works :-)`
+`# The only thing that does not work yet is DNS`
+`# scutil --dns # resolver #1 is empty, which is a problem -- very ugly workaround:`
+echo 'nameserver 10.0.2.3' &gt; /etc/resolver/com
 echo 'nameserver 10.0.2.3' &gt; /etc/resolver/org
 echo 'nameserver 10.0.2.3' &gt; /etc/resolver/net
 echo 'nameserver 10.0.2.3' &gt; /etc/resolver/de

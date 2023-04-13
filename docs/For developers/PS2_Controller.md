@@ -4,7 +4,7 @@ PS2 Controller
 ![](/img/developers/xnu/ps2-controller/voodoolabs_500.png)
 Draft.
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

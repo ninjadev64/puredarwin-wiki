@@ -8,7 +8,7 @@ If you are interested in getting MacPorts to run on PureDarwin as quickly as pos
 **
 
 
-<div class="sites-embed-border-off sites-embed" style="width:450px;">
+
 
 
 Contents
@@ -250,7 +250,7 @@ port install fortune
 Running MacPorts
 ----------------
 ### Running a compiled MacPorts on PureDarwin
-<span style="font-family:courier new,monospace;white-space:pre">![](/img/developers/macports/macportsonpuredarwin/running_macports_in_puredarwin.png)</span>
+![](/img/developers/macports/macportsonpuredarwin/running_macports_in_puredarwin.png)
 
 The next step involves network support (but could be also done via a local repository (see MacPorts documentation for more information)), which is at this time only functional via [QEMU](../qemu.html) user mode network stack and some workaround.
 #### port selfupdate

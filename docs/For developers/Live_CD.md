@@ -2,7 +2,7 @@ Live CD
 =======
 Live CDs are a very popular way to distribute operating systems.
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

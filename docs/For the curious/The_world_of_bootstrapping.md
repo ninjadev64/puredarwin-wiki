@@ -4,7 +4,7 @@ This page gives an overview over some basic concepts about booting operating sys
 It is based on a conversation with dfe in #puredarwin.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

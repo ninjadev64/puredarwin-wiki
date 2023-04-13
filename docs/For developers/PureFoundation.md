@@ -3,7 +3,7 @@ PureFoundation
 This page is about the use of PureFoundation on Darwin. For details about its development, see the links section below. 
 
 
-<div class="sites-embed-border-off sites-embed" style="width:400px;">
+
 
 
 Contents

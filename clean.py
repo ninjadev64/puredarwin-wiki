@@ -4,13 +4,25 @@ from bs4 import BeautifulSoup
 from in_place import InPlace
 from re import sub
 
+removal = [
+    """<div class="sites-embed-align-left-wrapping-off">""",
+    """<div class="sites-embed-content sites-embed-type-toc">""",
+    """<div class="sites-embed-content sites-embed-type-trog-gadget">""",
+    """<div style="display:block">""",
+    """<div style="direction:ltr">""",
+    """<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">""",
+    """<div class="sites-embed-border-off sites-embed" style="width:.*?px;">""",
+    """<div class="goog-toc sites-embed-toc-maxdepth-.*?">""",
+    """<div style="font-family:arial,sans-serif">""",
+    """<div style="color:rgb\(\d*,\d*,\d*\)">""",
+    """<div style="background-color:transparent">"""
+]
+
 def fixfile(contents):
     soup = BeautifulSoup(contents, "html.parser")
 
-    contents = contents.replace("""<div class="sites-embed-align-left-wrapping-off">""", "")
-    contents = contents.replace("""<div class="sites-embed-content sites-embed-type-toc">""", "")
-    contents = sub("""<div class="sites-embed-border-off sites-embed" style="width:333px;">""", "", contents)
-    contents = sub("""<div class="goog-toc sites-embed-toc-maxdepth-6">""", "", contents)
+    for string in removal:
+        contents = sub(string, "", contents)
 
     for span in soup.find_all("span"):
         style = span.get("style")
@@ -37,7 +49,7 @@ def fixfile(contents):
             if ("text-decoration:line-through" in style):
                 opening = opening + "~~"
                 closing = "~~" + closing
-        
+
         contents = contents.replace(str(span), opening + (span.string or "") + closing)
 
     return contents

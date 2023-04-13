@@ -4,7 +4,7 @@ The xref database by [DarwinBuild](../darwinbuild.html) is roughly the equivalen
  This page is intended to describe what is in the xref database, and how to use it.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

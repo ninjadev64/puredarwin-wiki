@@ -10,7 +10,7 @@ From *VMware Fusion 2.0* (Mac OS X) to *VMware Player 2.5* (free download for Wi
 **A more precise list will be constituted if respective [feedback](../todo.html) is received.**
 
 
-<div class="sites-embed-border-off sites-embed" style="width:357px;">
+
 
 
 Contents<br>
@@ -395,65 +395,65 @@ even the IOName and name are the only "ethernet" occurence found
     | |   |   |   }
 
 #### AppleIntel8255x
-<div style="display:block">
+
 Intel82566MM.kext can be build and loaded.
-<div style="display:block">
+
 Info.plist needs to be modified to match VMware device.
-<div style="display:block">
+
 No interface is shown..
-<div style="display:block">
 
-<div style="display:block">
 
-<div style="display:block">
+
+
+
 With 0x8086 0x100F:
-<div style="display:block">
-<div style="display:block">
+
+
 Jul 14 20:56:15 PureDarwin kernel[0]: i82557eeprom: checksum fffe incorrect
 
 Jul 14 20:56:15 PureDarwin kernel[0]: Intel82557: couldn't allocate eeprom object
 
 
 #### Intel82566MM
-<div style="display:block">
-Intel82566MM.kext can be build and loaded.
-<div style="display:block">
-Info.plist needs to be modified to match VMware device.
-<div style="display:block">
-No interface is shown..
-<div style="display:block">
 
-<div style="display:block">
-<div style="display:block">
+Intel82566MM.kext can be build and loaded.
+
+Info.plist needs to be modified to match VMware device.
+
+No interface is shown..
+
+
+
+
 Jul 12 19:17:19 PureDarwin kernel[0]: venderid: 0x8086 deviceid: 0x100f.
-<div style="display:block">
+
 
 
 It seems really clear that this kext has been derivated from the FreeBSD branch too (even comments are almost identic).
-<div style="display:block">
+
 Editing the plist is naturally not enough, so after adding a couple of defines and enable debug on stdout, it looks like:
-<div style="display:block">
-<div style="display:block">
+
+
 Jul 15 00:38:44 PureDarwin kernel[0]: Intel82566MM debug: bool Intel82566MM::Init(OSDictionary *properties).
-<div style="display:block">
+
 Jul 15 00:38:44 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::start(IOService * provider)
-<div style="display:block">
+
 Jul 15 00:38:44 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::createWorkLoop().
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::getWorkLoop() const.
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::createOutputQueue().
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::getWorkLoop() const.
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::getPacketBufferConstraints.
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: venderid: 0x8086 deviceid: 0x100f.
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: Intel82566MM::e1000_read_pcie_cap_reg(struct e1000_hw *hw, UInt32 reg, UInt16 *value)
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: flashPCIAddress.
-<div style="display:block">
+
 Jul 15 00:38:45 PureDarwin kernel[0]: Intel82566MM debug: void Intel82566MM::free()
 
 The red part can be found in *Intel82566M.cpp* and corresponds to:
@@ -510,94 +510,94 @@ In the FreeBSD src code:
 
 
 **kextload:**
-<div style="display:block">
 
-<div style="display:block">
+
+
 ![](/img/developers/vmware/82566MM.png)
-<div style="display:block">
 
-<div style="display:block">
+
+
 **kextload more verbose:**
-<div style="display:block">
+
 [...]
-<div style="display:block">
-<div style="display:block">
+
+
 kextload: module /System/Library/Extensions/IONetworkingFamily.kext/Contents/MacOS/IONetworkingFamily (identifier com.apple.iokit.IONetworkingFamily) is already loaded
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/System.kext/PlugIns/IOKit.kext/IOKit
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/System.kext/PlugIns/Unsupported.kext/Unsupported
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/System.kext/PlugIns/Libkern.kext/Libkern
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/System.kext/PlugIns/Mach.kext/Mach
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/System.kext/PlugIns/BSDKernel.kext/BSDKernel
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/IOPCIFamily.kext/IOPCIFamily
-<div style="display:block">
+
 kextload: using existing load address 0xd19a000 (0xd19ac40 with header pad)
-<div style="display:block">
+
 kextload: kmod name: com.apple.iokit.IOPCIFamily
-<div style="display:block">
+
 kextload: kmod start @ 0xd1a6333 (offset 0xb6f3)
-<div style="display:block">
+
 kextload: kmod stop @ 0xd1a6376 (offset 0xb736)
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/IONetworkingFamily.kext/Contents/MacOS/IONetworkingFamily
-<div style="display:block">
+
 kextload: using existing load address 0xf888000 (0xf888c40 with header pad)
-<div style="display:block">
+
 kextload: kmod name: com.apple.iokit.IONetworkingFamily
-<div style="display:block">
+
 kextload: kmod start @ 0xf8983e0 (offset 0xf7a0)
-<div style="display:block">
+
 kextload: kmod stop @ 0xf898423 (offset 0xf7e3)
-<div style="display:block">
+
 kextload: link/loading file /System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/Intel82566MM.kext/Contents/MacOS/Intel82566MM
-<div style="display:block">
+
 kextload: allocated 53248 bytes in kernel space at 0xff7d000
-<div style="display:block">
+
 kextload: using load address of 0xff7d000
-<div style="display:block">
+
 kextload: kmod name: com.tootoosoft.driver.Intel82566MM
-<div style="display:block">
+
 kextload: kmod start @ 0xff802cd (offset 0x268d)
-<div style="display:block">
+
 kextload: kmod stop @ 0xff80310 (offset 0x26d0)
-<div style="display:block">
+
 kextload: module com.tootoosoft.driver.Intel82566MM created as # 64 at address 0xff7d000, size 53248
-<div style="display:block">
+
 kextload: module # 64 reference counts incremented
-<div style="display:block">
+
 kextload: module # 64 started
-<div style="display:block">
+
 kextload: /System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/Intel82566MM.kext loaded successfully
-<div style="display:block">
+
 kextload: loading personalities for extension /System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/Intel82566MM.kext and dependencies
-<div style="display:block">
+
 kextload: sending personalities to kernel:
-<div style="display:block">
+
 kextload:     from extension /System/Library/Extensions/IONetworkingFamily.kext:
-<div style="display:block">
+
 kextload:         IONetworkStack
-<div style="display:block">
+
 kextload:         Kernel Debugging Driver
-<div style="display:block">
+
 kextload:     from extension /System/Library/Extensions/IOPCIFamily.kext:
-<div style="display:block">
+
 kextload:         IOPCI2PCIBridge-Name
-<div style="display:block">
+
 kextload:         IOPCI2PCIBridge-i386
-<div style="display:block">
+
 kextload:         IOPCI2PCIBridge-PCI
-<div style="display:block">
+
 kextload:     from extension /System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/Intel82566MM.kext:
-<div style="display:block">
+
 kextload:         Intel82566MM
-<div style="display:block">
+
 kextload: sending 6 personalities to the kernel
-<div style="display:block">
+
 kextload: matching started for /System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/Intel82566MM.kext
 
 

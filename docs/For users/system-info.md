@@ -3,7 +3,7 @@ system-info
 `system-info' is a little OpenSource tool (GPL v3) which reports operating system information.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

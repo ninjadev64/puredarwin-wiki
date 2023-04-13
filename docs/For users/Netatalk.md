@@ -6,7 +6,7 @@ Netatalk
 Mac OS X comes with a Apple File Protocol (AFP) server which is closed source and unavailable for PureDarwin. Hence, if you would like to use PureDarwin as a file, print and time server for Macintosh computers, you need to use netatalk, a third-party, open source implementation of the AppleTalk suite of protocols. It allows PureDarwin to act as an AFP server and can act as a Time Machine server similar to Apple's Time Capsule. This page describes how to install and configure netatalk on PureDarwin.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

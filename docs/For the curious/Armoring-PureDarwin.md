@@ -294,20 +294,20 @@ Executable files with this bit set will run with effective uid set to the uid of
 `find / -type f -perm -04001 -user 0 -ls > suid-root `
 `find / -type f -perm -02001 -group 0 -ls > sgid-root `
 ``
-<div style="font-family:courier new,monospace">
+
 whoami 
-<div style="font-family:courier new,monospace">
+
 aladin
-<div style="font-family:courier new,monospace">
+
 id
-<div style="color:rgb(102,102,102)">
+
 uid=501(aladin) gid=20(staff) groups=20(staff),98(_lpadmin),80(admin)
 
 osascript -e "tell app "ARDAgent" to do shell script "whoami""
 ``
 <div style="font-family:courier new,monospace;color:rgb(102,102,102)">
 root
-<div style="font-family:courier new,monospace">
+
 osascript -e "tell app "ARDAgent" to do shell script "id""
 <div style="font-family:courier new,monospace;color:rgb(102,102,102)">
 uid=0(root) gid=0(wheel) egid=20(staff) groups=0(wheel),1(daemon),2(kmem),8(procview),29(certusers),3(sys),9(procmod),4(tty),5(operator),80(admin),20(staff)
@@ -863,12 +863,12 @@ As an example, create a pipe that only allows up to 42KB/s to go through.
 
 Attach that pipe to the outgoing traffic on port 22, effectively limiting the outgoing traffic of sshd.
 
-<div style="font-family:courier new,monospace">
+
 sudo ipfw add 1 pipe 1 src-port 22
 
 Remove the pipe from the port.
 
-<div style="font-family:courier new,monospace">
+
 sudo ipfw delete 1
 #### firewall state in sysctl {style="margin:10px 10px 10px 0px;color:rgb(0,0,0)"}
 The state of the firewall (enabled or disabled) can be changed by directly changing a kernel parameter.
@@ -880,17 +880,17 @@ Disables the firewall:
 `sysctl -w net.inet.ip.fw.enable=1 `
 
 More info:
-<div style="font-family:courier new,monospace">
+
 net.inet.ip.fw.verbose_limit: 0
-<div style="font-family:courier new,monospace">
+
 net.inet.ip.fw.verbose: 2
-<div style="font-family:courier new,monospace">
+
 net.inet.ip.fw.debug: 0
-<div style="font-family:courier new,monospace">
+
 net.inet.ip.fw.one_pass: 0
-<div style="font-family:courier new,monospace">
+
 net.inet.ip.fw.autoinc_step: 100
-<div style="font-family:courier new,monospace">
+
 net.inet.ip.fw.enable: 1
 #### Rules examples {style="margin:10px 10px 10px 0px;color:rgb(0,0,0)"}
 TODO
@@ -1190,21 +1190,21 @@ ioreg -c "AppleAHCIDiskDriver" | awk -F '"' '/Serial Number/ {print $4}'
 
 ioreg -l | grep -i 'serial number'
     | |   |         |   "Serial Number" = "        K439********"
-<span>`
-`</span>
+`
+`
 
 ioreg -l | grep -i 'serialnumber'
     |   "IOPlatformSerialNumber" = "WQ7********"
 
     | |           "BatterySerialNumber" = "DP-ASM****-3***-3***"
     | |           "SerialNumber" = 12***
-<span>`
-`</span>
+`
+`
 
 ioreg -l | grep -i 'serial-number' 
     |   "serial-number" = <594***0000000000000000000057513************941**00000000000000000000000000000000000000>
-<span>`
-`</span>
+`
+`
 
 ioreg -l | grep -i 'device serial'
     | |   |   |     |   "device serial" = "K0075S*****         "

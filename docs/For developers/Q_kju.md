@@ -4,7 +4,7 @@ Some QEMU attempts through [Q](http://www.kju-app.org/), A CPU emulator for Maci
 
 
 
-<div class="sites-embed-border-off sites-embed" style="width:300px;">
+
 
 
 Contents

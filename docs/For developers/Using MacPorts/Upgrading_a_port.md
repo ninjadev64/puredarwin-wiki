@@ -4,7 +4,7 @@ Upgrading a port
 This page describes how to upgrade a port in MacPorts to a later version of the respective software.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

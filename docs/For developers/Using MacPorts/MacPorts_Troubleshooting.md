@@ -3,7 +3,7 @@ MacPorts Troubleshooting
 
 This page contains some of the issues you might run into when using MacPorts on a PureDarwin system (or in a PureDarwin chroot). We also list pragmatic workarounds where possible. This page is mainly for reference via search engines, so we should always cite specific error messages here.
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

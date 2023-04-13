@@ -6,7 +6,7 @@ Ever wondered what the differences between /lib, /usr/lib, /usr/local/lib are?
 Ever wondered what libexec and standalone mean?
 
 
-<div class="sites-embed-border-off sites-embed" style="width:280px;">
+
 
 
 Contents

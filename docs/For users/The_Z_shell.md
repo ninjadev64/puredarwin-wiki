@@ -7,7 +7,7 @@ Normally, PureDarwin comes with the bash shell which most users will be familiar
 Some users might prefer to use zsh however. This page is a work in progress, please feel free to contribute.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents
@@ -55,19 +55,19 @@ Populate your ~/.zshrc (or /etc/zshrc) with:
 `PS1='%n@%m:%~%# '`
 `TERM='vt100'`
 `bindkey -e`
-<div style="font-family:arial,sans-serif">
+
 -   Some PATH could be optional, depending the flavor.
 -   PS1 sets the prompt like user@PureDarwin:~% in your home dir and 
 -   TERM variable could be 'ansi' or per example 'xterm-color'.
 -   the bindkey -e command allows you to use emac style for ^A, ^E, and ^D shortcut (how paradoxal since the EDITOR is vi? ;)).
-<div style="font-family:arial,sans-serif">
+
 __Note__: zsh is the only shell we know that it is able to run in interactive mode without (or with a broken) standard input.
 ### Resources {style="font-family:arial,sans-serif"}
-<div style="font-family:arial,sans-serif">
-<http://www.zsh.org/>
-<div style="font-family:arial,sans-serif">
-<http://zsh.dotsrc.org/> (mirror: <http://zsh.sourceforge.net/> )
-<div style="font-family:arial,sans-serif">
 
-<div style="font-family:arial,sans-serif">
+<http://www.zsh.org/>
+
+<http://zsh.dotsrc.org/> (mirror: <http://zsh.sourceforge.net/> )
+
+
+
 <http://en.wikipedia.org/wiki/Zsh> 

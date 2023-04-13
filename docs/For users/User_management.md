@@ -4,7 +4,7 @@ This page is about user management in Darwin. It is a work in progress.
 Because user management has changed since Darwin 8 via Darwin 9 to Darwin10, this does not fully apply for versions prior to 9 and greater than 9.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:444px;">
+
 
 
 Contents

@@ -7,7 +7,7 @@ Sections marked with the "X" logo only apply to Mac OS X and not to Darwin. They
 This page is a work in progress, please contribute.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 

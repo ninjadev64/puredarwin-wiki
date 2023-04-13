@@ -10253,7 +10253,7 @@ libsecurity_apple_file_dl
 let's fix more and more..
 
 After applying some patches and rebuild some dependents where their dependencies just have been patched, the picture looks like:
-<span style="font-size:x-small">![](/img/developers/darwinbuild/troubleshooting/9J61pd1-n.png)</span>
+![](/img/developers/darwinbuild/troubleshooting/9J61pd1-n.png)
 
 
 The state is beyond the 12th pass now..
@@ -10998,7 +10998,7 @@ Psuedo-Solution: Patch *BuildRoot/SourceCache/IOKitUser/IOKitUser-388.2.1/IOKitL
 `cp /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/libruby.1.dylib BuildRoot/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/libruby.1.dylib`
 **
 **
-<span style="font-weight:bold">Problem:` `/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist:15:in `require': no such file to load -- optparse (LoadError)</span>
+**Problem:` `/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist:15:in `require': no such file to load -- optparse (LoadError)**
 `/XCD/loper/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings:16:in `require': no such file to load -- optparse (LoadError)`
 ****
 
@@ -11840,7 +11840,7 @@ ld: framework not found IOKit
 **Solution:** See above for *IOKitUser* project.
 
 
-<span style="font-family:Arial;font-size:13px">**Problem:**` ``/SourceCache/launchd/launchd-258.1/launchd/src/launchd_core_logic.c:76:21: error: sandbox.h: No such file or directory`</span>
+**Problem:**` ``/SourceCache/launchd/launchd-258.1/launchd/src/launchd_core_logic.c:76:21: error: sandbox.h: No such file or directory`
 **Solution:**` ``cp /usr/include/sandbox.h BuildRoot/usr/include/`
 
 
@@ -12658,10 +12658,10 @@ otool -L /usr/bin/arch
 > > </span></span></span>
 > > > > otool -L /System/Library/Frameworks/Security.framework/Versions/A/Security
 > > > > <span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"> /usr/lib/libstdc++.6.dylib...</span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"> /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation...</span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"> /usr/lib/libgcc_s.1.dylib...</span><span style="color:rgb(68,68,68)">
-> > > > </span><span style="font-family:Helvetica;font-size:12px"> /usr/lib/libSystem.B.dylib...</span>
+> > > > </span> /usr/lib/libstdc++.6.dylib...<span style="color:rgb(68,68,68)">
+> > > > </span> /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation...<span style="color:rgb(68,68,68)">
+> > > > </span> /usr/lib/libgcc_s.1.dylib...<span style="color:rgb(68,68,68)">
+> > > > </span> /usr/lib/libSystem.B.dylib...
 
 
 

@@ -3,7 +3,7 @@ Visualize KEXTs dependencies
 In the spirit of [Vizualize dependencies in MacPorts](../macports/macports-dependencies-overview.html), this page describes a way to track kernel extension dependencies and related satellite information (e.g: blockers).
 
 
-<div class="sites-embed-border-off sites-embed" style="width:350px;">
+
 
 
 Contents

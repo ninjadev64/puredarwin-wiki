@@ -31,10 +31,10 @@ strings YourBinaryOfChoice | grep "Apple Code Signing Certification Authority
 
 
 or
-<div style="font-family:courier new,monospace">
 
 
-<div style="font-family:courier new,monospace">
+
+
 
 `grep -b `"Apple Code Signing Certification Authority"` YourBinaryOfChoice`
 ### Examples on Mac OS X

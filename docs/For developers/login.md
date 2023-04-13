@@ -3,7 +3,7 @@ login
 Since multi-user support is available, managing logins (so that users run with only the permissions they have been granted) follows naturally.
 
 
-<div class="sites-embed-border-off sites-embed" style="width:301px;">
+
 
 
 Contents

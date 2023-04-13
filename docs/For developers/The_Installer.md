@@ -5,7 +5,7 @@ Through the general install process the installer should be able to also install
 
 
 
-<div class="sites-embed-border-off sites-embed" style="width:456px;">
+
 
 
 Contents
@@ -22,19 +22,19 @@ The Installation Process
 ------------------------
 Installing PureDarwin should be a two stage process, as illustrated here.
 
-<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
+
 ![](/img/developers/repository/the-installer/install.png)
 ### First stage
-<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
+
 The first stage installer is run from either a PureDarwin CD image, or from another operating system on the target computer. The first stage should:
-<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
+
 -   Partition the target disk, if desired.
 -   Format the target partition.
 -   Install the PureDarwin Core package. This will provide all of the utilities and services necessary to allow the second stage installer to complete successfully.
 -   Install the appropriate bootloaders (*/usr/standalone/i386 -> install bootloader into MBR (beginning of disk), boot sector (beginning of partition), grub and HFS startup file (alternatively /boot)*), according to user choice and whether it will be a multi-boot system. The user will have the choice of MBR (Chameleon) or EFI. The question should be "Is this a Mac or VMware Fusion?" If they answer "yes", install the EFI bootloader; if they answer "no", install MBR.
 -   Reboot the system when done.
 ![](/img/developers/repository/the-installer/firststage.png)
-<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
+
 **
 #### Pre-configuration and questions
 The user will be asked a quick list of questions. The question must always have a default answer available and "compatible" with all others answers of previous and next questions.
@@ -52,7 +52,7 @@ The user will be asked a quick list of questions. The question must always have
 > "Non-interactive mode" will require the user (eg. system admin) to do some extra work. The installer should always automatically attempt to copy non-interactive configuration files from a set location on the boot CD (eg. in /Library/Install/ ) to the target disk. In order to make use of this facility, a boot CD with files in this location should be specially prepared. We can make a root of the install CD, along with the pd_makedmg script, available for download for exactly this purpose.
 > 
 
-<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
+
 **
 Grouping in categories and sub-categories the sequences of questions seems common. 
 
@@ -60,7 +60,7 @@ This leads us to another possibilities, we could also target a type of PureDar
 
 
 
-<div style="text-align:left;display:block;margin-right:auto;margin-left:auto">
+
 **
 __Notes:__ We can't depend on what admin tools are loaded onto the target (having the core system ship without eg. the DSTools package), so user records should be created by generating the data files (a la pd_injectuser) rather than via tools (pd_adduser).
 #### Preparation of destination media

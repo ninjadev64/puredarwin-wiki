@@ -7,7 +7,7 @@ This page is about [XFree86](http://www.xfree86.org/) on Darwin.
 __
 __
 
-<div class="sites-embed-border-off sites-embed" style="width:400px;">
+
 
 
 Contents
@@ -37,17 +37,17 @@ Most binaries you can find on the net (e.g., in fink) are built for Mac OS X, an
 MacPorts contains a portfile which can be used to compile XFree86 for PureDarwin. In old release notes, it is stated that "*Darwin/Mac OS X uses IOKit drivers and does not use the module loader drivers listed above. Further information can be found in [README.Darwin](http://cvsweb.xfree86.org/cvsweb/xc/programs/Xserver/hw/xfree86/doc/README.Darwin?rev=1.28&content-type=text/vnd.viewcvs-markup)*". Also take a look at [Using the MacPorts project](macports.1.html) page for more information about MacPorts.
 ``
 The portfile shows the following information about Xfree86, among other things:
-<div style="color:rgb(0,0,0)">
+
 <span style="font-family:courier new">
  </span>
-<div style="color:rgb(0,0,0)">
+
 `port info XFree86`
  
-<div style="color:rgb(68,68,68)">
+
 ``
-<div style="color:rgb(68,68,68)">
+
 (...)
-<div style="color:rgb(68,68,68)">
+
 `Platforms: darwin freebsd`
 
 In the case of `+puredarwin` variant is choosen, this is what happens:
@@ -80,7 +80,7 @@ sudo mv /usr/X11R6 /usr/X11R6.apple
 
  
  
-<div style="font-family:arial,sans-serif">
+
 Then do:
 
  
@@ -298,9 +298,9 @@ sudo mv /usr/X11R6 /usr/X11R6.apple
 #### MAXHOSTNAMELEN undeclared
 Problem:
 port install xfree86 +puredarwin
-<div style="font-family:arial,sans-serif">
+
 [...]
-<div style="font-family:arial,sans-serif">
+
 
 
 In file included from x11trans.c:82:
@@ -314,9 +314,9 @@ make: *** [World] Error 2
  </span></span>
 Error: Status 1 encountered during processing.
 
-<div style="font-family:arial,sans-serif">
 
-<div style="font-family:arial,sans-serif">
+
+
 
 
 
@@ -338,7 +338,7 @@ Error: Status 1 encountered during processing.
 Problem:
 port install xfree86 +puredarwin
 [...]
-<span style="color:rgb(0,0,0)"><span style="color:rgb(68,68,68);font-family:Helvetica">`/usr/bin/cc -c -Wall -Wpointer-arith -no-cpp-precomp -fno-common -I. -I../include -I../../../programs/Xserver/include -I../../../exports/include "-I/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_x11_XFree86/work/include" -D__i386__ -D__DARWIN__ -DNO_ALLOCA -DCSRG_BASED -DFONTDIRATTRIB `` `` -DBUILD_SPEEDO -DBUILD_TYPE1 -DBUILD_CID `` `` -DBUILD_FREETYPE -DFONT_ENCODINGS_DIRECTORY="/usr/X11R6/lib/X11/fonts/encodings/encodings.dir" -DX_GZIP_FONT_COMPRESSION `` ``-Os -fno-strict-aliasing decompress.c -o unshared/decompress.o`</span></span>
+`/usr/bin/cc -c -Wall -Wpointer-arith -no-cpp-precomp -fno-common -I. -I../include -I../../../programs/Xserver/include -I../../../exports/include "-I/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_x11_XFree86/work/include" -D__i386__ -D__DARWIN__ -DNO_ALLOCA -DCSRG_BASED -DFONTDIRATTRIB `` `` -DBUILD_SPEEDO -DBUILD_TYPE1 -DBUILD_CID `` `` -DBUILD_FREETYPE -DFONT_ENCODINGS_DIRECTORY="/usr/X11R6/lib/X11/fonts/encodings/encodings.dir" -DX_GZIP_FONT_COMPRESSION `` ``-Os -fno-strict-aliasing decompress.c -o unshared/decompress.o`
 `decompress.c:96: error: syntax error before 'z_magic'`
 `[...]`
 `decompress.c:464: error: dereferencing pointer to incomplete type
@@ -350,9 +350,9 @@ port install xfree86 +puredarwin
  make: *** [World] Error 2`
 `Warning: the following items did not execute (for XFree86): org.macports.activate org.macports.build org.macports.destroot org.macports.install`
 `Error: Status 1 encountered during processing.`
-<div style="font-family:arial,sans-serif">
+
 Solution:
-<div style="font-family:arial,sans-serif">
+
 A Patch is available in ticket [#16697](https://trac.macports.org/ticket/16697) and in the attachments below too.
  
 Changes are minimal:

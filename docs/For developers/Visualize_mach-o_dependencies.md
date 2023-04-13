@@ -3,7 +3,7 @@ Visualize mach-o dependencies
 In the spirit of [Vizualize dependencies in MacPorts](../macports/macports-dependencies-overview.html) and [Vizualize KEXTs dependencies](../kexts/kexts-dependencies-overview.html), this page describes a way to track mach-o file dependencies and related satellite information (e.g: blockers).
 
 
-<div class="sites-embed-border-off sites-embed" style="width:444px;">
+
 
 
 Contents
@@ -18,7 +18,7 @@ Contents
 
 [Graphviz](http://www.graphviz.org/) is an opensource graph visualization software from AT&T Laboratories and Bell Laboratories (Lucent Technologies).
 
-<div style="font-family:courier new,monospace">
+
 port install graphviz +the_variants_you_need
 
 or grab and compile the source from [graphviz.org](http://graphviz.org/).
@@ -32,65 +32,65 @@ A hierarchical view:
 
 The corresponding script output:
 
-<div style="font-family:courier new,monospace">
+
 ./pd_machviz /usr/bin/otool
-<div style="font-family:courier new,monospace">
 
-<div style="font-family:courier new,monospace">
+
+
 Generate dependencies graphs of /usr/bin/otool
-<div style="font-family:courier new,monospace">
 
 
-<div style="font-family:courier new,monospace">
+
+
  Legend:
-<div style="font-family:courier new,monospace">
+
  1  + foo
-<div style="font-family:courier new,monospace">
+
  2  |`- bar                                             No more dependency
-<div style="font-family:courier new,monospace">
+
  2  |`+ baz impure! /Blocker_1 -> file_involved_1       Impurity detected
-<div style="font-family:courier new,monospace">
+
  2  |`+ baz impure! /Blocker_. -> file_involved_.       Impurity detected
-<div style="font-family:courier new,monospace">
+
  2  |`+ baz impure! /Blocker_n -> file_involved_n       Impurity detected
-<div style="font-family:courier new,monospace">
+
  2  |`+ baz                                             Dependency found
-<div style="font-family:courier new,monospace">
+
  3  | |`. qux                                           Cached file (Already processed)
-<div style="font-family:courier new,monospace">
 
 
-<div style="font-family:courier new,monospace">
+
+
 Now generating dependencies tree, please wait...
-<div style="font-family:courier new,monospace">
 
 
-<div style="font-family:courier new,monospace">
+
+
  1  + /usr/bin/otool
-<div style="font-family:courier new,monospace">
+
  2  |`+ /usr/lib/libgcc_s.1.dylib
-<div style="font-family:courier new,monospace">
+
  3  | |`+ /usr/lib/libSystem.B.dylib
-<div style="font-family:courier new,monospace">
+
  4  | | |`- /usr/lib/system/libmathCommon.A.dylib
-<div style="font-family:courier new,monospace">
+
  2  |`. /usr/lib/libSystem.B.dylib
-<div style="font-family:courier new,monospace">
+
 Generation of otool.dot complete.
-<div style="font-family:courier new,monospace">
 
 
-<div style="font-family:courier new,monospace">
+
+
 Now drawing graphs from otool.dot, please wait...
-<div style="font-family:courier new,monospace">
+
 Generation of otool.dot_directed.png complete.
-<div style="font-family:courier new,monospace">
+
 Generation of otool.dot_circular.png complete.
-<div style="font-family:courier new,monospace">
+
 Generation of otool.dot_radial.png complete.
-<div style="font-family:courier new,monospace">
+
 Generation of otool.dot_undirected.png complete.
-<div style="font-family:courier new,monospace">
+
 Generation of otool.dot_undirectedBIS.png complete.
 #### A circular view of xterm dependencies
 

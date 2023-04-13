@@ -4,7 +4,7 @@ GRUB, the GRand Unified Bootloader, is a boot loader from the GNU project. GRUB 
 However the "COPYING" file stipulates a GPLv3 license.
 This page discusses how to install and use GRUB 2.
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

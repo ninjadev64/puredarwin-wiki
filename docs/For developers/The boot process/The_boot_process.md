@@ -3,7 +3,7 @@ The boot process
 This page describes the boot process of a Darwin 9 system.
 This is a first draft, please feel free to contribute.
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents

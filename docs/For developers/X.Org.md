@@ -4,7 +4,7 @@ X.Org
 [![](http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/X.Org_Logo.svg/431px-X.Org_Logo.svg.png)](http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/X.Org_Logo.svg/431px-X.Org_Logo.svg.png)
 This page is about X.Org on Darwin.
 
-<div class="sites-embed-border-off sites-embed" style="width:250px;">
+
 
 
 Contents
