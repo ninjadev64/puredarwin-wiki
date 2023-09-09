@@ -1,12 +1,9 @@
 ## puredarwin-docs
 
-This repository holds the content for the PureDarwin documentation/wiki website. It is built using Docusaurus 2, a static site generator.
-
-#### Installation
-`npm install`
+After a lot of work, this repository contains the PureDarwin documentation/wiki, with almost all broken images fixed and most Google Sites HTML removed. It is served with GitHub Pages using Docsify.
 
 #### Local development
-`npm run start`
+`npm run serve`
 
-#### Build
-`npm run build`
+#### Update sidebar
+`npx docsify-auto-sidebar -d .`

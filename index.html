@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> PureDarwin Wiki </title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="description" content="Description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+	</head>
+
+	<body>
+		<div id="app"></div>
+		<script>
+			window.$docsify = {
+				loadSidebar: true,
+				homepage: "1-Home.md",
+				relativePath: true,
+				alias: {
+					"/about/(.+)": "/About/$1",
+					"^/developers/(.+)": "/For%20developers/$1",
+					"/curious/(.+)": "/For%20the%20curious/$1",
+					"/users/(.+)": "/For%20users/$1",
+					"/news/(.+)": "/News/$1",
+					"/.*/_sidebar.md": "/_sidebar.md"
+				},
+				markdown: {
+					renderer: {
+						image: (href, title) => {
+							return `<img src="${href}" data-origin="${href}" alt="${title}">`
+						}
+					}
+				}
+			}
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+	</body>
+</html>
