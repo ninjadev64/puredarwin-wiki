@@ -6,4 +6,4 @@ After a lot of work, this repository contains the PureDarwin documentation/wiki,
 `npm run serve`
 
 #### Update sidebar
-`npx docsify-auto-sidebar -d .`
+`npm run sidebar`

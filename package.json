@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"serve": "vite --open --host"
+		"serve": "vite --open --host",
+		"sidebar": "docsify-auto-sidebar -d ."
 	},
 	"devDependencies": {
 		"docsify-tools": "^1.0.20",
