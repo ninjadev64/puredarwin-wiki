@@ -13,22 +13,14 @@
 		<div id="app"></div>
 		<script>
 			window.$docsify = {
-				loadSidebar: true,
 				homepage: "1-Home.md",
-				relativePath: true,
-				alias: {
-					"/about/(.+)": "/About/$1",
-					"^/developers/(.+)": "/For%20developers/$1",
-					"/curious/(.+)": "/For%20the%20curious/$1",
-					"/users/(.+)": "/For%20users/$1",
-					"/news/(.+)": "/News/$1",
-					"/.*/_sidebar.md": "/_sidebar.md"
-				},
+				auto2top: true,
+				loadNavbar: true,
+				loadSidebar: true,
+				alias: { "/.*/_navbar.md": "/_navbar.md" },
 				markdown: {
 					renderer: {
-						image: (href, title) => {
-							return `<img src="${href}" data-origin="${href}" alt="${title}">`
-						}
+						image: (href, title) => `<img src="${href}" data-origin="${href}" alt="${title}">`
 					}
 				}
 			}

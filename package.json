@@ -1,10 +1,9 @@
 {
 	"scripts": {
 		"serve": "vite --open --host",
-		"sidebar": "docsify-auto-sidebar -d ."
+		"sidebar": "node sidebar.js"
 	},
 	"devDependencies": {
-		"docsify-tools": "^1.0.20",
 		"vite": "^4.4.9"
 	}
 }
