@@ -1,5 +1,4 @@
-About
-=====
+# About
 
 This page describes some part of the PureDarwin project and the motivation behind it, as well as how it relates to other projects.
 
@@ -9,15 +8,15 @@ The goal of the PureDarwin project is to make Darwin more usable for open source
 
 ### Organization
 
-The PureDarwin project is organized very informally at this stage. There are no official boards and committees. We are not interested in politics and personal agendas, just in smart concepts and quality code. Our [team](https://github.com/PureDarwin/PureDarwin/wiki/Team) is loosely coupled by a common interest in Darwin and by upholding true Open Source spirit.
+The PureDarwin project is organized very informally at this stage. There are no official boards and committees. We are not interested in politics and personal agendas, just in smart concepts and quality code. Our [team](Team) is loosely coupled by a common interest in Darwin and by upholding true Open Source spirit.
 
 ### Contributing
 
 Like other open source projects, PureDarwin is looking for contributors for all aspects of the project.
 
-The PureDarwin project is always looking for talented individuals to contribute to and join the project. To contribute to the PureDarwin project, you should first familiarize yourself with the contents of this wiki. You can also join the IRC discussion on the #puredarwin channel on irc.freenode.net and help each other. Contributions to the project can take various forms, from adding documentation to sending in patches and constructive feedback in the [Issues](https://github.com/PureDarwin/PureDarwin/issues) section.
+The PureDarwin project is always looking for talented individuals to contribute to and join the project. To contribute to the PureDarwin project, you should first familiarize yourself with the contents of this wiki. You can also join the IRC discussion on the #puredarwin channel on irc.freenode.net or the [Discord server](https://discord.gg/9kz8XXRRcT) and help each other. Contributions to the project can take various forms, from adding documentation to sending in patches and constructive feedback in the [Issues](https://github.com/PureDarwin/PureDarwin/issues) section.
 
-A non-exhaustive list of the fields where investigation has still not been done is available [here](https://github.com/PureDarwin/PureDarwin/wiki/TODO).
+A non-exhaustive list of the fields where investigation has still not been done is available [here](TODO).
 
 ### Sponsors
 
@@ -35,7 +34,7 @@ Although some people have been seeing PureDarwin as the informal successor to Op
 
 #### How does PureDarwin relate to the DarwinBuild project? 
 
-[DarwinBuild](https://github.com/PureDarwin/PureDarwin/wiki/DarwinBuild) is one of PureDarwin's main upstream projects. 
+[DarwinBuild](/developers/Using%20DarwinBuild/DarwinBuild) is one of PureDarwin's main upstream projects. 
 
 #### What does the "Pure" in PureDarwin stand for?
 
@@ -47,8 +46,8 @@ A ready-made VMware virtual machine is available from the [LegacyDownloads](http
 
 #### When do you plan to release a full ISO image?
 
-Probably when the DarwinBuild project and the MacPorts project will be able to run on a mature PureDarwin release without any "[impurities](https://github.com/PureDarwin/PureDarwin/wiki/Purity)".
+Probably when the DarwinBuild project and the MacPorts project will be able to run on a mature PureDarwin release without any "[impurities](/developers/Using%20MacPorts/Purity)".
 
 ### PureDarwin Logo
 
-![](https://raw.github.com/wiki/PureDarwin/PureDarwin/images/puredarwin.jpg)
+![](/img/PureDarwin.png)
