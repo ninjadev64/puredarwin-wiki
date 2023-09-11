@@ -13,12 +13,12 @@
 		<div id="app"></div>
 		<script>
 			window.$docsify = {
-				homepage: "1-Home.md",
+				homepage: "Home.md",
 				auto2top: true,
 				loadNavbar: true,
 				loadSidebar: true,
 				relativePath: true,
-				alias: { "/.*/_navbar.md": "/_navbar.md" },
+				alias: { "/.*/_navbar.md": "/_navbar.md", "/_sidebar.md": "/_navbar.md" },
 				markdown: {
 					renderer: {
 						image: (href, title) => `<img src="${href}" data-origin="${href}" alt="${title}">`

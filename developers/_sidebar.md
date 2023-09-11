@@ -1,5 +1,5 @@
 **<p style="margin-left: 15px;">Developers</p>**
- - [Developers](/developers/_Developers.md)
+- [Developers](/developers/_Developers.md)
 - [Audio](/developers/Audio.md)
 - [Bochs](/developers/Bochs.md)
 - [Build-server](/developers/Build-server.md)
@@ -79,7 +79,7 @@
 - [VMware](/developers/VMware.md)
 - [what](/developers/what.md)
 - [wishlist](/developers/wishlist.md)
-- [X](/developers/X.Org.md)
+- [X.Org](/developers/X.Org.md)
 - [XBS](/developers/XBS.md)
 - [XFree86](/developers/XFree86.md)
 - [XNU, the kernel](/developers/XNU,%20the%20kernel.md)

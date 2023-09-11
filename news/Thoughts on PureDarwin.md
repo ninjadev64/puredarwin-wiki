@@ -1,10 +1,8 @@
-Thoughts on PureDarwin
-======================
+# Thoughts on PureDarwin
 
 Looks like the latest wave of publicity started with this [mention](http://theocacao.com/document.page/594) on Theocacao:
 
 > "*Visit *[*PureDarwin.org*](../index.html)* for a few more of these gotchas and progress trying to get things working. Apple will fix these problems when people find them, so the more of us looking at the code the better.*"
-
 
 Followed a nice article mentioning the PureDarwin project: [On the Origin of Mac Opensource](http://www.appleeclectic.com/?p=247) on Apple Eclectic.
 
@@ -16,12 +14,8 @@ And we couldn't agree more than with 0x783czar's headline, [The Return of the Co
 
 Looks like some people are interested in Darwin indeed, also in Germany.
 
-> "[*Noch mehr Stoff fÃ¼r Terminalisten*](http://www.schreibtischnotizen.de/2008/09/27/puredarwingorg-noch-mehr-stoff-fr-terminalisten/)"
+> "[*Noch mehr Stoff für Terminalisten*](http://www.schreibtischnotizen.de/2008/09/27/puredarwingorg-noch-mehr-stoff-fr-terminalisten/)"
 
-Also [CocoaDev](http://www.cocoadev.com/index.pl?DarwinOS), a Mac OS X developer community.
-> 
-> 
-
+Also [CocoaDev](http://www.cocoadev.com/index.pl?DarwinOS), a Mac OS X developer community. 
 
 But always keep in mind that the project isn't even officially launched yet...
-

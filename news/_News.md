@@ -1,36 +1,3 @@
-News
-====
-####    iRC #puredarwin openprojects Network  {style="font-size:15px;margin:4px 0px"}
+# News
 
-
-
-+--------------------------------------------------------------------------+
-| <div dir="ltr" style="background-color:transparent">                     |
-|                                                                          |
-|                                |
-|                                                                          |
-|                                      |
-|                                                                          |
-| </div>                                                                   |
-|                                                                          |
-|                                |
-|                                                                          |
-|     for better communication and debugging between users |
-| and developers of puredarwin, so if you have time                        |
-|                                                                          |
-| </div>                                                                   |
-|                                                                          |
-|                                |
-|                                                                          |
-|     join the fun!                                       |
-|                                                                          |
-| </div>                                                                   |
-|                                                                          |
-|                                |
-|                                                                          |
-|                                                                         |
-|                                                                          |
-| </div>                                                                   |
-|                                                                          |
-| </div>                                                                   |
-+--------------------------------------------------------------------------+
+This category contains an archive of announcements and release notes from the early days of the PureDarwin project.

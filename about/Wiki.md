@@ -1,6 +1,14 @@
-# Wiki style guide
+# Wiki
 
-This page details the style guide you should follow when editing or creating wiki pages, or cleaning up broken ones.
+## State
+
+This wiki originated as a [Google Site](https://sites.google.com/a/puredarwin.org/puredarwin/), then was migrated to a GitHub Wiki, and then ported to this website.
+
+In the migration to GitHub, and therefore conversion to Markdown from HTML, a lot of formatting and many images were lost. The efforts of ninjadev64 have restored almost all of the images, fixed grammatical and formatting issues in the About and News categories, and removed most of the junk HTML tags lying around in pages. Additionally, many pages are more than a decade old, so many links are broken - please try to relocate them instead before removing them!
+
+## Style guide
+
+This is the style guide you should follow when editing or creating wiki pages, or cleaning up broken ones.
 
 ### Headers
 

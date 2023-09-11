@@ -1,8 +1,8 @@
-PureDarwin 9 server up and running
-==================================
+# PureDarwin 9 server up and running
+
 A PureDarwin 9 server is up and running (in private, for now - see below). 
 
-We have created a custom PureDarwin 9 ISO with the scripts and tools from our repository as described [here](../developers/repository.html), installed [networking](../developers/network.html), [OpenSSH](../users/users/ssh.html), [Apache](../users/apache.html), [MacPorts](../developers/macports/macportsonpuredarwin.html), [Netatalk](../users/netatalk.html), configured [Bonjour](../users/bonjour.html), even installed [TightVNC](../users/vnc.html) for graphical applications... set up [SpeedStep](../users/speedstep.html) to save some power... all runing nicely. 
+We have created a custom PureDarwin 9 ISO with the scripts and tools from our repository as described [here](/developers/PureDarwin%20repository), installed [networking](/developers/Network), [OpenSSH](/users/OpenSSH), [Apache](/users/Apache), [MacPorts](/developers/Using%20MacPorts/Using-MacPorts), [Netatalk](/users/Netatalk), configured [Bonjour](/users/Bonjour), even installed [TightVNC](/users/TightVNC) for graphical applications... set up [SpeedStep](/users/SpeedStep) to save some power... all running nicely. 
 
 Thanks for everyone who has contributed toward making PureDarwin this viable.
 

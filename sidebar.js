@@ -16,7 +16,8 @@ function loop(path) {
 	});
 	files.forEach((file) => {
 		let fullPath = join(path, file);
-		file != "_sidebar.md" && file != "_navbar.md" && (c += `- [${file.substring(file.indexOf("_") + 1).split(".")[0]}](${encodeURI("/" + fullPath)})\n`);
+		const lastDotIndex = file.lastIndexOf(".");
+		file != "_sidebar.md" && file != "_navbar.md" && (c += `- [${file.substring(file.indexOf("_") + 1, lastDotIndex > 0 ? lastDotIndex : file.length)}](${encodeURI("/" + fullPath)})\n`);
 		count += 1;
 		if (lstatSync(fullPath).isDirectory()) {
 			let s = loop(fullPath);
@@ -31,7 +32,7 @@ function loop(path) {
 
 const dirs = { "about": "About", "developers": "Developers", "users": "Users", "news": "News" };
 for (const [dir, name] of Object.entries(dirs)) {
-	writeFileSync(`${dir}/_sidebar.md`, `**<p style="margin-left: 15px;">${name}</p>**\n ${loop(dir)}`);
+	writeFileSync(`${dir}/_sidebar.md`, `**<p style="margin-left: 15px;">${name}</p>**\n${loop(dir)}`);
 };
 
 console.log(`Generated sidebar for ${count} files in ${Date.now() - startTime}ms`);
