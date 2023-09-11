@@ -2,18 +2,6 @@ Using the Smart Package Manager
 ===============================
 Smart manages RPM packages on PureDarwin. This page describes how to use it.
 
-
-
-
-Contents
-1.  [**1** What is smart](smart.html#TOC-What-is-smart)
-2.  [**2** Installing smart](smart.html#TOC-Installing-smart)
-3.  [**3** Setting up smart](smart.html#TOC-Setting-up-smart)
-4.  [**4** Using smart](smart.html#TOC-Using-smart)
-    1.  [**4.1** Installing a package](smart.html#TOC-Installing-a-package)
-    2.  [**4.2** Removing a package](smart.html#TOC-Removing-a-package)
-5.  [**5** References](smart.html#TOC-References)
-
 ### What is smart
 Smart is the tool you use to manage add-on software packages on PureDarwin. It can install, upgrade, and uninstall software packages and their dependencies using software repositories in the Internet.
 ### Installing smart

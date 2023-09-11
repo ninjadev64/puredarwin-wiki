@@ -5,19 +5,7 @@ NetBSD and the experimental Darwin binary compatibility
 ![](/img/developers/universal-binaries/netbsd-compat-darwin/netbsd_logo.png)
 This is a work in progress, attempting to run some mach-o binaries on NetBSD (macppc in this case).
 
-
-
-
-Contents
-1.  [**1** Kernel stuff](netbsd-compat-darwin.html#TOC-Kernel-stuff)
-    1.  [**1.1** Building the kernel with darwin support](netbsd-compat-darwin.html#TOC-Building-the-kernel-with-darwin-support)
-    2.  [**1.2** sysctl interface](netbsd-compat-darwin.html#TOC-sysctl-interface)
-2.  [**2** darwin_lib](netbsd-compat-darwin.html#TOC-darwin_lib)
-3.  [**3** Attempt to run a mach-o binary](netbsd-compat-darwin.html#TOC-Attempt-to-run-a-mach-o-binary)
-4.  [**4** Ressources](netbsd-compat-darwin.html#TOC-Ressources)
-
-
-Appeared as a significant [change](http://www.netbsd.org/changes/changes-3.0.html) in NetBSD 3.0 (
+Appeared as a significant [change](http://www.netbsd.org/changes/changes-3.0.html) in NetBSD 3.0.
 
 Kernel stuff
 ------------

@@ -2,27 +2,6 @@ Current Blockers
 ================
 This page lists the current issues we are having that prevent us from making a Darwin 9 ISO. The contents of this page are subject to change.
 
-### Contents
-
-- [1. Problems to be solved](#1-problems-to-be-solved)
-  * [1.1 `CFOpenDirectory` missing in `CFOpenDirectory` binary root](#11--cfopendirectory--missing-in--cfopendirectory--binary-root)
-  * [1.2 `IOHDIXController.kext` needed (image boot support)](#12--iohdixcontrollerkext--needed--image-boot-support-)
-  * [1.3 `OSvKernDSPLib.kext` needed (audio support)](#13--osvkerndsplibkext--needed--audio-support-)
-  * [1.4 Shortage of network drivers](#14-shortage-of-network-drivers)
-  * [1.5 `SystemConfiguration.framework` is incomplete](#15--systemconfigurationframework--is-incomplete)
-  * [1.6 gdb does not compile](#16-gdb-does-not-compile)
-  * [1.7 DirectoryService daemon depends on missing CFLite functions](#17-directoryservice-daemon-depends-on-missing-cflite-functions)
-- [2. Problems with partial workarounds](#2-problems-with-partial-workarounds)
-  * [2.1 OpenDirectory depends on Foundation](#21-opendirectory-depends-on-foundation)
-  * [2.2 launchd does not build](#22-launchd-does-not-build)
-  * [2.3 IOKitUser does not build](#23-iokituser-does-not-build)
-- [3. Problems that are problems no more](#3-problems-that-are-problems-no-more)
-  * [3.1 diskarbitrationd fails with "_SCSerialize() failure" errors](#31-diskarbitrationd-fails-with---scserialize---failure--errors)
-  * [3.2 CF missing symbols](#32-cf-missing-symbols)
-  * [3.3 libauto.dylib ~~missing~~](#33-libautodylib---missing--)
-
-<!-- Table of contents generated with https://ecotrust-canada.github.io/markdown-toc/ -->
-
 ### 1. Problems to be solved
 #### 1.1 `CFOpenDirectory` missing in `CFOpenDirectory` binary root
 `OpenDirectory` framework depends on `CFOpenDirectory` framework, for which there is both a project and a binary root.

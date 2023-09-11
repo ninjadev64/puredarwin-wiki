@@ -2,11 +2,6 @@
 
 draft.
 
-**Contents**
-1.  [Status](https://github.com/PureDarwin/PureDarwin/wiki/Development_environments#status)
-    1.  [gcc](https://github.com/PureDarwin/PureDarwin/wiki/Development_environments#gcc)
-    2.  [llvm](https://github.com/PureDarwin/PureDarwin/wiki/Development_environments#llvm)
-
 ## Status
 Most of libraries, headers and developer tools (e.g. a compiler) comes from the Darwinbuild project and/or the MacPorts project.
 

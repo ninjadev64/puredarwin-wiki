@@ -2,18 +2,6 @@ Purity checking
 ===============
 This page is about checking the "purity" (read: absence of links to ApplicationServices, CoreServices and other proprietary, closed-source frameworks and libraries).
 
-
-
-
-
-Contents
-
-- [Purity checking](#purity-checking)
-        - [About "purity"](#about-purity)
-        - [Script](#script)
-        - [Blacklist](#blacklist)
-        - [Results](#results)
-
 ### About "purity"
 
 Since the proprietary, closed-source frameworks and libraries that are part of Mac OS X but not Darwin, we must ensure that none of the binaries generated through the MacPorts project link to any of them.

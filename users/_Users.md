@@ -2,24 +2,6 @@ For users
 =========
 This page contains information for users.
 
-### Contents
-- [For users](#for-users)
-  - [1. General information for users](#1-general-information-for-users)
-    - [1.1 Installation ISOs](#11-installation-isos)
-    - [1.2 Other](#12-other)
-    - [1.3 Documentation](#13-documentation)
-  - [2. Prerequisites](#2-prerequisites)
-    - [2.1 Darwin 8](#21-darwin-8)
-    - [2.2 Darwin 9](#22-darwin-9)
-  - [3 Tested Compatible Hardware](#3-tested-compatible-hardware)
-    - [3.1 Virtual](#31-virtual)
-    - [3.2 Physical](#32-physical)
-  - [4. Installing PureDarwin](#4-installing-puredarwin)
-    - [4.1 Installing PureDarwin using `GRUB` and `CHAMELEON`](#41-installing-puredarwin-using-grub-and-chameleon)
-    - [4.2 Preparing a Disk Using Darwin Tools](#42-preparing-a-disk-using-darwin-tools)
-
-<!-- Table of contents generated with https://ecotrust-canada.github.io/markdown-toc/ -->
-
 ## 1. General information for users
 
 ### 1.1 Installation ISOs ###

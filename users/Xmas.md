@@ -7,13 +7,6 @@ The PureDarwin project announces the immediate availability of "PureDarwin Xmas"
 
 [Darwin](http://en.wikipedia.org/wiki/Darwin_%28operating_system%29) is the Open Source operating system from Apple that forms the basis for Mac OS X, and PureDarwin is a community project to make Darwin more usable (some people think of it as the informal successor to OpenDarwin). One current goal of this project is to provide a bootable ISO of Darwin 9.x (the version that corresponds to 10.5.x Leopard). Another goal of this project is to provide additional documentation. [More](https://github.com/PureDarwin/PureDarwin/wiki/About)...
 
-Contents
-1.  [Download](https://github.com/PureDarwin/PureDarwin/wiki/Xmas#download)
-2.  [Showcase](https://github.com/PureDarwin/PureDarwin/wiki/Xmas#showcase)
-3.  [Known issues](https://github.com/PureDarwin/PureDarwin/wiki/Xmas#known-issues)
-4.  [Frequently asked questions](https://github.com/PureDarwin/PureDarwin/wiki/Xmas#frequently-asked-questions)
-5.  [Screenshots](https://github.com/PureDarwin/PureDarwin/wiki/Xmas#screenshots)
-
 ### Download
 -   [XZ-compressed TAR archive](http://code.google.com/p/puredarwin/downloads/detail?name=puredarwinxmas.tar.xz) (hosted on Google Code) - SHA-1 checksum: `80f88f44cc540ea05aa847bb18b94bdd133b6c07`
 -   [BZip2-compressed TAR archive](http://xref.puredarwin.org/puredarwinxmas.tar.bz2) (hosted on XRef) - MD5 checksum: `fd0ade4da224475e5dc33c2c11d9d0bc`

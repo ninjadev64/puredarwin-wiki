@@ -3,24 +3,6 @@ MacPorts Troubleshooting
 
 This page contains some of the issues you might run into when using MacPorts on a PureDarwin system (or in a PureDarwin chroot). We also list pragmatic workarounds where possible. This page is mainly for reference via search engines, so we should always cite specific error messages here.
 
-
-
-
-Contents
-1.  [**1** gcc42](troubleshooting.html#TOC-gcc42)
-2.  [**2** gtk2](troubleshooting.html#TOC-gtk2)
-3.  [**3** python26](troubleshooting.html#TOC-python26)
-4.  [**4** dnsmasq](troubleshooting.html#TOC-dnsmasq)
-5.  [**5** subversion](troubleshooting.html#TOC-subversion)
-6.  [**6** dbus](troubleshooting.html#TOC-dbus)
-7.  [**7** xorg-libxcb](troubleshooting.html#TOC-xorg-libxcb)
-8.  [**8** mesa](troubleshooting.html#TOC-mesa)
-9.  [**9** xinit](troubleshooting.html#TOC-xinit)
-10. [**10** xorg-server](troubleshooting.html#TOC-xorg-server)
-11. [**11** glitz](troubleshooting.html#TOC-glitz)
-12. [**12** db47](troubleshooting.html#TOC-db47)
-13. [**13** curlftpfs](troubleshooting.html#TOC-curlftpfs)
-
 ### gcc42
 **Issue**
 ****

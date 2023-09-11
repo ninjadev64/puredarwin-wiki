@@ -3,21 +3,6 @@ Upgrading a port
 ![](../../_/rsrc/1222694606788/developers/macports/macports-logo-top.png)[MacPorts](http://www.macports.org/), formerly known as DarwinPorts, is a variant of the BSD ports system for Darwin and Mac OS X.
 This page describes how to upgrade a port in MacPorts to a later version of the respective software.
 
-
-
-
-
-Contents
-1.  [**1** Case example](upgrading-a-port.html#TOC-Case-example)
-    1.  [**1.1** Downloading latest upstream source](upgrading-a-port.html#TOC-Downloading-latest-upstream-source)
-    2.  [**1.2** Calculating md5](upgrading-a-port.html#TOC-Calculating-md5)
-    3.  [**1.3** Editing the portfile](upgrading-a-port.html#TOC-Editing-the-portfile)
-    4.  [**1.4** Creating the patch](upgrading-a-port.html#TOC-Creating-the-patch)
-    5.  [**1.5** Testing the patched portfile](upgrading-a-port.html#TOC-Testing-the-patched-portfile)
-    6.  [**1.6** Activating the new version](upgrading-a-port.html#TOC-Activating-the-new-version)
-    7.  [**1.7** Submitting the patch to MacPorts](upgrading-a-port.html#TOC-Submitting-the-patch-to-MacPorts)
-
-
 ### Case example
 In this example, we update the portfile for gnustep-base. This is just an example.
 #### Downloading latest upstream source

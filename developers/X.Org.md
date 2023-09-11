@@ -4,18 +4,6 @@ X.Org
 [![](http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/X.Org_Logo.svg/431px-X.Org_Logo.svg.png)](http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/X.Org_Logo.svg/431px-X.Org_Logo.svg.png)
 This page is about X.Org on Darwin.
 
-
-
-
-Contents
-1.  [**1** XDarwin](xorg.html#TOC-XDarwin)
-2.  [**2** History of X.Org on Darwin](xorg.html#TOC-History-of-X.Org-on-Darwin)
-3.  [**3** X.app](xorg.html#TOC-X.app)
-4.  [**4** X.Org in MacPorts](xorg.html#TOC-X.Org-in-MacPorts)
-5.  [**5** X.Org in fink](xorg.html#TOC-X.Org-in-fink)
-6.  [**6** Ressources](xorg.html#TOC-Ressources)
-
-
 ### XDarwin
 
 Update June 2012:

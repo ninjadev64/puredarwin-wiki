@@ -5,25 +5,6 @@ RPM Package Manager
 The RPM Package Manager is a package manager and package format commonly used for Linux distributions. RPM also runs on Darwin. MacPorts is capable of producing RPMs including depencency information.
 This page describes how to use RPM on a PureDarwin system.
 
-
-
-
-
-Contents
-1.  [**1** About RPM](rpm.html#TOC-About-RPM)
-    1.  [**1.1** RPM in MacPorts](rpm.html#TOC-RPM-in-MacPorts)
-    2.  [**1.2** RPM from rpm5.org](rpm.html#TOC-RPM-from-rpm5.org)
-2.  [**2** Installing RPM5 on PureDarwin](rpm.html#TOC-Installing-RPM5-on-PureDarwin)
-3.  [**3** Building RPMs with MacPorts](rpm.html#TOC-Building-RPMs-with-MacPorts)
-4.  [**4** Useful RPM commands](rpm.html#TOC-Useful-RPM-commands)
-5.  [**5** Troubleshooting](rpm.html#TOC-Troubleshooting)
-    1.  [**5.1** org.macports.darwin9 is needed](rpm.html#TOC-org.macports.darwin9-is-needed)
-    2.  [**5.2** Installation fails due to dependencies on itself](rpm.html#TOC-Installation-fails-due-to-dependencies-on-itself)
-    3.  [**5.3** Disk fills up quickly](rpm.html#TOC-Disk-fills-up-quickly)
-6.  [**6** To be investigated](rpm.html#TOC-To-be-investigated)
-7.  [**7** A quick and dirty way to unpack a directory of RPMs](rpm.html#TOC-A-quick-and-dirty-way-to-unpack-a-directory-of-RPMs)
-8.  [**8** Thanks](rpm.html#TOC-Thanks)
-
 ### About RPM
 ![](http://archiv.tu-chemnitz.de/pub/2006/0178/data/rpm_logo.png)
 

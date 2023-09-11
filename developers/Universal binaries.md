@@ -6,19 +6,6 @@ Universal binaries
 Mac OS X and Darwin can use so-called Mach-O (Mach Object) "fat" files, or universal binaries that contain code for more than one architecture, e.g., ppc and i386.
 PureDarwin, however, currently uses i386 only (also referred to as "x86") but hopes to use x86_64 a day and future architectures.
 
-
-
-
-Contents
-1.  [**1** Finding and removing files that have no i386 code](universal-binaries.html#TOC-Finding-and-removing-files-that-have-no-i386-code)
-2.  [**2** Example](universal-binaries.html#TOC-Example)
-3.  [**3** Mach](universal-binaries.html#TOC-Mach)
-    1.  [**3.1** What is Mach-o?](universal-binaries.html#TOC-What-is-Mach-o-)
-    2.  [**3.2** Where does it come from?](universal-binaries.html#TOC-Where-does-it-come-from-)
-    3.  [**3.3** What does it specify?](universal-binaries.html#TOC-What-does-it-specify-)
-    4.  [**3.4** Structure](universal-binaries.html#TOC-Structure)
-4.  [**4** References](universal-binaries.html#TOC-References)
-
 ### Finding and removing files that have no i386 code
 The command-line tool `lipo` can be used to inspect and modify the architecture-related aspects of executable files and libraries.
 

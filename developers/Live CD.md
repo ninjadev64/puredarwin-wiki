@@ -2,24 +2,6 @@ Live CD
 =======
 Live CDs are a very popular way to distribute operating systems.
 
-
-
-
-Contents
-
-**1.** [How Live CDs work](#how-live-cds-work) 
-
-**2.** [How Mac OS X Installation DVDs work](#how-mac-os-x-installation-dvds-work)
- 
-**3.** [How a PureDarwin Live CD might work](#how-a-puredarwin-live-cd-might-work)
- 1. [Alternative 1: Uncompressed from disc ](#alternative-1-uncompressed-from-disc) 
- 2. [Alternative 2: Using imageboot](#alternative-2-using-imageboot) 
- 3. [Alternative 3: Using a ZFS file](#alternative-3-using-a-zfs-file) 
-
-**4.** [Shadow files](#shadow-files)
-
-**5.** [References](#references)
-
 ### How Live CDs work
 In order to make a PureDarwin Live CD, we essentially need to do two things:
 

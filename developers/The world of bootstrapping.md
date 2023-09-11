@@ -3,23 +3,6 @@ The world of bootstrapping
 This page gives an overview over some basic concepts about booting operating systems.
 It is based on a conversation with dfe in #puredarwin.
 
-
-
-
-
-Contents
-1.  [**1** Linux](bootstrapping.html#TOC-Linux)
-2.  [**2** Windows NTLDR](bootstrapping.html#TOC-Windows-NTLDR)
-3.  [**3** EFI](bootstrapping.html#TOC-EFI)
-4.  [**4** Multiboot](bootstrapping.html#TOC-Multiboot)
-    1.  [**4.1** Modified boot-132 to run as multiboot kernel](bootstrapping.html#TOC-Modified-boot-132-to-run-as-multiboot-kernel)
-5.  [**5** Network booting](bootstrapping.html#TOC-Network-booting)
-    1.  [**5.1** PXE](bootstrapping.html#TOC-PXE)
-    2.  [**5.2** BootX (PPC)](bootstrapping.html#TOC-BootX-PPC-)
-    3.  [**5.3** Netboot (PPC)](bootstrapping.html#TOC-Netboot-PPC-)
-    4.  [**5.4** Windows](bootstrapping.html#TOC-Windows)
-    5.  [**5.5** General](bootstrapping.html#TOC-General)
-
 ### Linux
 Linux needs two files to boot.  A kernel, and an initrd
 any time you upgrade your kernel you've got to build a new initrd to go with it

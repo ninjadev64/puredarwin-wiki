@@ -4,20 +4,6 @@ Historically, Darwin did not have package management. However, DarwinBuild has m
  This page is for discussion what needs to be there, what is already there, and what hence needs to be done.
 **This page is currently in brainstorming mode. Please join the discussion!**
 
-
-
-
-
-Contents
-1.  [**1** What needs to be there](package-management.html#TOC-What-needs-to-be-there)
-2.  [**2** What is already there](package-management.html#TOC-What-is-already-there)
-3.  [**3** darwinup](package-management.html#TOC-darwinup)
-4.  [**4** What needs to be done](package-management.html#TOC-What-needs-to-be-done)
-    1.  [**4.1** "Glue" language to use: python? ](package-management.html#TOC-Glue-language-to-use:-python-)
-    2.  [**4.2** Questions](package-management.html#TOC-Questions)
-5.  [**5** Mac OS X](package-management.html#TOC-Mac-OS-X)
-6.  [**6** Security](package-management.html#TOC-Security)
-
 ### What needs to be there
 1.  Find out the version of a (installed/uninstalled) binary root ("package")
 2.  Install a binary root, including its run-time dependencies

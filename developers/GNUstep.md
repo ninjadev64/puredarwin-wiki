@@ -3,17 +3,6 @@
 GNUstep is a cross-platform environment that provides partially Cocoa-compatible frameworks.
 This page is a work in progress and is currently just a placeholder and space for collecting all things related to GNUstep.
 
-Contents
-
-1.  [About GNUstep](#about-gnustep)
-2.  [Building GNUstep for PureDarwin](#building-gnustep-for-puredarwin)
-3.  [Compiling a "Cocoa" hello world on Ubuntu](#compiling-a-cocoa-hello-world-on-ubuntu)
-    1.  [source.m](#sourcem)
-    2.  [GNUmakefile](#gnumakefile)
-    3.  [Compile](#compile)
-4.  [References](#references)
-
-
 ## About GNUstep
 
 GNUstep is a cross-platform environment loosely compatible with Cocoa. It is available for Linux, for example, and also for PureDarwin (via MacPorts). By the way, WindowMaker and GNUstep are different things and are often confused by people.

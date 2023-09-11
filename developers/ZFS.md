@@ -2,20 +2,6 @@ ZFS
 ===
 .
  
-
-
-
-
-Contents
-1.  [**1** MacZFS.org](zfs.html#TOC-MacZFS.org)
-2.  [**2** Parts of ZFS](zfs.html#TOC-Parts-of-ZFS)
-    1.  [**2.1** Filesystem kext](zfs.html#TOC-Filesystem-kext)
-    2.  [**2.2** Performance, Integrity and Stability](zfs.html#TOC-Performance-Integrity-and-Stability)
-    3.  [**2.3** Building ZFS](zfs.html#TOC-Building-ZFS)
-    4.  [**2.4** Resources](zfs.html#TOC-Resources)
-
-
- 
 MacZFS.org {style="font-family:Arial,Verdana,sans-serif;line-height:normal"}
 ----------
 Enthusiasts of ZFS and of PureDarwin will want to read the whole web site from the beginning, for an idea of what's to come from the alliance of these two communities and their technologies. PureDarwin users will require [manual installation](http://code.google.com/p/maczfs/wiki/FAQ#How_do_I_install_MacZFS_manually?) for now, in order to upgrade to the latest stable release of MacZFS. From there, all other MacZFS.org documentation is generally relevant.

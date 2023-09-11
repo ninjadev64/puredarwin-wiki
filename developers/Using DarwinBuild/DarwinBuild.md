@@ -5,38 +5,6 @@ There are [many reasons](http://darwinbuild.macosforge.org/) why you should use 
 This page describes some ways to use [DarwinBuild](http://darwinbuild.macosforge.org/) in order to build Darwin projects.
 It is a work in progress. Please post your comments below or edit this wiki page.
 
-
- 
-
-
-
-
-Contents
- * [**1** Prerequisites](#prerequisites)  
- * [**2** Terminology](#terminology)  
- * [**3** Installation](#installation)  
-     * [**3.1** From Git](#from-git)
-     * [**3.2** From MacPorts](#from-macports)  
- * [**4** Initialize Darwinbuild](#initialize-darwinbuild)  
-     * [**4.1** Some part of the environment](#some-part-of-the-environment)  
-         * [**4.1.1** The BuildRoot directory](#the-buildroot-directory)  
-         * [**4.1.2** Logs folder](#logs-folder)  
- * [**5** Building projects](#building-projects)  
-     * [**5.1** CoreFoundation as a first test case](#corefoundation-as-a-first-test-case)  
-     * [**5.2** xnu](#xnu)  
-     * [**5.3** /XCD/loper](#xcdloper)  
- * [**6** More cool stuff DarwinBuild can do](#more-cool-stuff-darwinbuild-can-do)  
-     * [**6.1** darwinxref](#darwinxref)  
-         * [**6.1.1** Listing all the projects for a given branch](#listing-all-the-projects-for-a-given-branch)  
-         * [**6.1.2** Searching the project of a given file](#searching-the-project-of-a-given-file)  
-         * [**6.1.3** Building all the projects (brutus way)](#building-all-the-projects-brutus-way)  
-     * [**6.2** Package the built binaries](#package-the-built-binaries)  
- * [**7** Resources](#resources)  
-     * [**7.1** Deprecated](#deprecated)  
-         * [**7.1.1** Workaround DarwinBuild ticket #1 (no longer needed)](#workaround-darwinbuild-ticket-1-no-longer-needed)  
-         * [**7.1.2** Populate BuildRoot (no longer needed)](#populate-buildroot-no-longer-needed)  
-     * [**7.2** Credits](#credits)  
-
 Prerequisites
 -------------
 Have a look at

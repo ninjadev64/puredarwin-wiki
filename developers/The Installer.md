@@ -3,21 +3,6 @@ The Installer
 This page is a "request for comments" related to the general installation process. Please feel free to contribute and comment.
 Through the general install process the installer should be able to also install itself.
 
-
-
-
-
-
-Contents
-1.  [**1** The Installation Process](the-installer.html#TOC-The-Installation-Process)
-    1.  [**1.1** First stage](the-installer.html#TOC-First-stage)
-        1.  [**1.1.1** Pre-configuration and questions](the-installer.html#TOC-Pre-configuration-and-questions)
-        2.  [**1.1.2** Preparation of destination media](the-installer.html#TOC-Preparation-of-destination-media)
-        3.  [**1.1.3** First Stage Installer Script](the-installer.html#TOC-First-Stage-Installer-Script)
-    2.  [**1.2** Second stage](the-installer.html#TOC-Second-stage)
-        1.  [**1.2.1** Copying across and installing packages](the-installer.html#TOC-Copying-across-and-installing-packages)
-        2.  [**1.2.2** Post-configuration](the-installer.html#TOC-Post-configuration)
-
 The Installation Process
 ------------------------
 Installing PureDarwin should be a two stage process, as illustrated here.

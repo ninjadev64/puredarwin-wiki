@@ -7,20 +7,6 @@ Visualize dependencies in MacPorts
 
 This page describes a way to track dependencies and related satellite information (e.g: as variants or blockers) in MacPorts.
 
-
-
-
-
-Contents
-1.  [**1** Overview of dependencies, variants and blockers](macports-dependencies-overview.html#TOC-Overview-of-dependencies-variants-and-blockers)
-    1.  [**1.1** Installing Graphviz](macports-dependencies-overview.html#TOC-Installing-Graphviz)
-    2.  [**1.2** Using pd_portviz to generate a graph](macports-dependencies-overview.html#TOC-Using-pd_portviz-to-generate-a-graph)
-        1.  [**1.2.1** Preliminary](macports-dependencies-overview.html#TOC-Preliminary)
-        2.  [**1.2.2** An example across rrdtool dependencies](macports-dependencies-overview.html#TOC-An-example-across-rrdtool-dependencies)
-        3.  [**1.2.3** Purity?](macports-dependencies-overview.html#TOC-Purity-)
-    3.  [**1.3** Miscellaneous](macports-dependencies-overview.html#TOC-Miscellaneous)
-2.  [**2** Ressources](macports-dependencies-overview.html#TOC-Ressources)
-
 Overview of dependencies, variants and blockers
 -----------------------------------------------------------------------------------
 [Graphviz](http://www.graphviz.org/) is an opensource graph visualization software from AT&T Laboratories and Bell Laboratories (Lucent Technologies).

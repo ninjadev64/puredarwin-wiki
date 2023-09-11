@@ -2,21 +2,6 @@ Q - [kju:]
 ============
 Some QEMU attempts through [Q](http://www.kju-app.org/), A CPU emulator for Macintosh.
 
-
-
-
-
-
-Contents
-1.  [**1** Status](qemu-q.html#TOC-Status)
-2.  [**2** UI](qemu-q.html#TOC-UI)
-    1.  [**2.1** Q control manager](qemu-q.html#TOC-Q-control-manager)
-    2.  [**2.2** Configuration](qemu-q.html#TOC-Configuration)
-3.  [**3** Boot sequence](qemu-q.html#TOC-Boot-sequence)
-    1.  [**3.1** DFE bootloader](qemu-q.html#TOC-DFE-bootloader)
-        1.  [**3.1.1** CPU:FSB multiplier detection fails](qemu-q.html#TOC-CPU:FSB-multiplier-detection-fails)
-    2.  [**3.2** Chameleon bootloader](qemu-q.html#TOC-Chameleon-bootloader)
-
 Status
 ------
 As of January 2010, Q.app still uses qemu 0.9.x, whereas PureDarwin needs 0.10 to function properly. Hence, we recommend to use [QEMU](../qemu.html) instead for now.

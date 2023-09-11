@@ -6,19 +6,6 @@ This page is about using zsh on PureDarwin system.
 Normally, PureDarwin comes with the bash shell which most users will be familiar with.
 Some users might prefer to use zsh however. This page is a work in progress, please feel free to contribute.
 
-
-
-
-
-Contents
-1.  [**1** Availability](zsh.html#TOC-Availability)
-    1.  [**1.1** In PureDarwin](zsh.html#TOC-In-PureDarwin)
-    2.  [**1.2** In the DarwinBuild project](zsh.html#TOC-In-the-DarwinBuild-project)
-    3.  [**1.3** In the MacPorts project](zsh.html#TOC-In-the-MacPorts-project)
-2.  [**2** Changing an user's default shell](zsh.html#TOC-Changing-an-user-s-default-shell)
-3.  [**3** zshrc](zsh.html#TOC-zshrc)
-4.  [**4** Resources](zsh.html#TOC-Resources)
-
 ### Availability
 #### In PureDarwin
 Available.

@@ -5,21 +5,6 @@ Ever wondered what /etc, /usr, /opt, and so on mean?
 Ever wondered what the differences between /lib, /usr/lib, /usr/local/lib are?
 Ever wondered what libexec and standalone mean?
 
-
-
-
-
-Contents
-1.  [**1** BSD man hier](hier.html#TOC-BSD-man-hier)
-2.  [**2** Commonly used Darwin specialties](hier.html#TOC-Commonly-used-Darwin-specialties)
-3.  [**3** $PATH](hier.html#TOC-PATH)
-    1.  [**3.1** Darwin 9](hier.html#TOC-Darwin-9)
-    2.  [**3.2** Mac OS X 10.5](hier.html#TOC-Mac-OS-X-10.5)
-    3.  [**3.3** FreeBSD (example for "BSD world")](hier.html#TOC-FreeBSD-example-for-BSD-world-)
-    4.  [**3.4** Ubuntu (example for "GNU world")](hier.html#TOC-Ubuntu-example-for-GNU-world-)
-4.  [**4** Library path](hier.html#TOC-Library-path)
-
-
 **Commonly used Darwin specialties at the bottom of this page.**
 ### BSD man hier
  

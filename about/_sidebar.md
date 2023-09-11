@@ -9,4 +9,4 @@
 - [Screenshots](/about/Screenshots.md)
 - [Team](/about/Team.md)
 - [TODO](/about/TODO.md)
-- [Wiki style guide](/about/Wiki%20style%20guide.md)
+- [Wiki](/about/Wiki.md)

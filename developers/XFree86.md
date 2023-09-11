@@ -7,28 +7,6 @@ This page is about [XFree86](http://www.xfree86.org/) on Darwin.
 __
 __
 
-
-
-
-Contents
-1.  [**1** XFree86 4.7.0](xfree86.html#TOC-XFree86-4.7.0)
-2.  [**2** XFree86 in MacPorts](xfree86.html#TOC-XFree86-in-MacPorts)
-    1.  [**2.1** Compiling XFree86 for PureDarwin](xfree86.html#TOC-Compiling-XFree86-for-PureDarwin)
-    2.  [**2.2** Compiling FreeType for PureDarwin](xfree86.html#TOC-Compiling-FreeType-for-PureDarwin)
-    3.  [**2.3** Installing XFree86 on PureDarwin](xfree86.html#TOC-Installing-XFree86-on-PureDarwin)
-3.  [**3** Screenshots](xfree86.html#TOC-Screenshots)
-4.  [**4** Troubleshooting](xfree86.html#TOC-Troubleshooting)
-    1.  [**4.1** Conflicting /usr/X11R6](xfree86.html#TOC-Conflicting-usr-X11R6)
-    2.  [**4.2** MAXHOSTNAMELEN undeclared](xfree86.html#TOC-MAXHOSTNAMELEN-undeclared)
-    3.  [**4.3** decompress.c error](xfree86.html#TOC-decompress.c-error)
-    4.  [**4.4** Cannot establish any listening sockets](xfree86.html#TOC-Cannot-establish-any-listening-sockets)
-    5.  [**4.5** Missing keymap](xfree86.html#TOC-Missing-keymap)
-    6.  [**4.6** Font-related problem when launching xterm](xfree86.html#TOC-Font-related-problem-when-launching-xterm)
-    7.  [**4.7** Failed to connect to the HID system](xfree86.html#TOC-Failed-to-connect-to-the-HID-system)
-    8.  [**4.8** No screens found](xfree86.html#TOC-No-screens-found)
-    9.  [**4.9** assert failed on line 416 of xfIOKit.c!](xfree86.html#TOC-assert-failed-on-line-416-of-xfIOKit.c-)
-5.  [**5** Resources](xfree86.html#TOC-Resources)
-
 ### XFree86 4.7.0
 XFree86 is another X11 implementation besides [X.Org](xorg.html). Version 4.7.0 was released in 2007.
 Most binaries you can find on the net (e.g., in fink) are built for Mac OS X, and will fail to run on PureDarwin since they depend on closed frameworks such as ApplicationServices. Hence, we need to compile XFree86 specifically for PureDarwin, and MacPorts can help us with this task.

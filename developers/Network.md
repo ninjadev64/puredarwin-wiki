@@ -4,24 +4,6 @@ Network
 This page primarily details how to get networking working in PureDarwinXmas, but these steps should be applicable to any Darwin installation.
 Next releases should/could include some part present here.
 
-
-
-
-
-Contents
-1.  [**1** Network support](network.html#TOC-Network-support)
-    1.  [**1.1** Install Network Drivers](network.html#TOC-Install-Network-Drivers)
-    2.  [**1.2** VMWare settings](network.html#TOC-VMWare-settings)
-    3.  [**1.3** QEMU settings](network.html#TOC-QEMU-settings)
-    4.  [**1.4** Install PureFoundation](network.html#TOC-Install-PureFoundation)
-    5.  [**1.5** Activate DirectoryServices](network.html#TOC-Activate-DirectoryServices)
-    6.  [**1.6** Install IPConfiguration](network.html#TOC-Install-IPConfiguration)
-2.  [**2** Credits](network.html#TOC-Credits)
-3.  [**3** Availability and investigation](network.html#TOC-Availability-and-investigation)
-    1.  [**3.1** Available](network.html#TOC-Available)
-    2.  [**3.2** Investigate](network.html#TOC-Investigate)
-    3.  [**3.3** Blocked](network.html#TOC-Blocked)
-
 Network support
 ---------------
 A must.

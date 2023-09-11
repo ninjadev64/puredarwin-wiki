@@ -2,18 +2,6 @@ PureFoundation
 ==============
 This page is about the use of PureFoundation on Darwin. For details about its development, see the links section below. 
 
-
-
-
-
-Contents
-1.  [**1** About PureFoundation](purefoundation.html#TOC-About-PureFoundation)
-2.  [**2** Status](purefoundation.html#TOC-Status)
-    1.  [**2.1** How to recognise a dependency on Foundation](purefoundation.html#TOC-How-to-recognise-a-dependency-on-Foundation)
-    2.  [**2.2** Report a dependent on Foundation](purefoundation.html#TOC-Report-a-dependent-on-Foundation)
-3.  [**3** Links](purefoundation.html#TOC-Links)
-4.  [**4** Resources](purefoundation.html#TOC-Resources)
-
 About PureFoundation
 --------------------
 PureFoundation is a binary-compatible, open source clone of Apple's Foundation framework, designed exclusively for Darwin. It uses the same components as Apple's Foundation: the Objective-C 2.0 Runtime, CoreFoundation, and (one day) the AutoZone garbage collector.

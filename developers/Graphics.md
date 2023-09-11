@@ -6,28 +6,6 @@ Sections marked with the "X" logo only apply to Mac OS X and not to Darwin. They
 
 This page is a work in progress, please contribute.
 
-
-
-
-
-
-Contents
-
-1.  [**1** Overview](graphics.html#TOC-Overview)
-2.  [**2** PureDarwin](graphics.html#TOC-PureDarwin)
-    1.  [**2.1** IOGraphics](graphics.html#TOC-IOGraphics)
-    2.  [**2.2** GraphicsDrivers](graphics.html#TOC-GraphicsDrivers)
-    3.  [**2.3** X server](graphics.html#TOC-X-server)
-    4.  [**2.4** VMware framebuffer](graphics.html#TOC-VMware-framebuffer)
-    5.  [**2.5** IOProxyVideoFamily](graphics.html#TOC-IOProxyVideoFamily)
-3.  [**3** Mac OS X](graphics.html#TOC-Mac-OS-X)
-    1.  [**3.1** Quartz](graphics.html#TOC-Quartz)
-    2.  [**3.2** Aqua](graphics.html#TOC-Aqua)
-    3.  [**3.3** Framebuffer](graphics.html#TOC-Framebuffer)
-4.  [**4** Troubleshooting](graphics.html#TOC-Troubleshooting)
-    1.  [**4.1** AppleIntel830.kext fails to load](graphics.html#TOC-AppleIntel830.kext-fails-to-load)
-
-
 ### Overview
 
 While Darwin is the operating system underlying Mac OS X, the graphical environments of PureDarwin and Mac OS X are very different. This is because most graphical aspects of Mac OS X (especially Quartz and Aqua) are proprietary, closed-source software and are not available for PureDarwin. Hence, PureDarwin uses a more traditional UNIX-like graphics system (X server), waiting a better alternative.

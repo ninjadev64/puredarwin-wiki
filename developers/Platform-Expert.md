@@ -3,13 +3,6 @@ Platform Expert
 
 The Platform Expert is a vital part of the Darwin kernel environment. It contains the hardware abstraction layer, that is hardware specific parts of the kernel space. The Platform Expert for Intel machines is contained in `AppleACPIPlatform.kext`, which is available under the Apple Binary Driver License.
 
-Contents
-1.  [What the Platform Expert does](pe.html#TOC-What-the-Platform-Expert-does)
-2.  [Known issues with AppleACPIPlatformExpert](pe.html#TOC-Known-issues-with-AppleACPIPlatformExpert)
-3.  [Other Platform Experts](pe.html#TOC-Other-Platform-Experts)
-4.  [Specify which Platform Expert to use](pe.html#TOC-Specify-which-Platform-Expert-to-use)
-5.  [Generic Platform](pe.html#TOC-Generic-Platform)
-
 ### What the Platform Expert does
 You can basically think of the Platform Expert as a "driver for the logic board". As such, it can roughly be compared to the Hardware Abstraction Layer (HAL) of other operating systems. The Platform Expert initializes the data structures that the [I/O Kit](http://developer.apple.com/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/chapter_1_section_1.html) needs. Specifically, it creates the root node of the device tree in the [I/O Registry](http://developer.apple.com/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/TheRegistry/chapter_4_section_2.html), which all other nodes attach to. As such, it is a fundamental part of the Darwin kernel environment. The Platform Expert also handles kernel flags (such as cpus=1), registers interrupt, scans the system for devices, and drives the text console. In the XNU source code, the Platform Expert is referred to as `pexpert`.
  

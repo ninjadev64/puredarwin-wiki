@@ -3,14 +3,6 @@ The boot process
 This page describes the boot process of a Darwin 9 system.
 This is a first draft, please feel free to contribute.
 
-
-
-
-Contents
-1.  [**1** Single-user (-s/cmd-S)](booting.1.html#TOC-Single-user--s-cmd-S-)
-2.  [**2** Multi-user](booting.1.html#TOC-Multi-user)
-3.  [**3** Netbooting (-n/cmd-N)](booting.1.html#TOC-Netbooting--n-cmd-N-)
-
 ### Single-user (-s/cmd-S)
 This is a top-level overview about the Darwin 9 boot process in single-user mode.
 

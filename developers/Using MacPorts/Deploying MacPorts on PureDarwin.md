@@ -7,33 +7,6 @@ If you are interested in getting MacPorts to run on PureDarwin as quickly as pos
 **
 **
 
-
-
-
-
-Contents
-1.  [**1** Status](macportsonpuredarwin.html#TOC-Status)
-2.  [**2** Getting MacPorts](macportsonpuredarwin.html#TOC-Getting-MacPorts)
-    1.  [**2.1** Fetching MacPorts in a PureDarwin VM](macportsonpuredarwin.html#TOC-Fetching-MacPorts-in-a-PureDarwin-VM)
-        1.  [**2.1.1** Via Network](macportsonpuredarwin.html#TOC-Via-Network)
-        2.  [**2.1.2** Local copy](macportsonpuredarwin.html#TOC-Local-copy)
-3.  [**3** Building MacPorts](macportsonpuredarwin.html#TOC-Building-MacPorts)
-    1.  [**3.1** Compiling MacPorts in a PureDarwin vm](macportsonpuredarwin.html#TOC-Compiling-MacPorts-in-a-PureDarwin-vm)
-        1.  [**3.1.1** configure](macportsonpuredarwin.html#TOC-configure)
-        2.  [**3.1.2** make](macportsonpuredarwin.html#TOC-make)
-        3.  [**3.1.3** make install](macportsonpuredarwin.html#TOC-make-install)
-    2.  [**3.2** Compiling MacPorts 1.7.0 in DarwinBuild](macportsonpuredarwin.html#TOC-Compiling-MacPorts-1.7.0-in-DarwinBuild)
-4.  [**4** Running MacPorts](macportsonpuredarwin.html#TOC-Running-MacPorts)
-    1.  [**4.1** Running a compiled MacPorts on PureDarwin](macportsonpuredarwin.html#TOC-Running-a-compiled-MacPorts-on-PureDarwin)
-        1.  [**4.1.1** port selfupdate](macportsonpuredarwin.html#TOC-port-selfupdate)
-        2.  [**4.1.2** port install most](macportsonpuredarwin.html#TOC-port-install-most)
-    2.  [**4.2** Compiling MacPorts in PureDarwin](macportsonpuredarwin.html#TOC-Compiling-MacPorts-in-PureDarwin)
-5.  [**5** Deprecated stuff](macportsonpuredarwin.html#TOC-Deprecated-stuff)
-    1.  [**5.1** Compiling MacPorts 1.7.1 in a PureDarwin chroot](macportsonpuredarwin.html#TOC-Compiling-MacPorts-1.7.1-in-a-PureDarwin-chroot)
-    2.  [**5.2** Deprecated (Compiling MacPorts 1.6.0 on DarwinBuild)](macportsonpuredarwin.html#TOC-Deprecated-Compiling-MacPorts-1.6.0-on-DarwinBuild-)
-6.  [**6** Quick method: Install MacPorts on PureDarwin using the binary pkg provided by the MacPorts project](macportsonpuredarwin.html#TOC-Quick-method:-Install-MacPorts-on-PureDarwin-using-the-binary-pkg-provided-by-the-MacPorts-project)
-7.  [**7** Resources](macportsonpuredarwin.html#TOC-Resources)
-
 Status
 ------
 MacPorts is functional on PureDarwin 9 using the "quick method" at the end of this page.

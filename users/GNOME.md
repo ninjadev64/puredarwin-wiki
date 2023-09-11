@@ -5,16 +5,6 @@ GNOME
 GNOME is a graphical desktop environment and development platform. For more information, see <http://www.gnome.org/>.
 This page is about running GNOME components on a PureDarwin system.
 
-
-
-
-
-Contents
-1.  [**1** GNOME components running in PureDarwin 9](gnome.html#TOC-GNOME-components-running-in-PureDarwin-9)
-    1.  [**1.1** metacity](gnome.html#TOC-metacity)
-    2.  [**1.2** zenity](gnome.html#TOC-zenity)
-
-
 ### GNOME components running in PureDarwin 9
 Right now, we have the following components running on PureDarwin 9.
 #### metacity

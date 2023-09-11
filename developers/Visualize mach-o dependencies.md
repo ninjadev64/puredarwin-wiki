@@ -2,18 +2,6 @@ Visualize mach-o dependencies
 =============================
 In the spirit of [Vizualize dependencies in MacPorts](../macports/macports-dependencies-overview.html) and [Vizualize KEXTs dependencies](../kexts/kexts-dependencies-overview.html), this page describes a way to track mach-o file dependencies and related satellite information (e.g: blockers).
 
-
-
-
-
-Contents
-1.  [**1** Prerequisites](mach-o-dependencies-overview.html#TOC-Prerequisites)
-2.  [**2** Using pd_machviz to generate a graph](mach-o-dependencies-overview.html#TOC-Using-pd_machviz-to-generate-a-graph)
-    1.  [**2.1** A simple example across otool dependencies](mach-o-dependencies-overview.html#TOC-A-simple-example-across-otool-dependencies)
-    2.  [**2.2** A circular view of xterm dependencies](mach-o-dependencies-overview.html#TOC-A-circular-view-of-xterm-dependencies)
-    3.  [**2.3** Checking for purity in passwd](mach-o-dependencies-overview.html#TOC-Checking-for-purity-in-passwd)
-3.  [**3** Resources](mach-o-dependencies-overview.html#TOC-Resources)
-
 ### Prerequisites
 
 [Graphviz](http://www.graphviz.org/) is an opensource graph visualization software from AT&T Laboratories and Bell Laboratories (Lucent Technologies).

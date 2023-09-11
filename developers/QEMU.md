@@ -6,35 +6,6 @@ This page is about running PureDarwin on the QEMU emulator and is *not *about r
 The ability to run PureDarwin on emulated hardware can be very useful, especially for development, testing and debugging.
 **If you get the "Error parsing plist file", then you need to increase the amount of virtual RAM. At least 330 MB seem to be required. If the kernel just crashes and the boot prompt appears again, press F8 and enter mach_kernel.voodoo <enter>.**
 
-<!--
-
-
-
--->
-Contents
-1.  [**1** Running PureDarwin Xmas on QEMU](qemu.html#TOC-Running-PureDarwin-Xmas-on-QEMU)
-    1.  [**1.1** On Linux hosts](qemu.html#TOC-On-Linux-hosts)
-    2.  [**1.2** On Windows hosts](qemu.html#TOC-On-Windows-hosts)
-    3.  [**1.3** On Mac OS X hosts](qemu.html#TOC-On-Mac-OS-X-hosts)
-2.  [**2** QEMU devices](qemu.html#TOC-QEMU-devices)
-3.  [**3** QEMU network](qemu.html#TOC-QEMU-network)
-    1.  [**3.1** The user network stack](qemu.html#TOC-The-user-network-stack)
-    2.  [**3.2** Requirements](qemu.html#TOC-Requirements)
-    3.  [**3.3** DHCP (IPv4)](qemu.html#TOC-DHCP-IPv4-)
-    4.  [**3.4** Ping workaround](qemu.html#TOC-Ping-workaround)
-    5.  [**3.5** Miscellaneous](qemu.html#TOC-Miscellaneous)
-        1.  [**3.5.1** Guest fingerprint (10.0.2.15)](qemu.html#TOC-Guest-fingerprint-10.0.2.15-)
-        2.  [**3.5.2** Gateway fingerprint (10.0.2.2)](qemu.html#TOC-Gateway-fingerprint-10.0.2.2-)
-        3.  [**3.5.3** DNS server fingerprint (10.0.2.3)](qemu.html#TOC-DNS-server-fingerprint-10.0.2.3-)
-4.  [**4** QEMU options](qemu.html#TOC-QEMU-options)
-    1.  [**4.1** Standard options](qemu.html#TOC-Standard-options)
-    2.  [**4.2** Network options](qemu.html#TOC-Network-options)
-    3.  [**4.3** Live options](qemu.html#TOC-Live-options)
-5.  [**5** probono's networking experiments 12/2011](qemu.html#TOC-probono-s-networking-experiments-12-2011)
-6.  [**6** Rafael's networking information 01/2012](qemu.html#TOC-Rafael-s-networking-information-01-2012)
-7.  [**7** QSOC project on Darwin support in QEMU](qemu.html#TOC-QSOC-project-on-Darwin-support-in-QEMU)
-8.  [**8** References](qemu.html#TOC-References)
-
 Running PureDarwin Xmas on QEMU
 -------------------------------
 ### On Linux hosts

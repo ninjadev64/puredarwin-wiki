@@ -2,16 +2,6 @@
 
 ![The Bochs logo](https://sites.google.com/a/puredarwin.org/puredarwin/developers/bochs/Bochs%20logo.gif?attredirects=0)
 
-**Contents:**
-1. [Boot sequence](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#boot-sequence)
-    1. [The Plex86/Bochs VGABios](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#The-plex86-bochs-vgabios)
-    2. [DFE bootloader](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#dfe-bootloader)
-        1. [Decompressing extensions](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#decompressing-extensions)
-        2. [CPU:FSB multiplier detection fails](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#cpu-fsb-multiplier-detection-fails)
-    3. [Chameleon bootloader](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#chameleon-bootloader)
-        1. [Kernel Panic](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#kernel-panic)
-2. [Resources](https://github.com/PureDarwin/PureDarwin/wiki/Bochs#resources)
-
 ## Boot sequence
 
 ### The Plex86/Bochs VGABios

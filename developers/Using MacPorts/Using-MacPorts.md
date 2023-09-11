@@ -5,27 +5,6 @@ Using MacPorts
 [MacPorts](http://www.macports.org/), formerly known as DarwinPorts, is a variant of the BSD ports system for Darwin and Mac OS X.
 This page describes how to use MacPorts to create binary packages that can be deployed to PureDarwin. We now have [MacPorts running on PureDarwin](macports/macportsonpuredarwin.html) itself. Deploying MacPorts on a PureDarwin system and building binaries there is preferable, since you will save a lot of hassle.
 
-### Contents
-- [Using MacPorts](#using-macports)
-    + [Prerequisites](#prerequisites)
-    + [Installation](#installation)
-    + [Configuration](#configuration)
-    + [Use](#use)
-      - [Searching for a port](#searching-for-a-port)
-      - [Getting information about a port found](#getting-information-about-a-port-found)
-      - [Building a port](#building-a-port)
-      - [+puredarwin variant](#-puredarwin-variant)
-      - [Purity checking](#purity-checking)
-      - [Updating MacPorts](#updating-macports)
-      - [Upgrading deprecated port(s)](#upgrading-deprecated-port-s-)
-      - [Cleaning MacPorts](#cleaning-macports)
-      - [Removing inactive port(s)](#removing-inactive-port-s-)
-    + [Troubleshooting](#troubleshooting)
-    + [Credits](#credits)
-    + [Resources](#resources)
-
-<!-- Table of contents generated with https://ecotrust-canada.github.io/markdown-toc/ -->
-
 ### Prerequisites
 For MacPorts, you need
 -   An Intel-based Macintosh with Mac OS X 10.5 Leopard (latest version)

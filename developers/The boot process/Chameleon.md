@@ -11,17 +11,6 @@ Chameleon brings some nice features from low to high layers as:
 *Preboot ramdisk image, EFI partition booting, hibernation/resume, DSDT and SMBIOS, GUI booting and custom themes supports.*
 
 **draft.**  
-Contents  
-1.  [**1** Status](chameleon.html#TOC-Status)
-2.  [**2** Some features](chameleon.html#TOC-Some-features)
-    1.  [**2.1** Default partition](chameleon.html#TOC-Default-partition)
-    2.  [**2.2** Customizable UI](chameleon.html#TOC-Customizable-UI)
-        1.  [**2.2.1** Custom UI](chameleon.html#TOC-Custom-UI)
-        2.  [**2.2.2** Default UI](chameleon.html#TOC-Default-UI)
-    3.  [**2.3** RAM speed](chameleon.html#TOC-RAM-speed)
-    4.  [**2.4** Extension folder](chameleon.html#TOC-Extension-folder)
-3.  [**3** How to update PureDarwin running inside qemu to the latest Chameleon bootloader 11/2011](chameleon.html#TOC-How-to-update-PureDarwin-running-inside-qemu-to-the-latest-Chameleon-bootloader-11-2011)
-4.  [**4** Resources](chameleon.html#TOC-Resources)
 
 Status
 ------

@@ -3,33 +3,6 @@ User management
 This page is about user management in Darwin. It is a work in progress.
 Because user management has changed since Darwin 8 via Darwin 9 to Darwin10, this does not fully apply for versions prior to 9 and greater than 9.
 
-
-
-
-
-Contents
-1.  [**1** Status](users.1.html#TOC-Status)
-2.  [**2** Open Directory](users.1.html#TOC-Open-Directory)
-3.  [**3** Directory Services](users.1.html#TOC-Directory-Services)
-    1.  [**3.1** /var/db/dslocal/](users.1.html#TOC-var-db-dslocal-)
-        1.  [**3.1.1** /var/db/dslocal/nodes/Default/users/](users.1.html#TOC-var-db-dslocal-nodes-Default-users-)
-        2.  [**3.1.2** /var/db/dslocal/nodes/Default/group/](users.1.html#TOC-var-db-dslocal-nodes-Default-group-)
-        3.  [**3.1.3** /var/db/shadow/hash/](users.1.html#TOC-var-db-shadow-hash-)
-    2.  [**3.2** Command line tool: dscl](users.1.html#TOC-Command-line-tool:-dscl)
-    3.  [**3.3** passwd tool](users.1.html#TOC-passwd-tool)
-4.  [**4** PAM](users.1.html#TOC-PAM)
-5.  [**5** F.A.Q.](users.1.html#TOC-F.A.Q.)
-    1.  [**5.1** How to generate an Universally Unique IDentifier (UUID)?](users.1.html#TOC-How-to-generate-an-Universally-Unique-IDentifier-UUID-)
-        1.  [**5.1.1** uuidgen](users.1.html#TOC-uuidgen)
-        2.  [**5.1.2** openssl && xdd](users.1.html#TOC-openssl-xdd)
-        3.  [**5.1.3** by hand](users.1.html#TOC-by-hand)
-        4.  [**5.1.4** root UUID](users.1.html#TOC-root-UUID)
-    2.  [**5.2** How to create or modify any user?](users.1.html#TOC-How-to-create-or-modify-any-user-)
-    3.  [**5.3** How to add an user to admin group?](users.1.html#TOC-How-to-add-an-user-to-admin-group-)
-    4.  [**5.4** How to disable a specified user?](users.1.html#TOC-How-to-disable-a-specified-user-)
-    5.  [**5.5** How to delete a specified user?](users.1.html#TOC-How-to-delete-a-specified-user-)
-    6.  [**5.6** About /etc/authorization](users.1.html#TOC-About-etc-authorization)
-
 Status
 ------------------------------------------------------------------------------
 

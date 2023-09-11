@@ -4,15 +4,6 @@ MacFUSE
 ![](/img/developers/macfuse/macfuse-icon.png)
 [MacFUSE](http://code.google.com/p/macfuse/) is a filesystem in userland. It runs well on PureDarwin and can be used to mount sshfs, ramdisk and other FUSE-based filesystems. It is, according to its maintainers, "The Easiest and Fastest Way to Create File Systems for Mac OS X" (and PureDarwin, one might add).
 
-
-
-
-Contents
-1.  [**1** Installing MacFUSE](macfuse.html#TOC-Installing-MacFUSE)
-2.  [**2** sshfs](macfuse.html#TOC-sshfs)
-3.  [**3** ramdisk](macfuse.html#TOC-ramdisk)
-    1.  [**3.1** Troubleshooting in building ramdisk and targetting Darwin 9](macfuse.html#TOC-Troubleshooting-in-building-ramdisk-and-targetting-Darwin-9)
-
 ### Installing MacFUSE
 MacFUSE can be installed from the official MacFUSE.pkg (from the MacFUSE site) on PureDarwin with the following commands:
 

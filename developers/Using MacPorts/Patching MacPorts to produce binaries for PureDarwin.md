@@ -7,23 +7,7 @@ Patching MacPorts to produce binaries for PureDarwin
 Since the focus of the MacPorts project has shifted away from Darwin toward Mac OS X lately, it may be necessary create some patches in order to be able to use MacPorts-built software on PureDarwin.
 
 You can check [here](https://trac.macports.org/query?status=assigned&status=closed&status=new&status=reopened&order=priority&col=id&col=summary&col=status&col=type&col=priority&col=milestone&col=component&keywords=%7Epuredarwin) which ports already have (or should have) puredarwin variants.
- This page describes how to create such patches.
-
-
-
-
-
-Contents
-1.  [**1** Making a +puredarwin variant](patching.html#TOC-Making-a-puredarwin-variant)
-2.  [**2** Case study: vim](patching.html#TOC-Case-study:-vim)
-    1.  [**2.1** Problem statement](patching.html#TOC-Problem-statement)
-    2.  [**2.2** Finding out how to disable the proprietary libraries and frameworks](patching.html#TOC-Finding-out-how-to-disable-the-proprietary-libraries-and-frameworks)
-    3.  [**2.3** Editing the portfile](patching.html#TOC-Editing-the-portfile)
-    4.  [**2.4** Testing the modifications](patching.html#TOC-Testing-the-modifications)
-    5.  [**2.5** Creating and submitting a patch to MacPorts](patching.html#TOC-Creating-and-submitting-a-patch-to-MacPorts)
-3.  [**3** Case study: freetype](patching.html#TOC-Case-study:-freetype)
-4.  [**4** Case study: glib2](patching.html#TOC-Case-study:-glib2)
-5.  [**5** To do](patching.html#TOC-To-do)
+This page describes how to create such patches.
 
 
 ### Making a +puredarwin variant

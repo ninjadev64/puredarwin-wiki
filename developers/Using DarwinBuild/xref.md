@@ -1,22 +1,7 @@
 xref
 ====
 The xref database by [DarwinBuild](../darwinbuild.html) is roughly the equivalent to a package manager database on other systems.
- This page is intended to describe what is in the xref database, and how to use it.
-
-
-
-
-
-Contents
-1.  [**1** xref.db file format](xref.html#TOC-xref.db-file-format)
-2.  [**2** darwinxref](xref.html#TOC-darwinxref)
-    1.  [**2.1** darwinxref binary_sites](xref.html#TOC-darwinxref-binary_sites)
-    2.  [**2.2** darwinxref source_sites](xref.html#TOC-darwinxref-source_sites)
-    3.  [**2.3** darwinxref patchfiles](xref.html#TOC-darwinxref-patchfiles)
-    4.  [**2.4** darwinxref dependencies](xref.html#TOC-darwinxref-dependencies)
-    5.  [**2.5** darwinxref plug-ins](xref.html#TOC-darwinxref-plug-ins)
-3.  [**3** Contents of xref.db](xref.html#TOC-Contents-of-xref.db)
-
+This page is intended to describe what is in the xref database, and how to use it.
 
 ### xref.db file format
 The file xref.db is located in the .build directory of your [DarwinBuild](../darwinbuild.html) working directory (the one that contains BuildRoot, among other things). It is a mysql3 database file, which makes it convenient to open end edit using mysql3 (which comes with Leopard):

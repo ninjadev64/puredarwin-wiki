@@ -4,13 +4,6 @@ PS2 Controller
 ![](/img/developers/xnu/ps2-controller/voodoolabs_500.png)
 Draft.
 
-
-
-
-Contents
-1.  [**1** Voodoo PS2 Controller](ps2-controller.html#TOC-Voodoo-PS2-Controller)
-
-
 Voodoo PS2 Controller
 ---------------------
 VoodooPS2Controller 0.98 has been released and seems to work.

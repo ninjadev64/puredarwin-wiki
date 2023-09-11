@@ -4,18 +4,6 @@ GRUB, the GRand Unified Bootloader, is a boot loader from the GNU project. GRUB 
 However the "COPYING" file stipulates a GPLv3 license.
 This page discusses how to install and use GRUB 2.
 
-
-
-
-Contents
-1.  [**1** For BIOS-based machines](grub2.html#TOC-For-BIOS-based-machines)
-    1.  [**1.1** Getting GRUB 2](grub2.html#TOC-Getting-GRUB-2)
-        1.  [**1.1.1** Compiling from SVN using Ubuntu](grub2.html#TOC-Compiling-from-SVN-using-Ubuntu)
-    2.  [**1.2** Installing GRUB 2](grub2.html#TOC-Installing-GRUB-2)
-    3.  [**1.3** Booting Darwin with GRUB 2](grub2.html#TOC-Booting-Darwin-with-GRUB-2)
-2.  [**2** For EFI-based machines](grub2.html#TOC-For-EFI-based-machines)
-3.  [**3** References](grub2.html#TOC-References)
-
 For BIOS-based machines
 -----------------------
 ### Getting GRUB 2

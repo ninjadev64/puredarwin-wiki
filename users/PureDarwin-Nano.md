@@ -2,19 +2,6 @@
 
 This page describes the minimal components needed for a minimal PureDarwin system (also known as "PureDarwin Nano"). 
 
-## Contents
-
-- [PureDarwin Nano](#puredarwin-nano)
-    - [Contents](#contents)
-    - [Download](#download)
-    - [Components](#components)
-        - [Bootloader](#bootloader)
-        - [Installer](#installer)
-        - [Interactive mode](#interactive-mode)
-    - [Virtual machine](#virtual-machine)
-        - [VMware](#vmware)
-        - [QEMU](#qemu)
-
 This system is a **proof-of-concept** of a minimal bootable Darwin 9 system that can be built from the components that Apple provides through the [DarwinBuild](http://darwinbuild.macosforge.org/) project.
 
 [![](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/puredarwin.jpg?attredirects=0)](https://sites.google.com/a/puredarwin.org/puredarwin/downloads/puredarwin-nano/puredarwin.jpg?attredirects=0)

@@ -5,32 +5,6 @@ This is Stuart and Aladin's proposal for "dm", a Darwin Package Manager. It is b
 
 Feel free to rip it apart.
 
-
-
-
-
-
-
-Contents
-1.  [**1** Scope](the-darwin-package-manager.html#TOC-Scope)
-    1.  [**1.1** Supersets](the-darwin-package-manager.html#TOC-Supersets)
-    2.  [**1.2** Subsets](the-darwin-package-manager.html#TOC-Subsets)
-    3.  [**1.3** Mandatory files involved at run-time](the-darwin-package-manager.html#TOC-Mandatory-files-involved-at-run-time)
-2.  [**2** darwinup](the-darwin-package-manager.html#TOC-darwinup)
-3.  [**3** The PureDarwin Package Database](the-darwin-package-manager.html#TOC-The-PureDarwin-Package-Database)
-4.  [**4** Groups and Systems](the-darwin-package-manager.html#TOC-Groups-and-Systems)
-5.  [**5** The "core" group](the-darwin-package-manager.html#TOC-The-core-group)
-6.  [**6** Updates](the-darwin-package-manager.html#TOC-Updates)
-7.  [**7** Security](the-darwin-package-manager.html#TOC-Security)
-8.  [**8** Language](the-darwin-package-manager.html#TOC-Language)
-9.  [**9** Usage](the-darwin-package-manager.html#TOC-Usage)
-10. [**10** At Installation Time](the-darwin-package-manager.html#TOC-At-Installation-Time)
-11. [**11** Package Database Admin Toold](the-darwin-package-manager.html#TOC-Package-Database-Admin-Toold)
-    1.  [**11.1** dbaudit](the-darwin-package-manager.html#TOC-dbaudit)
-    2.  [**11.2** dbstats](the-darwin-package-manager.html#TOC-dbstats)
-    3.  [**11.3** pdpdmake](the-darwin-package-manager.html#TOC-pdpdmake)
-    4.  [**11.4** dtbi](the-darwin-package-manager.html#TOC-dtbi)
-
 ### Scope
 
 "dm" will be a command line tool used to manage the darwinbuild components of a Darwin system, namely:

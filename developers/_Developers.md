@@ -1,17 +1,6 @@
 For developers
 ==============
 
-### Contents ###
-- [For developers](#for-developers)
-    + [Prerequisites](#prerequisites)
-    + [PureDarwin releases](#puredarwin-releases)
-    + [Testers wanted](#testers-wanted)
-    + [Useful tools](#useful-tools)
-    + [Darwin mailing lists](#darwin-mailing-lists)
-    + [Documentation](#documentation)
-
-<!-- Table of contents generated with https://ecotrust-canada.github.io/markdown-toc/ -->
-
 ### Prerequisites ###
 In order to do any serious PureDarwin development, please familiarize yourself with the [DarwinBuild](developers/darwinbuild.html) project and the [MacPorts](developers/macports.1.html) project, as these are the key components of building software for Darwin.
 ### PureDarwin releases ###

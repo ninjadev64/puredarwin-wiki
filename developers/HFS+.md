@@ -3,19 +3,6 @@ HFS+
 This page describes the HFS+ filesystem and how to interact with it.
 This is a work in progress; please contribute to this page.
 
-
-
-
-
-Contents
-1.  [**1** What is HFS+](hfsplus.html#TOC-What-is-HFS-)
-2.  [**2** How to interact with HFS+](hfsplus.html#TOC-How-to-interact-with-HFS-)
-    1.  [**2.1** Using Mac OS X](hfsplus.html#TOC-Using-Mac-OS-X)
-    2.  [**2.2** Using Darwin](hfsplus.html#TOC-Using-Darwin)
-    3.  [**2.3** Using Linux](hfsplus.html#TOC-Using-Linux)
-    4.  [**2.4** Using Windows](hfsplus.html#TOC-Using-Windows)
-
-
 ### What is HFS+
 the HFS+ file system is an improved version of the historical Hierarchical File System (HFS).
 The predecessor was introduced in Mac OS.

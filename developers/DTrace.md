@@ -3,34 +3,6 @@ DTrace
 
 This page is about the DTrace facility in _"Darwin-land"_.
 
-# Contents
-1.  [**1** What is DTrace?](#whatisdtrace)
-    1.  [**1.1** Pros](#pros)
-    2.  [**1.2** Cons](#cons)
-2.  [**2** Examples](#examples)
-    1.  [**2.1** A real world example: show missing files](dtrace.html#TOC-A-real-world-example:-show-missing-files)
-    2.  [**2.2** A _cliché_ example: "Hello world!"](dtrace.html#TOC-A-clich-example:-Hello-world-)
-        1.  [**2.2.1** Inline](dtrace.html#TOC-Inline)
-        2.  [**2.2.2** In a file](dtrace.html#TOC-In-a-file)
-    3.  [**2.3** Detect new process (successfully started)](dtrace.html#TOC-Detect-new-process-successfully-started-)
-    4.  [**2.4** Detect sigkill](dtrace.html#TOC-Detect-sigkill)
-    5.  [**2.5** Detect promiscuous mode changes](dtrace.html#TOC-Detect-promiscuous-mode-changes)
-    6.  [**2.6** Watch setuid/setgid calls](dtrace.html#TOC-Watch-setuid-setgid-calls)
-    7.  [**2.7** Classic examples](dtrace.html#TOC-Classic-examples)
-3.  [**3** D Programming language](dtrace.html#TOC-D-Programming-language)
-    1.  [**3.1** A generic D script example](dtrace.html#TOC-A-generic-D-script-example)
-    2.  [**3.2** Probes and providers](dtrace.html#TOC-Probes-and-providers)
-        1.  [**3.2.1** Probe syntax](dtrace.html#TOC-Probe-syntax)
-        2.  [**3.2.2** Listing probes](dtrace.html#TOC-Listing-probes)
-        3.  [**3.2.3** Available providers](dtrace.html#TOC-Available-providers)
-        4.  [**3.2.4** Default variables](dtrace.html#TOC-Default-variables)
-        5.  [**3.2.5** Macro variables](dtrace.html#TOC-Macro-variables)
-    3.  [**3.3** Predicate (optional)](dtrace.html#TOC-Predicate-optional-)
-    4.  [**3.4** Action (optional)](dtrace.html#TOC-Action-optional-)
-    5.  [**3.5** Kernel destructive actions](dtrace.html#TOC-Kernel-destructive-actions)
-        1.  [**3.5.1** "-w" flag required for...](dtrace.html#TOC--w-flag-required-for...)
-4.  [**4** References](dtrace.html#TOC-References)
-
 What is DTrace?
 -----------------
 According to ```man dtrace```\:

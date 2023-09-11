@@ -2,20 +2,6 @@ login
 =====
 Since multi-user support is available, managing logins (so that users run with only the permissions they have been granted) follows naturally.
 
-
-
-
-
-Contents
-1.  [**1** Console login](login.html#TOC-Console-login)
-2.  [**2** SSH login](login.html#TOC-SSH-login)
-3.  [**3** X login](login.html#TOC-X-login)
-    1.  [**3.1** X Display manager list](login.html#TOC-X-Display-manager-list)
-4.  [**4** Smartcard login](login.html#TOC-Smartcard-login)
-5.  [**5** Disable login](login.html#TOC-Disable-login)
-6.  [**6** Auto login](login.html#TOC-Auto-login)
-
-
 ### Console login
 Console login can be achieved using the ``getty'` tool. There is a launchd plist (com.apple.getty.plist) available (but uninstalled by default - we need to add this to the next revision of Spring) as part of the *system_cmds* project. Installing this leads to a login prompt being displayed (as long as the startx script isn't also run).
 

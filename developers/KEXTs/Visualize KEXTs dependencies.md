@@ -2,20 +2,6 @@ Visualize KEXTs dependencies
 ============================
 In the spirit of [Vizualize dependencies in MacPorts](../macports/macports-dependencies-overview.html), this page describes a way to track kernel extension dependencies and related satellite information (e.g: blockers).
 
-
-
-
-
-Contents
-1.  [**1** Prerequisites](kexts-dependencies-overview.html#TOC-Prerequisites)
-2.  [**2** Using pd_kextviz to generate a graph](kexts-dependencies-overview.html#TOC-Using-pd_kextviz-to-generate-a-graph)
-    1.  [**2.1** Preliminary](kexts-dependencies-overview.html#TOC-Preliminary)
-    2.  [**2.2** An example across IOBDStorageFamily.kext](kexts-dependencies-overview.html#TOC-An-example-across-IOBDStorageFamily.kext)
-    3.  [**2.3** Detecting blocker inside KEXTs](kexts-dependencies-overview.html#TOC-Detecting-blocker-inside-KEXTs)
-    4.  [**2.4** Massive generation](kexts-dependencies-overview.html#TOC-Massive-generation)
-    5.  [**2.5** Miscellaneous](kexts-dependencies-overview.html#TOC-Miscellaneous)
-3.  [**3** Ressources](kexts-dependencies-overview.html#TOC-Ressources)
-
 ### Prerequisites
 [Graphviz](http://www.graphviz.org/) is an opensource graph visualization software from AT&T Laboratories and Bell Laboratories (Lucent Technologies).
 

@@ -10,25 +10,6 @@ This page describes how to use the contents of the repository to build your own 
 
 **Please [contact us](http://www.puredarwin.org/#contact-us) if you need write access. Everyone who wants to make Darwin more usable is invited.**
 
-
-Contents
---------
-1.  [**1** Basic structure](#basic-structure)
-2.  [**2** Usage](#usage)
-    1.  [**2.1** Requirements](#requirements)
-    2.  [**2.2** Quick steps](#quick-steps)
-    3.  [**2.3** Configuration](#configuration)
-        1.  [**2.3.1** DARWIN_RELEASE](#darwin_release)
-        2.  [**2.3.2** ARCH](#arch)
-        3.  [**2.3.3** PUREDARWIN_RELEASE](#puredarwin_release)
-        4.  [**2.3.4** BINARYROOTS_LIST_FILE](#binaryroots_list_file)
-        5.  [**2.3.5** DARWINBUILD_DIR](#darwinbuild_dir)
-        6.  [**2.3.6** ADD_CLONE](#add_clone)
-    4.  [**2.4** "Genetic" constraints](#genetic-constraints)
-        1.  [**2.4.1** Basic overview](#basic-overview)
-        2.  [**2.4.2** Zooming chickens and eggs](#zooming-chickens-and-eggs)
-3.  [**3** Resources](#resources)
-
 Basic structure
 ---------------
 The current Mercurial repository is composed of the sub repositories.

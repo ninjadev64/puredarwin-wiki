@@ -5,22 +5,6 @@ This page describes various formats for disk images used in Darwin, Mac OS X, an
 
 Note that this page might mention tools that are only available in Mac OS X, but not in PureDarwin.
 
-**Contents**
-1.  [Hard disk images](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#hard-disk-images)
-    1.  [.dmg (disk image)](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#.dmg-disk-image-)
-    2.  [.dd/.cdr (raw image)](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#.dd-.cdr-raw-image)
-    3.  [.vmdk (Virtual Machine Disk Format)](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#.vmdk-virtual-machine-disk-format)
-    4.  [CD/DVD images](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#cd-dvd-images)
-        1.  [Partitioning with pdisk + newfs_hfs.](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#partitioning-with-pdisk---newfs_hfs)
-        2.  [Dump a CD/DVD to an iso image](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#dump-a-cd-dvd-to-an-iso-image)
-    5.  [Hybrid media](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#hybrid-media)
-2.  [Bootable CDs](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#bootable-cds)
-3.  [Mounting DMGs on PureDarwin](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#mounting-dmgs-on-puredarwin)
-    1.  [vndevice](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#vndevice)
-    2.  [hdik](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#hdik)
-    3.  [Source code as starting point for own developments](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#source-code-as-starting-point-for-own-developments)
-    4.  [Conversion of disk images using LibDMG's HFS+ implementation](https://github.com/PureDarwin/PureDarwin/wiki/Disk_images#conversion-of-disk-images-using-libdmg-s-hfs-implementation)
-
 ## Hard disk images
 
 ### .dmg (disk image)

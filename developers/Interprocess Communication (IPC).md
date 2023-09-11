@@ -2,29 +2,6 @@ Interprocess Communication (IPC)
 ================================
 Interprocess communication is a "means of information sharing and synchronization" (Singh) between processs. This page describes the various forms of IPC on a Darwin system and also shows forms of IPC not present in Darwin, but in Mac OS X.
 
-
-
-
-
-Contents
-1.  [**1** Introduction](ipc.html#TOC-Introduction)
-2.  [**2** Forms of IPC](ipc.html#TOC-Forms-of-IPC)
-    1.  [**2.1** Mach IPC](ipc.html#TOC-Mach-IPC)
-    2.  [**2.2** Mach Exceptions](ipc.html#TOC-Mach-Exceptions)
-    3.  [**2.3** Unix Signals](ipc.html#TOC-Unix-Signals)
-    4.  [**2.4** Unnamed pipes](ipc.html#TOC-Unnamed-pipes)
-    5.  [**2.5** Named pipes (fifos)](ipc.html#TOC-Named-pipes-fifos-)
-    6.  [**2.6** XSI/System V IPC](ipc.html#TOC-XSI-System-V-IPC)
-    7.  [**2.7** POSIX IPC](ipc.html#TOC-POSIX-IPC)
-    8.  [**2.8** notifyd](ipc.html#TOC-notifyd)
-3.  [**3** Missing forms of IPC](ipc.html#TOC-Missing-forms-of-IPC)
-    1.  [**3.1** Distributed Objects](ipc.html#TOC-Distributed-Objects)
-    2.  [**3.2** Notifications](ipc.html#TOC-Notifications)
-    3.  [**3.3** Apple Events](ipc.html#TOC-Apple-Events)
-4.  [**4** Credits](ipc.html#TOC-Credits)
-5.  [**5** References](ipc.html#TOC-References)
-
-
 ### Introduction
 Processes on a typical Darwin system need to communicate with each other. The Darwin OS provides several mechanisms for such Interprocess Communication (IPC).
 ### Forms of IPC

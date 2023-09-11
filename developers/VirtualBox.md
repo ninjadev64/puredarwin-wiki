@@ -3,19 +3,6 @@ VirtualBox
 
 ![](https://raw.github.com/wiki/PureDarwin/PureDarwin/images/oraclevirtualbox.png)
 
-Contents
-
-1.  [Status](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#Status)
-2.  [PureDarwin Nano](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#PureDarwin-Nano)
-3.  [PureDarwin Xmas](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#PureDarwin-Xmas)
-4.  [Screenshots of PureDarwin Xmas](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#Screenshots-of-PureDarwin-Xmas)
-5.  [Ubuntu + VirtualBox 4](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#ubuntu--virtual-box-4)
-6.  [Screenshots of PureDarwin nano](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#Screenshots-of-PureDarwin-nano)
-    1.  [Using boot.efi in VirtualBox](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#using-bootefi-in-virtualbox)
-7.  [Screenshots of VirtualBox 4 settings](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#Screenshots-of-VirtualBox-4-settings)
-8.  [See also](https://github.com/PureDarwin/PureDarwin/wiki/VirtualBox#See-also)
-
-
 Status
 ------
 2011 Jan 14 news:
